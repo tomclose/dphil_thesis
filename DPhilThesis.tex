@@ -1,0 +1,115 @@
+% ------------------------------------------------------------------------------
+% author:		Tom Close
+% title:		DPhil Thesis
+% date:		December 2012
+
+\documentclass[12pt,a4paper,openright,twoside]{book} 
+%\documentclass[12pt,a4paper,openright,oneside]{book} 
+
+% ------------------------------------------------------------------------------
+% LaTeX packages to input
+\usepackage{fancyhdr} 
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{myfootnotes}
+\usepackage{appendix}
+
+
+% ------------------------------------------------------------------------------
+% PDF specific info for online version
+\usepackage[pdftex,bookmarks,colorlinks,linkcolor=blue,citecolor=red]{hyperref}
+\pdfinfo{/Title (DPhil Thesis) /Author (Tom Close)}
+
+% ------------------------------------------------------------------------------
+% LaTeX macros 
+\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
+\newcommand{\ket}[1]{\ensuremath{\vert#1\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\langle #1\vert}}
+\newcommand{\bk}[2]{\ensuremath{\langle #1\vert #2\rangle}}
+\newcommand{\kb}[2]{\ensuremath{\vert #1 \rangle \langle #2 \vert}}
+\newcommand{\exx}[1]{\ensuremath{\langle #1 \rangle}}
+
+\newcommand{\sz}[0]{\ensuremath{\mathbf{\sigma}_z}}
+\newcommand{\sx}[0]{\ensuremath{\mathbf{\sigma}_x}}
+\newcommand{\sy}[0]{\ensuremath{\mathbf{\sigma}_y}}
+\renewcommand{\sp}[0]{\ensuremath{\mathbf{\sigma}_{+}}}
+\newcommand{\sm}[0]{\ensuremath{\mathbf{\sigma}_{-}}}
+\newcommand{\id}[0]{\ensuremath{\mathbf{1}}}
+
+\newcommand{\an}[1]{\ensuremath{\hat{#1}}}
+\newcommand{\cre}[1]{\ensuremath{\hat{#1}^\dagger}}
+\newcommand{\no}[1]{\ensuremath{\cre{#1} \an{#1}}}
+
+\newcommand{\ddt}[0]{\frac{\mathrm{d}}{\mathrm{d}t}}
+\renewcommand{\vec}[1]{\ensuremath{{\boldsymbol{#1}}}}
+
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\beqa{\begin{eqnarray}}
+\def\eeqa{\end{eqnarray}}
+
+% ------------------------------------------------------------------------------
+% various page layout settings
+\renewcommand{\topfraction}{0.99} \renewcommand{\bottomfraction}{0.99}
+\renewcommand{\textfraction}{0.01}
+\renewcommand{\floatpagefraction}{0.99}
+
+\renewcommand{\baselinestretch}{1.4}
+\raggedbottom
+\tolerance=500 
+
+\reversemarginpar
+
+\setlength{\hoffset}{-1in} 
+\setlength{\voffset}{-1in}
+
+%\setlength{\oddsidemargin}{3.5cm} 
+%\setlength{\evensidemargin}{2.5cm}
+
+\setlength{\oddsidemargin}{3cm} 
+\setlength{\evensidemargin}{3cm}
+
+\setlength{\topmargin}{2.5cm}
+\setlength{\headheight}{5mm}
+\setlength{\headsep}{1cm} 
+\setlength{\textheight}{22.5cm}
+\setlength{\textwidth}{15cm} 
+\setlength{\marginparwidth}{3cm} 
+\setlength{\footskip}{1.5cm}
+
+% ------------------------------------------------------------------------------
+% fancy header style definition
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection \hspace{4pt}#1}}
+\fancyhf{} \fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\textbf\rightmark}} \fancyhead[RE]{\nouppercase{\textbf\leftmark}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{3pt} \fancypagestyle{plain}{
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% ------------------------------------------------------------------------------
+% the actual document
+\begin{document}
+\input{texfiles/Titlepage}
+\newpage \thispagestyle{empty} \mbox{}
+\singlespacing
+\input{texfiles/Abstract}
+\input{texfiles/Acknowledgements}
+\tableofcontents
+\doublespacing
+\pagestyle{fancy}
+\input{texfiles/Publications}
+\input{texfiles/MotivationOutline}
+\input{texfiles/QuantumInformationProcessing}
+\clearpage
+\singlespacing
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{unsrt}
+\bibliography{bibliography}
+\end{document}
