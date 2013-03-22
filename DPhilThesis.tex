@@ -25,8 +25,9 @@
 % ------------------------------------------------------------------------------
 % LaTeX macros 
 \newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
-\newcommand{\ket}[1]{\ensuremath{\vert#1\rangle}}
-\newcommand{\bra}[1]{\ensuremath{\langle #1\vert}}
+\newcommand{\ket}[1]{\ensuremath{\left\vert#1\right\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\left\langle #1\right\vert}}
+\newcommand{\ketbra}[2]{\ensuremath{\left\vert #1 \right\rangle \left\langle #2 \right\vert}}
 \newcommand{\bk}[2]{\ensuremath{\langle #1\vert #2\rangle}}
 \newcommand{\kb}[2]{\ensuremath{\vert #1 \rangle \langle #2 \vert}}
 \newcommand{\exx}[1]{\ensuremath{\langle #1 \rangle}}
@@ -96,22 +97,22 @@
 % ------------------------------------------------------------------------------
 % the actual document
 \begin{document}
-\input{texfiles/Titlepage}
-\newpage \thispagestyle{empty} \mbox{}
-\singlespacing
-\input{texfiles/Abstract}
-\input{texfiles/Acknowledgements}
-\tableofcontents
+%\input{texfiles/Titlepage}
+%\newpage \thispagestyle{empty} \mbox{}
+%\singlespacing
+%\input{texfiles/Abstract}
+%\input{texfiles/Acknowledgements}
+%\tableofcontents
 \doublespacing
 \pagestyle{fancy}
-\input{texfiles/Publications}
-\input{texfiles/MotivationOutline}
-\input{texfiles/QuantumInformationProcessing}
-\input{texfiles/OpenQuantumSystems}
+%\input{texfiles/Publications}
+%\input{texfiles/MotivationOutline}
+%\input{texfiles/QuantumInformationProcessing}
+\input{texfiles/QuantumDynamics}
 \input{texfiles/SpinAmplification}
 \input{texfiles/SinglePhotonSource}
-\input{texfiles/SurfaceCodes}
-\clearpage
+%\input{texfiles/SurfaceCodes}
+%\clearpage
 \singlespacing
 \addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{unsrt}

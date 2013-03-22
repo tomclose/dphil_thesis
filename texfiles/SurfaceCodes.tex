@@ -1,18 +1,35 @@
-\chapter{Introduction to quantum information processing} 
-\label{ch:Introduction}
+\chapter{Surface Codes} 
+\label{ch:SurfaceCodes}
 
-We begin this thesis with an introduction 
+\section{Early Quantum Codes}
 
-\section{Quantum Computing}
+Since the early days of quantum computing error correction has received a lot of attention. In an area where lack of perfect control can lead to an accumulating loss of information, the ability to correct for a finite amount of error is vital. Without the ability to encode qubits in a scheme that allows us to correct errors, quantum computing would be an unattainable goal.
 
-Quantum Computing (QC) is a novel approac
+The first example of a quantum error correction code was proposed by Shor. The general idea was to encode each qubit using three qubits, and to go with majority vote - the code is capable of correcting a single qubit error. Shor proposed a clever circuit which allowed the error correction to take place, without needing to measure the qubits. The code can tolerate errors in a single channel up to a rate of XXX. By applying the code twice errors in both channels can be tolerated.
 
+Although vital in showing the feasibility of quantum computing, and giving experimentalists a target error threshold to aim for in their calculations, these early codes seem problematic to implement. In reality, certain operations on qubits are difficult to perform with high fidelity, so it is hard to implement the code without introducing new errors. It became clear that an important feature of a code is its ease of implementation: a good code should minimimise the resources it requires.
 
+\section{Surface Codes}
 
-
-\section{Carriers of information}
+In YYY Kitaev proposed a promising class of codes
 
 \section{Summary}
+\begin{table}[htb]
+  \begin{tabular}{l l l}
+    Set & Desc. & Size \\
+    \hline
+    $S_X$ & Bare $X$-stabilisers  & $n^2$ \\
+    $S_Z$ & Bare $Y$-stabilisers  & $n^2$ \\
+    $S$   & Bare stabilisers      & $2n^2$ \\
+    $\overline{S_X}$ & Compound $X$-stabilisers  & $2^{n^2-1}$ \\
+    $\overline{S_Z}$ & Compound $Y$-stabilisers  & $2^{n^2-1}$ \\
+    $\overline{S}$   & Compound stabilisers      & $2^{2n^2-2}$ \\
+    $A$   & Syndromes & $2^{2n^2-2}$ \\
+    $L$   & Logical errors & $4^2$ \\
+    $E$   & All errors & $4^{2n^2}$ \\
+    $E_a$   & Errors for syndrome $a$ & $2^{2n^2 - 2}$ \\
+  \end{tabular}
+\end{table}
 
-We have given a concise explanation 
+
 

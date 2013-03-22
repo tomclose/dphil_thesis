@@ -64,7 +64,7 @@ The spin to be measured is the corner spin ($i=j=1$) and so would form part of a
 
   Our starting point is the state $\ket 1$, with just the corner spin `up'. From this position our rules allow two possibilities: either the spin to the right of the corner flips, or the spin below it flips (see Fig.~\ref{partition_states}). In each case the magnitude of the transition matrix element is $\Omega$. As we continue this procedure, we notice that the states that arise for each excitation number can be characterised by a non-increasing sequence of integers that represent the number of `up'-spins in each column of the lattice (see Fig.~\ref{partition_states}). Such sequences can also be used to define partitions of at integer: ways of splitting an integer up into a sum of other integers, e.g. $3=3=2+1=1+1+1$. In fact, the states that arise are in 1-to-1 correspondence with such partitions; we call these states `partition states' and denote them with standard partition notation (see Fig.~\ref{partition_states}).
   \begin{figure}
-  \includegraphics[scale=0.6]{youngs_lattice_with_spins}
+  \includegraphics[scale=0.6]{assets/youngs_lattice_with_spins}
   \caption{Partition states arranged into a lattice. Edges represent a coupling
     through the Hamiltion of strength $\Omega$. Weights represent the
       number of different paths through the lattice to a given state.}
@@ -106,7 +106,7 @@ It has been shown (e.g. \cite{Fitzsimons:2005p6472}) that a quantum state releas
 We can establish the rate of propagation in the 2D case using the ansatz that the time taken to travel between two neighbouring nodes is inversely proportional to the strength of the coupling between them. The total time is then $t_{2D}\propto \sum_{i=1}^{n}\frac{1}{\sqrt{i}}\simeq n^{\frac{1}{2}}$. As in the one-dimensional case, the position along the chain corresponds to the the number of spins that have flipped, and so we would expect the total polarisation to be proportional to $t^2$. This prediction of a quadratic speed-up of signal going from 1D to 2D is the central result of our paper, and was confirmed by simple numerical simulations of Eq. (\ref{2d_ham}) (Fig. \ref{comparison}).
 
 \begin{figure}
-\includegraphics[scale=0.5]{comparison.pdf}
+\includegraphics[scale=0.5]{assets/comparison.pdf}
 \caption{Expected total polarisation against time. Time in units of
   $\frac{1}{\Omega}$, dephasing rate $\Gamma = 1$. The gradient of the
     'one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
@@ -126,26 +126,24 @@ We can establish the rate of propagation in the 2D case using the ansatz that th
 
     We begin by considering a collective noise operator: $ L=\sum_{n}n\ket n\bra n$.  This represents noise that applies uniformly to the whole lattice: global fluctuations in the magnetic field, for example. As the effect of this type of noise depends only on the number of `up' spins, the system remains in the reduced basis of number states calculated earlier, with only the coherences between these states affected.
 
-    Our starting point is the Lindblad master equation
-    \begin{equation}
-    \dot{\rho}=i\left[\rho,H\right]+\frac{1}{2}\Gamma\left(2L\rho
-        L^{\dagger}-L^{\dagger}L\rho-\rho L^{\dagger}L\right).
-    \end{equation}
-    We proceed by splitting up the equation into diagonal and off-diagonal terms
-    \begin{align}
-    \dot{\rho}_{ii} & = i\sum_{k=\pm i}\left(\rho_{ik}g_{ki}-\rho_{ki}g_{ik}\right)=-2\sum_{k=\pm
-      i}Re\left[\rho_{ik}g_{ki}\right] \label{rhoii}\\
-        \dot{\rho_{ij}} & = i\left(\sum_{k=\pm j}\rho_{ik}g_{kj}-\sum_{k=\pm
-            i}\rho_{kj}g_{ik}\right)-\Gamma\rho_{ij}
-        \end{align}
-        where $g_{ij}$ is the coupling between states $i$ and $j$. In the limit of heavy dephasing ($\Gamma\gg g$), we have a process similar to adiabatic following, and we can make the approximation\[ \Gamma\rho_{ij}\approx i\left(\sum_{k=\pm j}\rho_{ik}g_{kj}-\sum_{k=\pm i}\rho_{kj}g_{ik}\right).\] We consider the $\rho_{ij}$ as a set of $\frac{n(n-1)}{2}$ variables and solve for them in terms of the $\rho_{ii}$. Neglecting terms that are second order in $\frac{g}{\Gamma}$, and substituting back into Eq. (\ref{rhoii}) gives \[ \dot{\rho}_{ii}=-\sum_{j=i\pm1}\frac{2|g_{ij}|^{2}}{\Gamma}\left(\rho_{ii}-\rho_{jj}\right).\]
+Our starting point is the Lindblad master equation
+\begin{equation}
+\dot{\rho}=i\left[\rho,H\right]+\frac{1}{2}\Gamma\left(2L\rho
+    L^{\dagger}-L^{\dagger}L\rho-\rho L^{\dagger}L\right).
+\end{equation}
+We proceed by splitting up the equation into diagonal and off-diagonal terms
+\begin{align}
+\dot{\rho}_{ii} & = i\sum_{k=\pm i}\left(\rho_{ik}g_{ki}-\rho_{ki}g_{ik}\right)=-2\sum_{k=\pm i}Re\left[\rho_{ik}g_{ki}\right] \label{rhoii}\\
+\dot{\rho_{ij}} & = i\left(\sum_{k=\pm j}\rho_{ik}g_{kj}-\sum_{k=\pm i}\rho_{kj}g_{ik}\right)-\Gamma\rho_{ij}
+\end{align}
+where $g_{ij}$ is the coupling between states $i$ and $j$. In the limit of heavy dephasing ($\Gamma\gg g$), we have a process similar to adiabatic following, and we can make the approximation\[ \Gamma\rho_{ij}\approx i\left(\sum_{k=\pm j}\rho_{ik}g_{kj}-\sum_{k=\pm i}\rho_{kj}g_{ik}\right).\] We consider the $\rho_{ij}$ as a set of $\frac{n(n-1)}{2}$ variables and solve for them in terms of the $\rho_{ii}$. Neglecting terms that are second order in $\frac{g}{\Gamma}$, and substituting back into Eq. (\ref{rhoii}) gives \[ \dot{\rho}_{ii}=-\sum_{j=i\pm1}\frac{2|g_{ij}|^{2}}{\Gamma}\left(\rho_{ii}-\rho_{jj}\right).\]
 Our quantum chain formally reduces to a classical Markov chain on the same statespace, with transition rates proportional to the coupling squared.
 
 Although states with more `up' spins decohere more quickly, the decoherence rate $\Gamma$ is not multiplied for higher states, as it is the \textit{relative} decoherence rate between neighbouring states, which is of importance.
 
 In one-dimension $g_{ij} = 1$ and we are reduced to a simple random walk on a semi-infinite line. By analogy with simple diffusion we expect that the resulting distribution is roughly Gaussian, with the expected number of flipped spins going with $\sqrt{t}$: the rate of spin propagation drops from $t$ to $\sqrt{t}$. This result was confirmed numerically (Fig. \ref{comparison}).
 
-        In the two-dimensional case $g_{ij} = \sqrt{j}, j=i+1$: We get a random walk with increasing transition rates. Numerically (Fig. \ref{comparison}), we find that the rate of spin propagation drops from $t^2$ to $t$ - still an encouraging scaling.
+In the two-dimensional case $g_{ij} = \sqrt{j}, j=i+1$: We get a random walk with increasing transition rates. Numerically (Fig. \ref{comparison}), we find that the rate of spin propagation drops from $t^2$ to $t$ - still an encouraging scaling.
 
         %%\subsection{Independent noise}
 
@@ -185,9 +183,9 @@ Finally we consider imperfect inital polarisation (i.e. finite temperature) - a 
             %   \label{fig:impurities}
             % \end{figure}
 
-\begin{acknowledgements}
-We thank Gerard Milburn and John Morton for useful discussion. This work was supported by the EPSRC, the National Research Foundation and Ministry of Education, Singapore, and the Royal Society.
-\end{acknowledgements}
+%\begin{acknowledgements}
+%We thank Gerard Milburn and John Morton for useful discussion. This work was supported by the EPSRC, the National Research Foundation and Ministry of Education, Singapore, and the Royal Society.
+%\end{acknowledgements}
 
 
 

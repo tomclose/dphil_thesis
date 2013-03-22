@@ -6,23 +6,24 @@
 %\documentclass[prb,twocolumn,showpacs,preprintnumbers,superscriptaddress,
 %amsmath]{revtex4}
 %\documentclass[ amsmath]{revtex4}
-\documentclass[12pt]{iopart}
-\bibliographystyle{unsrt}
-\usepackage{amsfonts}
+%\documentclass[12pt]{iopart}
+%\bibliographystyle{unsrt}
+%\usepackage{amsfonts}
 
 %\usepackage{color}
-\usepackage{graphicx}% Include figure files
-\usepackage{bm}% bold math
+%\usepackage{graphicx}% Include figure files
+%\usepackage{bm}% bold math
 
-\newcommand{\id}{\mathbb{I}}
+%\newcommand{\id}{\mathbb{I}}
 
-\include{braket}
+%\include{assets/braket}
 \newcommand{\tom}[1]{{\color{blue} #1}}
 
 \newcommand{\inmain}{}
 \newcommand{\threevec}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
-\newcommand{\text}[1]{\textrm{#1}}
-\newcommand{\eqref}[1]{Equation (\ref{#1})}
+
+\newcommand{\eqntext}[1]{\textrm{#1}}
+%\newcommand{\eqref}[1]{Equation (\ref{#1})}
 
 
 \section{Introduction}
@@ -87,19 +88,19 @@ The $H_{sys-mod}$ and $H_{sys-ext}$ terms are well understood, and we will treat
 
 Using the standard Jaynes-Cummings Hamiltonian, the $\Lambda$-system coupled to a cavity mode with strength $h$ and detuning $\nu$ from resonance  can be described by the following Hamiltonian:
 \begin{eqnarray}
-  H_{sys} = \left(\omega + \nu\right)\ketbra{e}{e} + \omega a^\dagger a + \frac{h}{2}\left(\ketbra{g_1}{e}a^\dagger + \text{h.c.} \right)~,
+  H_{sys} = \left(\omega + \nu\right)\ketbra{e}{e} + \omega a^\dagger a + \frac{h}{2}\left(\ketbra{g_1}{e}a^\dagger + \eqntext{h.c.} \right)~,
 \end{eqnarray}
-where $\text{h.c.}$ denotes the Hermitian conjugate. $\omega$ is the cavity mode frequency.
+where $\eqntext{h.c.}$ denotes the Hermitian conjugate. $\omega$ is the cavity mode frequency.
 
 We can restrict ourselves to one or zero cavity photons since the Jaynes-Cummings model preserves excitation number and after photon emission we assume that the emitter system remains in state $\ket{g_1}$ - i.e.\ we make the approximation that once a photon has escaped re-excitation does not occur - at least until an appropriate reset step (such as thermal relaxation) which we assume happens on a much longer timescale than the photon emission dynamics. This allows us to replace $\ket{g_1}a^\dagger$ with a new combined atom-photon state $\ket{g_a}$ and $a^\dagger a$ with $\ketbra{g_a}{g_a}$. 
 
 The term $H_{dr}$ describes a laser driving the transition $\ket{g_0} \leftrightarrow \ket{e}$ with coupling strength $\Omega$, and whose frequency is detuned from resonance by the same $\nu$ parameter, yielding
 \begin{eqnarray}
-  H_{dr} = \Omega \cos(\omega t) \left(\ketbra{e}{g_0} + \text{h.c.} \right)~.
+  H_{dr} = \Omega \cos(\omega t) \left(\ketbra{e}{g_0} + \eqntext{h.c.} \right)~.
 \end{eqnarray}
 After performing the rotating wave approximation, assuming that $\omega \gg \nu, h, \Omega$, we are left with 
 \begin{eqnarray}
-  H_{sys} + H_{dr} =  \nu\ketbra{e}{e} + \frac{1}{2}\left(h \ketbra{g_a}{e} + \Omega \ketbra{e}{g_0}\right) + \text{h.c.}
+  H_{sys} + H_{dr} =  \nu\ketbra{e}{e} + \frac{1}{2}\left(h \ketbra{g_a}{e} + \Omega \ketbra{e}{g_0}\right) + \eqntext{h.c.}
 \end{eqnarray}
 for the total system Hamiltonian.
 
