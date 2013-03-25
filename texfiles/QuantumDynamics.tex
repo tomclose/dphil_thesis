@@ -3,46 +3,204 @@
 
 \section{The Scrodinger Equation}
 
-The dynamics of an isolated quantum system are governed by the Schrodinger equation,
+We begin by looking at the quantum mechanical description and evolution of isolated systems - those systems which do not interact with their environment in any way. The dynamics of such systems are fundamental to the quantum mechanical description of nature, as we can consider the universe itself an isolated quantum system which contains all other systems. 
+
+The state of an isolated quantum system can be described by a \textit{state vector}, $\ket{\psi}$, in a Hilbert space representing the system, $S$. We say that the state vector represents a quantum system in a \textit{pure state}. In the systems we consider in this thesis the state vector will be a vector in a finite-dimensional vector space over the complex numbers. 
+
+The dynamics of an isolated quantum system are governed by the Schr\"odinger equation,
 \begin{align}
-  \frac{d}{dt}\ket{\psi(t)} = -i H(t) \ket{\psi(t)},
+  \label{qd:schrodinger_eq}
+  \ddt \ket{\psi(t)} = -i H(t) \ket{\psi(t)}
 \end{align}
 where $H(t)$ is Hermitian operator describing the system's Hamiltonian.
 
+The Schr\"odinger equation can be solved in terms of a time evolution operator
+\begin{align}
+  \ket{\psi(t)} = U(t)\ket{\psi(0)}
+\end{align}
+where $U(t)$ satisfies
+\begin{align}
+  \ddt U(t) = H(t).
+\end{align}
+As $H(t)$ is Hermitian, $U(t)$ will be unitary. In particular this implies that $U^{-1}(t) = U^\dagger(t)$ exists and therefore the dynamics quantums of isolated quantum systems are reversible.
+
 \subsection{Rabi Oscillations}
 
+As a simple example of pure state evolution we consider an isolated \textit{qubit}, a two-dimensional quantim system, under the influence of the \textit{Rabi Hamiltonian},
 \begin{equation}
 H = 
 \begin{bmatrix}
-  0 & 1 \\
-  1 & 0
-\end{bmatrix}
+  -\nu & \Omega \\
+  \Omega & \nu 
+\end{bmatrix}.
 \end{equation}
 
+This Hamiltonian can be diagonalized
+\begin{align}
+  H 
+\end{align}
 
+\section{Open Quantum Systems}
+
+When the quantum system that we want to model can no longer be considered isolated
+
+In practice it is rare that a quantum system can truly be considered isolated and so the Schr\"{o}dinger equation has limits in terms of the insight it can give us into system dynamics. While it is always possible to take a step back and view the system we are interested in as part of a larger isolated system, it is often impossible to model this larger system, either due to lack of knowledge of its state at any one time, or due to computational constraints.
+
+The problem actually goes deeper than the equation used to describe the dynamics; our representation of a quantum state as a state vector $\ket{\psi}$ proves to be inadequate for describing many quantum systems.
+
+When evaluating systems for quantum information processing this is a particularly important consideration: we ultimately want to preserve pure quantum behavious, so it is important to be able to model any deviations from this ideal.
+
+As a simple illustration of this point, consider a pair of qubits in the Bell singlet state, $\ket{01} - \ket{10}$. Imagine we only have access to the first qubit and want to provide the best possible description of its state; another party holds the second qubit and there are no restrictions placed on the operations they perform. A first observation is that if measured in the Z basis this qubit will report the outcomes $0$ and $1$, each with probability $1/2$. The only state vectors with this property take the form $\ket{0} + e^{i\phi}\ket{1}$, with $\phi \in [0, 2\pi)$. However, our first qubit also has the property that when measured in the X or Y basis, it will also report both possible outcomes with equal probability, which is not the case for any of the state vectors given. A good representation of the state of the first qubit is not possible within the language of state vectors.
+
+Density matrix
+
+\begin{align}
+  \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i} 
+\end{align}
+
+Master equation
+
+Markovian evolution - evolution depends only on the state of the system at the current time - not the state of the environment, or the history of the state. The most general form \cite{lindblad}
+\begin{align}
+  \ddt \rho(t) = -i \left[H, \rho\right] + \sum_k L_k \rho L_k^\dagger -\frac{1}{2} L_k^\dagger L_k \rho -\frac{1}{2} \rho L_k^\dagger L_k 
+\end{align}
+
+
+\subsection{Decoherence Master Equation}
+
+\begin{align}
+  H = H_S + H_B + H_I
+\end{align}
+In the interaction picture
+\begin{align}
+  \label{i_von_neumann_eq}
+  \ddt \rho(t) = -i\left[ H_I(t), \rho(t) \right]
+\end{align}
+We find the density matrix of the system by tracing out the environment
+\begin{align}
+  \rho_S(t) = tr_B\left\{\rho(t)\right\}
+\end{align}
+
+We can combine these to find an equation for $\rho_S$ in integral form
+\begin{align}
+  \rho_S(t) = tr_B\left\{\rho(0) + -i\int_{s=0}^t \left[ H_I(s), \rho(s) \right] dt \right\}
+\end{align}
+This isn't yet in a closed form as the right hand side still contains $\rho(t)$, the density matrix of the whole system.
+
+We then make the Born approximation letting $\rho(t) \approx \rho_S(t) \otimes \rho_B$. At first glance this appears to say that the environment is completely unaffected by the system. In fact we still allow exitations from the system to enter the environment; the assumption is merely that these exitations dissipate on a short timescale to become undetectable.
+
+We then substitute into eq. \ref{i_von_neumann_eq} we get (we've made a Markov eqn $\rho_S(s) \rightarrow \rho_S(t)$
+\begin{align}
+  \ddt \rho_S = -i \int_{s=0}^t tr_B\left\{\left[ H_I(t), \left[ H_I(s), \rho(t) \right] \right]\right\} ds
+\end{align}
+
+We now integrate in the other direction to remove the dependence on the state at time $0$
+\begin{align}
+  \ddt \rho_S(t) = -i \int_{s=0}^\infty tr_B\left\{\left[ H_I(t), \left[ H_I(t-s), \rho(t) \right] \right]\right\} ds
+\end{align}
+
+Then split into components to make the rotating wave approximation
+\begin{align}
+  H_I = \sum_\alpha A_\alpha \otimes B_\alpha
+\end{align}
+
+
+\subsection{Coupling to phonons}
+
+\begin{align}
+  H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right)
+\end{align}
+
+
+
+\subsection{Quantum Jump Master Equation}
+Cite test \cite{Brun:2002}
+
+Projective measurement. Positive operator valued measurement
+
+A projective measurement is defined by a set of operators $A_k$, satisfying
+\begin{align}
+  \sum_k A_k^\dagger A_k = \id
+\end{align}
+Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
+\begin{align}
+  \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
+\end{align}
+
+Discuss 
 
 \section{Quantum Treatment of Light}
 
+There are two approaches to modelling light: classical and quantum. 
+
+When quantizing the electromagnetic field it is convenient to work in terms of creation and annihilation operators, $\cre{a}_\lambda(\vec{k})$ and $\an{a}_\lambda(\vec{k})$, for field modes
 \begin{align}
-  \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k}) \right]
+  u(\vec{k}; \vec{r}, t) \propto e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t}
+\end{align}
+with polarization $\lambda$. The mode $u(\vec{k}; \vec{r}, t)$ describes a plane wave with definite momentum $\vec{k}$, which is unphysical due to its infinite extend in space. Nevertheless these modes are very useful when describing light quantum mechanically.
+
+In terms of these operations, the Hamiltonian for the free field is given by
+\begin{align}
+  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right] \\
+  &= \sum_\lambda \int d\vec{k} H_\lambda(\vec{k}).
 \end{align}
 
+
+
+The creation and annihilation operators are so-called as they can be thought to as adding or removing an excitation in a given mode. Commutation relation $[\an{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')]  = \delta_{\lambda\lambda '}\delta^3(\vec{k} - \vec{k}') $.
+
+We have that
+\begin{align}
+  \left[H, \an{a}_\lambda(\vec{k})\right] = -\hbar \omega_\vec{k} \an{a}_\lambda(\vec{k})
+  \quad \text{and} \quad 
+  \left[H, \cre{a}_\lambda(\vec{k})\right] = \hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k})
+\end{align}
+
+Show by commuting with H that we add energy
+
+Fock states number operator
+
+Single photon states
+
 \subsection{Hong-Ou-Mandel Dip}
+
+The Hong-Ou-Mandel experiment concerns the behaviour of a pair of photons iteracting with a \textit{beam splitter}. A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. Given two optical modes $a_1$ and $a_2$ the beam splitter performs the transformation
+\begin{align}
+  \an{a}_{1} \rightarrow \an{a}_{1} + \an{a}_{2} \\
+  \an{a}_{2} \rightarrow \an{a}_{1} - \an{a}_{2}
+\end{align}
+If both modes are incident on the beam splitter simultateously,
+\begin{align}
+  \an{a}_{1}\an{a}_{2} \rightarrow \left(\an{a}_{1} + \an{a}_{2}\right) \left(\an{a}_{1} - \an{a}_{2}\right) = \an{a}_{1}\an{a}_{1} - \an{a}_{2}\an{a}_{2}
+\end{align}
+The output states contain only those cases where both exitations are in the same mode.
+
+So if we have two single mode exitations of a given frequency incident on different arms of a beam splitter they exihit a `bunching' behaviour: they will leave on the same arm. As already discussed, single mode exitations are not physical. Does a similar result apply to a pair of single photons arriving at a beam splitter?
+
+A single photon can be written in terms of its annihilation operator
+\begin{align}
+  \an{b} = \int f(k) \an{a} dk
+\end{align}
+
+\begin{align}
+  \an{b}_1 \an{b}_2 & = \int \int f_1(k)f_2(k') \an{a}_1(k) \an{a}_2(k') dkdk' \\
+                    & \rightarrow
+\end{align}
+
+\subsection{Input-Output formalism}
+
+
 
 \section{Light-Matter interactions}
 
 \subsection{Jaynes-Cummings Hamiltonian}
 
+\begin{align}
+  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{b}\an{b} + g\an{b} \sp + g^{*}\cre{b} \sm
+\end{align}
+
 \subsection{Raman procedure}
 
-\subsection{Input-Output formalism}
 
-\section{Open Quantum Systems}
-
-\subsection{Decoherence Master Equation}
-
-\subsection{Deriving Phonon Coupling}
-
-\subsection{Quantum Jump Master Equation}
 
 
