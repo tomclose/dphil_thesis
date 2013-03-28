@@ -27,27 +27,53 @@ As $H(t)$ is Hermitian, $U(t)$ will be unitary. In particular this implies that 
 \subsection{Rabi Oscillations}
 
 As a simple example of pure state evolution we consider an isolated \textit{qubit}, a two-dimensional quantim system, under the influence of the \textit{Rabi Hamiltonian},
-\begin{equation}
-H = 
+\begin{equation} \label{rabi_hamiltonian}
+  H = \frac{\hbar}{2}
 \begin{bmatrix}
   -\nu & \Omega \\
   \Omega & \nu 
 \end{bmatrix}.
 \end{equation}
 
-This Hamiltonian can be diagonalized
+We diagonalise the Hamiltonian, writing the eigenvectors and eigenvalues in the form
 \begin{align}
-  H 
+  \ket{\psi_+} &=  \left(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\right)  &\lambda_{+} = \nu + \sqrt{\nu^2 - \Omega^2} \\
+  \ket{\psi_-} &=  \left(\sin\frac{\theta}{2}, \cos\frac{\theta}{2}\right)  &\lambda_{-} = \nu - \sqrt{\nu^2 - \Omega^2} 
 \end{align}
+where
+\begin{align}
+  \theta = \arctan\left(\frac{\Omega}{\nu}\right).
+\end{align}
+
+We can then write the sultion to the Schr\"odinger equation
+\begin{align}
+  \ket{\psi(t)} &= \alpha_{+} e^{i\lambda_{+}t}\ket{\psi_{+}} +  \alpha_{-} e^{i\lambda_{-}t} \ket{\psi_{-}} \\
+  &= \alpha_{+} e^{i\Delta t}\ket{\psi_{+}} +  \alpha_{-} e^{- i\Delta t} \ket{\psi_{-}} 
+\end{align}
+where $\Delta = \sqrt{\nu^2 - \Omega^2}$ and the last equality uses the equivalence of two quantum states differing only by a global phase. 
+
+The solution represents oscillations in time with angular frequency $\Delta$. This oscillitory behaviour, known as the \textit{Rabi oscillation}, is a common feature of many quantum systems.
+
+TODO: Diagram?
 
 \section{Open Quantum Systems}
 
 When the quantum system that we want to model can no longer be considered isolated
+- state vector no-longer sufficient
 
-In practice it is rare that a quantum system can truly be considered isolated and so the Schr\"{o}dinger equation has limits in terms of the insight it can give us into system dynamics. While it is always possible to take a step back and view the system we are interested in as part of a larger isolated system, it is often impossible to model this larger system, either due to lack of knowledge of its state at any one time, or due to computational constraints.
+Why not isolated
+- only interested in part of a larger system
+- maybe the whole system is too complex to model
+- maybe we don't have any knowledge of its state
+- either way, although we can always step back, we often find ourselves interested in modelling a specific, non-isolated part of a larger system
+- we have to make some assumptions about the larger system
 
-The problem actually goes deeper than the equation used to describe the dynamics; our representation of a quantum state as a state vector $\ket{\psi}$ proves to be inadequate for describing many quantum systems.
 
+[In practice it is rare that a quantum system can truly be considered isolated and so the Schr\"{o}dinger equation has limits in terms of the insight it can give us into system dynamics. While it is always possible to take a step back and view the system we are interested in as part of a larger isolated system, it is often impossible to model this larger system, either due to lack of knowledge of its state at any one time, or due to computational constraints.
+
+  The problem actually goes deeper than the equation used to describe the dynamics; our representation of a quantum state as a state vector $\ket{\psi}$ proves to be inadequate for describing many quantum systems.]
+
+Why important for quantum computing
 When evaluating systems for quantum information processing this is a particularly important consideration: we ultimately want to preserve pure quantum behavious, so it is important to be able to model any deviations from this ideal.
 
 As a simple illustration of this point, consider a pair of qubits in the Bell singlet state, $\ket{01} - \ket{10}$. Imagine we only have access to the first qubit and want to provide the best possible description of its state; another party holds the second qubit and there are no restrictions placed on the operations they perform. A first observation is that if measured in the Z basis this qubit will report the outcomes $0$ and $1$, each with probability $1/2$. The only state vectors with this property take the form $\ket{0} + e^{i\phi}\ket{1}$, with $\phi \in [0, 2\pi)$. However, our first qubit also has the property that when measured in the X or Y basis, it will also report both possible outcomes with equal probability, which is not the case for any of the state vectors given. A good representation of the state of the first qubit is not possible within the language of state vectors.
@@ -61,42 +87,95 @@ Density matrix
 Master equation
 
 Markovian evolution - evolution depends only on the state of the system at the current time - not the state of the environment, or the history of the state. The most general form \cite{lindblad}
-\begin{align}
+\begin{align}\label{master_eq}
   \ddt \rho(t) = -i \left[H, \rho\right] + \sum_k L_k \rho L_k^\dagger -\frac{1}{2} L_k^\dagger L_k \rho -\frac{1}{2} \rho L_k^\dagger L_k 
 \end{align}
 
 
+\subsection{Measurement}
+
+
+
+Projective measurement. Positive operator valued measurement
+Neumark's theorem [TODO ref]: POVM equivalent to interaction with an ancilliary system followed by a projective measurement.
+
+A POVM  is defined by a set of operators $A_k$, satisfying
+\begin{align}
+  \label{POVM_completeness_eq}
+  \sum_k A_k^\dagger A_k = \id
+\end{align}
+Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
+\begin{align}
+  \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
+\end{align}
+
+\subsection{Quantum Jump Master Equation}
+
+We will now consider how a system evolves under continuous measurement. We have to be careful about what we mean by this; the quantum Zeno effect \cite{quantum_zeno} states that a system that is repeatedly projectively measured never evolves from its current state. What we really mean is a system under constant observation: at any time a measurement result could be reported, but most of the time it is not. An optically active atom in a cavity is a good example: at any point it is possible that a photon will be emitted and detected, but in most time intervals no emission will occur.
+
+It is important to realise that by placing a system under continuous observation we alter its dynamics even if no detection event occurs. Intuitively, the event of `no detectection' increases our knowledge of the system's state and thus changes it. We say the state follows \textit{no-jump evolution} due to the \textit{back-action} of our observation.
+
+To put all this on a rigorous footing we will describe our observation using a POVM. For simplicity, we will assume that we look to detect only a single  event; the extension to multiple events is straightforward once a single event is understood. We let the detection event operator be $A_1$, so that after a detection event the system is in state
+\begin{align}
+  \frac{A_1 \rho A_1^\dagger}{tr\{A_1 \rho A_1^\dagger\}}
+\end{align}
+We let the measurement is \textit{weak} by setting $A_1 = \sqrt{\epsilon} L$ so that the probability of detecting an event is small. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that eq (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
+\begin{align}
+  A_0^\dagger A_0 + A_1^\dagger A_1 = \left( \id - \frac{\epsilon}{2} L^\dagger L\right)^\dagger \left( \id - \frac{\epsilon}{2} L^\dagger L\right) + \epsilon L^\dagger L = \id + O(\epsilon^2)
+\end{align}
+
+Make $\epsilon \approx \delta t$. Recover master equation. Talk about avoiding quantum Zeno effect? 
+
+
 \subsection{Decoherence Master Equation}
 
+We have so far presented the general form of a Markovian Master Equation and seen how such an equation can be interpreted as the average over the different observation histories of a continuously observed quantum system. We now approach the master equation from a different direction by deriving it directly from the system-environment Hamiltonian. In doing so we visit some of the common assumptions made to cast the system into Markovian form, as well as deriving an equation that will be of use in the single photon source work in Chapter \ref{ch:SinglePhotonSource}.
+
+Start with following the general derivation of a weakly interacting system-environment.
+
+Need that $H_S$, $H_E$ and $H_I$? are constant
+
+We begin by separating the Hamiltonian into terms acting solely on the system, terms acting solely on the environment, and terms involving both the system and environment (the interaction terms):
 \begin{align}
-  H = H_S + H_B + H_I
+  H(t) = H_S + H_E + H_I.
 \end{align}
-In the interaction picture
+
+In order to simplify our description of the system evolution, we change to the \textit{interaction picture}: we let $U(t) = \exp(i(H_S + H_E)t)$ and transform operators as $\tilde{A}(t) = U(t)A(t)U^\dagger(t)$. The von Neumann equation is transformed to
 \begin{align}
   \label{i_von_neumann_eq}
-  \ddt \rho(t) = -i\left[ H_I(t), \rho(t) \right]
+  \ddt \tilde{\rho}(t) = -i\left[ \tilde{H}_I(t), \tilde{\rho}(t) \right]
 \end{align}
-We find the density matrix of the system by tracing out the environment
+By switching to the interaction picture we move to a basis which follows the natural, independent evolution of both the system and environment. The natural motion of the system and environment have thus been absorbed into our description of the states, and so the terms $H_S$ and $H_E$ are eliminated from the Hamiltonian.
+
+Our best description of the state of the system $S$ is given by taking the partial trace of the overall density matrix over the envonment $E$:
 \begin{align}
-  \rho_S(t) = tr_B\left\{\rho(t)\right\}
+  \label{trace_eq}
+  \tilde{\rho}_S(t) = tr_E\left\{\tilde{\rho}(t)\right\}.
 \end{align}
 
-We can combine these to find an equation for $\rho_S$ in integral form
+We now look to find the master equation for the system S, which will be an expression for the rate of change of $\tilde{\rho}_S$ in terms of $\tilde{\rho}_S$. To this end, we formally solve eq. (\ref{i_von_neumann_eq}) to find an equation for $\tilde{\rho}$ in integral form
 \begin{align}
-  \rho_S(t) = tr_B\left\{\rho(0) + -i\int_{s=0}^t \left[ H_I(s), \rho(s) \right] dt \right\}
+  \tilde{\rho}(t) = \tilde{\rho}(0) + -i\int_{s=0}^t \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] dt
 \end{align}
+and then substitute this back into eq. (\ref{i_von_neumann_eq}) and apply eq. (\ref{trace_eq}) to get
+\begin{align}
+  \ddt \tilde{\rho}_S(t) = -\int_{s=0}^t tr_B\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} dt
+\end{align}
+where we have assumed that $tr_B [H_I(t), \rho(0)] = 0$.
+
+
 This isn't yet in a closed form as the right hand side still contains $\rho(t)$, the density matrix of the whole system.
 
-We then make the Born approximation letting $\rho(t) \approx \rho_S(t) \otimes \rho_B$. At first glance this appears to say that the environment is completely unaffected by the system. In fact we still allow exitations from the system to enter the environment; the assumption is merely that these exitations dissipate on a short timescale to become undetectable.
+We then make the Born approximation letting $\tilde{\rho}(t) \approx \tilde{\rho}_S(t) \otimes \tilde{\rho}_B$. At first glance this appears to say that the environment is completely unaffected by the system. In fact we still allow exitations from the system to enter the environment; the assumption is merely that these exitations dissipate on a short timescale to become undetectable.
 
 We then substitute into eq. \ref{i_von_neumann_eq} we get (we've made a Markov eqn $\rho_S(s) \rightarrow \rho_S(t)$
 \begin{align}
-  \ddt \rho_S = -i \int_{s=0}^t tr_B\left\{\left[ H_I(t), \left[ H_I(s), \rho(t) \right] \right]\right\} ds
+  \ddt \tilde{\rho}_S = -i \int_{s=0}^t tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(t) \right] \right]\right\} ds
 \end{align}
 
 We now integrate in the other direction to remove the dependence on the state at time $0$
 \begin{align}
-  \ddt \rho_S(t) = -i \int_{s=0}^\infty tr_B\left\{\left[ H_I(t), \left[ H_I(t-s), \rho(t) \right] \right]\right\} ds
+  \ddt \tilde{\rho}_S(t) = -i \int_{s=0}^\infty tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds
 \end{align}
 
 Then split into components to make the rotating wave approximation
@@ -104,6 +183,52 @@ Then split into components to make the rotating wave approximation
   H_I = \sum_\alpha A_\alpha \otimes B_\alpha
 \end{align}
 
+Want to unpick the time dependence of $\tilde{H}_I(t)$
+
+Split $A_\alpha$ into operators 
+\begin{align}
+  A_\alpha(\omega) = \sum_{\epsilon' - \epsilon = \omega} \Pi(\epsilon)A_\alpha \Pi(\epsilon')
+\end{align}
+
+So that
+\begin{align}
+  [H_S, A_\alpha(\omega)] &= - \omega A_\alpha(\omega) \\
+  [H_S, A^\dagger_\alpha(\omega)] &= + \omega A^\dagger_\alpha(\omega)
+\end{align}
+
+$A_\alpha(\omega)$ are eigenoperators with frequencies $\pm \omega$.
+
+In the interaction picture
+\begin{align}
+  \tilde{A}(\omega, t) = e^{iH_S t}A_\alpha(\omega) e^{-iH_S t} = e^{-i\omega t} A_\alpha(\omega)
+\end{align}
+
+\begin{align}
+  \tilde{H}_I(t) = \sum_{\alpha, \omega} e^{-i \omega t} A_\alpha(\omega)\otimes \tilde{B}_\alpha(t) = \sum_{\alpha, \omega} e^{i \omega t} A^\dagger_\alpha(\omega)\otimes \tilde{B}^\dagger_\alpha(t)
+\end{align}
+
+\begin{align}
+  \ddt \tilde{\rho}_S(t) = \sum_{\omega, \omega'} \sum_{\alpha, \beta} e^{i(\omega'-\omega)t} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega') - A^\dagger_\alpha(\omega')A_\beta(\omega)\right) + \text{H.c}
+\end{align}
+
+\begin{align}
+  \Gamma_{\alpha\beta}(\omega) = \int_0^\infty ds e^{i\omega s} \langle \tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rangle
+\end{align}
+where $\Gamma$ has no time dependence (why?).
+
+If we write
+\begin{align}
+  \Gamma_{\alpha \beta}(\omega) = \frac{1}{2}\gamma_{\alpha\beta}(\omega) + i S_{\alpha\beta}(\omega)
+\end{align}
+
+
+Need to point out RWA
+
+Then we recover
+\begin{align}
+  \ddt \rho_S(t) = -i[H_S + H_{LS}, \rho_S(t) ] + \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho_S(t)H_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho_S(t)\} \right)
+\end{align}
+where we have the Lamb shift Hamiltonian contribution $H_{LS}$. We can now diagonalise the matrix $\gamma_{\alpha\beta}$ to recover the Master Equation form in eq (\ref{master_eq}).
 
 \subsection{Coupling to phonons}
 
@@ -112,22 +237,6 @@ Then split into components to make the rotating wave approximation
 \end{align}
 
 
-
-\subsection{Quantum Jump Master Equation}
-Cite test \cite{Brun:2002}
-
-Projective measurement. Positive operator valued measurement
-
-A projective measurement is defined by a set of operators $A_k$, satisfying
-\begin{align}
-  \sum_k A_k^\dagger A_k = \id
-\end{align}
-Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
-\begin{align}
-  \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
-\end{align}
-
-Discuss 
 
 \section{Quantum Treatment of Light}
 
@@ -144,8 +253,6 @@ In terms of these operations, the Hamiltonian for the free field is given by
   H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right] \\
   &= \sum_\lambda \int d\vec{k} H_\lambda(\vec{k}).
 \end{align}
-
-
 
 The creation and annihilation operators are so-called as they can be thought to as adding or removing an excitation in a given mode. Commutation relation $[\an{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')]  = \delta_{\lambda\lambda '}\delta^3(\vec{k} - \vec{k}') $.
 
@@ -195,12 +302,71 @@ A single photon can be written in terms of its annihilation operator
 
 \subsection{Jaynes-Cummings Hamiltonian}
 
+Classically
+\begin{align}
+  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
+\end{align}
+
+Quantumly
+\begin{align}
+  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
+\end{align}
+
 \begin{align}
   H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{b}\an{b} + g\an{b} \sp + g^{*}\cre{b} \sm
 \end{align}
 
 \subsection{Raman procedure}
 
+
+\begin{align}
+  H=\hbar
+  \begin{bmatrix}
+    0 & 0 & \Omega_1 \cos\omega_1 t \\
+    0 & \delta & \Omega_2 \cos\omega_2 t \\
+    \Omega_1 \cos\omega_1 t & \Omega_2 \cos\omega_2 t & \omega
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  U(t) = 
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & e^{i(\omega_1 - \omega_2)t} & 0 \\
+    0 & 0 & e^{\omega_1 t}
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  \tilde{H}=\frac{\hbar}{2}
+  \begin{bmatrix}
+    0 & 0 & \Omega_1(1+e^{2i\omega_1 t}) \\
+    0 & 2(\delta + \omega_2 - \omega_1) & \Omega_2 (1+e^{2i\omega_2 t}) \\
+    \Omega_1(1+e^{2i\omega_1 t}) & \Omega_2 (1+e^{2i\omega_2 t}) & 2(\omega - \omega_1)
+  \end{bmatrix}
+\end{align}
+
+After we make the rotating wave approximation
+\begin{align}
+  \tilde{H}=\frac{\hbar}{2}
+  \begin{bmatrix}
+    0 & 0 & \Omega_1 \\
+    0 & 2(\nu_1 - \nu_2) & \Omega_2  \\
+    \Omega_1 & \Omega_2  & 2\nu_1
+  \end{bmatrix}
+\end{align}
+
+Look at the limit $\nu \gg \{\Omega_1, \Omega_2\}$.  Degenerate perturbation theory
+\begin{align}
+  H = -\frac{1}{4\nu}
+  \begin{bmatrix}
+    \Omega_1^2 & \Omega_1 \Omega_2 \\
+    \Omega_1\Omega_2 & \Omega_2^2
+  \end{bmatrix}
+\end{align}
+which is the basically the Rabi Hamiltonian as in Eq. (\ref{rabi_hamiltonian}).
+
+Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ induced via the third state.
 
 
 

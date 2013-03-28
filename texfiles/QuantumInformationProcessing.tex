@@ -13,12 +13,36 @@ Like quantum mechanics itself, \textit{quantum information processing} touches o
 
 At the heart of quantum computing lies the observation that it is very hard to simulate a quantum mechanical system on a classical computer. Due to the principle of quantum superposition - that a quantum system can exist in many states at once - a classical computer is forced to compute many possible trajectories of a system in order to make an accurate statement about the actual motion. As a system grows in size, tracking the superpostion states requires an exponential amount of work, making exact simulation unfeasable. It is thought that it was Feynman in the early 1980s \cite{feynman82} who first suggested turning this idea on its head: that a computer that followed the laws of quantum mechanics might have processing capabilities that would fundamentally outstrip those of its classical counterparts. 
 
+First quantum algorithm by Deutsch \& Josza
 
+Shors factorisation, hidden subgroup problem, implications for security
+
+Quantum simulation
 
 \section{Quantum Communication}
 
+quantum communication is provably secure, use the fact that by measuring you change
+
+1st such algorithm by bennett and brassard. Then later by Ekert
+
+there are some technological realisations
+
 \section{Measurement Based Quantum Computing}
 
+Quantum computing is usually presented in terms of the circuit model. 
+
+Measurement based quantum computation (MBQC) or one-way quantum computation is a computing paradigm proposed by Raussendorf and Briegel \cite{raussendorf01}. A computation is performed by making irreversible measurements on a highly entangled quantum state.
+
+The approach separates the computation into two separate stages: the creation of a suitable entangled state; and the implementation of the algorithm by making local measurements that consume this state. This is both practically and conceptually useful. Practically it separates the creation of entanglement from the running of the algorithm and thus allows new possibilities in the entanglement mechanism, such as the use of mechanisms with a high failure probablilties. Conceptually it allows us to view entanglement as a resource to be consumed throughout the computation and to ask questions about how to quantify entanglement and relate this to the computations we can perform. 
+
+The key concept behind MBQC is that a unitary gate on a quantum state can be implemented as a specially chosen measurement on a larger entangled state. For example, consider the state $\bra{\psi}=\alpha\bra 0+\beta\bra 1$ entangled with an ancilla qubit using a CZ gate. We will measure this state in the $\bra 0\pm e^{i\phi}\bra 1$ basis. Rewriting the state in this basis:
+\begin{equation}
+\alpha\bra{00}+\alpha\bra{01}+\beta\bra{10}-\beta\bra{11}=(\bra 0+e^{i\phi}\bra 1)(\alpha\bra ++\beta e^{i\phi}\bra -)+(\bra 0-e^{i\phi}\bra 1)(\alpha\bra +-\beta e^{i\phi}\bra -)
+\end{equation}
+so, we have moved the state $\bra{\psi}$ onto the ancilla and performed the rotation $HZ^{m}R_{z}(\phi)$, where $m$ is the measurement outcome, i.e. $0$ if the $\bra 0+e^{i\phi}\bra 1$ state was measured and $1$ if the $\bra 0-e^{i\phi}\bra 1$ state was measured.
+
+Although we have only performed a rotation around the $Z$ axis here, by concatenating such operations we can perform arbitary single qubit rotations. By starting with a network of entangled qubits we can not only perform an arbitrary number of these single qubit rotations but also effectively implement two qubit gates by exploiting the entanglement already existing in the network.
+
+In this manner we can see that the MBQC model is able to implement any quantum algorithm possible in the circuit model and thus is universal for quantum computing. Throughout the calculation it is necessary to keep track of the extra $Z$ rotations that are dependent on the measurement outcomes and modify future measurement bases accordingly. This imposes a time ordering on the measurements which prevents all the measurements being carried out independently and the resulting paradox that all algorithms could be performed in $O(1)$ time.  
+
 \section{Candidate Quantum Systems}
-
-
