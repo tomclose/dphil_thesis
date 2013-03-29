@@ -1,7 +1,7 @@
 \chapter{Quantum Dynamics} 
 \label{ch:QuantumDynamics}
 
-\section{The Scrodinger Equation}
+\section{The Schr\"odinger Equation}
 
 We begin by looking at the quantum mechanical description and evolution of isolated systems - those systems which do not interact with their environment in any way. The dynamics of such systems are fundamental to the quantum mechanical description of nature, as we can consider the universe itself an isolated quantum system which contains all other systems. 
 
@@ -58,46 +58,31 @@ TODO: Diagram?
 
 \section{Open Quantum Systems}
 
-When the quantum system that we want to model can no longer be considered isolated
-- state vector no-longer sufficient
+It is often the case that the system whose behaviour we wish to predict cannot truly be considered isolated in the sense given above. Frequently the system we are interested in is actually part of a larger system with which it interacts. This larger system may be too complex to model given our computational resources or perhaps we do not have enough knowledge of its state to make modelling possible. Either way, we often find ourselves with the task of modelling a non-isolated system interacting with some other system. 
 
-Why not isolated
-- only interested in part of a larger system
-- maybe the whole system is too complex to model
-- maybe we don't have any knowledge of its state
-- either way, although we can always step back, we often find ourselves interested in modelling a specific, non-isolated part of a larger system
-- we have to make some assumptions about the larger system
-
-
-[In practice it is rare that a quantum system can truly be considered isolated and so the Schr\"{o}dinger equation has limits in terms of the insight it can give us into system dynamics. While it is always possible to take a step back and view the system we are interested in as part of a larger isolated system, it is often impossible to model this larger system, either due to lack of knowledge of its state at any one time, or due to computational constraints.
-
-  The problem actually goes deeper than the equation used to describe the dynamics; our representation of a quantum state as a state vector $\ket{\psi}$ proves to be inadequate for describing many quantum systems.]
-
-Why important for quantum computing
-When evaluating systems for quantum information processing this is a particularly important consideration: we ultimately want to preserve pure quantum behavious, so it is important to be able to model any deviations from this ideal.
+In this case, when the quantum system that we want to model can no longer be considered isolated, the description of the state using a state vector $\ket{\psi}$ is no-longer sufficient.
 
 As a simple illustration of this point, consider a pair of qubits in the Bell singlet state, $\ket{01} - \ket{10}$. Imagine we only have access to the first qubit and want to provide the best possible description of its state; another party holds the second qubit and there are no restrictions placed on the operations they perform. A first observation is that if measured in the Z basis this qubit will report the outcomes $0$ and $1$, each with probability $1/2$. The only state vectors with this property take the form $\ket{0} + e^{i\phi}\ket{1}$, with $\phi \in [0, 2\pi)$. However, our first qubit also has the property that when measured in the X or Y basis, it will also report both possible outcomes with equal probability, which is not the case for any of the state vectors given. A good representation of the state of the first qubit is not possible within the language of state vectors.
 
-Density matrix
+Systems that cannot be described using the state vector alone play an important role in quantum information processing: we ultimately want to preserve pure quantum behaviour, so it is important to be able to model any deviations from this ideal.
 
+In order to describe such systems we introduce the \textit{density matrix}
 \begin{align}
   \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i} 
 \end{align}
+which describes a \textit{mixed state}: a statistical mixture of pure states $\ket{\psi_i}$. A desity matrix must be Hermitian, positive semi-definite and have $tr(\rho) = 1$.
 
-Master equation
-
-Markovian evolution - evolution depends only on the state of the system at the current time - not the state of the environment, or the history of the state. The most general form \cite{lindblad}
-\begin{align}\label{master_eq}
-  \ddt \rho(t) = -i \left[H, \rho\right] + \sum_k L_k \rho L_k^\dagger -\frac{1}{2} L_k^\dagger L_k \rho -\frac{1}{2} \rho L_k^\dagger L_k 
+In the language of density matrices the Schr\"odinger equation becomes the \textit{von Neumann equation}
+\begin{align}
+  \ddt \rho = i [\rho, H]
 \end{align}
 
 
 \subsection{Measurement}
 
+A measurement on an isolated quantum system is described by a single operator. The possible measurement outcomes are given by the eigenvalues of the operator and the act of measurement projects the system into the eigenspace of the eigenvalue corresponding to the outcome. We refer to such measurements as \textit{projective measurements}.
 
-
-Projective measurement. Positive operator valued measurement
-Neumark's theorem [TODO ref]: POVM equivalent to interaction with an ancilliary system followed by a projective measurement.
+When dealing with non-isolated systems we extend our measurement framework to \textit{positive operator valued measurements} (POVMs). Neumark's theorem \cite{?} tells us that any POVM on a system is equivalent to a projective measurement on a larger system. For example, a common experimental set-up is to allow a system to interact with an ancillia qubit and then projectively measure the ancillia to learn about the system.
 
 A POVM  is defined by a set of operators $A_k$, satisfying
 \begin{align}
@@ -105,9 +90,21 @@ A POVM  is defined by a set of operators $A_k$, satisfying
   \sum_k A_k^\dagger A_k = \id
 \end{align}
 Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
-\begin{align}
+\begin{align}\label{POVM_normalisation_eq}
   \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
 \end{align}
+
+\subsection{Evolution of open quantum systems}
+
+It is not always possible to predict the evolution of an open quantum system. In general it might be necessary to model the system and environment together in order to produce useful predictions about the system's behaviour. An important part of the study of open qantum systems is to identify those cases where we can obtain a good approximation of the system's behaviour without also having to model the environment in detail.
+
+An important class of systems are \textit{Markovian systems}: where the current evolution of the system depends only on its state at the current time, not the state of the environment, or the history of the state. For example, this will be the case if the memory time of the environment is short compared to the timescale of system evolution we are interested in so that any information that leaked from the system to the environment is quickly dissipated. [TODO YUK]
+
+The most general form \cite{lindblad} of evolution of a Markovian system is given by the \textit{Markovian master equation}
+\begin{align}\label{master_eq}
+  \ddt \rho(t) = -i \left[H, \rho\right] + \sum_k L_k \rho L_k^\dagger -\frac{1}{2} L_k^\dagger L_k \rho -\frac{1}{2} \rho L_k^\dagger L_k .
+\end{align}
+The operators $L_k$ are often referred to as \textit{Lindblad operators}. 
 
 \subsection{Quantum Jump Master Equation}
 
@@ -124,7 +121,27 @@ We let the measurement is \textit{weak} by setting $A_1 = \sqrt{\epsilon} L$ so 
   A_0^\dagger A_0 + A_1^\dagger A_1 = \left( \id - \frac{\epsilon}{2} L^\dagger L\right)^\dagger \left( \id - \frac{\epsilon}{2} L^\dagger L\right) + \epsilon L^\dagger L = \id + O(\epsilon^2)
 \end{align}
 
-Make $\epsilon \approx \delta t$. Recover master equation. Talk about avoiding quantum Zeno effect? 
+Make $\epsilon \approx \delta t$ to get condidional no jump evolution. Point out that the trace of the state isn't 1 anymore but that it tracks the probability
+Conditional on no jump the system evolves as
+\begin{align}
+  \rho_c(t+\delta t) &= \left(\id - \frac{\delta t}{2} L^\dagger L\right)\rho_c(t)\left(\id - \frac{\delta t}{2} L^\dagger L\right) \\
+  &= \rho_c(t) - \frac{\delta t}{2} \left(L^\dagger L \rho_c(t) + \rho(t) L^\dagger L \right)
+\end{align}
+Note here that we have not normalised the density matrix as was done by dividing by $p_k$ in eq. (\ref{POVM_normalisation_eq}). The equation for the normalised density matrix is non-linear, which makes solution tricky. It is convenient to leave the density matrix in this non-normalised form, as the trace of our density matrix $\rho_c(t)$ will equal the cumulative probability that there has been no detection by time $t$.
+
+\begin{align}
+  \ddt \rho_c(t) = - \frac{1}{2} \left(L^\dagger L \rho_c(t) + \rho(t) L^\dagger L \right)
+\end{align}
+
+The probability of getting the first detection at time $t$ is 
+\begin{align}
+ \tr(\delta t L \rho_c(t) L^\dagger)
+\end{align}
+
+
+Say about averaging over all jumps to recover master equation
+
+Recover master equation. Talk about avoiding quantum Zeno effect? 
 
 
 \subsection{Decoherence Master Equation}
@@ -263,9 +280,19 @@ We have that
   \left[H, \cre{a}_\lambda(\vec{k})\right] = \hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k})
 \end{align}
 
-Show by commuting with H that we add energy
+Suppose we have a state $\ket{\psi}$ which is an eigenstate of the Hamiltonian with energy $E$. Consider the state $\cre{a}\ket{\psi}$:
+\begin{align}
+  H\cre{a}_\lambda(\vec{k})\ket{\psi} &= \left(\hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k}) + \cre{a}_\lambda(\vec{k})H\right) \ket{\psi} \\
+  &= \left(\hbar \omega_\vec{k} + E\right) \cre{a}_\lambda(\vec{k})\ket{\psi}
+\end{align}
+so $\cre{a}_\lambda(\vec{k})\ket{\psi}$ is also an eigenstate of the Hamiltonian, this time with energy $E + \hbar\omega_\vec{k}$. The operator $\cre{a}_\lambda(\vec{k})$ has created an excitation with energy $\hbar \omega_\vec{k}$.
 
-Fock states number operator
+If we start with a vacuum state of the electomagnetic field $\ket{0}$ such that $H\ket{0} = 0$ [TODO?? is this right] we can use the operators $\cre{a}$ to define set of states:
+\begin{align}
+  \ket{n} = (\cre{a})^n \ket{0}
+\end{align}
+These are called the \textit{Fock states} and corespond to states with a definite number of excitations.These are called the \textit{Fock states} and corespond to states with a definite number of excitations.  
+
 
 Single photon states
 
