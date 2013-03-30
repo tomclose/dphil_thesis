@@ -1,32 +1,62 @@
 \chapter{Quantum Dynamics} 
 \label{ch:QuantumDynamics}
 
-\section{The Schr\"odinger Equation}
+\section{Closed quantum systems}
 
-We begin by looking at the quantum mechanical description and evolution of isolated systems - those systems which do not interact with their environment in any way. The dynamics of such systems are fundamental to the quantum mechanical description of nature, as we can consider the universe itself an isolated quantum system which contains all other systems. 
+We begin by quickly summarising the laws of quantum mechanics as applied to a \textit{closed system}; that is, a system which does not intereact in any way with other systems. In practice, it is rare that any given system can truly be considered to be closed, yet the dynamics of closed systems are fundamental to the quantum mechanical description of nature: at the highest level, we can view the universe itself an closed quantum system which contains all others.
 
-The state of an isolated quantum system can be described by a \textit{state vector}, $\ket{\psi}$, in a Hilbert space representing the system, $S$. We say that the state vector represents a quantum system in a \textit{pure state}. In the systems we consider in this thesis the state vector will be a vector in a finite-dimensional vector space over the complex numbers. 
+By considering idealised closed systems, we are able to present the purest form of the rules of quantum mechanics - in the form of three postulate concerning the system's state, its evolution, and the act of performing measurements on it. In the latter parts of this chapter we will generalise the laws stated here to address \textit{open systems}, by first considering the open system as part of a larger closed system to which the postulates apply.
 
-The dynamics of an isolated quantum system are governed by the Schr\"odinger equation,
+The first postulate concerns the description of the state of a system \cite{nielsen+chuang}:
+\begin{quotation}
+  Assosciated to any closed physical system is a Hilbert space known as the \textit{state space} of the system. The system is completely described by its \textit{state vector}, which is a unit vector in the system's state space. The state space of a composite physical system is the tensor product of the state spaces of the component physical systems.
+\end{quotation}
+A Hilbert space is (possibly infinite-dimensional) vector space over the complex numbers, on which an inner product is defined. We will usually write the state vector using the Dirac bracket notation, $\ket{\psi}$. Note that the postulate does not tell us anything more about the correct state space for a given system - we have to make that judgement when we model it.
+
+In general, when a system can be described using a state vector we say that it exists in a \textit{pure state}. With the state vector specified we have complete knowledge about the system - we know everything that there is to know.
+
+In QIP we are often concerned with physical systems where the state space is two-dimensional: the quantum bit or \textit{qubit}. The general state of such as system can be written
+\begin{align}
+  \ket{\psi} = \alpha\ket{0} + \beta\ket{1}
+\end{align}
+where the normalisation condition is imposed by requiring that $|\alpha|^2 + |\beta|^2 = 1$. As an alternative representation we can write
+\begin{align}
+  \ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi}\sin\frac{\theta}{2}\ket{1}
+\end{align}
+where used the fact that two states are physically equivalent if they differ by a global phase, $\ket{a} = e^{ik}\ket{b}$, which will become apparent when we look at the measurement postulate. We can use this representation to visualise a qubit as a point on the surface of a unit sphere, known as the \textit{Bloch sphere}, described by the $3$-vector $[\cos(\phi)\sin(\theta), \sin(\phi)\sin(\theta), \cos(\theta)]$.
+
+The second postulate concerns the evolution of an isolated quantum system and can be stated
+\begin{quotation}
+The time evolution of an isolated quantum system is described by the \textit{Schr\"odinger equation},
 \begin{align}
   \label{qd:schrodinger_eq}
-  \ddt \ket{\psi(t)} = -i H(t) \ket{\psi(t)}
+  i\hbar\ddt \ket{\psi(t)} = H(t) \ket{\psi(t)}
 \end{align}
-where $H(t)$ is Hermitian operator describing the system's Hamiltonian.
+where $\hbar$ is a constant, known as \textit{Plank's constant}, and $H(t)$ is a fixed Hermitian operator known as the Hamiltonian of the closed system.
+\end{quotation}
+In the rest of this thesis we choose units so as to set $\hbar = 1$. 
 
 The Schr\"odinger equation can be solved in terms of a time evolution operator
 \begin{align}
   \ket{\psi(t)} = U(t)\ket{\psi(0)}
 \end{align}
-where $U(t)$ satisfies
+where $U(t)$ is the solution to the differential equation
 \begin{align}
-  \ddt U(t) = H(t).
+  \ddt U(t) = H(t)U(t), \qquad U(0) = \id
 \end{align}
 As $H(t)$ is Hermitian, $U(t)$ will be unitary. In particular this implies that $U^{-1}(t) = U^\dagger(t)$ exists and therefore the dynamics quantums of isolated quantum systems are reversible.
 
-\subsection{Rabi Oscillations}
+As the Hamiltonian is Hermitian we can write it in the form
+\begin{align}
+  H = \sum_i E_i \bra{\phi_i}\ket{\phi_i}
+\end{align}
+where $E_i$ are the eigenvalues, which are real, and $\ket{\phi_i}$ are the associated eigenvectors, which can be chosen to be orthogonal. The $\ket{\phi_i}$ are sometimes called stationary states, as they evolve as
+\begin{align}
+  \ket{\phi_i(t)} = e^{E_i t}\ket{\phi_i(0)}
+\end{align}
+picking up a phase at rate $E_i$.
 
-As a simple example of pure state evolution we consider an isolated \textit{qubit}, a two-dimensional quantim system, under the influence of the \textit{Rabi Hamiltonian},
+As a simple example of pure state evolution we consider an isolated qubit, under the influence of the \textit{Rabi Hamiltonian},
 \begin{equation} \label{rabi_hamiltonian}
   H = \frac{\hbar}{2}
 \begin{bmatrix}
@@ -35,26 +65,46 @@ As a simple example of pure state evolution we consider an isolated \textit{qubi
 \end{bmatrix}.
 \end{equation}
 
-We diagonalise the Hamiltonian, writing the eigenvectors and eigenvalues in the form
+We diagonalise the Hamiltonian
 \begin{align}
-  \ket{\psi_+} &=  \left(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\right)  &\lambda_{+} = \nu + \sqrt{\nu^2 - \Omega^2} \\
-  \ket{\psi_-} &=  \left(\sin\frac{\theta}{2}, \cos\frac{\theta}{2}\right)  &\lambda_{-} = \nu - \sqrt{\nu^2 - \Omega^2} 
+  H = E_1 \ket{\phi_1}\bra{\phi_1} + E_2 \ket{\phi_2}\bra{\phi_2}
+\end{align}
+in terms of the eigenvectors and eigenvalues
+\begin{align}
+  \ket{\phi_1} &=  \left(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\right)  &E_1 = \nu + \sqrt{\nu^2 - \Omega^2} \\
+  \ket{\phi_2} &=  \left(\sin\frac{\theta}{2}, \cos\frac{\theta}{2}\right)  &E_2 = \nu - \sqrt{\nu^2 - \Omega^2} 
 \end{align}
 where
 \begin{align}
   \theta = \arctan\left(\frac{\Omega}{\nu}\right).
 \end{align}
 
-We can then write the sultion to the Schr\"odinger equation
+We can then write the solution to the Schr\"odinger equation
 \begin{align}
-  \ket{\psi(t)} &= \alpha_{+} e^{i\lambda_{+}t}\ket{\psi_{+}} +  \alpha_{-} e^{i\lambda_{-}t} \ket{\psi_{-}} \\
-  &= \alpha_{+} e^{i\Delta t}\ket{\psi_{+}} +  \alpha_{-} e^{- i\Delta t} \ket{\psi_{-}} 
+  \ket{\psi(t)} &= \alpha e^{iE_1t}\ket{\phi_1} +  \beta e^{iE_2t} \ket{\phi_2} \\
+  &= \alpha e^{i\Delta t}\ket{\phi_1} +  \beta e^{- i\Delta t} \ket{\phi_2} 
 \end{align}
 where $\Delta = \sqrt{\nu^2 - \Omega^2}$ and the last equality uses the equivalence of two quantum states differing only by a global phase. 
 
-The solution represents oscillations in time with angular frequency $\Delta$. This oscillitory behaviour, known as the \textit{Rabi oscillation}, is a common feature of many quantum systems.
+The solution can be visualised a rotation of the initial state vector on the Bloch sphere at angular speed $\Delta$, about the axis connecting the diametrically opposite points relating $\ket{\phi_1}$ and $\ket{\phi_2}$. The amplitude of the oscillation is proportional to $\sin^2\theta$, increasing from $0$ to $1$ as $\theta \rightarrow \pi$.  This oscillatory behaviour, known in this case as the \textit{Rabi oscillation}, is a common feature of many quantum systems.
 
-TODO: Diagram?
+The third, and final, postulate concerns itself with measurments performed on isolated quantum systems. We state it in terms of a special class of measurements
+\begin{quotation}
+  A \textit{prjective measurement} is described by an \textit{observable}, M, a Hermition operator on the system's state space. We can write the operator as
+  \begin{align}
+    M = \sum_m mP_m
+  \end{align}
+  where $P_m$ is the projector onto the eigenspace of $M$ with eigenvalue $m$. The outcomes of the measurement correspond to the eigenvalues $m$. When performing a measurement on state $\ket{\psi}$, the probability of obtaining outcome $m$ is
+  \begin{align}
+    p(m) = \bra{\psi}P_m\ket{\psi}.
+  \end{align}
+  Given that outcome $m$ occurred, the state of the system immediately after the measurement is
+  \begin{align}
+    \frac{P_m\ket{\psi}}{\sqrt{p(m)}}.
+  \end{align}
+\end{quotation}
+In fact, projective measurements are not the most general measurement we can make on a closed quantum system. A projective measurement corresponds to making a measurement on the whole system. We could also choose to just measure a part of the system, which would not generally perform a projective measurement on the whole. We state postulate three in terms of projective measurements as they are conceptually simple and it can be shown that the most general types of measurements are always equivalent to a projective measurement on some ancilliary system \cite{neumark}. We visit these more general measurements along with open quantum systems in the next section.
+
 
 \section{Open Quantum Systems}
 
@@ -70,7 +120,7 @@ In order to describe such systems we introduce the \textit{density matrix}
 \begin{align}
   \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i} 
 \end{align}
-which describes a \textit{mixed state}: a statistical mixture of pure states $\ket{\psi_i}$. A desity matrix must be Hermitian, positive semi-definite and have $tr(\rho) = 1$.
+which describes a \textit{mixed state}: a statistical mixture of pure states $\ket{\psi_i}$. A desity matrix must be Hermitian, positive semi-definite and have $\tr(\rho) = 1$.
 
 In the language of density matrices the Schr\"odinger equation becomes the \textit{von Neumann equation}
 \begin{align}
@@ -89,7 +139,7 @@ A POVM  is defined by a set of operators $A_k$, satisfying
   \label{POVM_completeness_eq}
   \sum_k A_k^\dagger A_k = \id
 \end{align}
-Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
+Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = \tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
 \begin{align}\label{POVM_normalisation_eq}
   \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
 \end{align}
@@ -114,7 +164,7 @@ It is important to realise that by placing a system under continuous observation
 
 To put all this on a rigorous footing we will describe our observation using a POVM. For simplicity, we will assume that we look to detect only a single  event; the extension to multiple events is straightforward once a single event is understood. We let the detection event operator be $A_1$, so that after a detection event the system is in state
 \begin{align}
-  \frac{A_1 \rho A_1^\dagger}{tr\{A_1 \rho A_1^\dagger\}}
+  \frac{A_1 \rho A_1^\dagger}{\tr\{A_1 \rho A_1^\dagger\}}
 \end{align}
 We let the measurement is \textit{weak} by setting $A_1 = \sqrt{\epsilon} L$ so that the probability of detecting an event is small. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that eq (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
 \begin{align}
@@ -167,7 +217,7 @@ By switching to the interaction picture we move to a basis which follows the nat
 Our best description of the state of the system $S$ is given by taking the partial trace of the overall density matrix over the envonment $E$:
 \begin{align}
   \label{trace_eq}
-  \tilde{\rho}_S(t) = tr_E\left\{\tilde{\rho}(t)\right\}.
+  \tilde{\rho}_S(t) = \tr_E\left\{\tilde{\rho}(t)\right\}.
 \end{align}
 
 We now look to find the master equation for the system S, which will be an expression for the rate of change of $\tilde{\rho}_S$ in terms of $\tilde{\rho}_S$. To this end, we formally solve eq. (\ref{i_von_neumann_eq}) to find an equation for $\tilde{\rho}$ in integral form
@@ -176,86 +226,84 @@ We now look to find the master equation for the system S, which will be an expre
 \end{align}
 and then substitute this back into eq. (\ref{i_von_neumann_eq}) and apply eq. (\ref{trace_eq}) to get
 \begin{align}
-  \ddt \tilde{\rho}_S(t) = -\int_{s=0}^t tr_B\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} dt
+  \label{before_markov_approx}
+  \ddt \tilde{\rho}_S(t) = -\int_{s=0}^t \tr_B\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} dt
 \end{align}
-where we have assumed that $tr_B [H_I(t), \rho(0)] = 0$.
+where we have assumed that $\tr_B [H_I(t), \rho(0)] = 0$.
 
 
 This isn't yet in a closed form as the right hand side still contains $\rho(t)$, the density matrix of the whole system.
 
-We then make the Born approximation letting $\tilde{\rho}(t) \approx \tilde{\rho}_S(t) \otimes \tilde{\rho}_B$. At first glance this appears to say that the environment is completely unaffected by the system. In fact we still allow exitations from the system to enter the environment; the assumption is merely that these exitations dissipate on a short timescale to become undetectable.
+We then make the Born approximation letting $\tilde{\rho}(s) \approx \tilde{\rho}_S(s) \otimes \tilde{\rho}_E$. At first glance this appears to say that the environment is completely unaffected by the system. In fact we still allow exitations from the system to enter the environment; the assumption is merely that these exitations dissipate on a short timescale to become undetectable.
 
-We then substitute into eq. \ref{i_von_neumann_eq} we get (we've made a Markov eqn $\rho_S(s) \rightarrow \rho_S(t)$
+After the Born approximation the RHS of eq. (\ref{before_markov_approx}) no longer depends on the history of the environment, but still depends on the system state at previous times. To remove this dependence we make the \textit{Markov approximation} by setting $\rho(s) = \rho(t)$
 \begin{align}
-  \ddt \tilde{\rho}_S = -i \int_{s=0}^t tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(t) \right] \right]\right\} ds
+  \ddt \tilde{\rho}_S = -i \int_{s=0}^t \tr_E\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}_S(t)\otimes\tilde{\rho}_E \right] \right]\right\} ds
 \end{align}
+This equation is known as the Redfield equation. 
 
-We now integrate in the other direction to remove the dependence on the state at time $0$
+The Redfield equation only depends on current state of the system, but still contains a reference to the initial time $t=0$. To remove this we make the second part of the Markov approximation, by integrating backwards in time. 
 \begin{align}
-  \ddt \tilde{\rho}_S(t) = -i \int_{s=0}^\infty tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds
+  \label{redfield_eq}
+  \ddt \tilde{\rho}_S(t) = -i \int_{s=0}^\infty \tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds
 \end{align}
+This assumes that the integrand dissapears sufficiently quickly. We would expect this to happen on the timescale of dissipation of environmental excitations, so the \textit{Born-Markov approximation} is suitable for modelling the system on a timescale larger than this.
 
-Then split into components to make the rotating wave approximation
+We now look get the equation into a form where we can perform the integral by examining the form of the Hamiltonian. We begin by returning to the Schr\"odinger picture Hamiltonian and writing
 \begin{align}
   H_I = \sum_\alpha A_\alpha \otimes B_\alpha
 \end{align}
+where $A_\alpha$ and $B_\alpha$ act on the system and environment respectively.
 
-Want to unpick the time dependence of $\tilde{H}_I(t)$
-
-Split $A_\alpha$ into operators 
+To find the time dependence of $\tilde{H}_I(t)$ we further split the $A_\alpha$ into operators 
 \begin{align}
   A_\alpha(\omega) = \sum_{\epsilon' - \epsilon = \omega} \Pi(\epsilon)A_\alpha \Pi(\epsilon')
 \end{align}
-
-So that
+where $\Pi(\epsilon)$ is a projector onto the eigenspace of energy $\epsilon$. This gives us that
 \begin{align}
   [H_S, A_\alpha(\omega)] &= - \omega A_\alpha(\omega) \\
   [H_S, A^\dagger_\alpha(\omega)] &= + \omega A^\dagger_\alpha(\omega)
 \end{align}
+The $A_\alpha(\omega)$ are eigenoperators of the Hamiltonian with frequencies $\pm \omega$.
 
-$A_\alpha(\omega)$ are eigenoperators with frequencies $\pm \omega$.
-
-In the interaction picture
+Returning to the interaction picture we have
 \begin{align}
   \tilde{A}(\omega, t) = e^{iH_S t}A_\alpha(\omega) e^{-iH_S t} = e^{-i\omega t} A_\alpha(\omega)
 \end{align}
-
+so that
 \begin{align}
   \tilde{H}_I(t) = \sum_{\alpha, \omega} e^{-i \omega t} A_\alpha(\omega)\otimes \tilde{B}_\alpha(t) = \sum_{\alpha, \omega} e^{i \omega t} A^\dagger_\alpha(\omega)\otimes \tilde{B}^\dagger_\alpha(t)
 \end{align}
 
+If we substitute this back into the Redfield eq. (\ref{redfield_eq}) we are able to perform the integration
 \begin{align}
   \ddt \tilde{\rho}_S(t) = \sum_{\omega, \omega'} \sum_{\alpha, \beta} e^{i(\omega'-\omega)t} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega') - A^\dagger_\alpha(\omega')A_\beta(\omega)\right) + \text{H.c}
 \end{align}
-
+where
 \begin{align}
-  \Gamma_{\alpha\beta}(\omega) = \int_0^\infty ds e^{i\omega s} \langle \tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rangle
+  \Gamma_{\alpha\beta}(\omega) = \int_0^\infty ds e^{i\omega s} \tr_E \{ \tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \}
 \end{align}
-where $\Gamma$ has no time dependence (why?).
+We have assumed that $\rho_E$ is a stationary state of the environment, so that $\tr_E \{\tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \} = \tr_E \{\tilde{B}_\alpha^\dagger(s) \tilde{B}_\beta(0) \rho_E \}$ and $\Gamma_{\alpha\beta}(\omega)$ has no time dependence.
+
+
+We now ignore the terms where $\omega' - \omega \neq 0$. This is equivalent to the RWA
+\begin{align}
+  \ddt \tilde{\rho}_S(t) = \sum_{\omega} \sum_{\alpha, \beta} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega) - A^\dagger_\alpha(\omega)A_\beta(\omega)\right) + \text{H.c}
+\end{align}
 
 If we write
 \begin{align}
   \Gamma_{\alpha \beta}(\omega) = \frac{1}{2}\gamma_{\alpha\beta}(\omega) + i S_{\alpha\beta}(\omega)
 \end{align}
-
-
-Need to point out RWA
-
-Then we recover
+and return to the Schr\"odinger picture, then we recover
 \begin{align}
   \ddt \rho_S(t) = -i[H_S + H_{LS}, \rho_S(t) ] + \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho_S(t)H_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho_S(t)\} \right)
 \end{align}
 where we have the Lamb shift Hamiltonian contribution $H_{LS}$. We can now diagonalise the matrix $\gamma_{\alpha\beta}$ to recover the Master Equation form in eq (\ref{master_eq}).
 
-\subsection{Coupling to phonons}
-
-\begin{align}
-  H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right)
-\end{align}
-
-
-
 \section{Quantum Treatment of Light}
+
+Wave particle duality.
 
 There are two approaches to modelling light: classical and quantum. 
 
@@ -396,4 +444,49 @@ which is the basically the Rabi Hamiltonian as in Eq. (\ref{rabi_hamiltonian}).
 Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ induced via the third state.
 
 
+
+\section{Phonon-matter interactions}
+
+When dealing with solid state systems an important source of decoherence comes from interaction with lattice vibrations. Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy.
+
+Phonons couple to any states of our system that lead to a distortion in the atomic lattice. We restrict ourselves to looking at relatively low-energy states, coupling only to long-wavelength, accoustic phonons. There are two dominant coupling mechanisms in this case: \textit{deformation potential} coupling, $D$, and \textit{piezoelectric coupling}, $P$, \cite{mahan} leading to the interaction Hamiltonian
+\begin{align}
+  H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right).
+\end{align}
+[Find mahan and add something interesting]
+
+We also restrict ourselves to looking at coupling to a phonon bath in a thermal state
+\begin{align}
+  \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
+\end{align}
+where $\beta = 1/(kT)$ and
+\begin{align}
+  H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha
+\end{align}
+
+In this state we can calculate the correlation functions explicitly
+\begin{align}
+  \langle \an{b}_i \an{b}_j \rangle &= 0 \\
+  \langle \cre{b}_i \cre{b}_j \rangle &= 0 \\
+  \langle \an{b}_i \cre{b}_j \rangle &= \delta_{ij} \left( N(\omega_i) +1 \right) \\
+  \langle \cre{b}_i \an{b}_j \rangle &= \delta_{ij} N(\omega_i)
+\end{align}
+where
+\begin{align}
+  N(\omega) \frac{1}{e^{\beta \omega} - 1}
+\end{align}
+is the occupation of state $i$.
+
+When we take the sum over $\vec{q}$ we end up with 
+\begin{align}
+  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q})
+\end{align}
+so that we get
+\begin{align}
+  \gamma_\alpha(\omega) = \left\{
+    \begin{array}{l l}
+    J(\omega)\left(N(\omega) + 1\right) & \qquad \text{if $\omega > 0$}\\
+    J(\omega)N(\omega) & \qquad \text{if $\omega \leq 0$}
+  \end{array} \right.
+\end{align}
 
