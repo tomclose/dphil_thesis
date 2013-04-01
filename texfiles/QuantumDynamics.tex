@@ -7,6 +7,8 @@ We begin by quickly summarising the laws of quantum mechanics as applied to a \t
 
 By considering idealised closed systems, we are able to present the purest form of the rules of quantum mechanics - in the form of three postulate concerning the system's state, its evolution, and the act of performing measurements on it. In the latter parts of this chapter we will generalise the laws stated here to address \textit{open systems}, by first considering the open system as part of a larger closed system to which the postulates apply.
 
+\subsection{State}
+
 The first postulate concerns the description of the state of a system \cite{nielsen+chuang}:
 \begin{quotation}
   Assosciated to any closed physical system is a Hilbert space known as the \textit{state space} of the system. The system is completely described by its \textit{state vector}, which is a unit vector in the system's state space. The state space of a composite physical system is the tensor product of the state spaces of the component physical systems.
@@ -24,6 +26,8 @@ where the normalisation condition is imposed by requiring that $|\alpha|^2 + |\b
   \ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi}\sin\frac{\theta}{2}\ket{1}
 \end{align}
 where used the fact that two states are physically equivalent if they differ by a global phase, $\ket{a} = e^{ik}\ket{b}$, which will become apparent when we look at the measurement postulate. We can use this representation to visualise a qubit as a point on the surface of a unit sphere, known as the \textit{Bloch sphere}, described by the $3$-vector $[\cos(\phi)\sin(\theta), \sin(\phi)\sin(\theta), \cos(\theta)]$.
+
+\subsection{Dynamics}
 
 The second postulate concerns the evolution of an isolated quantum system and can be stated
 \begin{quotation}
@@ -88,6 +92,8 @@ where $\Delta = \sqrt{\nu^2 - \Omega^2}$ and the last equality uses the equivale
 
 The solution can be visualised a rotation of the initial state vector on the Bloch sphere at angular speed $\Delta$, about the axis connecting the diametrically opposite points relating $\ket{\phi_1}$ and $\ket{\phi_2}$. The amplitude of the oscillation is proportional to $\sin^2\theta$, increasing from $0$ to $1$ as $\theta \rightarrow \pi$.  This oscillatory behaviour, known in this case as the \textit{Rabi oscillation}, is a common feature of many quantum systems.
 
+\subsection{Measurements}
+
 The third, and final, postulate concerns itself with measurments performed on isolated quantum systems. We state it in terms of a special class of measurements
 \begin{quotation}
   A \textit{prjective measurement} is described by an \textit{observable}, M, a Hermition operator on the system's state space. We can write the operator as
@@ -108,25 +114,41 @@ In fact, projective measurements are not the most general measurement we can mak
 
 \section{Open Quantum Systems}
 
-It is often the case that the system whose behaviour we wish to predict cannot truly be considered isolated in the sense given above. Frequently the system we are interested in is actually part of a larger system with which it interacts. This larger system may be too complex to model given our computational resources or perhaps we do not have enough knowledge of its state to make modelling possible. Either way, we often find ourselves with the task of modelling a non-isolated system interacting with some other system. 
+In reality a closed quatum system must be viewed as in idealisation; with the possible exception of the entire universe, the assumption that a system is closed must always be approximate. All physical systems are unvoidably coupled to other physical systems. We could try to rectify the situation by expanding the system we are interested in to include these other systems, but will eventually run into difficulties: when considered together the joint system may be too complex to model given our computational resources, or perhaps we do not have enough knowledge of some of the systems or couplings to make modelling possible. To model real-world situations we must develop the theory of \textit{open quantum systems}. 
 
-In this case, when the quantum system that we want to model can no longer be considered isolated, the description of the state using a state vector $\ket{\psi}$ is no-longer sufficient.
+The subject of open quantum systems is especially important for the field of QIP. Most QIP processes and algorithms are stated in terms of what can be done in prinicple in ideal systems. All reals systems suffer from unwanted interactions with other systems. In assessing a system's suitability as a candidate QIP system, it is important to be able to somehow incorporate these interactions into our model and evaluate the extent of their effect on the system's information processing capacity.
 
-As a simple illustration of this point, consider a pair of qubits in the Bell singlet state, $\ket{01} - \ket{10}$. Imagine we only have access to the first qubit and want to provide the best possible description of its state; another party holds the second qubit and there are no restrictions placed on the operations they perform. A first observation is that if measured in the Z basis this qubit will report the outcomes $0$ and $1$, each with probability $1/2$. The only state vectors with this property take the form $\ket{0} + e^{i\phi}\ket{1}$, with $\phi \in [0, 2\pi)$. However, our first qubit also has the property that when measured in the X or Y basis, it will also report both possible outcomes with equal probability, which is not the case for any of the state vectors given. A good representation of the state of the first qubit is not possible within the language of state vectors.
+In order to treat open systems we will need to generalise the ideas of state description, evolution and measurement that were introducted in the previous section.
 
-Systems that cannot be described using the state vector alone play an important role in quantum information processing: we ultimately want to preserve pure quantum behaviour, so it is important to be able to model any deviations from this ideal.
 
-In order to describe such systems we introduce the \textit{density matrix}
+
+\subsection{State}
+
+When describing the state of closed systems we used the state vector. The state vector represents complete knowledge of the system. When we deal with open quantum systems, we frequently find ourselves in situations where we do not have this complete knowledge - there is some classical uncertainty in our knowledge of the state. In these cases the state vector is no longer sufficient for giving the best possible representation of the state. 
+
+As a simple illustration of this point, consider a pair of qubits in the Bell singlet state, $\ket{01} - \ket{10}$. Imagine we only have access to the first qubit and want to provide the best possible description of its state; another party holds the second qubit and there are no restrictions placed on the operations they perform. A first observation is that if we perform a projective measurement described by the $Z$ operator we obtain the outcomes $0$ and $1$, each with probability $1/2$. The only state vectors with this property take the form $1/\sqrt{2}(\ket{0} + e^{i\phi}\ket{1})$, with $\phi \in [0, 2\pi)$. However, our first qubit also has the property that when measured in the $X$ or $Y$ basis it will also report both possible outcomes with equal probability, which is not the case for any of the state vectors given. A good representation of the state of the first qubit is not possible within the language of state vectors.
+
+Systems where the state is not completely known and subsystems of composite systems can be thought of as being in a statistical mixture of pure states. We say these systems exist in a \textit{mixed state}. To describe such states, we introduce the \textit{density matrix}
 \begin{align}
   \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i} 
 \end{align}
-which describes a \textit{mixed state}: a statistical mixture of pure states $\ket{\psi_i}$. A desity matrix must be Hermitian, positive semi-definite and have $\tr(\rho) = 1$.
+which represents a statistical mixture of pure states $\ket{\psi_i}$ each with probability $p_i$. It can be seen immediately that a desity matrix must be Hermitian and positive semi-definite (has all eigenvalues $\geq 0$), and that $\tr(\rho) = 1$. It is also true that any matrix satisfying these properties will describe the state of some quantum ensemble.
 
-In the language of density matrices the Schr\"odinger equation becomes the \textit{von Neumann equation}
+When we introduced the concept of a mixed state we did not rule out that the state is also pure, merely that it need not be. We can consider a pure state to be a statistical mixture of a single state:
 \begin{align}
-  \ddt \rho = i [\rho, H]
+  \rho = \ket{\psi}\bra{\psi}.
 \end{align}
+Pure states can be identified by the fact that $\tr\{\rho^2\} = 1$. In general $\tr\{\rho^2\}$ can be used as a measure of how mixed a state is. A maximally mixed state in a Hilbert space of dimesion $n$ has $\rho = 1/n\id$ and $\tr\{\rho^2\} = 1/n$.
 
+If we have a composite quantum system formed from two systems $A$ and $B$ the density matrix of the joint system is given
+\begin{align}
+  \rho_{AB} = \rho_A \otimes \rho_B. 
+\end{align}
+If we are given the density matrix of the joint system, we can find the reduced desity matrix of the subsystem $A$ by taking the \textit{partial trace} over $B$
+\begin{align}
+  \rho_A = \tr_B\{\rho_{AB}\} = \sum_b \bra{b}\rho_{AB}\ket{b}
+\end{align}
+where $\{\ket{b}\}$ is a basis for the Hilbert space of system $B$. 
 
 \subsection{Measurement}
 
@@ -144,54 +166,74 @@ Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$
   \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
 \end{align}
 
-\subsection{Evolution of open quantum systems}
+\subsection{Dynamics}
 
-It is not always possible to predict the evolution of an open quantum system. In general it might be necessary to model the system and environment together in order to produce useful predictions about the system's behaviour. An important part of the study of open qantum systems is to identify those cases where we can obtain a good approximation of the system's behaviour without also having to model the environment in detail.
+In the language of density matrices the Schr\"odinger equation becomes the \textit{von Neumann equation}
+\begin{align}
+  \ddt \rho = i [\rho, H]
+\end{align}
 
-An important class of systems are \textit{Markovian systems}: where the current evolution of the system depends only on its state at the current time, not the state of the environment, or the history of the state. For example, this will be the case if the memory time of the environment is short compared to the timescale of system evolution we are interested in so that any information that leaked from the system to the environment is quickly dissipated. [TODO YUK]
+The von Neumann equation describes the evolution of a closed system in a mixed state, but the evolution of open systems is far richer than this. In general it may not even be possible to predict the evolution of an open system without also providing a detailed model of all the systems with which it interacts. The study of open quantum systems and the circumstances under which an interacting system's dynamics can be modelled alone is vast and here we will touch on only a small, yet often applicable, corner of it.
+
+In order to set up the theory we first divide the world into two parts: the \textit{system} and the \textit{environment}. We choose the system to be the part that we wish to model and make predictions about. The environment represets everything outside the system. The decision of where to draw the boundary between system and environment in a given case requires much care.
+
+We now look at the important case of \textit{Markovian evolution}: where the current evolution depends only on the system state at the current time, and not on the state of the environment or the history of the system. In practice this evolution will be approximate, but nevertheless provides accurate predictions in many situations. In particular, if the exitations in the environment decay on a much quicker timescale than that of the system dynamics, then the system's evolution is often approximately Markovian.
 
 The most general form \cite{lindblad} of evolution of a Markovian system is given by the \textit{Markovian master equation}
 \begin{align}\label{master_eq}
   \ddt \rho(t) = -i \left[H, \rho\right] + \sum_k L_k \rho L_k^\dagger -\frac{1}{2} L_k^\dagger L_k \rho -\frac{1}{2} \rho L_k^\dagger L_k .
 \end{align}
-The operators $L_k$ are often referred to as \textit{Lindblad operators}. 
+The operators $L_k$ are often referred to as \textit{Lindblad operators} and term involving the sum is often referred to as the \textit{dissipator}, written $D(\rho)$. The $H$ that occurs in the commutator term is not necessarily the free system Hamiltonian, as it may contain corrective terms due to the interaction.
+
+We now look at two situations in which the Markovian master equation arises.
 
 \subsection{Quantum Jump Master Equation}
 
-We will now consider how a system evolves under continuous measurement. We have to be careful about what we mean by this; the quantum Zeno effect \cite{quantum_zeno} states that a system that is repeatedly projectively measured never evolves from its current state. What we really mean is a system under constant observation: at any time a measurement result could be reported, but most of the time it is not. An optically active atom in a cavity is a good example: at any point it is possible that a photon will be emitted and detected, but in most time intervals no emission will occur.
+We first consider a system evolving under continuous measurement. It is important to state carefully what we mean by this to avoid an apparent contradiction: the well known quantum Zeno effect means that any system that is repeatedly projectively measured will not change its state at all. What we mean here is a system undergoing a weak, POVM-type measurement. A weak measurement is one that gives us very little information about the system and correspondingly only slightly perturbs the system's state. Such measurements occur when the system interacts weakly with an ancilla which is then measured.
+
+We will focus on a specific type of continuous measurement, which can be phrased in terms of isolated detection events. Most of the time the measurement reveals that no event has occured, behaving like a weak measurement. Occasionally the measurement reveals that an event has occurred and the system changes drastically similar to a projective measurement. We say the system has undergone a \textit{quantum jump}. A good example is photon emission from an atom in a cavity: at any point it is possible that a photon will be emitted and detected, but in most time intervals no emission will occur.
 
 It is important to realise that by placing a system under continuous observation we alter its dynamics even if no detection event occurs. Intuitively, the event of `no detectection' increases our knowledge of the system's state and thus changes it. We say the state follows \textit{no-jump evolution} due to the \textit{back-action} of our observation.
 
-To put all this on a rigorous footing we will describe our observation using a POVM. For simplicity, we will assume that we look to detect only a single  event; the extension to multiple events is straightforward once a single event is understood. We let the detection event operator be $A_1$, so that after a detection event the system is in state
+We will now roughly sketch out how this measurement scenario leads back to the Markovian master equation (\ref{master_eq}). The rigorous derivation requires the use of stochastic calculus and a good explanation can be found in \cite{brun}. We aim to avoid these complexities whilst still providing some level of intuition for the result. 
+
+To put all this on a rigorous footing we will describe our observation using a POVM. For simplicity, we will assume that we look to detect only a single  event. We let the detection event operator be $A_1$, so that after a detection event the system is in state
 \begin{align}
   \frac{A_1 \rho A_1^\dagger}{\tr\{A_1 \rho A_1^\dagger\}}
 \end{align}
-We let the measurement is \textit{weak} by setting $A_1 = \sqrt{\epsilon} L$ so that the probability of detecting an event is small. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that eq (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
+We let the measurement is \textit{weak} by setting $A_1 = \sqrt{\epsilon} L$ so that the probability of detecting an event is proportional to $\epsilon$, which we can take to be small. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that eq (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
 \begin{align}
   A_0^\dagger A_0 + A_1^\dagger A_1 = \left( \id - \frac{\epsilon}{2} L^\dagger L\right)^\dagger \left( \id - \frac{\epsilon}{2} L^\dagger L\right) + \epsilon L^\dagger L = \id + O(\epsilon^2)
 \end{align}
 
-Make $\epsilon \approx \delta t$ to get condidional no jump evolution. Point out that the trace of the state isn't 1 anymore but that it tracks the probability
-Conditional on no jump the system evolves as
+We now consider the measurement to be made over a small time interval, $\delta t$, setting $\epsilon \propto \delta t$ so that the probability of detection is proportional to the length of that interval. We absorb any constant factor into our definition of $L$. We also make the simplifying assumption that the system is stationary apart from the measurement process, so the Hamiltonian is $0$. Conditional on there being no jump in the interval the system evolves as
 \begin{align}
-  \rho_c(t+\delta t) &= \left(\id - \frac{\delta t}{2} L^\dagger L\right)\rho_c(t)\left(\id - \frac{\delta t}{2} L^\dagger L\right) \\
-  &= \rho_c(t) - \frac{\delta t}{2} \left(L^\dagger L \rho_c(t) + \rho(t) L^\dagger L \right)
+  \rho(t+\delta t) &= \frac{1}{p_0(t, t+\delta t)}\left(\id - \frac{\delta t}{2} L^\dagger L\right)\rho(t)\left(\id - \frac{\delta t}{2} L^\dagger L\right) \\
+  &= \frac{1}{p_0(t, t+\delta t)}\left(\rho(t) - \frac{\delta t}{2} \left(L^\dagger L \rho(t) + \rho(t) L^\dagger L \right)\right)
 \end{align}
-Note here that we have not normalised the density matrix as was done by dividing by $p_k$ in eq. (\ref{POVM_normalisation_eq}). The equation for the normalised density matrix is non-linear, which makes solution tricky. It is convenient to leave the density matrix in this non-normalised form, as the trace of our density matrix $\rho_c(t)$ will equal the cumulative probability that there has been no detection by time $t$.
+where we have normalised the state $\rho$ by dividing by the probability that no jump occured in the interval, $p_0(t, t+\delta t)$. This normalisation is not ideal as, due to the dependence of $p_0(t, t+\delta t)$ on $\rho(t)$, it introduces a non-linearity into the equation. We can avoid this by simply not performing the normalisation, which has the nice feature that the probability $p_0(t, t+\delta t)$ is now encoded in the trace of the density matrix. As the outcomes of measurements in different time intervals are independent, the probabilities multiply, and the so the trace of the density matrix $\rho(t)$ will represent the cumulative probability there has been no jump by time $t$.
 
+We can use this equation to deduce the continuous conditional no-jump dynamics of the system by allowing $\delta t \rightarrow dt$: [TODO do I need to talk about Zeno here - see Brun page 8? Is Brun wrong?]
 \begin{align}
   \ddt \rho_c(t) = - \frac{1}{2} \left(L^\dagger L \rho_c(t) + \rho(t) L^\dagger L \right)
 \end{align}
+This makes precise the earlier statement that the act of not detecting an event has a tangible effect on the physical system.
 
-The probability of getting the first detection at time $t$ is 
+In a similar fashion to before we can look at what happens if we do detect an event in the interval $\delta t$. Conditional on an event being detected the system evolves as
 \begin{align}
- \tr(\delta t L \rho_c(t) L^\dagger)
+  \rho(t + \delta t) = L\rho(t)L^\dagger
 \end{align}
+where we have chosen not to normalise, so that the trace of $\rho(t + \delta t)$ records the probability that an event was detected.
 
+If we average over these two possible outcomes we obtain the equation
+\begin{align}
+\frac{\rho(t + \delta t) - \rho(t)}{\delta t} = L\rho(t)L^\dagger- \frac{1}{2} \left(L^\dagger L \rho(t) + \rho(t) L^\dagger L \right).
+\end{align}
+By allowing $\delta t \rightarrow dt$ we recover the Markovian master equation (\ref{master_eq}). 
 
-Say about averaging over all jumps to recover master equation
+Such an averaging procedure would be justified if, for example, we performed the measurement but forgot to look at the outcome. Perhaps a better way of viewing it is that Nature measured the system. The result is in priciple recorded in the environment but we do not have access to it. In this way we can interpret decoherence processes as described by the Markovian master equation in terms of information leaking from the system into the environment.
 
-Recover master equation. Talk about avoiding quantum Zeno effect? 
+It also allows us to view the Markovian master equation as an averaging over all possible trajectories of the system. It is sometimes useful to think in terms of \textit{unravelling} a master equation into the different trajectories. A simple example would be to pull out the no-jump component that we derived above, to unravel the evolution into no-jump and at-least-one-jump processes.
 
 
 \subsection{Decoherence Master Equation}
@@ -375,17 +417,80 @@ A single photon can be written in terms of its annihilation operator
 
 \section{Light-Matter interactions}
 
-\subsection{Jaynes-Cummings Hamiltonian}
+\subsection{Atom in a cavity}
 
-Classically
+Atom couples to the electric field through the dipole coupling $H_d = -\vec{d}\cdot\vec{E}(t)$ where $\vec{d} = -e \vec{r}$ for the charge $e$ and the position operator $\vec{r}$.
+
+We look at the case of an atom in a cavity. In a cavity only a discrete set of modes can exist, which simplifies the calculation.
+
+We also assume that the lowset mode frequency is nearly resonant with the atomic transition, which will allow us to ignore higher modes later in the calculation.
+
+Look at a two level system with Hamiltonian
+\begin{align}
+  H = -\frac{\omega_0}{2}\ket{g}\bra{g} +\frac{\omega_0}{2}\ket{e}\bra{e}
+\end{align}
+We call $\ket{g}$ the ground state and $\ket{e}$ the excited state. 
+
+
+Classically the electric field $\vec{E}$ is given
 \begin{align}
   \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
 \end{align}
 
-Quantumly
+We assume that we may treat the atom's center of mass classically and that the atom is positioned at $r=0$.
+
+We need to write the dipole Hamiltonian, $H_d$, in terms of our system basis $\{\ket{g}, \ket{e}\}$
+As the position operator $\vec{r}$ has odd parity, [??], the diagonal elements $\bra{g}H_d\ket{g}$ and $\bra{e}H_d\ket{e}$ must both be equal to $0$. As the Hamiltonian is Hermitian there is only one element left to specify:
 \begin{align}
-  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
+  \bra{e}H_d\ket{g} = \bra{g}H_d\ket{e}^* = E_0e\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t))
 \end{align}
+where $\vec{r}_{eg} = \bra{e}\vec{r}\ket{g}$
+
+Over all this leaves us with the Hamiltonian
+\begin{align}
+  H =
+  \begin{bmatrix}
+    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^*\exp(-i\omega t) + \vec{\epsilon}\exp(i\omega t)) \\
+    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t)) & +\omega_0/2
+  \end{bmatrix}
+\end{align}
+
+Still time dependent. Make a unitary transformation to rotate with the EM field:
+\begin{align}
+  U(t) =
+  \begin{bmatrix}
+    e^{i\omega t/2} & 0 \\
+    0 & e^{-i\omega t/2}
+  \end{bmatrix}
+\end{align}
+
+This gives us
+\begin{align}
+  H =
+  \begin{bmatrix}
+    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
+    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +\omega_0/2
+  \end{bmatrix}
+\end{align}
+
+We now make the rotating wave approximation, neglecting the fast rotating terms $e^{2i\omega t}$ and $e^{-2i\omega t}$ on the basis that they will be far off-resonance and their contribution will average to zero over time. 
+
+We are left with
+\begin{align}
+  H =
+  \begin{bmatrix}
+    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot\vec{\epsilon}^* \\
+    eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +\omega_0/2
+  \end{bmatrix}
+\end{align}
+which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). An atom in a cavity interacting with an EM field will oscillate.
+
+If we want to look at the emission and absorbtion of single photons we must instead use the fully quantised field. The electric field is then given 
+\begin{align}
+  \vec{E} = \sum_{\lambda = 1}^2 \sum_\vec{k} E_0 (\vec{\epsilon}_\lambda(\vec{k})\an{a}_\lambda(\vec{k})+ \vec{\epsilon}^*_\lambda(\vec{k})\cre{a}_\lambda(\vec{k})
+\end{align}
+
+
 
 \begin{align}
   H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{b}\an{b} + g\an{b} \sp + g^{*}\cre{b} \sm
