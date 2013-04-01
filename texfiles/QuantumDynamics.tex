@@ -165,6 +165,7 @@ Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$
 \begin{align}\label{POVM_normalisation_eq}
   \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
 \end{align}
+It is worth noting that, unlike projective measurements, POVMs are not repeatable - performing the same measurement twice in quick succession can give different outcomes.
 
 \subsection{Dynamics}
 
@@ -238,25 +239,21 @@ It also allows us to view the Markovian master equation as an averaging over all
 
 \subsection{Decoherence Master Equation}
 
-We have so far presented the general form of a Markovian Master Equation and seen how such an equation can be interpreted as the average over the different observation histories of a continuously observed quantum system. We now approach the master equation from a different direction by deriving it directly from the system-environment Hamiltonian. In doing so we visit some of the common assumptions made to cast the system into Markovian form, as well as deriving an equation that will be of use in the single photon source work in Chapter \ref{ch:SinglePhotonSource}.
-
-Start with following the general derivation of a weakly interacting system-environment.
-
-Need that $H_S$, $H_E$ and $H_I$? are constant
+We have so far presented the general form of a Markovian Master Equation and seen how such an equation can be interpreted as the average over the different observation histories of a continuously observed quantum system. We now approach the master equation from a different direction by deriving it directly from Hamiltonian for a weakly interacting, time independent system-environment. In doing so we visit some of the common assumptions made to cast the system into Markovian form, as well as deriving an equation that will be of use in the single photon source work in Chapter \ref{ch:SinglePhotonSource}.
 
 We begin by separating the Hamiltonian into terms acting solely on the system, terms acting solely on the environment, and terms involving both the system and environment (the interaction terms):
 \begin{align}
-  H(t) = H_S + H_E + H_I.
+  H = H_S + H_E + H_I.
 \end{align}
 
-In order to simplify our description of the system evolution, we change to the \textit{interaction picture}: we let $U(t) = \exp(i(H_S + H_E)t)$ and transform operators as $\tilde{A}(t) = U(t)A(t)U^\dagger(t)$. The von Neumann equation is transformed to
+Up until this point we have viewed system evolution in terms of a state evolving with respect to fixed operators representing the system's observables. This view is commonly known as the \textit{Schr\"odinger picture}. The only truly physical features of the system are given by the observables, which are a combination of both system operators and system state. It is therefore physically equivalent to consider system evolution as evolving operators with respect to a fixed state, or even somewhere inbetween. In order to simplify our description of the system evolution, we change to the \textit{interaction picture}: we let $U(t) = \exp(i(H_S + H_E)t)$ and transform operators as $\tilde{A}(t) = U(t)A(t)U^\dagger(t)$. The von Neumann equation is transformed to
 \begin{align}
   \label{i_von_neumann_eq}
   \ddt \tilde{\rho}(t) = -i\left[ \tilde{H}_I(t), \tilde{\rho}(t) \right]
 \end{align}
 By switching to the interaction picture we move to a basis which follows the natural, independent evolution of both the system and environment. The natural motion of the system and environment have thus been absorbed into our description of the states, and so the terms $H_S$ and $H_E$ are eliminated from the Hamiltonian.
 
-Our best description of the state of the system $S$ is given by taking the partial trace of the overall density matrix over the envonment $E$:
+Our best description of the state of the system $S$ is given by taking the partial trace of the overall density matrix over the environment $E$:
 \begin{align}
   \label{trace_eq}
   \tilde{\rho}_S(t) = \tr_E\left\{\tilde{\rho}(t)\right\}.
@@ -269,33 +266,29 @@ We now look to find the master equation for the system S, which will be an expre
 and then substitute this back into eq. (\ref{i_von_neumann_eq}) and apply eq. (\ref{trace_eq}) to get
 \begin{align}
   \label{before_markov_approx}
-  \ddt \tilde{\rho}_S(t) = -\int_{s=0}^t \tr_B\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} dt
+  \ddt \tilde{\rho}_S(t) = -\int_{s=0}^t \tr_E\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} dt
 \end{align}
-where we have assumed that $\tr_B [H_I(t), \rho(0)] = 0$.
+where we have assumed that $\tr_E [H_I(t), \rho(0)] = 0$.
 
 
-This isn't yet in a closed form as the right hand side still contains $\rho(t)$, the density matrix of the whole system.
+This isn't yet in a closed form as the right hand side still contains $\rho(t)$, the density matrix of the whole system. To begin rectifying this we first make the Born approximation letting $\tilde{\rho}(s) \approx \tilde{\rho}_S(s) \otimes \tilde{\rho}_E$. When doing this we envisage a system that is weakly coupled to a large environment. We expect the influence of the system on the environment to be small enough that the state remains approximately separable throughout. Excitations from the system are allowed to enter the environment, but we assume there is a sufficiently large continuum of frequencies that the excitations dissipate on a timescale that is small with respect to the timescale over which the system evolves. 
 
-We then make the Born approximation letting $\tilde{\rho}(s) \approx \tilde{\rho}_S(s) \otimes \tilde{\rho}_E$. At first glance this appears to say that the environment is completely unaffected by the system. In fact we still allow exitations from the system to enter the environment; the assumption is merely that these exitations dissipate on a short timescale to become undetectable.
-
-After the Born approximation the RHS of eq. (\ref{before_markov_approx}) no longer depends on the history of the environment, but still depends on the system state at previous times. To remove this dependence we make the \textit{Markov approximation} by setting $\rho(s) = \rho(t)$
+After the Born approximation the RHS of eq. (\ref{before_markov_approx}) no longer depends on the history of the environment, but still depends on the system state at previous times. To remove this dependence we make the first part of the \textit{Markov approximation} by setting $\rho(s) = \rho(t)$
 \begin{align}
   \ddt \tilde{\rho}_S = -i \int_{s=0}^t \tr_E\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}_S(t)\otimes\tilde{\rho}_E \right] \right]\right\} ds
 \end{align}
-This equation is known as the Redfield equation. 
-
-The Redfield equation only depends on current state of the system, but still contains a reference to the initial time $t=0$. To remove this we make the second part of the Markov approximation, by integrating backwards in time. 
+This equation is known as the Redfield equation. We can justify the Markov approximation by noting that we have already assumed that excitons entering the environment decay on a timescale that is short in comparison to system dynamics; the terms in the integrand will oscillate, averaging to zero, for values of $s$ away from $t$. Following this argument we can remove the Redfield equation's reference to the initial time $t=0$, by changing the direction of the integral in time:
 \begin{align}
   \label{redfield_eq}
   \ddt \tilde{\rho}_S(t) = -i \int_{s=0}^\infty \tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds
 \end{align}
-This assumes that the integrand dissapears sufficiently quickly. We would expect this to happen on the timescale of dissipation of environmental excitations, so the \textit{Born-Markov approximation} is suitable for modelling the system on a timescale larger than this.
+It is important to reiterate that timescales are important here: the \textit{Born-Markov approximation} is suitable for modelling the system on a timescale larger than typical environmental decay time. We make this notion more precise when we later write the equation in terms of the environmental correlation functions. It can be shown \cite{kok+lovett} that the Born-Markov approximation is equivalent to keeping second order commutator terms in a formal expansion of the solution to eq. (\ref{i_von_neumann_eq}).
 
 We now look get the equation into a form where we can perform the integral by examining the form of the Hamiltonian. We begin by returning to the Schr\"odinger picture Hamiltonian and writing
 \begin{align}
   H_I = \sum_\alpha A_\alpha \otimes B_\alpha
 \end{align}
-where $A_\alpha$ and $B_\alpha$ act on the system and environment respectively.
+where $A_\alpha$ and $B_\alpha$ act on the system and environment respectively. We have assumed here that the system-environment interaction is linear.
 
 To find the time dependence of $\tilde{H}_I(t)$ we further split the $A_\alpha$ into operators 
 \begin{align}
@@ -319,279 +312,32 @@ so that
 
 If we substitute this back into the Redfield eq. (\ref{redfield_eq}) we are able to perform the integration
 \begin{align}
+  \label{me_before_rwa}
   \ddt \tilde{\rho}_S(t) = \sum_{\omega, \omega'} \sum_{\alpha, \beta} e^{i(\omega'-\omega)t} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega') - A^\dagger_\alpha(\omega')A_\beta(\omega)\right) + \text{H.c}
 \end{align}
-where
+where the reservoir correlations functions are defined by
 \begin{align}
   \Gamma_{\alpha\beta}(\omega) = \int_0^\infty ds e^{i\omega s} \tr_E \{ \tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \}
 \end{align}
-We have assumed that $\rho_E$ is a stationary state of the environment, so that $\tr_E \{\tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \} = \tr_E \{\tilde{B}_\alpha^\dagger(s) \tilde{B}_\beta(0) \rho_E \}$ and $\Gamma_{\alpha\beta}(\omega)$ has no time dependence.
+We have assumed that $\rho_E$ is a stationary state of the environment, so that $\tr_E \{\tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \} = \tr_E \{\tilde{B}_\alpha^\dagger(s) \tilde{B}_\beta(0) \rho_E \}$ and thus $\Gamma_{\alpha\beta}(\omega)$ has no time dependence. We have also dropped any terms involving $AA$ and $A^\dagger A^\dagger$, as the associated correlation functions will be zero.
 
-
-We now ignore the terms where $\omega' - \omega \neq 0$. This is equivalent to the RWA
+We now make the \textit{secular approximation} or \textit{rotating wave approximation} (RWA): we eliminate any terms from eq. (\ref{me_before_rwa}) where $\omega' \neq \omega$. We justify this by again thinking about the timescales involved: terms involving $e^{i(\omega' - \omega)t}$ will average to zero on a characteristic timescale of $1/(\omega' - \omega)$. If this is small compared to the timescale of system evolution the RWA should hold.
 \begin{align}
   \ddt \tilde{\rho}_S(t) = \sum_{\omega} \sum_{\alpha, \beta} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega) - A^\dagger_\alpha(\omega)A_\beta(\omega)\right) + \text{H.c}
 \end{align}
 
-If we write
+We now have a Markovian evolution equation and all that is left is to massage it into the form of the Markovian master equation (\ref{master_eq}). To this end we write
 \begin{align}
   \Gamma_{\alpha \beta}(\omega) = \frac{1}{2}\gamma_{\alpha\beta}(\omega) + i S_{\alpha\beta}(\omega)
 \end{align}
-and return to the Schr\"odinger picture, then we recover
+and return to the Schr\"odinger picture to recover
 \begin{align}
-  \ddt \rho_S(t) = -i[H_S + H_{LS}, \rho_S(t) ] + \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho_S(t)H_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho_S(t)\} \right)
-\end{align}
-where we have the Lamb shift Hamiltonian contribution $H_{LS}$. We can now diagonalise the matrix $\gamma_{\alpha\beta}$ to recover the Master Equation form in eq (\ref{master_eq}).
-
-\section{Quantum Treatment of Light}
-
-Wave particle duality.
-
-There are two approaches to modelling light: classical and quantum. 
-
-When quantizing the electromagnetic field it is convenient to work in terms of creation and annihilation operators, $\cre{a}_\lambda(\vec{k})$ and $\an{a}_\lambda(\vec{k})$, for field modes
-\begin{align}
-  u(\vec{k}; \vec{r}, t) \propto e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t}
-\end{align}
-with polarization $\lambda$. The mode $u(\vec{k}; \vec{r}, t)$ describes a plane wave with definite momentum $\vec{k}$, which is unphysical due to its infinite extend in space. Nevertheless these modes are very useful when describing light quantum mechanically.
-
-In terms of these operations, the Hamiltonian for the free field is given by
-\begin{align}
-  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right] \\
-  &= \sum_\lambda \int d\vec{k} H_\lambda(\vec{k}).
-\end{align}
-
-The creation and annihilation operators are so-called as they can be thought to as adding or removing an excitation in a given mode. Commutation relation $[\an{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')]  = \delta_{\lambda\lambda '}\delta^3(\vec{k} - \vec{k}') $.
-
-We have that
-\begin{align}
-  \left[H, \an{a}_\lambda(\vec{k})\right] = -\hbar \omega_\vec{k} \an{a}_\lambda(\vec{k})
-  \quad \text{and} \quad 
-  \left[H, \cre{a}_\lambda(\vec{k})\right] = \hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k})
-\end{align}
-
-Suppose we have a state $\ket{\psi}$ which is an eigenstate of the Hamiltonian with energy $E$. Consider the state $\cre{a}\ket{\psi}$:
-\begin{align}
-  H\cre{a}_\lambda(\vec{k})\ket{\psi} &= \left(\hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k}) + \cre{a}_\lambda(\vec{k})H\right) \ket{\psi} \\
-  &= \left(\hbar \omega_\vec{k} + E\right) \cre{a}_\lambda(\vec{k})\ket{\psi}
-\end{align}
-so $\cre{a}_\lambda(\vec{k})\ket{\psi}$ is also an eigenstate of the Hamiltonian, this time with energy $E + \hbar\omega_\vec{k}$. The operator $\cre{a}_\lambda(\vec{k})$ has created an excitation with energy $\hbar \omega_\vec{k}$.
-
-If we start with a vacuum state of the electomagnetic field $\ket{0}$ such that $H\ket{0} = 0$ [TODO?? is this right] we can use the operators $\cre{a}$ to define set of states:
-\begin{align}
-  \ket{n} = (\cre{a})^n \ket{0}
-\end{align}
-These are called the \textit{Fock states} and corespond to states with a definite number of excitations.These are called the \textit{Fock states} and corespond to states with a definite number of excitations.  
-
-
-Single photon states
-
-\subsection{Hong-Ou-Mandel Dip}
-
-The Hong-Ou-Mandel experiment concerns the behaviour of a pair of photons iteracting with a \textit{beam splitter}. A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. Given two optical modes $a_1$ and $a_2$ the beam splitter performs the transformation
-\begin{align}
-  \an{a}_{1} \rightarrow \an{a}_{1} + \an{a}_{2} \\
-  \an{a}_{2} \rightarrow \an{a}_{1} - \an{a}_{2}
-\end{align}
-If both modes are incident on the beam splitter simultateously,
-\begin{align}
-  \an{a}_{1}\an{a}_{2} \rightarrow \left(\an{a}_{1} + \an{a}_{2}\right) \left(\an{a}_{1} - \an{a}_{2}\right) = \an{a}_{1}\an{a}_{1} - \an{a}_{2}\an{a}_{2}
-\end{align}
-The output states contain only those cases where both exitations are in the same mode.
-
-So if we have two single mode exitations of a given frequency incident on different arms of a beam splitter they exihit a `bunching' behaviour: they will leave on the same arm. As already discussed, single mode exitations are not physical. Does a similar result apply to a pair of single photons arriving at a beam splitter?
-
-A single photon can be written in terms of its annihilation operator
-\begin{align}
-  \an{b} = \int f(k) \an{a} dk
-\end{align}
-
-\begin{align}
-  \an{b}_1 \an{b}_2 & = \int \int f_1(k)f_2(k') \an{a}_1(k) \an{a}_2(k') dkdk' \\
-                    & \rightarrow
-\end{align}
-
-\subsection{Input-Output formalism}
-
-
-
-\section{Light-Matter interactions}
-
-\subsection{Atom in a cavity}
-
-Atom couples to the electric field through the dipole coupling $H_d = -\vec{d}\cdot\vec{E}(t)$ where $\vec{d} = -e \vec{r}$ for the charge $e$ and the position operator $\vec{r}$.
-
-We look at the case of an atom in a cavity. In a cavity only a discrete set of modes can exist, which simplifies the calculation.
-
-We also assume that the lowset mode frequency is nearly resonant with the atomic transition, which will allow us to ignore higher modes later in the calculation.
-
-Look at a two level system with Hamiltonian
-\begin{align}
-  H = -\frac{\omega_0}{2}\ket{g}\bra{g} +\frac{\omega_0}{2}\ket{e}\bra{e}
-\end{align}
-We call $\ket{g}$ the ground state and $\ket{e}$ the excited state. 
-
-
-Classically the electric field $\vec{E}$ is given
-\begin{align}
-  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
-\end{align}
-
-We assume that we may treat the atom's center of mass classically and that the atom is positioned at $r=0$.
-
-We need to write the dipole Hamiltonian, $H_d$, in terms of our system basis $\{\ket{g}, \ket{e}\}$
-As the position operator $\vec{r}$ has odd parity, [??], the diagonal elements $\bra{g}H_d\ket{g}$ and $\bra{e}H_d\ket{e}$ must both be equal to $0$. As the Hamiltonian is Hermitian there is only one element left to specify:
-\begin{align}
-  \bra{e}H_d\ket{g} = \bra{g}H_d\ket{e}^* = E_0e\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t))
-\end{align}
-where $\vec{r}_{eg} = \bra{e}\vec{r}\ket{g}$
-
-Over all this leaves us with the Hamiltonian
-\begin{align}
-  H =
-  \begin{bmatrix}
-    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^*\exp(-i\omega t) + \vec{\epsilon}\exp(i\omega t)) \\
-    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t)) & +\omega_0/2
-  \end{bmatrix}
-\end{align}
-
-Still time dependent. Make a unitary transformation to rotate with the EM field:
-\begin{align}
-  U(t) =
-  \begin{bmatrix}
-    e^{i\omega t/2} & 0 \\
-    0 & e^{-i\omega t/2}
-  \end{bmatrix}
-\end{align}
-
-This gives us
-\begin{align}
-  H =
-  \begin{bmatrix}
-    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
-    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +\omega_0/2
-  \end{bmatrix}
-\end{align}
-
-We now make the rotating wave approximation, neglecting the fast rotating terms $e^{2i\omega t}$ and $e^{-2i\omega t}$ on the basis that they will be far off-resonance and their contribution will average to zero over time. 
-
-We are left with
-\begin{align}
-  H =
-  \begin{bmatrix}
-    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot\vec{\epsilon}^* \\
-    eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +\omega_0/2
-  \end{bmatrix}
-\end{align}
-which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). An atom in a cavity interacting with an EM field will oscillate.
-
-If we want to look at the emission and absorbtion of single photons we must instead use the fully quantised field. The electric field is then given 
-\begin{align}
-  \vec{E} = \sum_{\lambda = 1}^2 \sum_\vec{k} E_0 (\vec{\epsilon}_\lambda(\vec{k})\an{a}_\lambda(\vec{k})+ \vec{\epsilon}^*_\lambda(\vec{k})\cre{a}_\lambda(\vec{k})
-\end{align}
-
-
-
-\begin{align}
-  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{b}\an{b} + g\an{b} \sp + g^{*}\cre{b} \sm
-\end{align}
-
-\subsection{Raman procedure}
-
-
-\begin{align}
-  H=\hbar
-  \begin{bmatrix}
-    0 & 0 & \Omega_1 \cos\omega_1 t \\
-    0 & \delta & \Omega_2 \cos\omega_2 t \\
-    \Omega_1 \cos\omega_1 t & \Omega_2 \cos\omega_2 t & \omega
-  \end{bmatrix}
-\end{align}
-
-\begin{align}
-  U(t) = 
-  \begin{bmatrix}
-    1 & 0 & 0 \\
-    0 & e^{i(\omega_1 - \omega_2)t} & 0 \\
-    0 & 0 & e^{\omega_1 t}
-  \end{bmatrix}
-\end{align}
-
-\begin{align}
-  \tilde{H}=\frac{\hbar}{2}
-  \begin{bmatrix}
-    0 & 0 & \Omega_1(1+e^{2i\omega_1 t}) \\
-    0 & 2(\delta + \omega_2 - \omega_1) & \Omega_2 (1+e^{2i\omega_2 t}) \\
-    \Omega_1(1+e^{2i\omega_1 t}) & \Omega_2 (1+e^{2i\omega_2 t}) & 2(\omega - \omega_1)
-  \end{bmatrix}
-\end{align}
-
-After we make the rotating wave approximation
-\begin{align}
-  \tilde{H}=\frac{\hbar}{2}
-  \begin{bmatrix}
-    0 & 0 & \Omega_1 \\
-    0 & 2(\nu_1 - \nu_2) & \Omega_2  \\
-    \Omega_1 & \Omega_2  & 2\nu_1
-  \end{bmatrix}
-\end{align}
-
-Look at the limit $\nu \gg \{\Omega_1, \Omega_2\}$.  Degenerate perturbation theory
-\begin{align}
-  H = -\frac{1}{4\nu}
-  \begin{bmatrix}
-    \Omega_1^2 & \Omega_1 \Omega_2 \\
-    \Omega_1\Omega_2 & \Omega_2^2
-  \end{bmatrix}
-\end{align}
-which is the basically the Rabi Hamiltonian as in Eq. (\ref{rabi_hamiltonian}).
-
-Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ induced via the third state.
-
-
-
-\section{Phonon-matter interactions}
-
-When dealing with solid state systems an important source of decoherence comes from interaction with lattice vibrations. Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy.
-
-Phonons couple to any states of our system that lead to a distortion in the atomic lattice. We restrict ourselves to looking at relatively low-energy states, coupling only to long-wavelength, accoustic phonons. There are two dominant coupling mechanisms in this case: \textit{deformation potential} coupling, $D$, and \textit{piezoelectric coupling}, $P$, \cite{mahan} leading to the interaction Hamiltonian
-\begin{align}
-  H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right).
-\end{align}
-[Find mahan and add something interesting]
-
-We also restrict ourselves to looking at coupling to a phonon bath in a thermal state
-\begin{align}
-  \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
-\end{align}
-where $\beta = 1/(kT)$ and
-\begin{align}
-  H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha
-\end{align}
-
-In this state we can calculate the correlation functions explicitly
-\begin{align}
-  \langle \an{b}_i \an{b}_j \rangle &= 0 \\
-  \langle \cre{b}_i \cre{b}_j \rangle &= 0 \\
-  \langle \an{b}_i \cre{b}_j \rangle &= \delta_{ij} \left( N(\omega_i) +1 \right) \\
-  \langle \cre{b}_i \an{b}_j \rangle &= \delta_{ij} N(\omega_i)
+  \ddt \rho_S(t) = -i[H_S + H_{LS}, \rho_S(t) ] + D(\rho_S(t))
 \end{align}
 where
 \begin{align}
-  N(\omega) \frac{1}{e^{\beta \omega} - 1}
+ D(\rho) = \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho A_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho\} \right)
 \end{align}
-is the occupation of state $i$.
+Note that the system Hamiltonian has picked up the Lamb shift contribution $H_{LS}$, from the terms $S_{\alpha\beta}$. It can be shown \cite{b+p} that the matrix $\gamma_{\alpha\beta}$ is positive, so that we can diagonalise it to recover the Master Equation form in eq (\ref{master_eq}).
 
-When we take the sum over $\vec{q}$ we end up with 
-\begin{align}
-  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q})
-\end{align}
-so that we get
-\begin{align}
-  \gamma_\alpha(\omega) = \left\{
-    \begin{array}{l l}
-    J(\omega)\left(N(\omega) + 1\right) & \qquad \text{if $\omega > 0$}\\
-    J(\omega)N(\omega) & \qquad \text{if $\omega \leq 0$}
-  \end{array} \right.
-\end{align}
 

@@ -1,4 +1,256 @@
 \chapter{Light} 
 \label{ch:Light}
 
+\section{Quantum Treatment of Light}
+
+Wave particle duality.
+
+There are two approaches to modelling light: classical and quantum. 
+
+When quantizing the electromagnetic field it is convenient to work in terms of creation and annihilation operators, $\cre{a}_\lambda(\vec{k})$ and $\an{a}_\lambda(\vec{k})$, for field modes
+\begin{align}
+  u(\vec{k}; \vec{r}, t) \propto e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t}
+\end{align}
+with polarization $\lambda$. The mode $u(\vec{k}; \vec{r}, t)$ describes a plane wave with definite momentum $\vec{k}$, which is unphysical due to its infinite extend in space. Nevertheless these modes are very useful when describing light quantum mechanically.
+
+In terms of these operations, the Hamiltonian for the free field is given by
+\begin{align}
+  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right] \\
+  &= \sum_\lambda \int d\vec{k} H_\lambda(\vec{k}).
+\end{align}
+
+The creation and annihilation operators are so-called as they can be thought to as adding or removing an excitation in a given mode. Commutation relation $[\an{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')]  = \delta_{\lambda\lambda '}\delta^3(\vec{k} - \vec{k}') $.
+
+We have that
+\begin{align}
+  \left[H, \an{a}_\lambda(\vec{k})\right] = -\hbar \omega_\vec{k} \an{a}_\lambda(\vec{k})
+  \quad \text{and} \quad 
+  \left[H, \cre{a}_\lambda(\vec{k})\right] = \hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k})
+\end{align}
+
+Suppose we have a state $\ket{\psi}$ which is an eigenstate of the Hamiltonian with energy $E$. Consider the state $\cre{a}\ket{\psi}$:
+\begin{align}
+  H\cre{a}_\lambda(\vec{k})\ket{\psi} &= \left(\hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k}) + \cre{a}_\lambda(\vec{k})H\right) \ket{\psi} \\
+  &= \left(\hbar \omega_\vec{k} + E\right) \cre{a}_\lambda(\vec{k})\ket{\psi}
+\end{align}
+so $\cre{a}_\lambda(\vec{k})\ket{\psi}$ is also an eigenstate of the Hamiltonian, this time with energy $E + \hbar\omega_\vec{k}$. The operator $\cre{a}_\lambda(\vec{k})$ has created an excitation with energy $\hbar \omega_\vec{k}$.
+
+If we start with a vacuum state of the electomagnetic field $\ket{0}$ such that $H\ket{0} = 0$ [TODO?? is this right] we can use the operators $\cre{a}$ to define set of states:
+\begin{align}
+  \ket{n} = (\cre{a})^n \ket{0}
+\end{align}
+These are called the \textit{Fock states} and corespond to states with a definite number of excitations.These are called the \textit{Fock states} and corespond to states with a definite number of excitations.  
+
+
+Single photon states
+
+\subsection{Hong-Ou-Mandel Dip}
+
+The Hong-Ou-Mandel experiment concerns the behaviour of a pair of photons iteracting with a \textit{beam splitter}. A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. Given two optical modes $a_1$ and $a_2$ the beam splitter performs the transformation
+\begin{align}
+  \an{a}_{1} \rightarrow \an{a}_{1} + \an{a}_{2} \\
+  \an{a}_{2} \rightarrow \an{a}_{1} - \an{a}_{2}
+\end{align}
+If both modes are incident on the beam splitter simultateously,
+\begin{align}
+  \an{a}_{1}\an{a}_{2} \rightarrow \left(\an{a}_{1} + \an{a}_{2}\right) \left(\an{a}_{1} - \an{a}_{2}\right) = \an{a}_{1}\an{a}_{1} - \an{a}_{2}\an{a}_{2}
+\end{align}
+The output states contain only those cases where both exitations are in the same mode.
+
+So if we have two single mode exitations of a given frequency incident on different arms of a beam splitter they exihit a `bunching' behaviour: they will leave on the same arm. As already discussed, single mode exitations are not physical. Does a similar result apply to a pair of single photons arriving at a beam splitter?
+
+A single photon can be written in terms of its annihilation operator
+\begin{align}
+  \an{b} = \int f(k) \an{a} dk
+\end{align}
+
+\begin{align}
+  \an{b}_1 \an{b}_2 & = \int \int f_1(k)f_2(k') \an{a}_1(k) \an{a}_2(k') dkdk' \\
+                    & \rightarrow
+\end{align}
+
+\subsection{Input-Output formalism}
+
+
+
+\section{Light-Matter interactions}
+
+\subsection{Atom in a cavity}
+
+Atom couples to the electric field through the dipole coupling $H_d = -\vec{d}\cdot\vec{E}(t)$ where $\vec{d} = -e \vec{r}$ for the charge $e$ and the position operator $\vec{r}$.
+
+We look at the case of an atom in a cavity. In a cavity only a discrete set of modes can exist, which simplifies the calculation.
+
+We also assume that the lowset mode frequency is nearly resonant with the atomic transition, which will allow us to ignore higher modes later in the calculation.
+
+Look at a two level system with Hamiltonian
+\begin{align}
+  H = -\frac{\omega_0}{2}\ket{g}\bra{g} +\frac{\omega_0}{2}\ket{e}\bra{e}
+\end{align}
+We call $\ket{g}$ the ground state and $\ket{e}$ the excited state. 
+
+
+Classically the electric field $\vec{E}$ is given
+\begin{align}
+  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
+\end{align}
+
+We assume that we may treat the atom's center of mass classically and that the atom is positioned at $r=0$.
+
+We need to write the dipole Hamiltonian, $H_d$, in terms of our system basis $\{\ket{g}, \ket{e}\}$
+As the position operator $\vec{r}$ has odd parity, [??], the diagonal elements $\bra{g}H_d\ket{g}$ and $\bra{e}H_d\ket{e}$ must both be equal to $0$. As the Hamiltonian is Hermitian there is only one element left to specify:
+\begin{align}
+  \bra{e}H_d\ket{g} = \bra{g}H_d\ket{e}^* = E_0e\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t))
+\end{align}
+where $\vec{r}_{eg} = \bra{e}\vec{r}\ket{g}$
+
+Over all this leaves us with the Hamiltonian
+\begin{align}
+  H =
+  \begin{bmatrix}
+    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^*\exp(-i\omega t) + \vec{\epsilon}\exp(i\omega t)) \\
+    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t)) & +\omega_0/2
+  \end{bmatrix}
+\end{align}
+
+Still time dependent. Make a unitary transformation to rotate with the EM field:
+\begin{align}
+  U(t) =
+  \begin{bmatrix}
+    e^{i\omega t/2} & 0 \\
+    0 & e^{-i\omega t/2}
+  \end{bmatrix}
+\end{align}
+
+This gives us
+\begin{align}
+  H =
+  \begin{bmatrix}
+    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
+    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +\omega_0/2
+  \end{bmatrix}
+\end{align}
+
+We now make the rotating wave approximation, neglecting the fast rotating terms $e^{2i\omega t}$ and $e^{-2i\omega t}$ on the basis that they will be far off-resonance and their contribution will average to zero over time. 
+
+We are left with
+\begin{align}
+  H =
+  \begin{bmatrix}
+    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot\vec{\epsilon}^* \\
+    eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +\omega_0/2
+  \end{bmatrix}
+\end{align}
+which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). An atom in a cavity interacting with an EM field will oscillate.
+
+If we want to look at the emission and absorbtion of single photons we must instead use the fully quantised field. The electric field is then given 
+\begin{align}
+  \vec{E} = \sum_{\lambda = 1}^2 \sum_\vec{k} E_0 (\vec{\epsilon}_\lambda(\vec{k})\an{a}_\lambda(\vec{k})+ \vec{\epsilon}^*_\lambda(\vec{k})\cre{a}_\lambda(\vec{k})
+\end{align}
+
+
+
+\begin{align}
+  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{b}\an{b} + g\an{b} \sp + g^{*}\cre{b} \sm
+\end{align}
+
+\subsection{Raman procedure}
+
+
+\begin{align}
+  H=\hbar
+  \begin{bmatrix}
+    0 & 0 & \Omega_1 \cos\omega_1 t \\
+    0 & \delta & \Omega_2 \cos\omega_2 t \\
+    \Omega_1 \cos\omega_1 t & \Omega_2 \cos\omega_2 t & \omega
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  U(t) = 
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & e^{i(\omega_1 - \omega_2)t} & 0 \\
+    0 & 0 & e^{\omega_1 t}
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  \tilde{H}=\frac{\hbar}{2}
+  \begin{bmatrix}
+    0 & 0 & \Omega_1(1+e^{2i\omega_1 t}) \\
+    0 & 2(\delta + \omega_2 - \omega_1) & \Omega_2 (1+e^{2i\omega_2 t}) \\
+    \Omega_1(1+e^{2i\omega_1 t}) & \Omega_2 (1+e^{2i\omega_2 t}) & 2(\omega - \omega_1)
+  \end{bmatrix}
+\end{align}
+
+After we make the rotating wave approximation
+\begin{align}
+  \tilde{H}=\frac{\hbar}{2}
+  \begin{bmatrix}
+    0 & 0 & \Omega_1 \\
+    0 & 2(\nu_1 - \nu_2) & \Omega_2  \\
+    \Omega_1 & \Omega_2  & 2\nu_1
+  \end{bmatrix}
+\end{align}
+
+Look at the limit $\nu \gg \{\Omega_1, \Omega_2\}$.  Degenerate perturbation theory
+\begin{align}
+  H = -\frac{1}{4\nu}
+  \begin{bmatrix}
+    \Omega_1^2 & \Omega_1 \Omega_2 \\
+    \Omega_1\Omega_2 & \Omega_2^2
+  \end{bmatrix}
+\end{align}
+which is the basically the Rabi Hamiltonian as in Eq. (\ref{rabi_hamiltonian}).
+
+Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ induced via the third state.
+
+
+
+\section{Phonon-matter interactions}
+
+When dealing with solid state systems an important source of decoherence comes from interaction with lattice vibrations. Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy.
+
+Phonons couple to any states of our system that lead to a distortion in the atomic lattice. We restrict ourselves to looking at relatively low-energy states, coupling only to long-wavelength, accoustic phonons. There are two dominant coupling mechanisms in this case: \textit{deformation potential} coupling, $D$, and \textit{piezoelectric coupling}, $P$, \cite{mahan} leading to the interaction Hamiltonian
+\begin{align}
+  H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right).
+\end{align}
+[Find mahan and add something interesting]
+
+We also restrict ourselves to looking at coupling to a phonon bath in a thermal state
+\begin{align}
+  \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
+\end{align}
+where $\beta = 1/(kT)$ and
+\begin{align}
+  H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha
+\end{align}
+
+In this state we can calculate the correlation functions explicitly
+\begin{align}
+  \langle \an{b}_i \an{b}_j \rangle &= 0 \\
+  \langle \cre{b}_i \cre{b}_j \rangle &= 0 \\
+  \langle \an{b}_i \cre{b}_j \rangle &= \delta_{ij} \left( N(\omega_i) +1 \right) \\
+  \langle \cre{b}_i \an{b}_j \rangle &= \delta_{ij} N(\omega_i)
+\end{align}
+where
+\begin{align}
+  N(\omega) \frac{1}{e^{\beta \omega} - 1}
+\end{align}
+is the occupation of state $i$.
+
+When we take the sum over $\vec{q}$ we end up with 
+\begin{align}
+  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q})
+\end{align}
+so that we get
+\begin{align}
+  \gamma_\alpha(\omega) = \left\{
+    \begin{array}{l l}
+    J(\omega)\left(N(\omega) + 1\right) & \qquad \text{if $\omega > 0$}\\
+    J(\omega)N(\omega) & \qquad \text{if $\omega \leq 0$}
+  \end{array} \right.
+\end{align}
+
 
