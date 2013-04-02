@@ -327,7 +327,15 @@ in terms of the basis $\{\ket{0}, \ket{1}\}$. This has the same form as the Rabi
 
 \section{Phonon-matter interactions}
 
-When dealing with solid state systems an important source of decoherence comes from interaction with lattice vibrations. Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy.
+When dealing with solid state systems an important source of decoherence comes from interaction with lattice vibrations. Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy, giving Hamiltonian
+\begin{align}
+  H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha,
+\end{align}
+where $\cre{b}$ and $\an{b}$ are creation and annihilation operators, satisfying the normal commutation relations. We usually assume that the phonon bath exists in a thermal state
+\begin{align}
+  \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
+\end{align}
+where $\beta = 1/(kT)$ ans $Z_\beta$ is a normalisation factor (the parition function from statistical mechanics).
 
 Phonons couple to any states of our system that lead to a distortion in the atomic lattice. We restrict ourselves to looking at relatively low-energy states, coupling only to long-wavelength, accoustic phonons. There are two dominant coupling mechanisms in this case: \textit{deformation potential} coupling, $D$, and \textit{piezoelectric coupling}, $P$, \cite{mahan} leading to the interaction Hamiltonian
 \begin{align}
@@ -335,16 +343,28 @@ Phonons couple to any states of our system that lead to a distortion in the atom
 \end{align}
 [Find mahan and add something interesting]
 
-We also restrict ourselves to looking at coupling to a phonon bath in a thermal state
+As a concrete example we look at the Raman process from the previous section. We envisage the lambda system embedded in some solid state system and assume that phonons couple only to the excited state $\ket{e}$ so that the interaction Hamiltonian becomes
 \begin{align}
-  \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
+  H = \ket{e}\bra{e}\sum_\vec{q} g_\vec{q}\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}}\right).
 \end{align}
-where $\beta = 1/(kT)$ and
+This Hamiltonian is appropriate for certain quatum dot systems \cite{erik_qd_paper} and uses the fact that in these systems the deformation potential dominates \cite{ep76, ep138}.
+
+Following the technique given in chapter \ref{ch:QuantumDynamics} we move to the interaction picture and decompose the system part of the interaction Hamiltonian, $\ket{e}\bra{e}$ into eigenoperators of the system Hamiltonian:
 \begin{align}
-  H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha
+  \tilde{H} = \left(P_0 + P_\Lambda e^{-i\Delta t}e^{\Lambda t} + P^\dagger_\Lambda e^{-i\Delta t} e^{i\Lambda t}\right)\sum_\vec{q}g_\vec{q}\left(\an{a}_\vec{q}e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t} \right)
+\end{align}
+where $P_0$ and $P_\Lambda$ are given in terms of the eigenvectors from the previous section
+\begin{align}
+  P_0 &= \cos^2\phi \ket{+}\bra{+} + \sin^2\phi \ket{-}\bra{-} \\
+  p_\Lambda &= -\sin\phi \cos\phi \ket{-}\bra{+}.
+\end{align}
+By comparing with eq. (\ref{xxx}) we identify
+\begin{align}
+  B_0(t) &= \sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right)
+  B_\Lambda(t) &= e^{-i\Delta t}\sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right).
 \end{align}
 
-In this state we can calculate the correlation functions explicitly
+In the thermal state we can calculate the correlation functions explicitly
 \begin{align}
   \langle \an{b}_i \an{b}_j \rangle &= 0 \\
   \langle \cre{b}_i \cre{b}_j \rangle &= 0 \\
@@ -353,15 +373,9 @@ In this state we can calculate the correlation functions explicitly
 \end{align}
 where
 \begin{align}
-  N(\omega) \frac{1}{e^{\beta \omega} - 1}
+  N(\omega) = \frac{1}{e^{\beta \omega} - 1}
 \end{align}
-is the occupation of state $i$.
-
-When we take the sum over $\vec{q}$ we end up with 
-\begin{align}
-  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q})
-\end{align}
-so that we get
+is the occupation of state $i$. This allows us to 
 \begin{align}
   \gamma_\alpha(\omega) = \left\{
     \begin{array}{l l}
@@ -369,5 +383,15 @@ so that we get
     J(\omega)N(\omega) & \qquad \text{if $\omega \leq 0$}
   \end{array} \right.
 \end{align}
+where the \textit{spectral density} is given by
+\begin{align}
+  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q}).
+\end{align}
+The spectral density gives an indication of how much coupling affinity our system has for the phonons of frequency $\omega$.
 
+We end up with the phonon dissipator term
+\begin{align}
+  D_\text{ph}(\rho) = J(\Lambda)\left[\left(N(\Lambda) + 1)D[P_\Lambda]\rho\right) + N(\Lambda)D[P^\dagger_\Lambda]\rho \right],
+\end{align}
+where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$.
 
