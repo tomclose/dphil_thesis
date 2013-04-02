@@ -5,15 +5,15 @@
 
 We begin by quickly summarising the laws of quantum mechanics as applied to a \textit{closed system}; that is, a system which does not intereact in any way with other systems. In practice, it is rare that any given system can truly be considered to be closed, yet the dynamics of closed systems are fundamental to the quantum mechanical description of nature: at the highest level, we can view the universe itself an closed quantum system which contains all others.
 
-By considering idealised closed systems, we are able to present the purest form of the rules of quantum mechanics - in the form of three postulate concerning the system's state, its evolution, and the act of performing measurements on it. In the latter parts of this chapter we will generalise the laws stated here to address \textit{open systems}, by first considering the open system as part of a larger closed system to which the postulates apply.
+By considering idealised closed systems, we are able to present the purest form of the rules of quantum mechanics - by stating three postulates concerning the system's state, its evolution, and the act of performing measurements on it. In the latter parts of this chapter we will generalise the laws stated here to address \textit{open systems}, by first considering the open system as part of a larger closed system to which the postulates apply.
 
 \subsection{State}
 
-The first postulate concerns the description of the state of a system \cite{nielsen+chuang}:
+The first postulate concerns the description of the state of a system :
 \begin{quotation}
-  Assosciated to any closed physical system is a Hilbert space known as the \textit{state space} of the system. The system is completely described by its \textit{state vector}, which is a unit vector in the system's state space. The state space of a composite physical system is the tensor product of the state spaces of the component physical systems.
+  Assosciated to any closed physical system is a Hilbert space known as the \textit{state space} of the system. The system is completely described by its \textit{state vector}, which is a unit vector in the system's state space. The state space of a composite physical system is the tensor product of the state spaces of the component physical systems.\cite{nielsen+chuang}
 \end{quotation}
-A Hilbert space is (possibly infinite-dimensional) vector space over the complex numbers, on which an inner product is defined. We will usually write the state vector using the Dirac bracket notation, $\ket{\psi}$. Note that the postulate does not tell us anything more about the correct state space for a given system - we have to make that judgement when we model it.
+A Hilbert space is (possibly infinite-dimensional) vector space over the complex numbers, on which an inner product is defined. We will usually write the state vector using the Dirac bracket notation, $\ket{\psi}$. Note that the postulate does not specify how the correct state space for a given system should be chosen, which is therefore a judgment that must be made when the system is modelled.
 
 In general, when a system can be described using a state vector we say that it exists in a \textit{pure state}. With the state vector specified we have complete knowledge about the system - we know everything that there is to know.
 
@@ -25,7 +25,7 @@ where the normalisation condition is imposed by requiring that $|\alpha|^2 + |\b
 \begin{align}
   \ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi}\sin\frac{\theta}{2}\ket{1}
 \end{align}
-where used the fact that two states are physically equivalent if they differ by a global phase, $\ket{a} = e^{ik}\ket{b}$, which will become apparent when we look at the measurement postulate. We can use this representation to visualise a qubit as a point on the surface of a unit sphere, known as the \textit{Bloch sphere}, described by the $3$-vector $[\cos(\phi)\sin(\theta), \sin(\phi)\sin(\theta), \cos(\theta)]$.
+where we have used the fact that two states are physically equivalent if they differ by a global phase, $\ket{a} = e^{ik}\ket{b}$, which will become apparent when we look at the measurement postulate. We can use this representation to visualise a qubit as a point on the surface of a unit sphere, known as the \textit{Bloch sphere}, described by the real $3$-vector $(\cos\phi\sin\theta, \sin\phi\sin\theta, \cos\theta)$.
 
 \subsection{Dynamics}
 
@@ -36,9 +36,9 @@ The time evolution of an isolated quantum system is described by the \textit{Sch
   \label{qd:schrodinger_eq}
   i\hbar\ddt \ket{\psi(t)} = H(t) \ket{\psi(t)}
 \end{align}
-where $\hbar$ is a constant, known as \textit{Plank's constant}, and $H(t)$ is a fixed Hermitian operator known as the Hamiltonian of the closed system.
+where $\hbar$ is a constant, known as \textit{Plank's constant}, and $H(t)$ is a fixed Hermitian operator known as the Hamiltonian of the closed system.\cite{nielsen+chuang}
 \end{quotation}
-In the rest of this thesis we choose units so as to set $\hbar = 1$. 
+In the rest of this thesis we often choose units so as to set $\hbar = 1$. 
 
 The Schr\"odinger equation can be solved in terms of a time evolution operator
 \begin{align}
@@ -52,7 +52,7 @@ As $H(t)$ is Hermitian, $U(t)$ will be unitary. In particular this implies that 
 
 As the Hamiltonian is Hermitian we can write it in the form
 \begin{align}
-  H = \sum_i E_i \bra{\phi_i}\ket{\phi_i}
+  H = \sum_i E_i \ket{\phi_i}\bra{\phi_i}
 \end{align}
 where $E_i$ are the eigenvalues, which are real, and $\ket{\phi_i}$ are the associated eigenvectors, which can be chosen to be orthogonal. The $\ket{\phi_i}$ are sometimes called stationary states, as they evolve as
 \begin{align}
@@ -66,8 +66,9 @@ As a simple example of pure state evolution we consider an isolated qubit, under
 \begin{bmatrix}
   -\nu & \Omega \\
   \Omega & \nu 
-\end{bmatrix}.
+\end{bmatrix},
 \end{equation}
+in the $\{\ket{0}, \ket{1}\}$ basis.
 
 We diagonalise the Hamiltonian
 \begin{align}
@@ -75,8 +76,8 @@ We diagonalise the Hamiltonian
 \end{align}
 in terms of the eigenvectors and eigenvalues
 \begin{align}
-  \ket{\phi_1} &=  \left(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\right)  &E_1 = \nu + \sqrt{\nu^2 - \Omega^2} \\
-  \ket{\phi_2} &=  \left(\sin\frac{\theta}{2}, \cos\frac{\theta}{2}\right)  &E_2 = \nu - \sqrt{\nu^2 - \Omega^2} 
+  \ket{\phi_1} &=  \cos\frac{\theta}{2}\ket{0} + \sin\frac{\theta}{2}\ket{1}  &E_1 = \nu + \sqrt{\nu^2 - \Omega^2} \\
+  \ket{\phi_2} &=  \sin\frac{\theta}{2}\ket{0} + \cos\frac{\theta}{2}\ket{1} &E_2 = \nu - \sqrt{\nu^2 - \Omega^2} 
 \end{align}
 where
 \begin{align}
@@ -90,13 +91,13 @@ We can then write the solution to the Schr\"odinger equation
 \end{align}
 where $\Delta = \sqrt{\nu^2 - \Omega^2}$ and the last equality uses the equivalence of two quantum states differing only by a global phase. 
 
-The solution can be visualised a rotation of the initial state vector on the Bloch sphere at angular speed $\Delta$, about the axis connecting the diametrically opposite points relating $\ket{\phi_1}$ and $\ket{\phi_2}$. The amplitude of the oscillation is proportional to $\sin^2\theta$, increasing from $0$ to $1$ as $\theta \rightarrow \pi$.  This oscillatory behaviour, known in this case as the \textit{Rabi oscillation}, is a common feature of many quantum systems.
+The solution can be visualised a rotation of the initial state vector about the axis connecting the diametrically opposite points relating $\ket{\phi_1}$ and $\ket{\phi_2}$ on the Bloch sphere, at angular speed $\Delta$. The amplitude of the oscillation is proportional to $\sin^2\theta$, increasing from $0$ to $1$ as $\theta \rightarrow \pi$.  This oscillatory behaviour, known in this case as the \textit{Rabi oscillation}, is a common feature of many quantum systems.
 
 \subsection{Measurements}
 
 The third, and final, postulate concerns itself with measurments performed on isolated quantum systems. We state it in terms of a special class of measurements
 \begin{quotation}
-  A \textit{prjective measurement} is described by an \textit{observable}, M, a Hermition operator on the system's state space. We can write the operator as
+  A \textit{projective measurement} is described by an \textit{observable}, M, a Hermition operator on the system's state space. We can write the operator as
   \begin{align}
     M = \sum_m mP_m
   \end{align}
@@ -107,14 +108,14 @@ The third, and final, postulate concerns itself with measurments performed on is
   Given that outcome $m$ occurred, the state of the system immediately after the measurement is
   \begin{align}
     \frac{P_m\ket{\psi}}{\sqrt{p(m)}}.
-  \end{align}
+  \end{align}\cite{nielsen+chuang}
 \end{quotation}
-In fact, projective measurements are not the most general measurement we can make on a closed quantum system. A projective measurement corresponds to making a measurement on the whole system. We could also choose to just measure a part of the system, which would not generally perform a projective measurement on the whole. We state postulate three in terms of projective measurements as they are conceptually simple and it can be shown that the most general types of measurements are always equivalent to a projective measurement on some ancilliary system \cite{neumark}. We visit these more general measurements along with open quantum systems in the next section.
+In fact, projective measurements are not the most general measurement we can make on a closed quantum system. A projective measurement corresponds to making a measurement on the whole system. We could also choose to just measure a part of the system, which would not generally perform a projective measurement on the whole. We state postulate three in terms of projective measurements as they are conceptually simple and it can be shown that the most general types of measurements are always equivalent to a projective measurement on some ancilliary system \cite{peres}. We visit these more general measurements along with open quantum systems in the next section.
 
 
 \section{Open Quantum Systems}
 
-In reality a closed quatum system must be viewed as in idealisation; with the possible exception of the entire universe, the assumption that a system is closed must always be approximate. All physical systems are unvoidably coupled to other physical systems. We could try to rectify the situation by expanding the system we are interested in to include these other systems, but will eventually run into difficulties: when considered together the joint system may be too complex to model given our computational resources, or perhaps we do not have enough knowledge of some of the systems or couplings to make modelling possible. To model real-world situations we must develop the theory of \textit{open quantum systems}. 
+In reality, a closed quatum system must be viewed as an idealisation; with the possible exception of the entire universe, the assumption that a system is closed must always be approximate as all physical systems are unvoidably coupled to other physical systems. We could try to rectify the situation by expanding the system we are interested in to include these other systems, but will eventually run into difficulties: when considered together the joint system may be too complex to model given our computational resources, or perhaps we do not have enough knowledge of some of the systems or couplings to make modelling possible. To model real-world situations we must develop the theory of \textit{open quantum systems}. 
 
 The subject of open quantum systems is especially important for the field of QIP. Most QIP processes and algorithms are stated in terms of what can be done in prinicple in ideal systems. All reals systems suffer from unwanted interactions with other systems. In assessing a system's suitability as a candidate QIP system, it is important to be able to somehow incorporate these interactions into our model and evaluate the extent of their effect on the system's information processing capacity.
 
@@ -128,7 +129,7 @@ When describing the state of closed systems we used the state vector. The state 
 
 As a simple illustration of this point, consider a pair of qubits in the Bell singlet state, $\ket{01} - \ket{10}$. Imagine we only have access to the first qubit and want to provide the best possible description of its state; another party holds the second qubit and there are no restrictions placed on the operations they perform. A first observation is that if we perform a projective measurement described by the $Z$ operator we obtain the outcomes $0$ and $1$, each with probability $1/2$. The only state vectors with this property take the form $1/\sqrt{2}(\ket{0} + e^{i\phi}\ket{1})$, with $\phi \in [0, 2\pi)$. However, our first qubit also has the property that when measured in the $X$ or $Y$ basis it will also report both possible outcomes with equal probability, which is not the case for any of the state vectors given. A good representation of the state of the first qubit is not possible within the language of state vectors.
 
-Systems where the state is not completely known and subsystems of composite systems can be thought of as being in a statistical mixture of pure states. We say these systems exist in a \textit{mixed state}. To describe such states, we introduce the \textit{density matrix}
+Systems where the state is not completely known, and subsystems of composite systems, can be thought of as being in a statistical mixture of pure states. We say these systems exist in a \textit{mixed state}. To describe such states, we introduce the \textit{density matrix}
 \begin{align}
   \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i} 
 \end{align}
@@ -138,30 +139,30 @@ When we introduced the concept of a mixed state we did not rule out that the sta
 \begin{align}
   \rho = \ket{\psi}\bra{\psi}.
 \end{align}
-Pure states can be identified by the fact that $\tr\{\rho^2\} = 1$. In general $\tr\{\rho^2\}$ can be used as a measure of how mixed a state is. A maximally mixed state in a Hilbert space of dimesion $n$ has $\rho = 1/n\id$ and $\tr\{\rho^2\} = 1/n$.
+Pure states can be identified by the fact that $\tr\{\rho^2\} = 1$. In general $\tr\{\rho^2\}$ can be used as a measure of how pure a state is. A maximally mixed state in a Hilbert space of dimesion $n$ has $\rho = 1/n\id$ and $\tr\{\rho^2\} = 1/n$.
 
 If we have a composite quantum system formed from two systems $A$ and $B$ the density matrix of the joint system is given
 \begin{align}
   \rho_{AB} = \rho_A \otimes \rho_B. 
 \end{align}
-If we are given the density matrix of the joint system, we can find the reduced desity matrix of the subsystem $A$ by taking the \textit{partial trace} over $B$
+If we are given the density matrix of the joint system, we can find the reduced desity matrix of the subsystem $A$ by taking the \textit{partial trace} over $B$,
 \begin{align}
-  \rho_A = \tr_B\{\rho_{AB}\} = \sum_b \bra{b}\rho_{AB}\ket{b}
+  \rho_A = \tr_B\{\rho_{AB}\} = \sum_b \bra{b}\rho_{AB}\ket{b},
 \end{align}
 where $\{\ket{b}\}$ is a basis for the Hilbert space of system $B$. 
 
 \subsection{Measurement}
 
-A measurement on an isolated quantum system is described by a single operator. The possible measurement outcomes are given by the eigenvalues of the operator and the act of measurement projects the system into the eigenspace of the eigenvalue corresponding to the outcome. We refer to such measurements as \textit{projective measurements}.
+We earlier stated the measurement postualte in terms of projective measurements: a measurement on an isolated quantum system is described by a single operator and the possible measurement outcomes are given by the eigenvalues of that operator. The act of measurement projects the system into the eigenspace of the eigenvalue corresponding to the outcome. 
 
-When dealing with non-isolated systems we extend our measurement framework to \textit{positive operator valued measurements} (POVMs). Neumark's theorem \cite{?} tells us that any POVM on a system is equivalent to a projective measurement on a larger system. For example, a common experimental set-up is to allow a system to interact with an ancillia qubit and then projectively measure the ancillia to learn about the system.
+When dealing with non-isolated systems we must extend our measurement framework to \textit{positive operator valued measurements} (POVMs). Neumark's theorem \cite{peres} tells us that any POVM on a system is equivalent to a projective measurement on a larger system. For example, a common experimental set-up is to allow a system to interact with an ancillia qubit and then projectively measure the ancillia to learn about the system.
 
 A POVM  is defined by a set of operators $A_k$, satisfying
 \begin{align}
   \label{POVM_completeness_eq}
   \sum_k A_k^\dagger A_k = \id
 \end{align}
-Each of the operators $A_k$ corresponds to a different measurement outcome $o_k$. The probability of outcome $o_k$ is given by $p_k = \tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $o_k$ the system is left in the state
+Each of the operators $A_k$ corresponds to a different measurement outcome $a_k$. The probability of outcome $a_k$ is given by $p_k = \tr\{A_k \rho A_k^\dagger\}$. After a measurement with outcome $a_k$ the system is left in the state
 \begin{align}\label{POVM_normalisation_eq}
   \rho \rightarrow \rho' = \frac{1}{p_k} A_k \rho A_k^\dagger
 \end{align}
@@ -174,7 +175,7 @@ In the language of density matrices the Schr\"odinger equation becomes the \text
   \ddt \rho = i [\rho, H]
 \end{align}
 
-The von Neumann equation describes the evolution of a closed system in a mixed state, but the evolution of open systems is far richer than this. In general it may not even be possible to predict the evolution of an open system without also providing a detailed model of all the systems with which it interacts. The study of open quantum systems and the circumstances under which an interacting system's dynamics can be modelled alone is vast and here we will touch on only a small, yet often applicable, corner of it.
+The von Neumann equation describes the evolution of a closed system in a mixed state, but the evolution of open systems is far richer than this. In general it may not even be possible to predict the evolution of an open system without also providing a detailed model of all the systems with which it interacts. The study of open quantum systems, and the circumstances under which an interacting system's dynamics can be modelled alone, is a vast subject. Here we will touch on only a small, yet often applicable, corner of it.
 
 In order to set up the theory we first divide the world into two parts: the \textit{system} and the \textit{environment}. We choose the system to be the part that we wish to model and make predictions about. The environment represets everything outside the system. The decision of where to draw the boundary between system and environment in a given case requires much care.
 
@@ -192,7 +193,7 @@ We now look at two situations in which the Markovian master equation arises.
 
 We first consider a system evolving under continuous measurement. It is important to state carefully what we mean by this to avoid an apparent contradiction: the well known quantum Zeno effect means that any system that is repeatedly projectively measured will not change its state at all. What we mean here is a system undergoing a weak, POVM-type measurement. A weak measurement is one that gives us very little information about the system and correspondingly only slightly perturbs the system's state. Such measurements occur when the system interacts weakly with an ancilla which is then measured.
 
-We will focus on a specific type of continuous measurement, which can be phrased in terms of isolated detection events. Most of the time the measurement reveals that no event has occured, behaving like a weak measurement. Occasionally the measurement reveals that an event has occurred and the system changes drastically similar to a projective measurement. We say the system has undergone a \textit{quantum jump}. A good example is photon emission from an atom in a cavity: at any point it is possible that a photon will be emitted and detected, but in most time intervals no emission will occur.
+We will focus on a specific type of continuous measurement, which can be phrased in terms of isolated detection events. Most of the time the measurement reveals that no event has occured, behaving like a weak measurement. Occasionally the measurement reveals that an event has occurred and the system changes drastically similar to a projective measurement. In this case we say the system has undergone a \textit{quantum jump}. A good example is photon emission from an atom in a cavity: at any point it is possible that a photon will be emitted and detected, but in most time intervals no emission will occur.
 
 It is important to realise that by placing a system under continuous observation we alter its dynamics even if no detection event occurs. Intuitively, the event of `no detectection' increases our knowledge of the system's state and thus changes it. We say the state follows \textit{no-jump evolution} due to the \textit{back-action} of our observation.
 
@@ -204,25 +205,25 @@ To put all this on a rigorous footing we will describe our observation using a P
 \end{align}
 We let the measurement is \textit{weak} by setting $A_1 = \sqrt{\epsilon} L$ so that the probability of detecting an event is proportional to $\epsilon$, which we can take to be small. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that eq (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
 \begin{align}
-  A_0^\dagger A_0 + A_1^\dagger A_1 = \left( \id - \frac{\epsilon}{2} L^\dagger L\right)^\dagger \left( \id - \frac{\epsilon}{2} L^\dagger L\right) + \epsilon L^\dagger L = \id + O(\epsilon^2)
+  A_0^\dagger A_0 + A_1^\dagger A_1 = \left( \id - \frac{\epsilon}{2} L^\dagger L\right)^\dagger \left( \id - \frac{\epsilon}{2} L^\dagger L\right) + \epsilon L^\dagger L = \id + O(\epsilon^2).
 \end{align}
 
-We now consider the measurement to be made over a small time interval, $\delta t$, setting $\epsilon \propto \delta t$ so that the probability of detection is proportional to the length of that interval. We absorb any constant factor into our definition of $L$. We also make the simplifying assumption that the system is stationary apart from the measurement process, so the Hamiltonian is $0$. Conditional on there being no jump in the interval the system evolves as
+We now consider the measurement to be made over a small time interval, $\delta t$, and set $\epsilon \propto \delta t$ so that the probability of detection is proportional to the length of that interval. We absorb any constant factor into our definition of $L$. We also make the simplifying assumption that the system is stationary apart from the measurement process, so that the Hamiltonian is $0$. Conditional on there being no jump in the interval the system evolves as
 \begin{align}
   \rho(t+\delta t) &= \frac{1}{p_0(t, t+\delta t)}\left(\id - \frac{\delta t}{2} L^\dagger L\right)\rho(t)\left(\id - \frac{\delta t}{2} L^\dagger L\right) \\
-  &= \frac{1}{p_0(t, t+\delta t)}\left(\rho(t) - \frac{\delta t}{2} \left(L^\dagger L \rho(t) + \rho(t) L^\dagger L \right)\right)
+  &= \frac{1}{p_0(t, t+\delta t)}\left(\rho(t) - \frac{\delta t}{2} \left(L^\dagger L \rho(t) + \rho(t) L^\dagger L \right)\right),
 \end{align}
 where we have normalised the state $\rho$ by dividing by the probability that no jump occured in the interval, $p_0(t, t+\delta t)$. This normalisation is not ideal as, due to the dependence of $p_0(t, t+\delta t)$ on $\rho(t)$, it introduces a non-linearity into the equation. We can avoid this by simply not performing the normalisation, which has the nice feature that the probability $p_0(t, t+\delta t)$ is now encoded in the trace of the density matrix. As the outcomes of measurements in different time intervals are independent, the probabilities multiply, and the so the trace of the density matrix $\rho(t)$ will represent the cumulative probability there has been no jump by time $t$.
 
 We can use this equation to deduce the continuous conditional no-jump dynamics of the system by allowing $\delta t \rightarrow dt$: [TODO do I need to talk about Zeno here - see Brun page 8? Is Brun wrong?]
 \begin{align}
-  \ddt \rho_c(t) = - \frac{1}{2} \left(L^\dagger L \rho_c(t) + \rho(t) L^\dagger L \right)
+  \ddt \rho(t) = - \frac{1}{2} \left(L^\dagger L \rho(t) + \rho(t) L^\dagger L \right).
 \end{align}
 This makes precise the earlier statement that the act of not detecting an event has a tangible effect on the physical system.
 
 In a similar fashion to before we can look at what happens if we do detect an event in the interval $\delta t$. Conditional on an event being detected the system evolves as
 \begin{align}
-  \rho(t + \delta t) = L\rho(t)L^\dagger
+  \rho(t + \delta t) = L\rho(t)L^\dagger,
 \end{align}
 where we have chosen not to normalise, so that the trace of $\rho(t + \delta t)$ records the probability that an event was detected.
 
@@ -232,21 +233,21 @@ If we average over these two possible outcomes we obtain the equation
 \end{align}
 By allowing $\delta t \rightarrow dt$ we recover the Markovian master equation (\ref{master_eq}). 
 
-Such an averaging procedure would be justified if, for example, we performed the measurement but forgot to look at the outcome. Perhaps a better way of viewing it is that Nature measured the system. The result is in priciple recorded in the environment but we do not have access to it. In this way we can interpret decoherence processes as described by the Markovian master equation in terms of information leaking from the system into the environment.
+Such an averaging procedure would be justified if, for example, we performed the measurement but forgot to look at the outcome. Perhaps a better way of viewing it is that Nature measured the system. The result is in priciple recorded in the environment but we do not have access to it. In this way we can interpret decoherence processes, as described by the Markovian master equation, in terms of information leaking from the system into the environment.
 
-It also allows us to view the Markovian master equation as an averaging over all possible trajectories of the system. It is sometimes useful to think in terms of \textit{unravelling} a master equation into the different trajectories. A simple example would be to pull out the no-jump component that we derived above, to unravel the evolution into no-jump and at-least-one-jump processes.
+It also allows us to view the Markovian master equation as an averaging over all possible trajectories of the system. It is sometimes useful to think in terms of \textit{unravelling} a master equation into the different trajectories. A simple example would be to pull out the no-jump component that we derived above, to partially unravel the evolution into no-jump and at-least-one-jump processes.
 
 
 \subsection{Decoherence Master Equation}
 
-We have so far presented the general form of a Markovian Master Equation and seen how such an equation can be interpreted as the average over the different observation histories of a continuously observed quantum system. We now approach the master equation from a different direction by deriving it directly from Hamiltonian for a weakly interacting, time independent system-environment. In doing so we visit some of the common assumptions made to cast the system into Markovian form, as well as deriving an equation that will be of use in the single photon source work in Chapter \ref{ch:SinglePhotonSource}.
+We have so far presented the general form of a Markovian Master Equation and seen how such an equation can be interpreted as the average over the different observation histories of a continuously observed quantum system. We now approach the master equation from a different direction by deriving it directly from Hamiltonian for a weakly interacting, time independent system-environment. In doing so we visit some of the common assumptions made to cast the system into Markovian form.
 
 We begin by separating the Hamiltonian into terms acting solely on the system, terms acting solely on the environment, and terms involving both the system and environment (the interaction terms):
 \begin{align}
   H = H_S + H_E + H_I.
 \end{align}
 
-Up until this point we have viewed system evolution in terms of a state evolving with respect to fixed operators representing the system's observables. This view is commonly known as the \textit{Schr\"odinger picture}. The only truly physical features of the system are given by the observables, which are a combination of both system operators and system state. It is therefore physically equivalent to consider system evolution as evolving operators with respect to a fixed state, or even somewhere inbetween. In order to simplify our description of the system evolution, we change to the \textit{interaction picture}: we let $U(t) = \exp(i(H_S + H_E)t)$ and transform operators as $\tilde{A}(t) = U(t)A(t)U^\dagger(t)$. The von Neumann equation is transformed to
+Up until this point we have viewed system evolution in terms of a state evolving with respect to fixed operators representing the system's observables. This view is commonly known as the \textit{Schr\"odinger picture}. The only truly physical features of the system are given by the observables, which are a combination of both the system operators and the system state. It is therefore physically equivalent to consider system evolution as evolving operators with respect to a fixed state, or even somewhere inbetween. In order to simplify our description of the system evolution, we change to the \textit{interaction picture}: we let $U(t) = \exp(i(H_S + H_E)t)$ and transform operators as $\tilde{A}(t) = U(t)A(t)U^\dagger(t)$. The von Neumann equation is transformed to
 \begin{align}
   \label{i_von_neumann_eq}
   \ddt \tilde{\rho}(t) = -i\left[ \tilde{H}_I(t), \tilde{\rho}(t) \right]
@@ -268,75 +269,74 @@ and then substitute this back into eq. (\ref{i_von_neumann_eq}) and apply eq. (\
   \label{before_markov_approx}
   \ddt \tilde{\rho}_S(t) = -\int_{s=0}^t \tr_E\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} dt
 \end{align}
-where we have assumed that $\tr_E [H_I(t), \rho(0)] = 0$.
+where we have assumed that $\tr_E [\tilde{H}_I(t), \tilde{\rho}(0)] = 0$.
 
-
-This isn't yet in a closed form as the right hand side still contains $\rho(t)$, the density matrix of the whole system. To begin rectifying this we first make the Born approximation letting $\tilde{\rho}(s) \approx \tilde{\rho}_S(s) \otimes \tilde{\rho}_E$. When doing this we envisage a system that is weakly coupled to a large environment. We expect the influence of the system on the environment to be small enough that the state remains approximately separable throughout. Excitations from the system are allowed to enter the environment, but we assume there is a sufficiently large continuum of frequencies that the excitations dissipate on a timescale that is small with respect to the timescale over which the system evolves. 
+This isn't yet in a closed form as the RHS still contains $\tilde{\rho}(t)$, the density matrix of the whole system. To begin rectifying this we first make the Born approximation by letting $\tilde{\rho}(s) \approx \tilde{\rho}_S(s) \otimes \tilde{\rho}_E$. When doing this we envisage a system that is weakly coupled to a large environment. We expect the influence of the system on the environment to be small enough that the state remains approximately separable throughout. Excitations from the system are allowed to enter the environment, but we assume there is a sufficiently large continuum of frequencies that the excitations dissipate on a timescale that is small with respect to the timescale over which the system evolves. 
 
 After the Born approximation the RHS of eq. (\ref{before_markov_approx}) no longer depends on the history of the environment, but still depends on the system state at previous times. To remove this dependence we make the first part of the \textit{Markov approximation} by setting $\rho(s) = \rho(t)$
 \begin{align}
-  \ddt \tilde{\rho}_S = -i \int_{s=0}^t \tr_E\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}_S(t)\otimes\tilde{\rho}_E \right] \right]\right\} ds
+  \ddt \tilde{\rho}_S = -i \int_{s=0}^t \tr_E\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}_S(t)\otimes\tilde{\rho}_E \right] \right]\right\} ds.
 \end{align}
 This equation is known as the Redfield equation. We can justify the Markov approximation by noting that we have already assumed that excitons entering the environment decay on a timescale that is short in comparison to system dynamics; the terms in the integrand will oscillate, averaging to zero, for values of $s$ away from $t$. Following this argument we can remove the Redfield equation's reference to the initial time $t=0$, by changing the direction of the integral in time:
 \begin{align}
   \label{redfield_eq}
-  \ddt \tilde{\rho}_S(t) = -i \int_{s=0}^\infty \tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds
+  \ddt \tilde{\rho}_S(t) = -i \int_{s=0}^\infty \tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds.
 \end{align}
 It is important to reiterate that timescales are important here: the \textit{Born-Markov approximation} is suitable for modelling the system on a timescale larger than typical environmental decay time. We make this notion more precise when we later write the equation in terms of the environmental correlation functions. It can be shown \cite{kok+lovett} that the Born-Markov approximation is equivalent to keeping second order commutator terms in a formal expansion of the solution to eq. (\ref{i_von_neumann_eq}).
 
 We now look get the equation into a form where we can perform the integral by examining the form of the Hamiltonian. We begin by returning to the Schr\"odinger picture Hamiltonian and writing
 \begin{align}
-  H_I = \sum_\alpha A_\alpha \otimes B_\alpha
+  H_I = \sum_\alpha A_\alpha \otimes B_\alpha,
 \end{align}
 where $A_\alpha$ and $B_\alpha$ act on the system and environment respectively. We have assumed here that the system-environment interaction is linear.
 
 To find the time dependence of $\tilde{H}_I(t)$ we further split the $A_\alpha$ into operators 
 \begin{align}
-  A_\alpha(\omega) = \sum_{\epsilon' - \epsilon = \omega} \Pi(\epsilon)A_\alpha \Pi(\epsilon')
+  A_\alpha(\omega) = \sum_{\epsilon' - \epsilon = \omega} \Pi(\epsilon)A_\alpha \Pi(\epsilon'),
 \end{align}
 where $\Pi(\epsilon)$ is a projector onto the eigenspace of energy $\epsilon$. This gives us that
 \begin{align}
   [H_S, A_\alpha(\omega)] &= - \omega A_\alpha(\omega) \\
-  [H_S, A^\dagger_\alpha(\omega)] &= + \omega A^\dagger_\alpha(\omega)
+  [H_S, A^\dagger_\alpha(\omega)] &= + \omega A^\dagger_\alpha(\omega).
 \end{align}
 The $A_\alpha(\omega)$ are eigenoperators of the Hamiltonian with frequencies $\pm \omega$.
 
 Returning to the interaction picture we have
 \begin{align}
-  \tilde{A}(\omega, t) = e^{iH_S t}A_\alpha(\omega) e^{-iH_S t} = e^{-i\omega t} A_\alpha(\omega)
+  \tilde{A}(\omega, t) = e^{iH_S t}A_\alpha(\omega) e^{-iH_S t} = e^{-i\omega t} A_\alpha(\omega),
 \end{align}
 so that
 \begin{align}
-  \tilde{H}_I(t) = \sum_{\alpha, \omega} e^{-i \omega t} A_\alpha(\omega)\otimes \tilde{B}_\alpha(t) = \sum_{\alpha, \omega} e^{i \omega t} A^\dagger_\alpha(\omega)\otimes \tilde{B}^\dagger_\alpha(t)
+  \tilde{H}_I(t) = \sum_{\alpha, \omega} e^{-i \omega t} A_\alpha(\omega)\otimes \tilde{B}_\alpha(t) = \sum_{\alpha, \omega} e^{i \omega t} A^\dagger_\alpha(\omega)\otimes \tilde{B}^\dagger_\alpha(t).
 \end{align}
 
 If we substitute this back into the Redfield eq. (\ref{redfield_eq}) we are able to perform the integration
 \begin{align}
   \label{me_before_rwa}
-  \ddt \tilde{\rho}_S(t) = \sum_{\omega, \omega'} \sum_{\alpha, \beta} e^{i(\omega'-\omega)t} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega') - A^\dagger_\alpha(\omega')A_\beta(\omega)\right) + \text{H.c}
+  \ddt \tilde{\rho}_S(t) = \sum_{\omega, \omega'} \sum_{\alpha, \beta} e^{i(\omega'-\omega)t} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega') - A^\dagger_\alpha(\omega')A_\beta(\omega)\right) + \text{H.c},
 \end{align}
 where the reservoir correlations functions are defined by
 \begin{align}
-  \Gamma_{\alpha\beta}(\omega) = \int_0^\infty ds e^{i\omega s} \tr_E \{ \tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \}
+  \Gamma_{\alpha\beta}(\omega) = \int_0^\infty ds e^{i\omega s} \tr_E \{ \tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \}.
 \end{align}
 We have assumed that $\rho_E$ is a stationary state of the environment, so that $\tr_E \{\tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \} = \tr_E \{\tilde{B}_\alpha^\dagger(s) \tilde{B}_\beta(0) \rho_E \}$ and thus $\Gamma_{\alpha\beta}(\omega)$ has no time dependence. We have also dropped any terms involving $AA$ and $A^\dagger A^\dagger$, as the associated correlation functions will be zero.
 
-We now make the \textit{secular approximation} or \textit{rotating wave approximation} (RWA): we eliminate any terms from eq. (\ref{me_before_rwa}) where $\omega' \neq \omega$. We justify this by again thinking about the timescales involved: terms involving $e^{i(\omega' - \omega)t}$ will average to zero on a characteristic timescale of $1/(\omega' - \omega)$. If this is small compared to the timescale of system evolution the RWA should hold.
+We now make the \textit{secular approximation} or \textit{rotating wave approximation} (RWA): we eliminate any terms from eq. (\ref{me_before_rwa}) where $\omega' \neq \omega$. We justify this by again thinking about the timescales involved: terms involving $e^{i(\omega' - \omega)t}$ will average to zero on a characteristic timescale of $1/(\omega' - \omega)$. If this is small compared to the timescale of system evolution we can perform the approximation to give
 \begin{align}
-  \ddt \tilde{\rho}_S(t) = \sum_{\omega} \sum_{\alpha, \beta} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega) - A^\dagger_\alpha(\omega)A_\beta(\omega)\right) + \text{H.c}
+  \ddt \tilde{\rho}_S(t) = \sum_{\omega} \sum_{\alpha, \beta} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega) - A^\dagger_\alpha(\omega)A_\beta(\omega)\right) + \text{H.c}.
 \end{align}
 
 We now have a Markovian evolution equation and all that is left is to massage it into the form of the Markovian master equation (\ref{master_eq}). To this end we write
 \begin{align}
-  \Gamma_{\alpha \beta}(\omega) = \frac{1}{2}\gamma_{\alpha\beta}(\omega) + i S_{\alpha\beta}(\omega)
+  \Gamma_{\alpha \beta}(\omega) = \frac{1}{2}\gamma_{\alpha\beta}(\omega) + i S_{\alpha\beta}(\omega).
 \end{align}
 and return to the Schr\"odinger picture to recover
 \begin{align}
-  \ddt \rho_S(t) = -i[H_S + H_{LS}, \rho_S(t) ] + D(\rho_S(t))
+  \ddt \rho_S(t) = -i[H_S + H_{LS}, \rho_S(t) ] + D(\rho_S(t)),
 \end{align}
 where
 \begin{align}
- D(\rho) = \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho A_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho\} \right)
+ D(\rho) = \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho A_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho\} \right).
 \end{align}
 Note that the system Hamiltonian has picked up the Lamb shift contribution $H_{LS}$, from the terms $S_{\alpha\beta}$. It can be shown \cite{b+p} that the matrix $\gamma_{\alpha\beta}$ is positive, so that we can diagonalise it to recover the Master Equation form in eq (\ref{master_eq}).
 

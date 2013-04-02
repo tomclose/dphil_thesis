@@ -7,53 +7,162 @@ Wave particle duality.
 
 There are two approaches to modelling light: classical and quantum. 
 
-When quantizing the electromagnetic field it is convenient to work in terms of creation and annihilation operators, $\cre{a}_\lambda(\vec{k})$ and $\an{a}_\lambda(\vec{k})$, for field modes
+Maxwell's equations for the electic field $\vec{E}$ and magnetic field $\vec{B}$ in a vacuum:
 \begin{align}
-  u(\vec{k}; \vec{r}, t) \propto e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t}
+  \nabla \times \vec{B} &= \frac{1}{c^2} \frac{\partial \vec{E}}{\partial t} \label{maxwell_be} \\
+  \nabla \times \vec{E} &= - \frac{\partial \vec{B}}{\partial t}\\
+  \nabla \cdot \vec{B} &= 0 \\
+  \nabla \cdot \vec{E} &= 0,
 \end{align}
-with polarization $\lambda$. The mode $u(\vec{k}; \vec{r}, t)$ describes a plane wave with definite momentum $\vec{k}$, which is unphysical due to its infinite extend in space. Nevertheless these modes are very useful when describing light quantum mechanically.
+where $c$ is the speed of light.
 
-In terms of these operations, the Hamiltonian for the free field is given by
+This leads to the wave equation for $\vec{E}(\vec{r}, t)$:
+\begin{align}\label{wave_eq}
+  \nabla^2\vec{E} - \frac{1}{c^2} \frac{\partial^2 \vec{E}}{\partial t^2} = 0.
+\end{align}
+
+\subsection{Quantising Light: A toy model}
+
+An electromagnetic in a one dimensional cavity.
+
+We look at a waves propagating in a single direction (which we take to be parallel to the z-axis), that are polarised in the $xz$ plane. Solving the wave equation (\ref{wave_eq}) gives the only non-zero component of $\vec{E}$
+\begin{align}\label{toy_classical_e}
+  E_x = \sum_j q_j(t) \sin(k_j z),
+\end{align}
+where $k_j = j L$ for $j \in \{1, 2, \dots\}$. We know from the wave equation that
 \begin{align}
-  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right] \\
-  &= \sum_\lambda \int d\vec{k} H_\lambda(\vec{k}).
+  \ddot{q}_j = -c^2 k_j^2 q_j
+\end{align}
+which has solutions
+\begin{align}
+  q_j = Ae^{-i\omega_j t} + Be^{i\omega_j t} = ae^{-i\omega_j t} + a^*e^{i\omega_j t},
+\end{align}
+where $\omega_j = c k_j$ and in the last equality we have enfoced that $q_j(t)$ must be real.
+
+We can use eq. (\ref{maxwell_be}) to find $\vec{B}$. The only non-zero component is
+\begin{align}
+  B_y = \sum_j \frac{\dot{q}_j(t)}{k_j}\cos(k_j z).
 \end{align}
 
-The creation and annihilation operators are so-called as they can be thought to as adding or removing an excitation in a given mode. Commutation relation $[\an{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')]  = \delta_{\lambda\lambda '}\delta^3(\vec{k} - \vec{k}') $.
+We can write the Hamiltonian 
+\begin{align}
+  H = \frac{\epsilon_0}{2} \int \vert \vec{E}\vert^2 + \frac{1}{c^2}\vert\vec{B}\vert^2 dz 
+  = \frac{\epsilon_0}{2} \sum_j \left(\frac{1}{2} q_j^2 + \frac{1}{2c^2k_j^2} \dot{q}_j^2\right)
+\end{align}
+which we compare with the [TODO]
 
+To quantize we promote $x_i$ and $p_i$ to operators, imposing the commutation relation
+\begin{align}
+  [x_i, p_j] = i\delta_{ij} \\
+  [x_i, x_j] = [p_i, p_j] = 0.
+\end{align}
+
+Rewriting the amplitude relation gives
+\begin{align}
+  x_i = \hat{A}e^{-i\omega_i t} + \hat{B} e^{i\omega_i t} =  \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}
+\end{align}
+where the second equality is determined by the requirement that the operator $\hat{x}$ is Hermitian. The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following relations for $\cre{a}$ and $\an{a}$:
+\begin{align}
+  [\cre{a}_i, \an{a}_j] = \delta_{ij} \\
+  [\cre{a}_i, \cre{a}_j] = 0 \\
+  [\an{a}_i, \an{a}_j] = 0
+\end{align}
+
+We can write the Hamiltonian in terms of the amplitude operators:
+\begin{align}
+  H = \sum_k \hbar \left( \omega_k \cre{a}\an{a} +\frac{1}{2} \right)
+\end{align}
 We have that
 \begin{align}
-  \left[H, \an{a}_\lambda(\vec{k})\right] = -\hbar \omega_\vec{k} \an{a}_\lambda(\vec{k})
+  \left[H, \an{a}_k\right] = -\hbar \omega_k \an{a}_k
   \quad \text{and} \quad 
-  \left[H, \cre{a}_\lambda(\vec{k})\right] = \hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k})
+  \left[H, \cre{a}_k\right] = \hbar \omega_k \cre{a}_k
 \end{align}
 
-Suppose we have a state $\ket{\psi}$ which is an eigenstate of the Hamiltonian with energy $E$. Consider the state $\cre{a}\ket{\psi}$:
+Suppose we have a state $\ket{n}$ which is an eigenstate of the Hamiltonian with energy $E_n$. By using the commutation relations for $H$ and $\an{a}$ we see that
 \begin{align}
-  H\cre{a}_\lambda(\vec{k})\ket{\psi} &= \left(\hbar \omega_\vec{k} \cre{a}_\lambda(\vec{k}) + \cre{a}_\lambda(\vec{k})H\right) \ket{\psi} \\
-  &= \left(\hbar \omega_\vec{k} + E\right) \cre{a}_\lambda(\vec{k})\ket{\psi}
+  H\an{a}_k\ket{n} = \left(E_n - \hbar \omega_k\right) \an{a}_k\ket{n}
 \end{align}
-so $\cre{a}_\lambda(\vec{k})\ket{\psi}$ is also an eigenstate of the Hamiltonian, this time with energy $E + \hbar\omega_\vec{k}$. The operator $\cre{a}_\lambda(\vec{k})$ has created an excitation with energy $\hbar \omega_\vec{k}$.
-
-If we start with a vacuum state of the electomagnetic field $\ket{0}$ such that $H\ket{0} = 0$ [TODO?? is this right] we can use the operators $\cre{a}$ to define set of states:
+so $\an{a}_k\ket{\psi}$ is also an eigenstate of the Hamiltonian, this time with energy $E - \hbar\omega_k$. We let 
 \begin{align}
-  \ket{n} = (\cre{a})^n \ket{0}
+  \ket{n-1} = k_{n-1}\an{a} \ket{n}
 \end{align}
-These are called the \textit{Fock states} and corespond to states with a definite number of excitations.These are called the \textit{Fock states} and corespond to states with a definite number of excitations.  
+where $k_{n-1}$ is a normalisation constant. By repeatedly applying $a$ we can create a ladder of states at an energy spacing of $\hbar\omega_k$. In order for the system to have a lowest energy level $E_0$ this process must terminate somehow. If $\ket{0}$ is an eigenstate of $H$ with energy $E_0$ we must have
+\begin{align}
+  a\ket{0} = 0
+\end{align}
+or otherwise $a\ket{0}$ would be an eigenstate with energy lower than $E_0$. We can use $\ket{0}$, which we call the \textit{vacuum state}, to construct the states $\ket{n}$ explictly:
+\begin{align}
+  \ket{n} = \frac{(\cre{a})^n \ket{0}}{\sqrt{n!}}. 
+\end{align}
+We then have that $E_n = (n+1/2)\hbar\omega$. Note that $E_0 = 1/2\hbar \omega$, so that the ground energy state is not zero. We ascribe this energy to \textit{vacuum fluctuations}.
 
+The states $\ket{n}$ are commonly known as \textit{Fock states}. If we introduce the \textit{number operator},
+\begin{align}
+  N_k = \cre{a}_k\an{a}_k,
+\end{align}
+we have that
+\begin{align}
+  N_k\ket{n}_k = n.
+\end{align}
+We interpret the number operator as counting the number of excitations in the mode $k$. The operators $\an{a}_k$ are known as \textit{annihilation operators} and the operators $\cre{a}_k$ as \textit{creation operators}, as they can be thought of as respectively removing and adding excitations to the system. 
 
-Single photon states
+We can return to the classical expression for the electic field (\ref{toy_classical_e}) and promote it to a quantum field by writing in terms of creation and annihilation operators:
+\begin{align}
+  \hat{E}_x = \sum_j \left(\an{a}_k e^{-i\omega_k t} + \cre{a}_k e^{i\omega_k t}\right) \sin(k_j s).
+\end{align}
+Note that $\bra{n}\hat{E}_x\ket{n} = 0$ for all $n$, so that for a state with a definite number of excitations the expected value of the electric field at any point is zero. If we instead introduce states
+\begin{align}
+  \ket{\alpha} = \sum_n \frac{\alpha^n \ket{n}}{\sqrt{n!}}
+\end{align}
+for complex number $\alpha = p + iq$, we find that
+\begin{align}
+  \bra{\alpha}\hat{E}_x\ket{\alpha} = (p\cos\omega t + q\sin\omega t)\sin(k_j z).
+\end{align}
+The states $\ket{\alpha}$ are known as \textit{coherent states} and are the closest quantum analogue to the classical states of radiation.
+
+\subsection{Field in free space}
+
+We now present the corresponding results for the full electromagnetic field in free space.
+
+Classically the state of the electromagnetic field can be decomposed into plane waves [TODO: in Kok + Lovett 1.12 do they need the sum over $\lambda$?]
+\begin{align}
+  \vec{E}(\vec{r}, t) = \sum_\lambda \int d\vec{k} a_\lambda(\vec{k})\vec{\epsilon}_\lambda u(\vec{k}; \vec{r}, t) + \text{c.c.},
+\end{align}
+where the modes $u(\vec{k}; \vec{r}, t)$ describe plane waves with definite momentum $\vec{k}$,
+\begin{align}
+  u(\vec{k}; \vec{r}, t) \propto e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t},
+\end{align}
+and $\vec{\epsilon}_\lambda$ is the polarization vector, which is perpendicular to $\vec{k}$.
+
+After quantisation we obtain the expression
+\begin{align}
+  \hat{\vec{E}}(\vec{r}, t) = \sum_\lambda \int d\vec{k} \an{a}_\lambda(\vec{k})\vec{\epsilon}_\lambda u(\vec{k}; \vec{r}, t) + \text{H.c.},
+\end{align}
+where $\an{a}_\lambda(\vec{k})$ and $\cre{a}_\lambda(\vec{k})$ are the annihilation and creation operators for excitations of the mode $u(\vec{k}; \vec{r},t)$, which satisfy
+\begin{align}
+  [\an{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')]  &= \delta_{\lambda\lambda '}\delta^3(\vec{k} - \vec{k}') \\
+  [\an{a}_\lambda(\vec{k}), \an{a}_{\lambda '}(\vec{k}')]  &= 0 \\
+  [\cre{a}_\lambda(\vec{k}), \cre{a}_{\lambda '}(\vec{k}')] &= 0.
+\end{align}
+The modes $u(\vec{k}; \vec{r}, t)$ are not physical, as the plane wave solutions cannot be normalised, but nevertheless the operators  $\an{a}_\lambda(\vec{k})$ and $\cre{a}_\lambda(\vec{k})$ are very convenient when formulating the theory.
+
+In terms of these operators, the Hamiltonian for the free field is given by
+\begin{align}
+  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right]
+\end{align}
+
 
 \subsection{Hong-Ou-Mandel Dip}
 
-The Hong-Ou-Mandel experiment concerns the behaviour of a pair of photons iteracting with a \textit{beam splitter}. A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. Given two optical modes $a_1$ and $a_2$ the beam splitter performs the transformation
+The Hong-Ou-Mandel experiment concerns the behaviour of a pair of photons iteracting with a \textit{beam splitter}. A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. Given two optical modes $a_1$ and $a_2$ the beam splitter performs the transformation $B$ where
 \begin{align}
-  \an{a}_{1} \rightarrow \an{a}_{1} + \an{a}_{2} \\
-  \an{a}_{2} \rightarrow \an{a}_{1} - \an{a}_{2}
+  B (\cre{a}_{1}) = \frac{1}{\sqrt{2}} \left(\cre{a}_{1} + \cre{a}_{2}\right) \\
+  B (\cre{a}_{2}) = \frac{1}{\sqrt{2}} \left(\cre{a}_{1} - \cre{a}_{2}\right).
 \end{align}
 If both modes are incident on the beam splitter simultateously,
 \begin{align}
-  \an{a}_{1}\an{a}_{2} \rightarrow \left(\an{a}_{1} + \an{a}_{2}\right) \left(\an{a}_{1} - \an{a}_{2}\right) = \an{a}_{1}\an{a}_{1} - \an{a}_{2}\an{a}_{2}
+  B\left(\cre{a}_{1}\cre{a}_{2}\right) = \left(\cre{a}_{1} + \cre{a}_{2}\right) \left(\cre{a}_{1} - \cre{a}_{2}\right) = \cre{a}_{1}\cre{a}_{1} - \cre{a}_{2}\cre{a}_{2}
 \end{align}
 The output states contain only those cases where both exitations are in the same mode.
 
@@ -61,17 +170,25 @@ So if we have two single mode exitations of a given frequency incident on differ
 
 A single photon can be written in terms of its annihilation operator
 \begin{align}
-  \an{b} = \int f(k) \an{a} dk
+  \cre{b}\ket{0} = \int f(k) \cre{a}(k) dk\ket{0}
 \end{align}
+where we require that $\int f(k)^* f(k) dk = 1$.
 
 \begin{align}
-  \an{b}_1 \an{b}_2 & = \int \int f_1(k)f_2(k') \an{a}_1(k) \an{a}_2(k') dkdk' \\
-                    & \rightarrow
+  \ket{\psi_\text{out}} &= B(\cre{b}_1 \cre{b}_2)\ket{0}\\
+  & = \int \int f_1(k)f_2(k') B(\cre{a}_1(k) \cre{a}_2(k')) dkdk' \\
+  & = \int \int f_1(k)f_2(k') \left(\cre{a}_{1}(k) + \cre{a}_{2}(k)\right) \left(\cre{a}_{1}(k') - \cre{a}_{2}(k')\right)  dkdk' \\
 \end{align}
 
-\subsection{Input-Output formalism}
-
-
+The probability of detecting the two photons in different arms of the detector is given by
+\begin{align}
+  C = \bra{\psi_\text{out}} \int\int \cre{a}_1(k)\an{a}_1(k) \cre{a}_2(k')\an{a}_2(k') dk dk'\ket{\psi_\text{out}}.
+\end{align}
+Calculating this for our output state gives
+\begin{align}
+  C = \frac{1}{2} - \frac{1}{2}\int\int f_1(k)f_1^*(k')f_2(k')f_2^*(k) dk dk'.
+\end{align}
+If $f_1 = f_2$ the $C=0$: perfectly identical photon wavepackets demonstrate perfect bunching at a beam splitter. This allows us to use $C$ as a measure of how identical two photons are.
 
 \section{Light-Matter interactions}
 
@@ -156,45 +273,47 @@ If we want to look at the emission and absorbtion of single photons we must inst
 
 \subsection{Raman procedure}
 
-
+We now consider a three level system $\{\ket{0}, \ket{1}, \ket{e}\}$ where the transitions $\ket{0} \leftrightarrow \ket{e}$ and $\ket{1} \leftrightarrow \ket{e}$ are optically active. Using the semi-classical approach, as at the beginning of the previous section, we can write the Hamiltonian
 \begin{align}
   H=\hbar
   \begin{bmatrix}
     0 & 0 & \Omega_1 \cos\omega_1 t \\
     0 & \delta & \Omega_2 \cos\omega_2 t \\
     \Omega_1 \cos\omega_1 t & \Omega_2 \cos\omega_2 t & \omega
-  \end{bmatrix}
+  \end{bmatrix},
 \end{align}
+where we have assumed for simplicity that for both optically active transitions we have that $\vec{\epsilon}\cdot \vec{r}_{eg} = \vec{\epsilon}^*\cdot \vec{r}_{eg} = \Omega$ for some real $\Omega$ , so that we can we can write the oscillitory behaviour in terms of a single cosine.
 
+We next move to the rotating frame with the transformation
 \begin{align}
   U(t) = 
   \begin{bmatrix}
     1 & 0 & 0 \\
     0 & e^{i(\omega_1 - \omega_2)t} & 0 \\
     0 & 0 & e^{\omega_1 t}
-  \end{bmatrix}
+  \end{bmatrix},
 \end{align}
-
+so that the Hamiltonian becomes
 \begin{align}
   \tilde{H}=\frac{\hbar}{2}
   \begin{bmatrix}
     0 & 0 & \Omega_1(1+e^{2i\omega_1 t}) \\
     0 & 2(\delta + \omega_2 - \omega_1) & \Omega_2 (1+e^{2i\omega_2 t}) \\
     \Omega_1(1+e^{2i\omega_1 t}) & \Omega_2 (1+e^{2i\omega_2 t}) & 2(\omega - \omega_1)
-  \end{bmatrix}
+  \end{bmatrix}.
 \end{align}
 
-After we make the rotating wave approximation
+After we make the RWA to elimate the off-resonant $e^{\pm2\omega_2 t}$ terms, we are left with 
 \begin{align}
   \tilde{H}=\frac{\hbar}{2}
   \begin{bmatrix}
     0 & 0 & \Omega_1 \\
     0 & 2(\nu_1 - \nu_2) & \Omega_2  \\
     \Omega_1 & \Omega_2  & 2\nu_1
-  \end{bmatrix}
+  \end{bmatrix}.
 \end{align}
 
-Look at the limit $\nu \gg \{\Omega_1, \Omega_2\}$.  Degenerate perturbation theory
+We then restrict to the case where $\nu_1 = \nu_2 =: \nu$, which corresponds to tuning the frequencies $\omega_1$ and $\omega_2$ so they are both detuned from resonance by the same amount. In the limit where $\nu \gg \{\Omega_1, \Omega_2\}$ we can treat the system using degenerate perturbation theory to obtain the reduced Hamiltonian
 \begin{align}
   H = -\frac{1}{4\nu}
   \begin{bmatrix}
@@ -202,9 +321,7 @@ Look at the limit $\nu \gg \{\Omega_1, \Omega_2\}$.  Degenerate perturbation the
     \Omega_1\Omega_2 & \Omega_2^2
   \end{bmatrix}
 \end{align}
-which is the basically the Rabi Hamiltonian as in Eq. (\ref{rabi_hamiltonian}).
-
-Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ induced via the third state.
+in terms of the basis $\{\ket{0}, \ket{1}\}$. This has the same form as the Rabi Hamiltonian (\ref{rabi_hamiltonian}). Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ between the states $\ket{0}$ and $\ket{1}$ is induced via the third state.
 
 
 
