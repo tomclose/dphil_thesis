@@ -3,65 +3,58 @@
 
 \section{Quantum Treatment of Light}
 
-Wave particle duality.
-
-There are two approaches to modelling light: classical and quantum. 
-
-Maxwell's equations for the electic field $\vec{E}$ and magnetic field $\vec{B}$ in a vacuum:
+The quest to define the nature of light occupies an important place in the history of physics. In some ways light appeared to behave like a particle and in other ways it appeared to behave like a wave. Newton favoured the particular description, which formed the basis for his work on lenses. This view was thought to have been largely discredited when Maxwell introduced his unifying equations for the electic field, which for $\vec{E}$ and magnetic field $\vec{B}$ in a vacuum reduce to:
 \begin{align}
   \nabla \times \vec{B} &= \frac{1}{c^2} \frac{\partial \vec{E}}{\partial t} \label{maxwell_be} \\
   \nabla \times \vec{E} &= - \frac{\partial \vec{B}}{\partial t}\\
   \nabla \cdot \vec{B} &= 0 \\
   \nabla \cdot \vec{E} &= 0,
 \end{align}
-where $c$ is the speed of light.
-
-This leads to the wave equation for $\vec{E}(\vec{r}, t)$:
+where $c$ is the speed of light. These equations leads to the wave equation for $\vec{E}(\vec{r}, t)$:
 \begin{align}\label{wave_eq}
   \nabla^2\vec{E} - \frac{1}{c^2} \frac{\partial^2 \vec{E}}{\partial t^2} = 0.
 \end{align}
+and the wave/particle question was thought to be settled.
+
+What changed their minds?
+
 
 \subsection{Quantising Light: A toy model}
 
-An electromagnetic in a one dimensional cavity.
+The normal approach to quantising the electromagnetic field involves working with the electromagnetic vector potential and is fairly technical due to the relativistic nature of light and continuous spectrum of modes. We aim to avoid these technical complexities while still providing an overview of the key stages by looking at a toy model of light: an electromagnetic field in a one dimensional cavity. We later state the results for the quantisation of the full field.
 
-We look at a waves propagating in a single direction (which we take to be parallel to the z-axis), that are polarised in the $xz$ plane. Solving the wave equation (\ref{wave_eq}) gives the only non-zero component of $\vec{E}$
+We look at a waves propagating in a single direction (which we take to be parallel to the z-axis), that are polarised in the $xz$ plane. To simplify the situation further we take $c = 1$ and the length of the cavity to be $1$. Solving the wave equation (\ref{wave_eq}) gives the only non-zero component of $\vec{E}$
 \begin{align}\label{toy_classical_e}
-  E_x = \sum_j q_j(t) \sin(k_j z),
+  E_x &= \sum_j \sqrt{\frac{2\omega_j^2}{\epsilon_0 L}} q_j(t) \sin(k_j z) \\
+  B_y &= \sum_j \frac{1}{k_j \mu_0} \sqrt{\frac{2\omega_j^2}{\epsilon_0 L}} q_j(t) \cos(k_j z),
 \end{align}
-where $k_j = j L$ for $j \in \{1, 2, \dots\}$. We know from the wave equation that
+where $\omega_j = \pi j$ for $j \in \{1, 2, \dots\}$. We know from the wave equation that
 \begin{align}
-  \ddot{q}_j = -c^2 k_j^2 q_j
+  \ddot{q}_j = -\omega_j^2 q_j
 \end{align}
 which has solutions
 \begin{align}
   q_j = Ae^{-i\omega_j t} + Be^{i\omega_j t} = ae^{-i\omega_j t} + a^*e^{i\omega_j t},
 \end{align}
-where $\omega_j = c k_j$ and in the last equality we have enfoced that $q_j(t)$ must be real.
-
-We can use eq. (\ref{maxwell_be}) to find $\vec{B}$. The only non-zero component is
-\begin{align}
-  B_y = \sum_j \frac{\dot{q}_j(t)}{k_j}\cos(k_j z).
-\end{align}
+where in the last equality we have enforced that $q_j(t)$ must be real.
 
 We can write the Hamiltonian 
 \begin{align}
-  H = \frac{\epsilon_0}{2} \int \vert \vec{E}\vert^2 + \frac{1}{c^2}\vert\vec{B}\vert^2 dz 
-  = \frac{\epsilon_0}{2} \sum_j \left(\frac{1}{2} q_j^2 + \frac{1}{2c^2k_j^2} \dot{q}_j^2\right)
+  H = \frac{\epsilon_0}{2} \int_0^L \vert \vec{E}\vert^2 + c^2\vert\vec{B}\vert^2 dz 
+  = \frac{1}{2} \sum_j \left(\omega_j q_j^2 + p_j^2\right)
 \end{align}
-which we compare with the [TODO]
-
-To quantize we promote $x_i$ and $p_i$ to operators, imposing the commutation relation
+where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. To quantize we promote $q_i$ and $p_i$ to operators, imposing the commutation relation
 \begin{align}
-  [x_i, p_j] = i\delta_{ij} \\
-  [x_i, x_j] = [p_i, p_j] = 0.
+  [q_i, p_j] = i\delta_{ij} \\
+  [q_i, q_j] = [p_i, p_j] = 0.
 \end{align}
 
 Rewriting the amplitude relation gives
 \begin{align}
-  x_i = \hat{A}e^{-i\omega_i t} + \hat{B} e^{i\omega_i t} =  \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}
+  \hat{q}_i &= \sqrt{\frac{\hbar}{2\omega_i}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right) \\
+  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right).
 \end{align}
-where the second equality is determined by the requirement that the operator $\hat{x}$ is Hermitian. The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following relations for $\cre{a}$ and $\an{a}$:
+The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following relations for $\cre{a}$ and $\an{a}$:
 \begin{align}
   [\cre{a}_i, \an{a}_j] = \delta_{ij} \\
   [\cre{a}_i, \cre{a}_j] = 0 \\
@@ -243,8 +236,8 @@ This gives us
 \begin{align}
   H =
   \begin{bmatrix}
-    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
-    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +\omega_0/2
+    -(\omega_0-\omega)/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
+    eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +(\omega_0-\omega)/2
   \end{bmatrix}
 \end{align}
 
@@ -260,16 +253,25 @@ We are left with
 \end{align}
 which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). An atom in a cavity interacting with an EM field will oscillate.
 
-If we want to look at the emission and absorbtion of single photons we must instead use the fully quantised field. The electric field is then given 
+If we want to look at the emission and absorbtion of single photons we must instead use the fully quantised field. Quantum mechanically an electric field with a single mode and of definite polarisation is given
 \begin{align}
-  \vec{E} = \sum_{\lambda = 1}^2 \sum_\vec{k} E_0 (\vec{\epsilon}_\lambda(\vec{k})\an{a}_\lambda(\vec{k})+ \vec{\epsilon}^*_\lambda(\vec{k})\cre{a}_\lambda(\vec{k})
+  \vec{E} = E_0 (\vec{\epsilon}\an{a}+ \vec{\epsilon}^*\cre{a}).
 \end{align}
 
-
-
+With $\vec{r}_{eg}$ defined as before we write the dipole interaction term in the system basis:
 \begin{align}
-  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{b}\an{b} + g\an{b} \sp + g^{*}\cre{b} \sm
+  H_d = E_0 e \vec{r}_{eg}\cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a})\sp + E_0 e \vec{r}_{eg}^* \cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*),
 \end{align}
+where we have used spin language to describe atomic transitions, $\ket{e}\bra{g} \equiv \sp$ and $\ket{g}\bra{e} \equiv \sm$. We use this to rewrite the total Hamiltonian
+\begin{align}
+  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm + \gamma\an{a} \sm + \gamma^{*}\cre{a} \sp. 
+\end{align}
+
+If we have that $\omega \approx \omega_0$ the $\gamma$ terms will be highly off-resonant. Ignoring these terms is equivalent to making the RWA and gives
+\begin{align}
+  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm.
+\end{align}
+This is the well known \textit{Jaynes-Cummings Hamiltonian}. If we consider a basis of \textit{dressed states}, where we let $\ket{g, n} = \ket{g}\otimes\ket{n}$ and similarly for $\ket{e, n}$, we find that the Jaynes-Cummings Hamiltonian looks like the Rabi Hamiltonian on closed subspaces $\{\ket{g, n}, \ket{e, n-1}\}$ - the joint system oscillates between a state where it is relaxed and a state where it is excited but the mode contains one fewer excitation.
 
 \subsection{Raman procedure}
 
@@ -313,16 +315,40 @@ After we make the RWA to elimate the off-resonant $e^{\pm2\omega_2 t}$ terms, we
   \end{bmatrix}.
 \end{align}
 
-We then restrict to the case where $\nu_1 = \nu_2 =: \nu$, which corresponds to tuning the frequencies $\omega_1$ and $\omega_2$ so they are both detuned from resonance by the same amount. In the limit where $\nu \gg \{\Omega_1, \Omega_2\}$ we can treat the system using degenerate perturbation theory to obtain the reduced Hamiltonian
+We then restrict to the case where $\nu_1 = \nu_2 =: \Delta$, which corresponds to tuning the frequencies $\omega_1$ and $\omega_2$ so they are both detuned from resonance by the same amount. We spectrally decompose the Hamiltonian
 \begin{align}
-  H = -\frac{1}{4\nu}
+  H = \lambda_d \ket{d}\bra{d} + \lambda_{+}\ket{+}\bra{+} + \lambda_{-}\ket{-}\bra{-},
+\end{align}
+where 
+\begin{align}
+  \lambda_d &= 0 \\
+  \lambda_\pm &= \Delta \pm \sqrt{\Delta^2 + \Omega_1^2 + \Omega_2^2}
+\end{align}
+and
+\begin{align}
+  \ket{d} &%= \frac{1}{n_d}\left(\Omega_2\ket{0} - \Omega_1\ket{1}\right)
+  =\cos\theta \ket{0} - \sin\theta\ket{1} \\
+  \ket{+} &%= \frac{1}{n_{+}}\left(\Omega_1\ket{0} + \Omega_2\ket{1} + \lambda_{+}\ket{e}\right)
+  =\sin\phi \sin\theta \ket{0} + \sin\phi \cos\theta\ket{1}  + \cos\phi\ket{e}\\
+  \ket{-} &%= \frac{1}{n_{-}}\left(\Omega_1\ket{0} + \Omega_2\ket{1} + \lambda_{-}\ket{e}\right)
+  =\cos\phi \sin\theta \ket{0} + \cos\phi \cos\theta\ket{1}  - \sin\phi\ket{e}
+\end{align}
+with
+\begin{align}
+  \theta &= \arctan\left(\frac{\Omega_1}{\Omega_2}\right)\\
+  \phi &= \arctan\left(\frac{\Omega_1^2 + \Omega_2^2}{\lambda_{+}}\right).
+\end{align}
+
+In the limit where $\Delta \gg \{\Omega_1, \Omega_2\}$ we get $\ket{+} \approx \ket{e}$ and $\ket{-} \approx \sin\theta\ket{0} + \cos\theta\ket{1}$, so if the system starts in the space spanned by $\{\ket{0}, \ket{1}\}$ it will stay there. In terms of this reduced basis the Hamiltonian becomes
+\begin{align}
+  H &\approx \Delta\left(1 - \sqrt{1 + \frac{\Omega_1^2 + \Omega_2^2}{\Delta^2}}\right)\ket{-}\bra{-} \\
+   &\approx -\frac{1}{4\Delta}
   \begin{bmatrix}
     \Omega_1^2 & \Omega_1 \Omega_2 \\
     \Omega_1\Omega_2 & \Omega_2^2
-  \end{bmatrix}
+  \end{bmatrix},
 \end{align}
-in terms of the basis $\{\ket{0}, \ket{1}\}$. This has the same form as the Rabi Hamiltonian (\ref{rabi_hamiltonian}). Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ between the states $\ket{0}$ and $\ket{1}$ is induced via the third state.
-
+which has the same form as the Rabi Hamiltonian (\ref{rabi_hamiltonian}). Oscillation with angular frequency $\Delta = (\Omega_1^2 + \Omega_2^2)/4\nu$ between the states $\ket{0}$ and $\ket{1}$ is induced via the third state.
 
 
 \section{Phonon-matter interactions}
@@ -341,7 +367,6 @@ Phonons couple to any states of our system that lead to a distortion in the atom
 \begin{align}
   H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right).
 \end{align}
-[Find mahan and add something interesting]
 
 As a concrete example we look at the Raman process from the previous section. We envisage the lambda system embedded in some solid state system and assume that phonons couple only to the excited state $\ket{e}$ so that the interaction Hamiltonian becomes
 \begin{align}
@@ -362,6 +387,10 @@ By comparing with eq. (\ref{xxx}) we identify
 \begin{align}
   B_0(t) &= \sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right)
   B_\Lambda(t) &= e^{-i\Delta t}\sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right).
+\end{align}
+
+\begin{align}
+  \Gamma_{\alpha\beta}(\omega) = \frac{1}{\hbar^2}\int_0^\infty ds e^{i\omega s}\langle B^\dagger_\beta(t) B_\alpha(t-s)\rangle
 \end{align}
 
 In the thermal state we can calculate the correlation functions explicitly
