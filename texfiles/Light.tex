@@ -3,32 +3,31 @@
 
 \section{Quantum Treatment of Light}
 
-The quest to define the nature of light occupies an important place in the history of physics. In some ways light appeared to behave like a particle and in other ways it appeared to behave like a wave. Newton favoured the particular description, which formed the basis for his work on lenses. This view was thought to have been largely discredited when Maxwell introduced his unifying equations for the electic field, which for $\vec{E}$ and magnetic field $\vec{B}$ in a vacuum reduce to:
+The quest to define the nature of light occupies an important place in the history of physics. Much of the debate has focussed on whether light should be modelled as a particle or as a wave. Newton favoured the particular description, which formed the basis for his many fundamental contributions to optics, while his contemporary Huuygens believed in a wave description. Young's famous split experiment demonstrated that light exhibited interference effects and when Maxwell introduced his unifying equations for the electic field, the problem was thought to be settled: in a vacuum Maxwell's equations for the electric field, $\vec{E}$, and magnetic field, $\vec{B}$, reduce to:
 \begin{align}
   \nabla \times \vec{B} &= \frac{1}{c^2} \frac{\partial \vec{E}}{\partial t} \label{maxwell_be} \\
   \nabla \times \vec{E} &= - \frac{\partial \vec{B}}{\partial t}\\
   \nabla \cdot \vec{B} &= 0 \\
   \nabla \cdot \vec{E} &= 0,
 \end{align}
-where $c$ is the speed of light. These equations leads to the wave equation for $\vec{E}(\vec{r}, t)$:
+which lead to the wave equation for $\vec{E}(\vec{r}, t)$:
 \begin{align}\label{wave_eq}
-  \nabla^2\vec{E} - \frac{1}{c^2} \frac{\partial^2 \vec{E}}{\partial t^2} = 0.
+  \nabla^2\vec{E} - \frac{1}{c^2} \frac{\partial^2 \vec{E}}{\partial t^2} = 0,
 \end{align}
-and the wave/particle question was thought to be settled.
+where $c$ is the speed of light.
 
-What changed their minds?
+At the beginning of the 20th century physicists were forced to return to the question in order to explain the photoelectric effect and `ultraviolet catastrophy' of black body radiation. These problems were overcome, by Einstein \cite{eistein_photoelectric} and Planck \cite{planck_constant} respectively, by assuming that light could only be absorbed and emitted in discrete units of energy. The results were fundamental in the early development of the field of quantum mechanics. The modern description of light, capable of producing both wave and particle phenomena, is largely based on proposals from Dirac in the late 1920s \cite{dirac_1927}.
 
+\subsection{Quantizing Light: A toy model}
 
-\subsection{Quantising Light: A toy model}
+The modern approach to quantising the electromagnetic field involves working with the electromagnetic vector potential and is fairly technical due to the relativistic nature of light and continuous spectrum of modes. We aim to avoid these technical complexities while still providing an overview of the key stages by looking at a toy model of light: an electromagnetic field in a one dimensional cavity. We later state the results for the quantisation of the full field.
 
-The normal approach to quantising the electromagnetic field involves working with the electromagnetic vector potential and is fairly technical due to the relativistic nature of light and continuous spectrum of modes. We aim to avoid these technical complexities while still providing an overview of the key stages by looking at a toy model of light: an electromagnetic field in a one dimensional cavity. We later state the results for the quantisation of the full field.
-
-We look at a waves propagating in a single direction (which we take to be parallel to the z-axis), that are polarised in the $xz$ plane. To simplify the situation further we take $c = 1$ and the length of the cavity to be $1$. Solving the wave equation (\ref{wave_eq}) gives the only non-zero component of $\vec{E}$
+We begin by taking a one dimensional cavity occupying the interval $[0, L]$ on the $z$ axis. We assume that our electric field is linearly polarised in the $x$ direction, so that solving the wave equation (\ref{wave_eq}) gives the only non-zero components of $\vec{E}$ and $\vec{B}$ to be
 \begin{align}\label{toy_classical_e}
   E_x &= \sum_j \sqrt{\frac{2\omega_j^2}{\epsilon_0 L}} q_j(t) \sin(k_j z) \\
   B_y &= \sum_j \frac{1}{k_j \mu_0} \sqrt{\frac{2\omega_j^2}{\epsilon_0 L}} q_j(t) \cos(k_j z),
 \end{align}
-where $\omega_j = \pi j$ for $j \in \{1, 2, \dots\}$. We know from the wave equation that
+where $\omega_j = ck_j = \pi j/L$ for $j \in \{1, 2, \dots\}$ and $\epsilon_0$ and $\mu_0$ are constants that satisfy $\epsilon_0 \mu_0 = 1/c^2$. We know from the wave equation that
 \begin{align}
   \ddot{q}_j = -\omega_j^2 q_j
 \end{align}
@@ -38,15 +37,15 @@ which has solutions
 \end{align}
 where in the last equality we have enforced that $q_j(t)$ must be real.
 
-We can write the Hamiltonian 
+The Hamiltonian for the field is given by
 \begin{align}
   H = \frac{\epsilon_0}{2} \int_0^L \vert \vec{E}\vert^2 + c^2\vert\vec{B}\vert^2 dz 
   = \frac{1}{2} \sum_j \left(\omega_j q_j^2 + p_j^2\right)
 \end{align}
 where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. To quantize we promote $q_i$ and $p_i$ to operators, imposing the commutation relation
 \begin{align}
-  [q_i, p_j] = i\delta_{ij} \\
-  [q_i, q_j] = [p_i, p_j] = 0.
+  [q_i, p_j] &= i\delta_{ij} \\
+  [q_i, q_j] &= [p_i, p_j] = 0.
 \end{align}
 
 Rewriting the amplitude relation gives
@@ -56,9 +55,9 @@ Rewriting the amplitude relation gives
 \end{align}
 The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following relations for $\cre{a}$ and $\an{a}$:
 \begin{align}
-  [\cre{a}_i, \an{a}_j] = \delta_{ij} \\
-  [\cre{a}_i, \cre{a}_j] = 0 \\
-  [\an{a}_i, \an{a}_j] = 0
+  [\cre{a}_i, \an{a}_j] &= \delta_{ij} \\
+  [\cre{a}_i, \cre{a}_j] &= 0 \\
+  [\an{a}_i, \an{a}_j] &= 0
 \end{align}
 
 We can write the Hamiltonian in terms of the amplitude operators:
@@ -67,9 +66,8 @@ We can write the Hamiltonian in terms of the amplitude operators:
 \end{align}
 We have that
 \begin{align}
-  \left[H, \an{a}_k\right] = -\hbar \omega_k \an{a}_k
-  \quad \text{and} \quad 
-  \left[H, \cre{a}_k\right] = \hbar \omega_k \cre{a}_k
+  \left[H, \an{a}_k\right] &= -\hbar \omega_k \an{a}_k\\
+  \left[H, \cre{a}_k\right] &= \hbar \omega_k \cre{a}_k
 \end{align}
 
 Suppose we have a state $\ket{n}$ which is an eigenstate of the Hamiltonian with energy $E_n$. By using the commutation relations for $H$ and $\an{a}$ we see that
@@ -88,7 +86,7 @@ or otherwise $a\ket{0}$ would be an eigenstate with energy lower than $E_0$. We 
 \begin{align}
   \ket{n} = \frac{(\cre{a})^n \ket{0}}{\sqrt{n!}}. 
 \end{align}
-We then have that $E_n = (n+1/2)\hbar\omega$. Note that $E_0 = 1/2\hbar \omega$, so that the ground energy state is not zero. We ascribe this energy to \textit{vacuum fluctuations}.
+We then have that $E_n = (n+1/2)\hbar\omega$. Note that $E_0 =\hbar \omega/2$, so that the ground energy state is not zero. We ascribe this energy to \textit{vacuum fluctuations}.
 
 The states $\ket{n}$ are commonly known as \textit{Fock states}. If we introduce the \textit{number operator},
 \begin{align}
@@ -146,33 +144,31 @@ In terms of these operators, the Hamiltonian for the free field is given by
 \end{align}
 
 
-\subsection{Hong-Ou-Mandel Dip}
+\subsection{Hong-Ou-Mandel Effect}
 
-The Hong-Ou-Mandel experiment concerns the behaviour of a pair of photons iteracting with a \textit{beam splitter}. A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. Given two optical modes $a_1$ and $a_2$ the beam splitter performs the transformation $B$ where
+The Hong-Ou-Mandel effect is a demonstration of two photon interference. If two photons with identical wavepackets enter the two ports of a 50:50 beam splitter simultaneously, they bunch together and exit on the same port. The effect is important as, as discussed later, it can be used to provide a quality measure for a single photon source. It also be thought of as a demonstration of the bosonic nature of photons.
+
+A beam splitter is an optical device that reflects some of the incident light while allowing the rest to pass through. If  $a_1$ and $a_2$ describe the two modes that cross at the beam splitter, the beam splitter performs the transformation $B$ where
 \begin{align}
   B (\cre{a}_{1}) = \frac{1}{\sqrt{2}} \left(\cre{a}_{1} + \cre{a}_{2}\right) \\
   B (\cre{a}_{2}) = \frac{1}{\sqrt{2}} \left(\cre{a}_{1} - \cre{a}_{2}\right).
 \end{align}
-If both modes are incident on the beam splitter simultateously,
+If both modes contain a single excitation on the input side of the beam splitter we get
 \begin{align}
-  B\left(\cre{a}_{1}\cre{a}_{2}\right) = \left(\cre{a}_{1} + \cre{a}_{2}\right) \left(\cre{a}_{1} - \cre{a}_{2}\right) = \cre{a}_{1}\cre{a}_{1} - \cre{a}_{2}\cre{a}_{2}
+  B\left(\cre{a}_{1}\cre{a}_{2}\right) = \frac{1}{2}\left(\cre{a}_{1} + \cre{a}_{2}\right) \left(\cre{a}_{1} - \cre{a}_{2}\right) = \frac{1}{2}\left(\cre{a}_{1}\cre{a}_{1} - \cre{a}_{2}\cre{a}_{2}\right),
 \end{align}
-The output states contain only those cases where both exitations are in the same mode.
+so on the output side we only see states where both excitations are in the same modes.
 
-So if we have two single mode exitations of a given frequency incident on different arms of a beam splitter they exihit a `bunching' behaviour: they will leave on the same arm. As already discussed, single mode exitations are not physical. Does a similar result apply to a pair of single photons arriving at a beam splitter?
-
-A single photon can be written in terms of its annihilation operator
+As already discussed, single mode excitations are not physical - in real systems excitations will have finite extent in space and time and must be experessed as a superposition of excitations of different modes. We can write a the state of a single photon in the form
 \begin{align}
-  \cre{b}\ket{0} = \int f(k) \cre{a}(k) dk\ket{0}
+  \cre{b}\ket{0} = \int f(k) \cre{a}(k) dk\ket{0},
 \end{align}
-where we require that $\int f(k)^* f(k) dk = 1$.
-
+where we require that $\int f(k)^* f(k) dk = 1$. We consider $\cre{b}$ to be the creation operation of a photon, so that our input state can be written $\cre{b}_1\cre{b}_2\ket{0}$. To find the output state we must act on this with the beamsplitter operation:
 \begin{align}
   \ket{\psi_\text{out}} &= B(\cre{b}_1 \cre{b}_2)\ket{0}\\
   & = \int \int f_1(k)f_2(k') B(\cre{a}_1(k) \cre{a}_2(k')) dkdk' \\
   & = \int \int f_1(k)f_2(k') \left(\cre{a}_{1}(k) + \cre{a}_{2}(k)\right) \left(\cre{a}_{1}(k') - \cre{a}_{2}(k')\right)  dkdk' \\
 \end{align}
-
 The probability of detecting the two photons in different arms of the detector is given by
 \begin{align}
   C = \bra{\psi_\text{out}} \int\int \cre{a}_1(k)\an{a}_1(k) \cre{a}_2(k')\an{a}_2(k') dk dk'\ket{\psi_\text{out}}.
@@ -181,69 +177,63 @@ Calculating this for our output state gives
 \begin{align}
   C = \frac{1}{2} - \frac{1}{2}\int\int f_1(k)f_1^*(k')f_2(k')f_2^*(k) dk dk'.
 \end{align}
-If $f_1 = f_2$ the $C=0$: perfectly identical photon wavepackets demonstrate perfect bunching at a beam splitter. This allows us to use $C$ as a measure of how identical two photons are.
+If $f_1 = f_2$ then $C=0$: perfectly identical photon wavepackets demonstrate perfect bunching at a beam splitter. 
+
+The Hong-Ou-Mandel effect can be used as a diagnostic tool for single photon sources. We can compare the photon output from two different sources, or from the same source at different times by using a delay circuit. The coincidence rate, $C$ - the probability of detecting the photons on different arms, will be ideally be zero. This will be the case if the two photons are indistinguishable and both emitted in a pure state. In order for the photon wavepacket to be in a pure state it is necessary that the photon have no correlations with the source - there should be no information left in the source that could add to our description of the photon. Having indistinguishable photons in a pure state is important for a lot of quantum computing uses, including remote entanglement generation and linear optical quantum computing. 
+
+Showing good Hong-Ou-Mandel interference is not the only important measure of a good photon source. In some applications, notably in quantum communication devices, it is vital that exactly one photon, and not more, is emitted. It is possible to test for this using the Hanbury-Brown-Twiss experiment. Another important measure of the source is the efficiency - what proportion of the time a photon is emitted when requested - which can be measured by gathering statistics.
+
 
 \section{Light-Matter interactions}
 
-\subsection{Atom in a cavity}
+\subsection{Atom in a Cavity - Semiclassical Approach}
 
-Atom couples to the electric field through the dipole coupling $H_d = -\vec{d}\cdot\vec{E}(t)$ where $\vec{d} = -e \vec{r}$ for the charge $e$ and the position operator $\vec{r}$.
+We begin our section on light-matter interactions by looking at an atom interacting with electromagnetic modes in a cavity. We treat the cavity as an idealised system where only certain modes can exist, which allows us to ignore many of the complexities due to coupling to the full electromagnetic spectrum. Cavities are also incredibly important in quantum technologies due to their ability to filter and enhance emission into a given mode.
 
-We look at the case of an atom in a cavity. In a cavity only a discrete set of modes can exist, which simplifies the calculation.
+An atom will couple to an electromagnetic field due to its charge configuration. It is convenient to use the dipole approximation to the coupling, taking the interaction Hamiltonian $H_d = -\vec{d}\cdot\vec{E}(t)$ where $\vec{d} = -e \vec{r}$ for the charge $e$ and the position operator $\vec{r}$ from the atom's center of mass, which we assume to be at the origin. The dipole approximation can be obtained by keeping the first order terms of an expansion of $\vec{E}$ about the origin and is a good approximation when the wavelength of the radiation is bigger the spacial extent of the atom. In quantum optics we do not usually use frequencies about the UV spectrum, $\lambda > 100\text{nm}$, which when compared with typical atomic radii of the order of $0.1\text{nm}$ makes the approximation valid. We also assume that, although we treat the atom quantum mechanically, we can treat its center of mass classically, so that the operator $\vec{r}$ really does correspond to a vector operator from the origin. 
 
-We also assume that the lowset mode frequency is nearly resonant with the atomic transition, which will allow us to ignore higher modes later in the calculation.
-
-Look at a two level system with Hamiltonian
+We model our atom as a two level system with Hamiltonian
 \begin{align}
-  H = -\frac{\omega_0}{2}\ket{g}\bra{g} +\frac{\omega_0}{2}\ket{e}\bra{e}
+  H_S = -\frac{\omega_0}{2}\ket{g}\bra{g} +\frac{\omega_0}{2}\ket{e}\bra{e}.
 \end{align}
-We call $\ket{g}$ the ground state and $\ket{e}$ the excited state. 
+In doing this we assume there is some specific transition we wish to target and that all other transitions will be far off resonanance from the cavity mode. We call $\ket{g}$ the ground state and $\ket{e}$ the excited state. 
 
-
-Classically the electric field $\vec{E}$ is given
+In order to calculate the dipole interaction term $H_d$ we need to know about the electric field, $\vec{E}$, and the position operator, $\vec{r}$. Classically the electric field is given by
 \begin{align}
-  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r])
+  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r]),
 \end{align}
-
-We assume that we may treat the atom's center of mass classically and that the atom is positioned at $r=0$.
-
-We need to write the dipole Hamiltonian, $H_d$, in terms of our system basis $\{\ket{g}, \ket{e}\}$
-As the position operator $\vec{r}$ has odd parity, [??], the diagonal elements $\bra{g}H_d\ket{g}$ and $\bra{e}H_d\ket{e}$ must both be equal to $0$. As the Hamiltonian is Hermitian there is only one element left to specify:
+where $\vec{k}$ is the wavevector, $\omega$ is the frequency, $\vec{\epsilon}$ is the polarisation and $E_0$ is a constant of correct dimension.  We now need to write the position operator, $\vec{r}$, in terms of our system basis $\{\ket{g}, \ket{e}\}$. As $\vec{r}$ has odd parity the diagonal elements $\bra{g}H_d\ket{g}$ and $\bra{e}H_d\ket{e}$ must both vanish. As the Hamiltonian is Hermitian there is only one element left to specify:
 \begin{align}
-  \bra{e}H_d\ket{g} = \bra{g}H_d\ket{e}^* = E_0e\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t))
+  \bra{e}H_d\ket{g} = \bra{g}H_d\ket{e}^* = E_0e\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t)),
 \end{align}
-where $\vec{r}_{eg} = \bra{e}\vec{r}\ket{g}$
+where $\vec{r}_{eg} = \bra{e}\vec{r}\ket{g}$.
 
-Over all this leaves us with the Hamiltonian
+Subsituting these values into $H = H_S + H_d$ leaves us with the overall Hamiltonian
 \begin{align}
   H =
   \begin{bmatrix}
     -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^*\exp(-i\omega t) + \vec{\epsilon}\exp(i\omega t)) \\
     eE_0\vec{r}_{eg}\cdot(\vec{\epsilon}\exp(i\omega t) + \vec{\epsilon}^*\exp(-i\omega t)) & +\omega_0/2
-  \end{bmatrix}
+  \end{bmatrix}.
 \end{align}
-
-Still time dependent. Make a unitary transformation to rotate with the EM field:
+To remove some of the time dependency we make a unitary transformation into a basis that rotates with the electromagnetic field:
 \begin{align}
   U(t) =
   \begin{bmatrix}
     e^{i\omega t/2} & 0 \\
     0 & e^{-i\omega t/2}
-  \end{bmatrix}
+  \end{bmatrix},
 \end{align}
-
-This gives us
+to give
 \begin{align}
   H =
   \begin{bmatrix}
     -(\omega_0-\omega)/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
     eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +(\omega_0-\omega)/2
-  \end{bmatrix}
+  \end{bmatrix}.
 \end{align}
 
-We now make the rotating wave approximation, neglecting the fast rotating terms $e^{2i\omega t}$ and $e^{-2i\omega t}$ on the basis that they will be far off-resonance and their contribution will average to zero over time. 
-
-We are left with
+We now make the rotating wave approximation, neglecting the fast rotating terms $e^{2i\omega t}$ and $e^{-2i\omega t}$ on the basis that they will be far off-resonance and their contribution will average to zero over time. This leaves us with 
 \begin{align}
   H =
   \begin{bmatrix}
@@ -251,23 +241,25 @@ We are left with
     eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +\omega_0/2
   \end{bmatrix}
 \end{align}
-which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). An atom in a cavity interacting with an EM field will oscillate.
+which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). The system will undergo oscillations between the ground state, $\ket{g}$, and excited state, $\ket{e}$, driven by the electromagnetic field.
 
-If we want to look at the emission and absorbtion of single photons we must instead use the fully quantised field. Quantum mechanically an electric field with a single mode and of definite polarisation is given
-\begin{align}
-  \vec{E} = E_0 (\vec{\epsilon}\an{a}+ \vec{\epsilon}^*\cre{a}).
-\end{align}
+\subsection{Atom in a Cavity: Quantum case}
 
-With $\vec{r}_{eg}$ defined as before we write the dipole interaction term in the system basis:
-\begin{align}
-  H_d = E_0 e \vec{r}_{eg}\cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a})\sp + E_0 e \vec{r}_{eg}^* \cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*),
-\end{align}
-where we have used spin language to describe atomic transitions, $\ket{e}\bra{g} \equiv \sp$ and $\ket{g}\bra{e} \equiv \sm$. We use this to rewrite the total Hamiltonian
-\begin{align}
-  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm + \gamma\an{a} \sm + \gamma^{*}\cre{a} \sp. 
-\end{align}
+In many cases the semiclassical is sufficient, however if we want to look at the emission and absorbtion of single photons we must instead use the fully quantized field. We can either rederive the dipole approximation from the quantized Hamiltonian, in terms of the vector potential $A$, or appeal to the correspondence principle. 
 
-If we have that $\omega \approx \omega_0$ the $\gamma$ terms will be highly off-resonant. Ignoring these terms is equivalent to making the RWA and gives
+Quantum mechanically an electric field operator for a field with a single mode and definite polarisation is given
+\begin{align}
+  \hat{\vec{E}} = E_0 (\vec{\epsilon}\an{a}+ \vec{\epsilon}^*\cre{a}).
+\end{align}
+with $\vec{r}_{eg}$ defined as before we write the dipole interaction term in the system basis:
+\begin{align}
+  H_d = E_0 e \vec{r}_{eg}\cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a})\sp + E_0 e \vec{r}_{eg}^* \cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a}\sm),
+\end{align}
+where we have used spin language to describe atomic transitions, $\ket{e}\bra{g} \equiv \sp$ and $\ket{g}\bra{e} \equiv \sm$. We use this to rewrite the total Hamiltonian (ignoring the vacuum energy contribution)
+\begin{align}
+  H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm + \gamma\an{a} \sm + \gamma^{*}\cre{a} \sp, 
+\end{align}
+where $g = E_0 e \vec{r}_{eg}\cdot\vec{\epsilon}$ and $\gamma = E_0 e \vec{r}_{eg}^*\cdot\vec{\epsilon}$. The first two of the four terms on the right hand side correspond to exchanging excitations between the system and electromagnetic field. If the field mode is on resonance with the atomic transition these processes will be energy conserving. The last two terms involve adding or removing excitations from both atom and field at the same time.  If we have that $\omega \approx \omega_0$ these terms will be highly off-resonant; ignoring them is equivalent to making the RWA and gives
 \begin{align}
   H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm.
 \end{align}
@@ -275,7 +267,7 @@ This is the well known \textit{Jaynes-Cummings Hamiltonian}. If we consider a ba
 
 \subsection{Raman procedure}
 
-We now consider a three level system $\{\ket{0}, \ket{1}, \ket{e}\}$ where the transitions $\ket{0} \leftrightarrow \ket{e}$ and $\ket{1} \leftrightarrow \ket{e}$ are optically active. Using the semi-classical approach, as at the beginning of the previous section, we can write the Hamiltonian
+We now consider a three level system $\{\ket{0}, \ket{1}, \ket{e}\}$ where the transitions $\ket{0} \leftrightarrow \ket{e}$ and $\ket{1} \leftrightarrow \ket{e}$ are optically active. Using the semiclassical approach, as at the beginning of the previous section, we can write the Hamiltonian
 \begin{align}
   H=\hbar
   \begin{bmatrix}
@@ -317,14 +309,14 @@ After we make the RWA to elimate the off-resonant $e^{\pm2\omega_2 t}$ terms, we
 
 We then restrict to the case where $\nu_1 = \nu_2 =: \Delta$, which corresponds to tuning the frequencies $\omega_1$ and $\omega_2$ so they are both detuned from resonance by the same amount. We spectrally decompose the Hamiltonian
 \begin{align}
-  H = \lambda_d \ket{d}\bra{d} + \lambda_{+}\ket{+}\bra{+} + \lambda_{-}\ket{-}\bra{-},
+  \tilde{H} = \lambda_d \ket{d}\bra{d} + \lambda_{+}\ket{+}\bra{+} + \lambda_{-}\ket{-}\bra{-},
 \end{align}
-where 
+where the eigenvalues are giben 
 \begin{align}
   \lambda_d &= 0 \\
   \lambda_\pm &= \Delta \pm \sqrt{\Delta^2 + \Omega_1^2 + \Omega_2^2}
 \end{align}
-and
+and we write the eigenvectors
 \begin{align}
   \ket{d} &%= \frac{1}{n_d}\left(\Omega_2\ket{0} - \Omega_1\ket{1}\right)
   =\cos\theta \ket{0} - \sin\theta\ket{1} \\
@@ -333,11 +325,12 @@ and
   \ket{-} &%= \frac{1}{n_{-}}\left(\Omega_1\ket{0} + \Omega_2\ket{1} + \lambda_{-}\ket{e}\right)
   =\cos\phi \sin\theta \ket{0} + \cos\phi \cos\theta\ket{1}  - \sin\phi\ket{e}
 \end{align}
-with
+in terms of the parameters
 \begin{align}
   \theta &= \arctan\left(\frac{\Omega_1}{\Omega_2}\right)\\
   \phi &= \arctan\left(\frac{\Omega_1^2 + \Omega_2^2}{\lambda_{+}}\right).
 \end{align}
+The state $\ket{d}$ lies in the subspace spanned by $\{\ket{0}, \ket{1}\}$ and so is not optically active. For this reason it is often referred to as a \textit{dark state}.
 
 In the limit where $\Delta \gg \{\Omega_1, \Omega_2\}$ we get $\ket{+} \approx \ket{e}$ and $\ket{-} \approx \sin\theta\ket{0} + \cos\theta\ket{1}$, so if the system starts in the space spanned by $\{\ket{0}, \ket{1}\}$ it will stay there. In terms of this reduced basis the Hamiltonian becomes
 \begin{align}
@@ -353,11 +346,13 @@ which has the same form as the Rabi Hamiltonian (\ref{rabi_hamiltonian}). Oscill
 
 \section{Phonon-matter interactions}
 
-When dealing with solid state systems an important source of decoherence comes from interaction with lattice vibrations. Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy, giving Hamiltonian
+Solid state systems contain a large number of quantum degrees of freedom, some of which are suitable for exploiting in QIP, some of which are not. When dealing with solid state systems a major source of decoherence is due to interaction with lattice vibrations. In this section we aim to present a quantum description of the lattice vibrations and model their interaction with a simple optical system, as a first step to mitigating their deleterious effects.
+
+Following a similar pattern to the quantisation of the electromagnetic field, we can quantise the vibrational modes of a lattice, in terms of \textit{phonons}, quanta of vibrational energy, giving Hamiltonian
 \begin{align}
   H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha,
 \end{align}
-where $\cre{b}$ and $\an{b}$ are creation and annihilation operators, satisfying the normal commutation relations. We usually assume that the phonon bath exists in a thermal state
+where $\cre{b}$ and $\an{b}$ are creation and annihilation operators, satisfying the familiar commutation relations: like photons, phonons are bosonic in nature. In a finite crystal there exist a discrete set of vibrational modes, but in practice in bodies of large extent the spectrum becomes approximately continuous. In any case, we choose to write the set of modes as a sum over descrete modes, mostly out of convenience. We usually assume that the phonon bath exists in a thermal state
 \begin{align}
   \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
 \end{align}
@@ -368,11 +363,11 @@ Phonons couple to any states of our system that lead to a distortion in the atom
   H = \sum_\vec{q} \sqrt{\frac{\hbar}{2\mu V\omega_\vec{q}}} \left(D \vert \vec{q}\vert + iP \right)\hat{g}(\vec{q})\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}} \right).
 \end{align}
 
-As a concrete example we look at the Raman process from the previous section. We envisage the lambda system embedded in some solid state system and assume that phonons couple only to the excited state $\ket{e}$ so that the interaction Hamiltonian becomes
+As a concrete example we look at the Raman process from the previous section. We envisage that we have a lambda system embedded in some solid state system in such a way phonons couple only to the excited state $\ket{e}$. This would be appropriate in a quantum dot system where $\ket{0}$ and $\ket{1}$ correspond to low lying spin states and $\ket{e}$ is an exiton state with considerably different charge configuration. In this case the interaction Hamiltonian becomes
 \begin{align}
   H = \ket{e}\bra{e}\sum_\vec{q} g_\vec{q}\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}}\right).
 \end{align}
-This Hamiltonian is appropriate for certain quatum dot systems \cite{erik_qd_paper} and uses the fact that in these systems the deformation potential dominates \cite{ep76, ep138}.
+We have also used that in quatum dot systems the deformation potential dominates \cite{ep76, ep138}.
 
 Following the technique given in chapter \ref{ch:QuantumDynamics} we move to the interaction picture and decompose the system part of the interaction Hamiltonian, $\ket{e}\bra{e}$ into eigenoperators of the system Hamiltonian:
 \begin{align}
@@ -414,13 +409,12 @@ is the occupation of state $i$. This allows us to
 \end{align}
 where the \textit{spectral density} is given by
 \begin{align}
-  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q}).
+  J(\omega) = 2\pi \sum_\vec{q} |g_\vec{q}|^2 \delta(\omega-\omega_\vec{q})
 \end{align}
-The spectral density gives an indication of how much coupling affinity our system has for the phonons of frequency $\omega$.
+and depends both on the number of modes with frequency $\omega$ and our system's coupling affinity to them.
 
 We end up with the phonon dissipator term
 \begin{align}
   D_\text{ph}(\rho) = J(\Lambda)\left[\left(N(\Lambda) + 1)D[P_\Lambda]\rho\right) + N(\Lambda)D[P^\dagger_\Lambda]\rho \right],
 \end{align}
-where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$.
-
+where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$. The dissipator terms correspond to a jump $\ket{+}$ to $\ket{-}$ with emission of energy into the phonon bath, and a jump from $\ket{-}$ to $\ket{+}$ with the corresponding absorption of energy from the the phonon bath. The transition rate is proportional to the spectral density, which encapsulates all the system-specific information we need to supply. What is more, we only sample the spectral density at the given frequency $\Lambda$, which can be adjusted using other system paramaters allowing us to minimise the phonon decoherence effects.
