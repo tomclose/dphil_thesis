@@ -19,11 +19,45 @@ information leaking from system - destroys wavefunction - decoherence
 
 error correction \cite{knill_correction} errors per gate as high as 3\% with concatenated codes
  
-\cite{nature_cq_review_10}
+\cite{nature_cq_review_10} http://www.nature.com/nature/journal/v464/n7285/full/nature08812.html#B43
 
 \subsection{Quantum Communication}
+information theoretically secure
+http://www.rp-photonics.com/quantum_key_distribution.html 
+\cite{bennet_brassard_84} relies on no cloning theorem \cite{no_cloning}
+eavesdropping causes errors in the key
+can statistically compare to mitigate this to high effect
+
+vulnerable to man in the middle
+photon number splitting \cite{qkd_number_splitting_attacks_00} - split multiple photons off, store - techniques for overcoming \cite{qkd_decoy_defense}
+
+Using uncertainty principle to a safe public means of transmiting info
+Encoding in polarisation, random prepare, random measure (Brassard 1990)
+
+Using entanglement + bells theorem \cite{bells_theorem} to test for eavesdropping
+http://www.sciencenews.org/view/generic/id/341197/description/Quantum_teleportation_leaps_forward
+\cite{ekert_91} allows a central source to provide resource
+\cite{quantum_crypt_review}
+
+\cite{quantum_repeaters} protocol
+\cite{entanglement_97km_08}
+\cite{entanglement_144km_07} Canary Islands
+\cite{qkd_airbourne_13} aiplane tavelling at 300km/hr
+airbourne: http://www.sciencenews.org/view/generic/id/349318/description/News_in_Brief_Quantum_cryptography_takes_flight
+
+3 companies offering commercial qkd
+2004 first bank transfer using quantum key distribution in vienna \cite{qkd_bank_transfer_04}
+\cite{idquant_qkd_system} \cite{magiq_qkd_system}
+\cite{qkd_blinding_attack}
+magicq system
+
+quantum key distribution networks: DARPA
+\cite{secoqc_network}
+\cite{tokyo_qkd_network}
+
 
 \subsection{Quantum Simulation}
+http://www.nature.com/nphys/journal/v8/n4/full/nphys2253.html#ref9
 \cite{simulation_ion_review} Shors algorithm for large numbers around 10s of 1000s qubits
 but even small systems hard to simulate classically
 \cite{feynman_82} proposal to use quantum systems for simulations, quantum systems exibit an exponentially growing number of paths
@@ -32,7 +66,7 @@ simulators more tolerant of mistakes
 
 \cite{lloyd_universal_simulators} existance of universal quantum simulators for systems with local interactions, 1996
 
-systems like photosynthesis 
+systems like photosynthesis [aspuruguisick]
 
 \section{Models of Quantum Computing}
 
@@ -57,8 +91,11 @@ systems like photosynthesis
 Any system that exhibits quantum mechanical behaviour has the potential to be used for QIP. There are a plethora of different approaches currently under investigation. Here we briefly survey the most well known of the approaches and attempt to detail any notable progress that has been made.
 
 \textit{Nuclear magnetic resonance}
+[look at literature review bit]
 existing well-understood technology
 \cite{nmr_proposal_chuang_97}
+\cite{chuang_first_nmr_realisation_98} Deutsch-Josza
+\cite{nmr_factorise_15_01} same group
 lacks entanglement \cite{nmr_pseudo_pure}
 NMR not-scalable, favourable for small-scale quantum algorithms
 \cite{nmr_143_factorization} Factorise 143 using adiabatic algorithm, 2011
@@ -76,11 +113,16 @@ optical lattice to trap 100s of atoms
 
 2005 University of Michigan produced a chip based ion trap \cite{?}
 
-\textit{Cavity QED}
-?
 
 \textit{Quantum dots}
-
+Exist in semi conductor structures - no need to trap and hold
+spin to charge conversion
+\cite{quantum_dot_review_07}
+self assembled quantum dots hindered by random nature, optical characteristic vary, they can be controlled quickly though
+\cite{atature_quantum_dot_06} spin state preparation
+\cite{gerardot_dot_08} initialisation of hole and spin
+\cite{quantum_dot_control_08}
+\cite{quantum_dot_measurement_06}
 
 \textit{Optical lattices}
 Free from decoherence, polarisation rotations (1 qubit gates) simple
@@ -104,7 +146,9 @@ protected from magnetic noise, active colour centers
 \cite{two_qubit_chip_yale} 2 qubits, Deutsch-Josza, Grover, 2009
 \cite{dwave_annealing} quantum annealing - finding ground state of a system, 2011
 
+\textit{Silicon based systems}
 
+\cite{silicon_proposal_98}
 \cite{silicon_qubit} 2012 a qubit in silicon, 200us spin coherence time electron?, hours for nuclear spin at room temp?, atom + electron, charge to spin conversion
 \cite{silicon_seconds}
 
