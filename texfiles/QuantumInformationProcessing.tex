@@ -14,8 +14,15 @@ expoit the complexity of a many particle wave function to solve a computational 
 \cite{deutsch_jozsa_92} deutsch josza first quantum algoritm
 
 \cite{shors_algorithm}
+\cite{grovers_search}
 
 information leaking from system - destroys wavefunction - decoherence
+\cite{shor_codes_95}
+\cite{steane_code_96, steane_code_96_2}
+\cite{laflamme_5_code} can't do better by the Quantum hamming bound
+
+\cite{stabiliser_codes_97, stabiliser_codes_96}
+\cite{quantum_threshold_theorem} if fundamental error rate is low enough we can concatenate codes to account for it 3-5\%
 
 error correction \cite{knill_correction} errors per gate as high as 3\% with concatenated codes
  
@@ -42,6 +49,7 @@ http://www.sciencenews.org/view/generic/id/341197/description/Quantum_teleportat
 \cite{quantum_repeaters} protocol
 \cite{entanglement_97km_08}
 \cite{entanglement_144km_07} Canary Islands
+\cite{qkd_noisy_channel_12}
 \cite{qkd_airbourne_13} aiplane tavelling at 300km/hr
 airbourne: http://www.sciencenews.org/view/generic/id/349318/description/News_in_Brief_Quantum_cryptography_takes_flight
 
@@ -61,30 +69,67 @@ http://www.nature.com/nphys/journal/v8/n4/full/nphys2253.html#ref9
 \cite{simulation_ion_review} Shors algorithm for large numbers around 10s of 1000s qubits
 but even small systems hard to simulate classically
 \cite{feynman_82} proposal to use quantum systems for simulations, quantum systems exibit an exponentially growing number of paths
+exponential barriers, superposition and entanglement
+
+Two types - simulate global properties \cite{simulation_photon_review} eg phase transitions general properties ok. Second simulate molecular systems requires more control. Further classified into digitial (quantum gates) or analogue (Hamiltonian adiabatic) \cite{science_quantum_simulator_review_09}
 
 simulators more tolerant of mistakes
 
 \cite{lloyd_universal_simulators} existance of universal quantum simulators for systems with local interactions, 1996
 
-systems like photosynthesis [aspuruguisick]
+Quantum chemistry and band structure calculations account for up to 30\% of computation time at supercomputing centres \cite{simulation_photon_review, supercomputer_report_10}
+density functional theory others - approximations, exact solution scales exponentially with basis size
+``. There are several powerful methods — Monte-Carlo and coupled-cluster methods, density functional theory, dynamical mean-field theory, density matrix renormalization group theory and others — that have been successfully employed to solve a wide range of problems. Nevertheless, there are still entire classes of many-body problems that cannot be tackled with those methods''
+\cite{quantum_chem_alg_05, simulation_hamiltonians_11} qubits linear number of gates ^5 in terms of system size phase estimation to obtain eigenvalues following proposals of \cite{lloyd_simulate_eigenvalues_99, lloyd_simulate_many_body_97}
+
+can simulate quantum walks \cite{farhi_quantum_walks_98} \cite{quantum_walks_simulated_08}
+
+Exciton transfer in biological systems light harvesting. Recent experiments have shown the existence of long-lived coherences can exist in biological systems \cite{quant_bio_coherences_1, quant_bio_coherences_2, quant_bio_coherences_3} possible simulation target
+
+Condensed matter such as \cite{simulation_frustrated_spins_11}
+
 
 \section{Models of Quantum Computing}
 
 \subsection{Circuit Model}
 
+divincenzo criteria
+circuit diagram
+actions on states
+
 \subsection{Adiabatic Quantum Computing}
-\cite{adiabatic_equivalent} 2007
+\cite{adiabatic_qc} 2000 solves satisfyability problem, time dep Hamiltonian interpolating between an initial H with easy ground state, and final H whose ground state represents solution
+\cite{adiabatic_equivalent} 2007 spin lattice 
+\cite{hamiltonians_for_adiabatic_qc} 2008 realizeable Hamiltonians
 
 \subsection{Measurement Based Quantum Computing}
+\cite{mbqc_intro} uses measurement as computational steps, destructive
+universal
+\cite{teleportation_universal}
 \cite{one_way_qc} Raussendorf Briegel 2001
+\cite{qc_by_measurement_03}
+\cite{mbqc_cluster_03}
+no classical analogues, new perspective on the role of entanglement
+
+adaptive measurements
+
 
 \subsection{Topological Quantum Computing}
+
+++
 
 
 \section{Distributed Computing Architectures}
 
+
+what can you do with different resources at each node
+\cite{effiecient_distributed_qip_13}
+
 \subsection{Remote entanglement generation}
 
+path erasure \cite{basic_path_erasure} \cite{path_erasure_beam_splitter}
+Barrett and Kok \cite{barrett+kok} uses a double heralding to allow graph state production even in case of severe photon loss
+purification
 
 \section{Candidate Quantum Systems}
 
