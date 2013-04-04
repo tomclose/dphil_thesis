@@ -1,30 +1,117 @@
 \chapter{Introduction to quantum information processing} 
 \label{ch:Introduction}
 
-The theory of quantum mechanics is arguably the biggest scientific breakthrough of the 20th Century. The seemingly simple postulates that model behaviour of atomic-scale systems give rise to deep-reaching and counter-intuitive consequences .
-The philosophical implications of quantum mechanics in terms of the apparent lack of determinism in the universe we inhabit, the various interpretations of the quantum superposition and wavefunction collapse, and the apparent paradoxes afforded by phenomenum of quantum entanglement have, and continue, to occupy physicists and philosopers alike.
+\section{Quantum Information Processing}
 
-It is somewhat remarkable that a theory provoking such controversy has been such a success experimentally and technologically. When the philosophical implications are put aside and the laws accepted, we are left with an incredibly powerful tool for modelling and reasoning about the behaviour of atomic-scale systems. Many of the key technological advances responsible for shaping our world originated in insights aforded by quantum mechanics: the transistor depends on the quantm mechanical treatment of solid state physics that explains the PN junction; the laser depends both on solid state physics and the quantum mechanical description of light. Without quantum mechanics the word we see around us would be unrecogniseable.
+Quantum Information Processing (QIP) is the study of how quantum mechanical systems can be used to perform information processing tasks. 
 
-Like quantum mechanics itself, \textit{quantum information processing} touches on issues of fundamental physics and philosophy, whilst also concerning itself with practical technological advancement. In many ways, quantum mechanics is best understood in the language of information theory. The well-known form of Heisenberg's Uncertainty Principle - that by measuring the state of a system we change it - is already in this language, relating our change in knowledge about the system to a physical change in its state. The duality between information gain and quantum wave function collapse is strong enough to be of use in forming a working intuition of quantum systems and informally reasoning about their behaviour.
+\subsection{Quantum Computing}
 
-\section{Quantum Computing}
+expoit the complexity of a many particle wave function to solve a computational problem
+
+\cite{feynman_82} exponentially growing number of paths in a quantum system makes it difficult to simulate classically
+\cite{deutsch_85} universal quantum computer capable of simulating any system more powerful than classical
+\cite{deutsch_jozsa_92} deutsch josza first quantum algoritm
+
+\cite{shors_algorithm}
+
+information leaking from system - destroys wavefunction - decoherence
+
+error correction \cite{knill_correction} errors per gate as high as 3\% with concatenated codes
+ 
+\cite{nature_cq_review_10}
+
+\subsection{Quantum Communication}
+
+\subsection{Quantum Simulation}
+\cite{simulation_ion_review} Shors algorithm for large numbers around 10s of 1000s qubits
+but even small systems hard to simulate classically
+\cite{feynman_82} proposal to use quantum systems for simulations, quantum systems exibit an exponentially growing number of paths
+
+simulators more tolerant of mistakes
+
+\cite{lloyd_universal_simulators} existance of universal quantum simulators for systems with local interactions, 1996
+
+systems like photosynthesis 
+
+\section{Models of Quantum Computing}
+
+\subsection{Circuit Model}
+
+\subsection{Adiabatic Quantum Computing}
+\cite{adiabatic_equivalent} 2007
+
+\subsection{Measurement Based Quantum Computing}
+\cite{one_way_qc} Raussendorf Briegel 2001
+
+\subsection{Topological Quantum Computing}
+
+
+\section{Distributed Computing Architectures}
+
+\subsection{Remote entanglement generation}
+
+
+\section{Candidate Quantum Systems}
+
+Any system that exhibits quantum mechanical behaviour has the potential to be used for QIP. There are a plethora of different approaches currently under investigation. Here we briefly survey the most well known of the approaches and attempt to detail any notable progress that has been made.
+
+\textit{Nuclear magnetic resonance}
+existing well-understood technology
+\cite{nmr_proposal_chuang_97}
+lacks entanglement \cite{nmr_pseudo_pure}
+NMR not-scalable, favourable for small-scale quantum algorithms
+\cite{nmr_143_factorization} Factorise 143 using adiabatic algorithm, 2011
+
+\textit{Ion traps}
+\cite{cirac_zoller_ion_trap_proposal_95}
+\cite{first_ion_trap_wineland_98}
+scaling difficulties for cooling large numbers of atoms
+move between different zones so gates can work with small numbers of atoms
+\cite{ion_trap_14_qubits} 14 quibit entanglement, 2011, Blatt
+\cite{ion_trap_simulator} simulation of open quantum system
+\cite{ion_trap_digital_simulator}
+optical lattice to trap 100s of atoms
+\cite{ion_trap_magnetism_simulator} 2d system of 100s of ions simulating ising interaction - works well for classical simulatable weak fields, potential for strong
+
+2005 University of Michigan produced a chip based ion trap \cite{?}
+
+\textit{Cavity QED}
+?
+
+\textit{Quantum dots}
+
+
+\textit{Optical lattices}
+Free from decoherence, polarisation rotations (1 qubit gates) simple
+interactions a problem - non-linear effects weak
+\cite{klm} - single photon sources, detectors, linear circuits, non-deterministic interactions
+\cite{science_loqc_review} - theoretical advances to reduce resources
+\cite{shor_chip_bristol} 4 optical qubits, factorise 15, 2009
+\cite{shor_chip_bristol_2} 2 photons, to factorise 21, using qubit recycling, 2012
+efficient detectors \cite{single_photon_detector_review_09} and sources \cite{single_photon_source_review_04}
+photon loss a problem
+
+\textit{NV Centres}
+http://www.nature.com/nphys/journal/v9/n3/full/nphys2563.html#ref2
+protected from magnetic noise, active colour centers
+\cite{two_qubit_nv}
+\cite{nv_entanglement_hanson} entanglement of NV with C13 - non-deterministic
+\cite{nv_entanglement_dolde} deterministic entanglement between neighbouring pairs of NVs
+\cite{remote_nv_entanglement_hanson} non-deterministic entanglement between NVs on different pieces of diamond
+
+\textit{Superconducting qubits}
+\cite{two_qubit_chip_yale} 2 qubits, Deutsch-Josza, Grover, 2009
+\cite{dwave_annealing} quantum annealing - finding ground state of a system, 2011
+
+
+\cite{silicon_qubit} 2012 a qubit in silicon, 200us spin coherence time electron?, hours for nuclear spin at room temp?, atom + electron, charge to spin conversion
+\cite{silicon_seconds}
+
+
+----------------------------
 
 At the heart of quantum computing lies the observation that it is very hard to simulate a quantum mechanical system on a classical computer. Due to the principle of quantum superposition - that a quantum system can exist in many states at once - a classical computer is forced to compute many possible trajectories of a system in order to make an accurate statement about the actual motion. As a system grows in size, tracking the superpostion states requires an exponential amount of work, making exact simulation unfeasable. It is thought that it was Feynman in the early 1980s \cite{feynman82} who first suggested turning this idea on its head: that a computer that followed the laws of quantum mechanics might have processing capabilities that would fundamentally outstrip those of its classical counterparts. 
-
-First quantum algorithm by Deutsch \& Josza
-
-Shors factorisation, hidden subgroup problem, implications for security
-
-Quantum simulation
-
-\section{Quantum Communication}
-
-quantum communication is provably secure, use the fact that by measuring you change
-
-1st such algorithm by bennett and brassard. Then later by Ekert
-
-there are some technological realisations
 
 \section{Measurement Based Quantum Computing}
 
@@ -44,4 +131,4 @@ Although we have only performed a rotation around the $Z$ axis here, by concaten
 
 In this manner we can see that the MBQC model is able to implement any quantum algorithm possible in the circuit model and thus is universal for quantum computing. Throughout the calculation it is necessary to keep track of the extra $Z$ rotations that are dependent on the measurement outcomes and modify future measurement bases accordingly. This imposes a time ordering on the measurements which prevents all the measurements being carried out independently and the resulting paradox that all algorithms could be performed in $O(1)$ time.  
 
-\section{Candidate Quantum Systems}
+

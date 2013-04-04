@@ -32,71 +32,57 @@ where $\omega_j = ck_j = \pi j/L$ for $j \in \{1, 2, \dots\}$ and $\epsilon_0$ a
   \ddot{q}_j = -\omega_j^2 q_j
 \end{align}
 which has solutions
-\begin{align}
+\begin{align}\label{classical_q}
   q_j = Ae^{-i\omega_j t} + Be^{i\omega_j t} = ae^{-i\omega_j t} + a^*e^{i\omega_j t},
 \end{align}
 where in the last equality we have enforced that $q_j(t)$ must be real.
 
-The Hamiltonian for the field is given by
+We now write the standard electromagentic field Hamiltonian in terms of $q$:
 \begin{align}
   H = \frac{\epsilon_0}{2} \int_0^L \vert \vec{E}\vert^2 + c^2\vert\vec{B}\vert^2 dz 
-  = \frac{1}{2} \sum_j \left(\omega_j q_j^2 + p_j^2\right)
+  = \frac{1}{2} \sum_j \left(\omega_j q_j^2 + p_j^2\right),
 \end{align}
-where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. To quantize we promote $q_i$ and $p_i$ to operators, imposing the commutation relation
+where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. The Hamiltonian now takes the same form as the Hamiltonian for the simple harmonic osciallator. We proceed with quantization by analogy with the harmonic oscillator by promoting $p$ and $q$ to operators satisfying the communtation relations
 \begin{align}
-  [q_i, p_j] &= i\delta_{ij} \\
-  [q_i, q_j] &= [p_i, p_j] = 0.
+  [\hat{q}_i, \hat{p}_j] &= i\delta_{ij} \\
+  [\hat{q}_i, \hat{q}_j] &= [\hat{p}_i, \hat{p}_j] = 0.
 \end{align}
-
-Rewriting the amplitude relation gives
+As $\hat{p}$ and $\hat{q}$ satisfy the Heisenberg commutation relations, so will $\hat{E}_x$ and $\hat{B}_y$. As a consequence $\hat{E}_x$ and $\hat{B}_y$ will satisfy the Heisenberg uncertainty prinicple, so it is not possible to simultaneously have a well defined electric field and magnetic field. It is convenient to introduce operators $\an{a}$ and $\cre{a}$ so that
 \begin{align}
-  \hat{q}_i &= \sqrt{\frac{\hbar}{2\omega_i}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right) \\
-  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right).
+  \hat{q}_i &= \sqrt{\frac{\hbar}{2\omega_i}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right)\label{quantum_q} \\
+  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right)\\
+  \hat{H} &= \sum_k \hbar \left( \omega_k \cre{a}_k\an{a}_k +\frac{1}{2} \right).
 \end{align}
-The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following relations for $\cre{a}$ and $\an{a}$:
+The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following commutation relations:
 \begin{align}
   [\cre{a}_i, \an{a}_j] &= \delta_{ij} \\
-  [\cre{a}_i, \cre{a}_j] &= 0 \\
-  [\an{a}_i, \an{a}_j] &= 0
-\end{align}
-
-We can write the Hamiltonian in terms of the amplitude operators:
-\begin{align}
-  H = \sum_k \hbar \left( \omega_k \cre{a}\an{a} +\frac{1}{2} \right)
-\end{align}
-We have that
-\begin{align}
+  [\cre{a}_i, \cre{a}_j] &= [\an{a}_i, \an{a}_j] = 0 \\
   \left[H, \an{a}_k\right] &= -\hbar \omega_k \an{a}_k\\
   \left[H, \cre{a}_k\right] &= \hbar \omega_k \cre{a}_k
 \end{align}
+It is interesting to compare equations (\ref{classical_q}) and (\ref{quantum_q}). By analogy it appears that the operator $\cre{a}_k$ is in some way connected to the amplitude. It turns out that the operators $\an{a}_k$ and $\cre{a}_k$ are incredibly useful in the quantum treatment of the electromagnetic (and other) fields, so we will now spend a bit of time investigating some of their properties. In what follows we will deal with a generic mode with frequency $\omega$ and corresponding operators $\an{a}$ and $\cre{a}$.
 
 Suppose we have a state $\ket{n}$ which is an eigenstate of the Hamiltonian with energy $E_n$. By using the commutation relations for $H$ and $\an{a}$ we see that
 \begin{align}
-  H\an{a}_k\ket{n} = \left(E_n - \hbar \omega_k\right) \an{a}_k\ket{n}
+  H\an{a}\ket{n} = \left(E_n - \hbar \omega\right) \an{a}\ket{n},
 \end{align}
-so $\an{a}_k\ket{\psi}$ is also an eigenstate of the Hamiltonian, this time with energy $E - \hbar\omega_k$. We let 
+so $\an{a}\ket{\psi}$ is also an eigenstate of the Hamiltonian with energy $E - \hbar\omega$. Similarly $\cre{a}\ket{\psi}$ is an eiggenstate with energy $E + \hbar\omega$. The operators $\an{a}$ and $\cre{a}$ are known as \textit{annihilation operators} and \textit{creation operators} respectively. They can be thought of as respectively removing and adding excitations to the system. 
+
+We now let let 
 \begin{align}
   \ket{n-1} = k_{n-1}\an{a} \ket{n}
 \end{align}
-where $k_{n-1}$ is a normalisation constant. By repeatedly applying $a$ we can create a ladder of states at an energy spacing of $\hbar\omega_k$. In order for the system to have a lowest energy level $E_0$ this process must terminate somehow. If $\ket{0}$ is an eigenstate of $H$ with energy $E_0$ we must have
-\begin{align}
-  a\ket{0} = 0
-\end{align}
-or otherwise $a\ket{0}$ would be an eigenstate with energy lower than $E_0$. We can use $\ket{0}$, which we call the \textit{vacuum state}, to construct the states $\ket{n}$ explictly:
+where $k_{n-1}$ is a normalisation constant. By repeatedly applying $a$ we can create a ladder of states at an energy spacing of $\hbar\omega_k$. In order for the system to have a lowest energy level $E_0$ this process must terminate somehow. If $\ket{0}$ is an eigenstate of $H$ with energy $E_0$ we must have $a\ket{0} = 0$, or otherwise $a\ket{0}$ would be an eigenstate with energy lower than $E_0$. We can use $\ket{0}$, which we call the \textit{vacuum state}, to construct the states $\ket{n}$ explictly:
 \begin{align}
   \ket{n} = \frac{(\cre{a})^n \ket{0}}{\sqrt{n!}}. 
 \end{align}
-We then have that $E_n = (n+1/2)\hbar\omega$. Note that $E_0 =\hbar \omega/2$, so that the ground energy state is not zero. We ascribe this energy to \textit{vacuum fluctuations}.
+We then have that $E_n = (n+1/2)\hbar\omega$. Note that $E_0 =\hbar \omega/2$, so that the ground energy state is not zero - a signature of the vacuum fluctuations of the electromagnetic field.
 
-The states $\ket{n}$ are commonly known as \textit{Fock states}. If we introduce the \textit{number operator},
+The states $\ket{n}$ are commonly known as \textit{Fock states} and form a basis for the excitation states of the mode. If we introduce the \textit{number operator},
 \begin{align}
-  N_k = \cre{a}_k\an{a}_k,
+  N = \cre{a}\an{a},
 \end{align}
-we have that
-\begin{align}
-  N_k\ket{n}_k = n.
-\end{align}
-We interpret the number operator as counting the number of excitations in the mode $k$. The operators $\an{a}_k$ are known as \textit{annihilation operators} and the operators $\cre{a}_k$ as \textit{creation operators}, as they can be thought of as respectively removing and adding excitations to the system. 
+we have that $N\ket{n} = n$.  We interpret the number operator as counting the number of excitations in the mode and see that the Fock state $\ket{n}$ can be interpreted as having $n$ excitations.
 
 We can return to the classical expression for the electic field (\ref{toy_classical_e}) and promote it to a quantum field by writing in terms of creation and annihilation operators:
 \begin{align}
@@ -104,7 +90,7 @@ We can return to the classical expression for the electic field (\ref{toy_classi
 \end{align}
 Note that $\bra{n}\hat{E}_x\ket{n} = 0$ for all $n$, so that for a state with a definite number of excitations the expected value of the electric field at any point is zero. If we instead introduce states
 \begin{align}
-  \ket{\alpha} = \sum_n \frac{\alpha^n \ket{n}}{\sqrt{n!}}
+  \ket{\alpha} = e^{|\alpha|/2}\sum_n \frac{\alpha^n \ket{n}}{\sqrt{n!}}
 \end{align}
 for complex number $\alpha = p + iq$, we find that
 \begin{align}
@@ -114,21 +100,19 @@ The states $\ket{\alpha}$ are known as \textit{coherent states} and are the clos
 
 \subsection{Field in free space}
 
-We now present the corresponding results for the full electromagnetic field in free space.
-
-Classically the state of the electromagnetic field can be decomposed into plane waves [TODO: in Kok + Lovett 1.12 do they need the sum over $\lambda$?]
+We now present the corresponding results for the full electromagnetic field in free space. It will be useful to give the results for both the classic and quantum states, as we will use both at later points in this thesis.  Classically the state of the electromagnetic field can be decomposed into plane waves 
 \begin{align}
-  \vec{E}(\vec{r}, t) = \sum_\lambda \int d\vec{k} a_\lambda(\vec{k})\vec{\epsilon}_\lambda u(\vec{k}; \vec{r}, t) + \text{c.c.},
+  \vec{E}(\vec{r}, t) = \sum_{\lambda = 1}^2 \int d\vec{k} a_\lambda(\vec{k})\vec{\epsilon}_\lambda(\vec{k}) u(\vec{k}; \vec{r}, t) + \text{c.c.},
 \end{align}
-where the modes $u(\vec{k}; \vec{r}, t)$ describe plane waves with definite momentum $\vec{k}$,
+where $a_\lambda(\vec{k})$ gives the amplitude of the wave with polarisation $\vec{\epsilon}_\lambda(\vec{k})$, $\{\vec{\epsilon}_1(\vec{k}), \vec{\epsilon}_2(\vec{k})\}$ are a basis for the space perpendicular to $\vec{k}$ and the modes $u(\vec{k}; \vec{r}, t)$ describe plane waves with definite momentum $\vec{k}$,
 \begin{align}
-  u(\vec{k}; \vec{r}, t) \propto e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t},
+  u(\vec{k}; \vec{r}, t) = \frac{e^{i\vec{k} \cdot \vec{r} - i\omega_\vec{k} t}}{\sqrt{(2\pi)^3 2\omega_\vec{k}}}.
 \end{align}
-and $\vec{\epsilon}_\lambda$ is the polarization vector, which is perpendicular to $\vec{k}$.
+It is worth noting that this expression allows for circularly polarised light, for example by taking $\vec{\epsilon}_\lambda(\vec{k})$ to have complex components (or similar).
 
 After quantisation we obtain the expression
 \begin{align}
-  \hat{\vec{E}}(\vec{r}, t) = \sum_\lambda \int d\vec{k} \an{a}_\lambda(\vec{k})\vec{\epsilon}_\lambda u(\vec{k}; \vec{r}, t) + \text{H.c.},
+  \hat{\vec{E}}(\vec{r}, t) = \sum_\lambda \int d\vec{k} \sqrt{\frac{\hbar \omega_\vec{k}}{2(2\pi)^3\epsilon_0}}\an{a}_\lambda(\vec{k})\vec{\epsilon}_\lambda  + \text{H.c.},
 \end{align}
 where $\an{a}_\lambda(\vec{k})$ and $\cre{a}_\lambda(\vec{k})$ are the annihilation and creation operators for excitations of the mode $u(\vec{k}; \vec{r},t)$, which satisfy
 \begin{align}
@@ -140,8 +124,9 @@ The modes $u(\vec{k}; \vec{r}, t)$ are not physical, as the plane wave solutions
 
 In terms of these operators, the Hamiltonian for the free field is given by
 \begin{align}
-  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right]
+  H &= \sum_\lambda \int d\vec{k} \frac{\hbar\omega_k}{2} \left[ \cre{a}_\lambda(\vec{k})\an{a}_\lambda(\vec{k}) + \an{a}_\lambda(\vec{k})\cre{a}_\lambda(\vec{k}) \right].
 \end{align}
+
 
 
 \subsection{Hong-Ou-Mandel Effect}
