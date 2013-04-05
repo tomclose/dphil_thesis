@@ -6,45 +6,44 @@
 Quantum Information Processing (QIP) is the study of how quantum mechanical systems can be used to perform information processing tasks. 
 
 \subsection{Quantum Computing}
+[Computations can be thought of as physical processes?]
+In quantum computing a quantum mechanical system is used to produce the solution to some problem.
 
-expoit the complexity of a many particle wave function to solve a computational problem
+The original suggestion that quantum mechanics could be used to improve computing capabilities can be traced back to Feynman \cite{feynman_82} in 1981. Feynman made the observation that the exponentially growing number of paths in quantum processes, which make their simulation hard classically, could potentially be exploited for increased computational power. In 1985 Deutsch built upon this work to define the concept, and postulate the existence, of a \textit{universal quantum computer}\cite{deutsch_85} - an enhanced version of a universal Turing machine. 
 
-\cite{feynman_82} exponentially growing number of paths in a quantum system makes it difficult to simulate classically
-\cite{deutsch_85} universal quantum computer capable of simulating any system more powerful than classical
-\cite{deutsch_jozsa_92} deutsch josza first quantum algoritm
+The first quantum algorithm was proposed by Deutsch and Josza \cite{deutsch_jozsa_92} in 1992 and, along with several others \cite{simon_94, grovers_search}, demonstrated that, in some cases, quantum computers could be used to obtain increased computational power. The most significant contribution to the field of quantum algorithms was made by Shor in 1997 \cite{shors_algorithm}. Shor showed how a quantum computer could be used to factorise a number in time polnomial in the number of digits - a feat thought to be impossible with classical resources. The result attracted widespread attention, not least due to the implications efficient factorisation would have for the RSA algorithm \cite{rsa} and secure communication.
 
-\cite{shors_algorithm}
-\cite{grovers_search}
+It is important when running a quantum algorithm that the quantum superposition is preserved throughout the calculation \cite{nature_cq_review_10}. Interactions with external systems can lead to deteriation in the wavefunction - a phenomenon known as \textit{dechoerence}. When choosing a candidate quantum computer we aim to pick a system as free from decoherence effects as possible, but it is impossible to eliminate the problem entirely; for quantum computing to be practically feasible it is vital that certain level of noise can be tolerated. 
 
-information leaking from system - destroys wavefunction - decoherence
-\cite{shor_codes_95}
-\cite{steane_code_96, steane_code_96_2}
-\cite{laflamme_5_code} can't do better by the Quantum hamming bound
+An important step towards this goal was made by Shor in 1995, who proposed encoding a single qubit using nine qubits to allow correction of common errors \cite{shor_codes_95}. Further suggestions followed from Steane and Laflamme \cite{steane_code_96, steane_code_96_2, laflamme_5_code} using seven and five qubits respectively. In 1997 Aharanov and Ben-Or proved the \textit{quantum threshold theorem} - that fault tolerant quantum computing is possible if the error per gate can be reduced below a certain (code dependent) threshold. Work by Knill in 2005 \cite{knill_correction} raised this threshold to around 3\%. 
 
-\cite{stabiliser_codes_97, stabiliser_codes_96}
-\cite{quantum_threshold_theorem} if fundamental error rate is low enough we can concatenate codes to account for it 3-5\%
-
-error correction \cite{knill_correction} errors per gate as high as 3\% with concatenated codes
- 
-\cite{nature_cq_review_10} http://www.nature.com/nature/journal/v464/n7285/full/nature08812.html#B43
+With \ldots algorithms and the potential for robust computing with quantum codes, the theoretical basis for quantum computing was set. Since its initial inception, the field of quantum computing has developed rapidly, with the addition of several new computing paradigms and many competing experimental approaches. We will return to cover these points later in the chapter.
 
 \subsection{Quantum Communication}
-information theoretically secure
-http://www.rp-photonics.com/quantum_key_distribution.html 
-\cite{bennet_brassard_84} relies on no cloning theorem \cite{no_cloning}
-eavesdropping causes errors in the key
-can statistically compare to mitigate this to high effect
 
-vulnerable to man in the middle
-photon number splitting \cite{qkd_number_splitting_attacks_00} - split multiple photons off, store - techniques for overcoming \cite{qkd_decoy_defense}
 
 Using uncertainty principle to a safe public means of transmiting info
-Encoding in polarisation, random prepare, random measure (Brassard 1990)
+Quantum communication applies quantum mechanics to the problem of providing secure communication between two parties. Classical not proveably secure.
+
+If two parties share a secret string of random numbers they can use these to encode their communications in a way that will be possible for anyone without the secret string to decode. The problem of secure communication then becomes the problem of establishing this shared `key'. \textit{Quantum key distribution (QKD)} overcomes this problem using quantum mechanics.
+
+Encoding in polarisation, random prepare, random measure
+The first QKD scheme was proposed by Bennett and Brassard in 1984 \cite{bennett_brassard_84}. The scheme uses the polarisation states of stream of photons to establish a shared key between the two parties. The photons are randomly prepared and randomly measured, with the outcomes agreeing when the choice of measurement basis matches the choice of preparation basis. The presence of an eavesdropper will lead to errors in the shared key and can be detected with arbitrarily high probability by comparing and discarding some of the key.
 
 Using entanglement + bells theorem \cite{bells_theorem} to test for eavesdropping
-http://www.sciencenews.org/view/generic/id/341197/description/Quantum_teleportation_leaps_forward
 \cite{ekert_91} allows a central source to provide resource
+
+
+
+
+The security of the algorithm relies on the no cloning theorem \cite{no_cloning} - that the state of a quantum system cannot be copied. The ability to detect the eavesdropper hinges on the fact that it is possible to measure a quantum system without changing its state. The ideal system can be shown to be proveably secure - for the system to be compromised quantum mechanics must be incorrect.
+
+In practice there are a few ways in which the system can be vulnerable. The first is a standard man in the middle attack - if an attacker is able to intercept both the classical and quantum channels they can set themselves up as an intermediary, establishing secure keys with each of the parties. This relies on being able to intercept all communication though, and as none of the classical information shared is sensitive it can be broadcasted to the world, making interception hard. A more subtle attack is via number splitting\cite{qkd_number_splitting_attacks_00}: if photons are occassionally emitted in pairs an attacker can split off one of these photons and save it until a time when the basis is revealed, thus being able to reconstruct some portion of the key. This can be prevented with a slight modification to the procedure \cite{qkd_decoy_defense} or with the development of better single photon sources. More recent attacks have had success against the commercial QKD systems due to their specific photon detector design \cite{qkd_blinding_attack}.
+
+
+http://www.sciencenews.org/view/generic/id/341197/description/Quantum_teleportation_leaps_forward
 \cite{quantum_crypt_review}
+
 
 \cite{quantum_repeaters} protocol
 \cite{entanglement_97km_08}
@@ -56,7 +55,6 @@ airbourne: http://www.sciencenews.org/view/generic/id/349318/description/News_in
 3 companies offering commercial qkd
 2004 first bank transfer using quantum key distribution in vienna \cite{qkd_bank_transfer_04}
 \cite{idquant_qkd_system} \cite{magiq_qkd_system}
-\cite{qkd_blinding_attack}
 magicq system
 
 quantum key distribution networks: DARPA
@@ -65,48 +63,44 @@ quantum key distribution networks: DARPA
 
 
 \subsection{Quantum Simulation}
-http://www.nature.com/nphys/journal/v8/n4/full/nphys2253.html#ref9
-\cite{simulation_ion_review} Shors algorithm for large numbers around 10s of 1000s qubits
-but even small systems hard to simulate classically
-\cite{feynman_82} proposal to use quantum systems for simulations, quantum systems exibit an exponentially growing number of paths
-exponential barriers, superposition and entanglement
 
-Two types - simulate global properties \cite{simulation_photon_review} eg phase transitions general properties ok. Second simulate molecular systems requires more control. Further classified into digitial (quantum gates) or analogue (Hamiltonian adiabatic) \cite{science_quantum_simulator_review_09}
+Feynman's initial contributions to quantum computing \cite{feynman_81} were phrased in the terms of simulation: the existance of superpositions and entanglement makes it exponentially difficult to exactly simulate quantum systems using classical computers, so Feynman proposed using quantum systems instead. A big advance towards this goal was make by Lloyd, who in 1996 demonstrated the existence of universal quantum simulators for systems with local interactions \cite{lloyd_universal_simulators}.
 
-simulators more tolerant of mistakes
+The short-term prospects for creating a useful quantum simulator are better than a quantum computer for two reasons \cite{simulation_ion_review}. First, quantum simulators appear to be more tolerant of errors due to decoherence effects: a small amount of noise can render a quantum computation useless where a quantum simulator can still give useful insigts into the modelled system. Second, the size of system needed to obtain useful results is typically far smaller than for a quantum computer; to run Shors algorithm for meaningfully large numbers would require 1000s of qubits, whereas quantum systems containing a handful of qubits are already difficult to simulate classically.
 
-\cite{lloyd_universal_simulators} existance of universal quantum simulators for systems with local interactions, 1996
 
-Quantum chemistry and band structure calculations account for up to 30\% of computation time at supercomputing centres \cite{simulation_photon_review, supercomputer_report_10}
-density functional theory others - approximations, exact solution scales exponentially with basis size
-``. There are several powerful methods — Monte-Carlo and coupled-cluster methods, density functional theory, dynamical mean-field theory, density matrix renormalization group theory and others — that have been successfully employed to solve a wide range of problems. Nevertheless, there are still entire classes of many-body problems that cannot be tackled with those methods''
-\cite{quantum_chem_alg_05, simulation_hamiltonians_11} qubits linear number of gates ^5 in terms of system size phase estimation to obtain eigenvalues following proposals of \cite{lloyd_simulate_eigenvalues_99, lloyd_simulate_many_body_97}
+An important area of application of quantum simulators is to quantum chemistry \cite{science_quantum_simulator_review_09}. Quantum chemistry and band structure calculations currently account for up to 30\% of computation time at supercomputing centres \cite{simulation_photon_review, supercomputer_report_10}. Monte-Carlo and coupled-cluster methods, density funtional theory, density renormailization group theory and others have all been used to successfully solve a wide range of problems, however there are still whole classes of problems that cannot be tackled. Efficient quantum simulation algorithms \cite{quantum_chem_alg_05, simulation_hamiltonians_11}, that are linear in the number of required qubits and polynomial in the number of required gates, are known for estimating the eigenvalues of many-body systems, following the phase esitimation approach of Lloyd \cite{lloyd_simulate_eigenvalues_99, lloyd_simulate_many_body_97}.
 
-can simulate quantum walks \cite{farhi_quantum_walks_98} \cite{quantum_walks_simulated_08}
-
-Exciton transfer in biological systems light harvesting. Recent experiments have shown the existence of long-lived coherences can exist in biological systems \cite{quant_bio_coherences_1, quant_bio_coherences_2, quant_bio_coherences_3} possible simulation target
-
-Condensed matter such as \cite{simulation_frustrated_spins_11}
+Quantum simulators can be used to simulate quantum walks \cite{farhi_quantum_walks_98} with some experimental success \cite{quantum_walks_simulated_08}. Quantum walk type processes occur in many circumstances including exciton transfer in biological systems light harvesting. Recent experiments have shown the existence of long-lived coherences can exist in biological systems \cite{quant_bio_coherences_1, quant_bio_coherences_2, quant_bio_coherences_3} making them a possible simulation target. There has also been some success in simulating in the field of condensed matter such as the simulation of the wavefunction of a frustrated Heisenberg spin system in 2011 \cite{simulation_frustrated_spins_11}.
 
 
 \section{Models of Quantum Computing}
 
 \subsection{Circuit Model}
 
-divincenzo criteria
-circuit diagram
-actions on states
+The circuit model treats quantum computing as a sequence of operations, or gates, applied to qubits - which can be visualised as qubits travelling through a quantum circuit. It was the language in which most of the early work on quantum computing was presented and is still, in many ways, the most natural way to think about and describe most quantum algorithms.
+
+Just as in classical computing, it suffices to be able to implement all two-qubit gates to be able to build any quantum circuit - we say that two-qubit gates are universal for quantum computing \cite{two_bit_gates_universal}. In 2005 DiVinenzo five requirements \cite{divincenzo_requirements} that any candidate quantum computing system must meet, which can be thought of as defining other circuit features: in addition to a universal set of gates, we must be able to initialise our system into some given state, and perform individual qubit measurements. It must also be possible to scale our circuits up, and qubit decoherence lifetimes must be longer than the time it takes for the qubit to travel through the circuit.
 
 \subsection{Adiabatic Quantum Computing}
-\cite{adiabatic_qc} 2000 solves satisfyability problem, time dep Hamiltonian interpolating between an initial H with easy ground state, and final H whose ground state represents solution
-\cite{adiabatic_equivalent} 2007 spin lattice 
-\cite{hamiltonians_for_adiabatic_qc} 2008 realizeable Hamiltonians
+
+Adiabatic quantum computing involves manipulating qubits into some state that encodes the solution to the problem you wish to solve. Typically it involves using a time dependent Hamiltonian that interpolates between an initial Hamiltonian, whose ground state is easy to prepare, and a final Hamiltonian, whose ground state represents the solution. 
+
+The first adiabatic quantum computing algorithm was given by Farhi, Goldstone, Gutmann and Sipser in 2000 \cite{adiabatic_qc} to solve instances of the satisfyability problem. The algorithm's speed is limited by the requirement that the Hamiltonian must change slowly enough that the system remains in its ground state throughout, a process known as adiabatic evolution. The timescale necessary to maintain adiabatic evolution depends on the gap between the ground state and the next highest state - the smaller the gap the slower the motion must be. In 2007 it was shown that the adiabatic computing model is equivalent in power and resources to the circuit model \cite{adiabatic_equivalence}. A universal set of Hamiltonians requiring only local terms was found in 2008 \cite{hamiltonians_for_adiabatic_qc}.
+
 
 \subsection{Measurement Based Quantum Computing}
-\cite{mbqc_intro} uses measurement as computational steps, destructive
+
+Measurement based quantum computation (MBQC) \cite{mbqc_intro} or one-way quantum computation is a computing paradigm proposed by Raussendorf and Briegel in 2001 \cite{one_way_qc}. The computation is performed by making irreversible measurements on a highly entangled quantum state. The beauty of this approach is that it separates the a computation into two separate stages: the creation of a suitable entangled state and then the implementation of the algorithm by making local measurements on this state. This is both practically and conceptually useful. Practically it separates the creation of entanglement, and in so doing the need for multiple qubit interaction, from the running of the algorithm and allows computations to be implemented using spatially separated entangled qubits by removing the requirement to implement two qubit gates. Conceptually it allows us to view entanglement as a resource to be consumed throughout the computation and to ask questions about how to quantify entan- glement and relate this to the computations we can perform. In this section I will examine these ideas in further depth and look at practical approaches to building our entanglement resource states.
+
+The approach hinges on the fact that the quantum teleportation-type protocols can be used to construct a universal set of operations for quantum computing \cite{teleportation_universal}.By measuring a specially entangled in a particular basis and possibly performing a single qubit rotation depending on the outcome we can implement arbitrary operations. In real algorithms it is not necessary to physically perform the rotations - we can instead redefine our measurement basis for future operations. The fact that information from each measurement outcome needs to be fed back into the process introduces a time ordering on the process. 
+
+Shown to be universal by Nielsen in 2003 \cite{qc_by_measurement_03}?
+
+
+Measurement based quantum computing (MBQC) describes a computation in terms of making a sequence of irreversible measurements on a highly entangled quantum state.
 universal
-\cite{teleportation_universal}
-\cite{one_way_qc} Raussendorf Briegel 2001
+Raussendorf Briegel 2001
 \cite{qc_by_measurement_03}
 \cite{mbqc_cluster_03}
 no classical analogues, new perspective on the role of entanglement
@@ -135,17 +129,15 @@ purification
 
 Any system that exhibits quantum mechanical behaviour has the potential to be used for QIP. There are a plethora of different approaches currently under investigation. Here we briefly survey the most well known of the approaches and attempt to detail any notable progress that has been made.
 
-\textit{Nuclear magnetic resonance}
-[look at literature review bit]
-existing well-understood technology
+\subsection{Nuclear magnetic resonance}
+The first physical realisation of simple quantum computational procedures were performed using nuclear magnetic resonance (NMR) techniques. Thanks to the high existing level of expertise available in the area, initial progress in the late 1990s was quick. The basic technique involved using electromagnetic pulses of precise frequencies to target particular transitions with an aim to performing a nuclear spin flip dependent on the position of a second spin. In this manner a two qubit CNOT gate was implemented. By 1998 Chuang et al. had demonstrated a simple version of the Deutsch-Josza algorithm \cite{chuang_first_nmr_realisation_98} and shortly after, in 2001, the same group managed to run Shor’s algorithm to factorise the number 15 \cite{nmr_factorise_15_01}. Unfortunately this intial rate of progress was not sustained, mainly due to the inherent lack of scalability of the architecture. In order to increase the number of qubits in the system new suitable molecules must be found. Even if this is possible, it becomes increasingly difficult to implement controlled operations, as the number of state dependent energy splittings that must be targeted grows exponentially with the number of spins in the system.
+
+Some issues were also raised about the validity of the calculations that were performed. In order to get a sufficient NMR signal the computation must be carried out on an ensemble containing on the order of 1012 − 1018 molecules, each acting as an individual quantum computer. Perfect initialisation of such an ensemble is impossible at finite temperature and, as a result, the states always have a large component of the fully mixed state included, and as such form pseudo-pure states. Theoretical work \cite{nmr_pseudo_pure} showed that at the operational temperatures the states involved were actually separable and therefore had no true entanglement, making it unlikely that a true quantum computation had been performed. In spite of these diffi- culties, there have been recent successes in using NMR techniques and quantum information processing ideas applied to sensing beyond the standard quantum limit \cite{nmr_sensing_09} and research into the technology continues.
+
 \cite{nmr_proposal_chuang_97}
-\cite{chuang_first_nmr_realisation_98} Deutsch-Josza
-\cite{nmr_factorise_15_01} same group
-lacks entanglement \cite{nmr_pseudo_pure}
-NMR not-scalable, favourable for small-scale quantum algorithms
 \cite{nmr_143_factorization} Factorise 143 using adiabatic algorithm, 2011
 
-\textit{Ion traps}
+\subsection{Ion traps}
 \cite{cirac_zoller_ion_trap_proposal_95}
 \cite{first_ion_trap_wineland_98}
 scaling difficulties for cooling large numbers of atoms
@@ -156,10 +148,9 @@ move between different zones so gates can work with small numbers of atoms
 optical lattice to trap 100s of atoms
 \cite{ion_trap_magnetism_simulator} 2d system of 100s of ions simulating ising interaction - works well for classical simulatable weak fields, potential for strong
 
-2005 University of Michigan produced a chip based ion trap \cite{?}
 
 
-\textit{Quantum dots}
+\subsection{Quantum dots}
 Exist in semi conductor structures - no need to trap and hold
 spin to charge conversion
 \cite{quantum_dot_review_07}
@@ -169,7 +160,7 @@ self assembled quantum dots hindered by random nature, optical characteristic va
 \cite{quantum_dot_control_08}
 \cite{quantum_dot_measurement_06}
 
-\textit{Optical lattices}
+\subsection{Optical lattices}
 Free from decoherence, polarisation rotations (1 qubit gates) simple
 interactions a problem - non-linear effects weak
 \cite{klm} - single photon sources, detectors, linear circuits, non-deterministic interactions
@@ -179,12 +170,12 @@ interactions a problem - non-linear effects weak
 efficient detectors \cite{single_photon_detector_review_09} and sources \cite{single_photon_source_review_04}
 photon loss a problem
 
-\textit{NV Centres}
+\subsection{NV Centres}
 http://www.nature.com/nphys/journal/v9/n3/full/nphys2563.html#ref2
 protected from magnetic noise, active colour centers
 \cite{two_qubit_nv}
 \cite{nv_entanglement_hanson} entanglement of NV with C13 - non-deterministic
-\cite{nv_entanglement_dolde} deterministic entanglement between neighbouring pairs of NVs
+\cite{nv_entanglement_wachtrup} deterministic entanglement between neighbouring pairs of NVs
 \cite{remote_nv_entanglement_hanson} non-deterministic entanglement between NVs on different pieces of diamond
 
 \textit{Superconducting qubits}
@@ -196,28 +187,4 @@ protected from magnetic noise, active colour centers
 \cite{silicon_proposal_98}
 \cite{silicon_qubit} 2012 a qubit in silicon, 200us spin coherence time electron?, hours for nuclear spin at room temp?, atom + electron, charge to spin conversion
 \cite{silicon_seconds}
-
-
-----------------------------
-
-At the heart of quantum computing lies the observation that it is very hard to simulate a quantum mechanical system on a classical computer. Due to the principle of quantum superposition - that a quantum system can exist in many states at once - a classical computer is forced to compute many possible trajectories of a system in order to make an accurate statement about the actual motion. As a system grows in size, tracking the superpostion states requires an exponential amount of work, making exact simulation unfeasable. It is thought that it was Feynman in the early 1980s \cite{feynman82} who first suggested turning this idea on its head: that a computer that followed the laws of quantum mechanics might have processing capabilities that would fundamentally outstrip those of its classical counterparts. 
-
-\section{Measurement Based Quantum Computing}
-
-Quantum computing is usually presented in terms of the circuit model. 
-
-Measurement based quantum computation (MBQC) or one-way quantum computation is a computing paradigm proposed by Raussendorf and Briegel \cite{raussendorf01}. A computation is performed by making irreversible measurements on a highly entangled quantum state.
-
-The approach separates the computation into two separate stages: the creation of a suitable entangled state; and the implementation of the algorithm by making local measurements that consume this state. This is both practically and conceptually useful. Practically it separates the creation of entanglement from the running of the algorithm and thus allows new possibilities in the entanglement mechanism, such as the use of mechanisms with a high failure probablilties. Conceptually it allows us to view entanglement as a resource to be consumed throughout the computation and to ask questions about how to quantify entanglement and relate this to the computations we can perform. 
-
-The key concept behind MBQC is that a unitary gate on a quantum state can be implemented as a specially chosen measurement on a larger entangled state. For example, consider the state $\bra{\psi}=\alpha\bra 0+\beta\bra 1$ entangled with an ancilla qubit using a CZ gate. We will measure this state in the $\bra 0\pm e^{i\phi}\bra 1$ basis. Rewriting the state in this basis:
-\begin{equation}
-\alpha\bra{00}+\alpha\bra{01}+\beta\bra{10}-\beta\bra{11}=(\bra 0+e^{i\phi}\bra 1)(\alpha\bra ++\beta e^{i\phi}\bra -)+(\bra 0-e^{i\phi}\bra 1)(\alpha\bra +-\beta e^{i\phi}\bra -)
-\end{equation}
-so, we have moved the state $\bra{\psi}$ onto the ancilla and performed the rotation $HZ^{m}R_{z}(\phi)$, where $m$ is the measurement outcome, i.e. $0$ if the $\bra 0+e^{i\phi}\bra 1$ state was measured and $1$ if the $\bra 0-e^{i\phi}\bra 1$ state was measured.
-
-Although we have only performed a rotation around the $Z$ axis here, by concatenating such operations we can perform arbitary single qubit rotations. By starting with a network of entangled qubits we can not only perform an arbitrary number of these single qubit rotations but also effectively implement two qubit gates by exploiting the entanglement already existing in the network.
-
-In this manner we can see that the MBQC model is able to implement any quantum algorithm possible in the circuit model and thus is universal for quantum computing. Throughout the calculation it is necessary to keep track of the extra $Z$ rotations that are dependent on the measurement outcomes and modify future measurement bases accordingly. This imposes a time ordering on the measurements which prevents all the measurements being carried out independently and the resulting paradox that all algorithms could be performed in $O(1)$ time.  
-
 
