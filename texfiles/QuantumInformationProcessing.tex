@@ -107,27 +107,24 @@ purification
 Any system that exhibits quantum mechanical behaviour has the potential to be used for QIP. There are a plethora of different approaches currently under investigation. Here we briefly survey the most well known of the approaches and attempt to detail any notable progress that has been made.
 
 \subsection{Nuclear magnetic resonance}
-The first physical realisation of simple quantum computational procedures were performed using nuclear magnetic resonance (NMR) techniques. Thanks to the high existing level of expertise available in the area, initial progress in the late 1990s was quick. The basic technique involved using electromagnetic pulses of precise frequencies to target particular transitions with an aim to performing a nuclear spin flip dependent on the position of a second spin. In this manner a two qubit CNOT gate was implemented. By 1998 Chuang et al. had demonstrated a simple version of the Deutsch-Josza algorithm \cite{chuang_first_nmr_realisation_98} and shortly after, in 2001, the same group managed to run Shor’s algorithm to factorise the number 15 \cite{nmr_factorise_15_01}. Unfortunately this intial rate of progress was not sustained, mainly due to the inherent lack of scalability of the architecture. In order to increase the number of qubits in the system new suitable molecules must be found. Even if this is possible, it becomes increasingly difficult to implement controlled operations, as the number of state dependent energy splittings that must be targeted grows exponentially with the number of spins in the system.
+The first physical realisation of simple quantum computational procedures were performed using nuclear magnetic resonance (NMR) techniques. Thanks to the high existing level of expertise available in the area, initial progress in the late 1990s was quick following the inital proposal by Gershenfield and Chuang \cite{nmr_proposal_chuang_97}. The basic technique involved using electromagnetic pulses of precise frequencies to target particular transitions with an aim to performing a nuclear spin flip dependent on the position of a second spin. In this manner a two qubit CNOT gate was implemented. By 1998 Chuang et al. had demonstrated a simple version of the Deutsch-Josza algorithm \cite{chuang_first_nmr_realisation_98} and shortly after, in 2001, the same group managed to run Shor’s algorithm to factorise the number 15 \cite{nmr_factorise_15_01}. Unfortunately this intial rate of progress was not sustained, mainly due to the inherent lack of scalability of the architecture. In order to increase the number of qubits in the system new suitable molecules must be found. Even if this is possible, it becomes increasingly difficult to implement controlled operations, as the number of state dependent energy splittings that must be targeted grows exponentially with the number of spins in the system.
 
-Some issues were also raised about the validity of the calculations that were performed. In order to get a sufficient NMR signal the computation must be carried out on an ensemble containing on the order of 1012 − 1018 molecules, each acting as an individual quantum computer. Perfect initialisation of such an ensemble is impossible at finite temperature and, as a result, the states always have a large component of the fully mixed state included, and as such form pseudo-pure states. Theoretical work \cite{nmr_pseudo_pure} showed that at the operational temperatures the states involved were actually separable and therefore had no true entanglement, making it unlikely that a true quantum computation had been performed. In spite of these diffi- culties, there have been recent successes in using NMR techniques and quantum information processing ideas applied to sensing beyond the standard quantum limit \cite{nmr_sensing_09} and research into the technology continues.
-
-\cite{nmr_proposal_chuang_97}
-\cite{nmr_143_factorization} Factorise 143 using adiabatic algorithm, 2011
+Some issues were also raised about the validity of the calculations that were performed. In order to get a sufficient NMR signal the computation must be carried out on an ensemble containing on the order of 1012 − 1018 molecules, each acting as an individual quantum computer. Perfect initialisation of such an ensemble is impossible at finite temperature and, as a result, the states always have a large component of the fully mixed state included, and as such form pseudo-pure states. Theoretical work \cite{nmr_pseudo_pure} showed that at the operational temperatures the states involved were actually separable and therefore had no true entanglement, making it unlikely that a true quantum computation had been performed. In spite of these diffi- culties, there have been recent successes in using NMR techniques and quantum information processing ideas applied to sensing beyond the standard quantum limit \cite{nmr_sensing_09} and performing adiabatic algorithms \cite{nmr_143_factorization}.
 
 \subsection{Ion traps}
-\cite{cirac_zoller_ion_trap_proposal_95}
-\cite{first_ion_trap_wineland_98}
-scaling difficulties for cooling large numbers of atoms
-move between different zones so gates can work with small numbers of atoms
-\cite{ion_trap_14_qubits} 14 quibit entanglement, 2011, Blatt
-\cite{ion_trap_simulator} simulation of open quantum system
-\cite{ion_trap_digital_simulator}
-optical lattice to trap 100s of atoms
-\cite{ion_trap_magnetism_simulator} 2d system of 100s of ions simulating ising interaction - works well for classical simulatable weak fields, potential for strong
 
+Ion trap approaces use ions trapped in electrical potentials with qubits defined either by using stable electronic ground states or by the existence of electronic excitations. The initial proposal was made by Cirac and Zoller in 1995 \cite{cirac_zoller_ion_trap_proposal_95} and was followed with the implementation of a single qubit gate by Monroe et. al. later that year \cite{monroe_ion_trap_gate_95}. After some theoretical advances  \cite{first_ion_trap_wineland_98} there was an implementation of the Deutsch-Josza algorithm \cite{ion_trap_deutsch_jozsa_03} in 2003 and a successful quantum simulation using a single trapped atom in 2002 \cite{ion_trap_simulator_02}. More recent success includes the demonstration of 14 qubit entanglement by Blatt in 2011 \cite{ion_trap_14_qubits} and the use of ion traps, the digital simulation of a range of spin systems \cite{ion_trap_digital_simulator} using 6 qubits, and a system that can be used to simulate general open quantum system of up to 5 qubits \cite{ion_trap_simulator}.
 
+Despite these successes the architecture has some weaknesses when it comes to scaling: nearest neighbour interactions are commonly used to implement two-qubit gates which becomes problematic as the system size grows, with experimentalists forced to investigate approaches as the adiabatic transportation of ions along chip channels \cite{ion_trap_on_chip}. These concerns are less inhibitive is some simulation situations, such as the recent use of a 2d array of 100s of ions to simulate large Ising systems \cite{ion_trap_magnetism_simulator}.
 
 \subsection{Quantum dots}
+
+Solid state quantum dots are semiconductor structures formed by encasing a nanodot of a low band gap material in higher band gap surroundings. The resulting three dimensional spacial confinement potential traps charge carriers within a region smaller than their de Broglie wavelength, λ = h , leading to a series of discrete energy level The system can, to a good approximation, be viewed as an artificial atom with improved handling and stability properties and the potential for easy embed- ding within a conventional electronic circuit. Using similar techniques as have been developed for atoms, Rabi oscillations [Stievater:2001p4750] and photon antibunching [Michler:2000p4758] have been observed in quantum dot systems.
+
+There are a few possibilities for defining a qubit in a quantum dot system. We will briefly look at two: spin qubits and exitonic qubits. Spin qubits, un- surprisingly, use the spin of the electronic ground state to define the qubit. Coherence times are good, having been observed to be on the order of millisec- onds [Kroutvar:2004p4951, Greilich:2006p5031]. However, the same weak envi- ronmental coupling that allows this causes gating times to be relatively slow, on the nanosecond scale [Burkard:1999p5057]. On the other hand, excitonic qubits, using the absense or presence of an electron-hole pair, have very fast (ps) gating times [Li:2003p5178] but suffer from rapid decoherence (ns) due to strong environmental interactions. Some of the more promising recent proposals seek to combine the disireable features from both these schemes, for example by spin selective creation of an exciton to allow fast manipulation of the spin qubit [Calarco:2003p5363, Chen:2000p5290, Yokoi:2005p5390]. Quantum gates have been proposed based on these schemes [Feng:2004p5422, Nazir:2004p5542] but it is unclear whether their fidelity can be improved sufficiently due to the conflicting parameter regimes required to minimise both the radiative decay and dephasing process, which recent work suggests is primarily phonon-driven
+. There has been some hope that the gating fidelity could be raised to the required level by using adiabatic gating schemes, whereby the excitonic state is expoited whilst never being significantly populated, suppressing both decoherence processes [Gauger:2007p5447, Gauger:2008p5485].
+
+
 Exist in semi conductor structures - no need to trap and hold
 spin to charge conversion
 \cite{quantum_dot_review_07}
@@ -137,17 +134,23 @@ self assembled quantum dots hindered by random nature, optical characteristic va
 \cite{quantum_dot_control_08}
 \cite{quantum_dot_measurement_06}
 
-\subsection{Optical lattices}
-Free from decoherence, polarisation rotations (1 qubit gates) simple
-interactions a problem - non-linear effects weak
-\cite{klm} - single photon sources, detectors, linear circuits, non-deterministic interactions
-\cite{science_loqc_review} - theoretical advances to reduce resources
-\cite{shor_chip_bristol} 4 optical qubits, factorise 15, 2009
-\cite{shor_chip_bristol_2} 2 photons, to factorise 21, using qubit recycling, 2012
-efficient detectors \cite{single_photon_detector_review_09} and sources \cite{single_photon_source_review_04}
-photon loss a problem
+properties can vary wildely
+surface quantum dots
+
+\subsection{Photonic systems}
+
+Due to weak interactions with their environment, photonic qubits show excellent decoherence properties. The information can either be encoded using the polarisation degrees of freedom or in the so called `dual-rail’ representation, where the qubit is defined by the absence or presence of a qubit in a given mode \cite{loqc_review_07}. In both these representations single qubit operations can be carried out by well understood linear optical gates \cite{fox_quantum_optics, walls_milburn_optics}. The difficulty with the scheme comes in implementing the two qubit entangling gates. Non-linear effects, such as the Kerr effect, are too weak to be a viable option for entanglement creation in practice \cite{kerr_too_weak}.
+
+In 2001 Knill, Laflamme and Milburn proposed a system using projective measurements to implement two qubit gates probabilistically \cite{klm}. By using a teleportation type approach these gates can be incorporated into the system almost deterministically. Combined with theoretical advances to reduce resources \cite{science_loqc_review}, the approach has been the basis of some exciting recent developments. In 2009 a team at Bristol managed to implement Shor's algorithm using 4 optical qubits to factorise 15 \cite{shor_chip_bristol} and then in 2011 used qubit recycling schemes to factorise 21.  
+
+Dealing with photon loss is still a key challenge to the scheme but advances in the fields of efficient photon detectors \cite{single_photon_detector_review_09} and sources \cite{single_photon_source_review_04} should go some way to improve the situation.
 
 \subsection{NV Centres}
+
+NV centers 
+Another solid state system currently under consideration is that of NV centres in diamond. The defect occurs when a nitrogen atom is replaces a carbon atom in the diamond lattice, on a site adjacent to a missing carbon atom - an energetically favourable arrangement. The spin projections of the electron ground state have good properties for a qubit candidate \cite{nv_review, nv_oscillation_04}. The decoherence times are especially promising even at room temperatures, which is unusual in solid state systems.
+
+
 http://www.nature.com/nphys/journal/v9/n3/full/nphys2563.html#ref2
 protected from magnetic noise, active colour centers
 \cite{two_qubit_nv}
@@ -161,7 +164,5 @@ protected from magnetic noise, active colour centers
 
 \textit{Silicon based systems}
 
-\cite{silicon_proposal_98}
-\cite{silicon_qubit} 2012 a qubit in silicon, 200us spin coherence time electron?, hours for nuclear spin at room temp?, atom + electron, charge to spin conversion
-\cite{silicon_seconds}
+There has been renewed interest in silicon based systems in recent years after the original proposal by Kane back in 1998. Qubits can be realised using the electronic and nuclear spin degrees of freedom in a system of an electron bound to a phosphorous donor. Measurements of the spin can be performed in a single-shot manner via spin to charge conversion. Experiments in 2012 have shown spin coherence times in excess of $200\mus$ \cite{silicon_qubits, silicon_seconds} at room temperature, with recent (unpublished) results apparently pushing hours.
 
