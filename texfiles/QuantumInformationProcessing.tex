@@ -6,8 +6,6 @@
 Quantum Information Processing (QIP) is the study of how quantum mechanical systems can be used to perform information processing tasks. 
 
 \subsection{Quantum Computing}
-[Computations can be thought of as physical processes?]
-In quantum computing a quantum mechanical system is used to produce the solution to some problem.
 
 The original suggestion that quantum mechanics could be used to improve computing capabilities can be traced back to Feynman \cite{feynman_82} in 1981. Feynman made the observation that the exponentially growing number of paths in quantum processes, which make their simulation hard classically, could potentially be exploited for increased computational power. In 1985 Deutsch built upon this work to define the concept, and postulate the existence, of a \textit{universal quantum computer}\cite{deutsch_85} - an enhanced version of a universal Turing machine. 
 
@@ -68,45 +66,41 @@ The first adiabatic quantum computing algorithm was given by Farhi, Goldstone, G
 
 \subsection{Measurement Based Quantum Computing}
 
-Measurement based quantum computation (MBQC) \cite{mbqc_intro} or one-way quantum computation is a computing paradigm proposed by Raussendorf and Briegel in 2001 \cite{one_way_qc}. The computation is performed by making irreversible measurements on a highly entangled quantum state. The beauty of this approach is that it separates the a computation into two separate stages: the creation of a suitable entangled state and then the implementation of the algorithm by making local measurements on this state. This is both practically and conceptually useful. Practically it separates the creation of entanglement, and in so doing the need for multiple qubit interaction, from the running of the algorithm and allows computations to be implemented using spatially separated entangled qubits by removing the requirement to implement two qubit gates. Conceptually it allows us to view entanglement as a resource to be consumed throughout the computation and to ask questions about how to quantify entan- glement and relate this to the computations we can perform. In this section I will examine these ideas in further depth and look at practical approaches to building our entanglement resource states.
+Measurement based quantum computation (MBQC) \cite{mbqc_intro} or one-way quantum computation is a computing paradigm proposed by Raussendorf and Briegel in 2001 \cite{one_way_qc}.
+The computation is performed by making irreversible measurements on a highly entangled quantum state, an approach with no classical analogues that offers new perspective on the role of entanglement.
+The approach hinges on the fact that the quantum teleportation-type protocols can be used to construct a universal set of operations for quantum computing \cite{teleportation_universal}. By measuring a specially entangled in a particular basis and possibly performing a single qubit rotation depending on the outcome we can implement arbitrary operations. In real algorithms it is not necessary to physically perform the rotations - we can instead adapt the measurement basis for future operations. The fact that information from each measurement outcome needs to be fed back into the process introduces a time ordering on the process. 
 
-The approach hinges on the fact that the quantum teleportation-type protocols can be used to construct a universal set of operations for quantum computing \cite{teleportation_universal}.By measuring a specially entangled in a particular basis and possibly performing a single qubit rotation depending on the outcome we can implement arbitrary operations. In real algorithms it is not necessary to physically perform the rotations - we can instead adapt the measurement basis for future operations. The fact that information from each measurement outcome needs to be fed back into the process introduces a time ordering on the process. 
+The beauty of this approach is that it separates the a computation into two separate stages: the creation of a suitable entangled state and then the implementation of the algorithm by making local measurements on this state. This is both practically and conceptually useful. Practically it separates the creation of entanglement, and in so doing the need for multiple qubit interaction, from the running of the algorithm and allows computations to be implemented using spatially separated entangled qubits by removing the requirement to implement two qubit gates. Conceptually it allows us to view entanglement as a resource to be consumed throughout the computation and to ask questions about how to quantify entanglement and relate this to the computations we can perform.
 
-Shown to be universal by Nielsen in 2003 \cite{qc_by_measurement_03}?
-
-
-Measurement based quantum computing (MBQC) describes a computation in terms of making a sequence of irreversible measurements on a highly entangled quantum state.
-universal
-Raussendorf Briegel 2001
-\cite{qc_by_measurement_03}
-\cite{mbqc_cluster_03}
-no classical analogues, new perspective on the role of entanglement
-
-adaptive measurements
-
+The procedure relies on a special class of initial entangled state. Building on the initial proposal, Raussendorf, Browne and Briegel detailed how the computation could be performed using a special class of state, known as the \textit{cluster state} \cite{mbqc_cluster_03}. The fundamental issue of which states could serve as universal resources for quantum computing was tackled by Van den Nest et. al. in 2007 \cite{which_states_universal_resources}. We will look at how such states can be created in section \ref{remote_entanglement_generation}.
 
 \subsection{Topological Quantum Computing}
 
-++
+Topological quantum computing began as a new class of quantum codes but the area has since developed to the stage where it can now be considered a quantum computing paradigm in its own right. The first codes were introduced by Kitaev \cite{kitaev_1, kitaev_2} arising from an attempt to give simple models of topological order using quantum mechanics. The codes used a large array of physical qubits to encode a pair of logical qubits making use of different toric homology classes. Further examples in the class of topological codes soon followed \cite{kitaev_brayvi, planar_codes_freedman_meyer}.
 
+Focus then turned to how to implement logical operations on encoded qubits. In 2003 Wang, Harrington and Preskill made a suggestion for performing a CNOT gate by extending the code into a third dimension \cite{planar_cnot_preskill}, which was followed in 2007 with an approach from Raussendorf and Harrington which used braiding operations on the code lattices \cite{raussendorf07, raussendorf07_2}. Both approaches showed error tolerances an order of magnitude higher than standard concatenated codes when only local operations were allowed. Recently the efficient decoding of topological codes has been an active area of research \cite{fowler_matching_12, poulin_renormalisation, poulin_renormalisation2, wooton_mcmc1}.
 
-\section{Distributed Computing Architectures}
+\section{Entanglement and Distributed Architectures}
 
+The phenomenon of quantum entanglement has played a central role in the development of quantum theory. One of Einstein's objections to the theory of quantum mechanics was the apparent paradox that quantum entanglement effects appeared to require `spooky', long-range interactions \cite{epr}. Bell's work in 1964 \cite{bells_theorem} clarified much of the early confusion and showed that entanglement let to essentially quantum correlations, that could be reproduced in classical mechanics. Ekert's communication protocol \cite{ekert_91} and the measurement based quantum computing paradigm \cite{one_way_qc} show that entanglement can be viewed as a necessary (and essentially sufficient) resource for both quantum communication and quantum computing. Entanglement purification schemes \cite{purification} serve to strengthen this view showing that small amounts of entanglement can be combined into a more concentrated, useable form.
 
-what can you do with different resources at each node
-\cite{effiecient_distributed_qip_13}
+The characterisation of entanglement as an essential quantum resource has opened up possibilities in the form of distributed quantum systems. By invisaging an entangled network of spacially separated computational nodes, we overcome many of the common barriers to scalability \cite{distributed_qip_review}. The problem of scaling the computation is reduced in part to that of entangling remote quantum systems.
 
-\subsection{Remote entanglement generation}
+\subsection{Remote Entanglement Generation}\label{remote_entanglement_generation}
 
-path erasure \cite{basic_path_erasure} \cite{path_erasure_beam_splitter}
-Barrett and Kok \cite{barrett+kok} uses a double heralding to allow graph state production even in case of severe photon loss
-purification
+Remote entanglement generation involves entangling two spacially separated quantum systems. The standard technique is that of \textit{path erasure} - which, in informal terms, involves detecting a photon from the two systems and `forgetting' which system it came from, to leave them in an entangled state. Formally, the photon detection performs a projective measurement onto an entangled subspace.
+
+The first path erasure proposal was proposed by Cabrillo et. al. \cite{basic_path_erasure} in 1999 and involved the detection of a single photon. Photon loss is a problem for this system: if two photons are emitted but only one detected the system is left in a mixed state. More sophisticated path erasure schemes \cite{double_hearald_1, double_hearald_2, barrett+kok, double_hearald_3} overcome this weakness by requiring that a photon be emitted and detected from both systems. The probability of successful entanglement in any run decreases but in return we can be sure that when both photons are detected the systems are genuinely in an entangled state. 
+
+Entanglement creation using such schemes was first demonstrated by Moehring et al. in 2007 \cite{Moehring:2007p6099}. There has been much recent success using such schemes with entanglement generated between systems up to 100km apart \cite{entanglement_97km_08, entanglement_144km_07}. There have also been theoretical proposals about how to go about using this type of operation to build the entangled network states as required by MBQC proposals \cite{Benjamin:2006p6123}.
+
 
 \section{Candidate Quantum Systems}
 
 Any system that exhibits quantum mechanical behaviour has the potential to be used for QIP. There are a plethora of different approaches currently under investigation. Here we briefly survey the most well known of the approaches and attempt to detail any notable progress that has been made.
 
 \subsection{Nuclear magnetic resonance}
+
 The first physical realisation of simple quantum computational procedures were performed using nuclear magnetic resonance (NMR) techniques. Thanks to the high existing level of expertise available in the area, initial progress in the late 1990s was quick following the inital proposal by Gershenfield and Chuang \cite{nmr_proposal_chuang_97}. The basic technique involved using electromagnetic pulses of precise frequencies to target particular transitions with an aim to performing a nuclear spin flip dependent on the position of a second spin. In this manner a two qubit CNOT gate was implemented. By 1998 Chuang et al. had demonstrated a simple version of the Deutsch-Josza algorithm \cite{chuang_first_nmr_realisation_98} and shortly after, in 2001, the same group managed to run Shor’s algorithm to factorise the number 15 \cite{nmr_factorise_15_01}. Unfortunately this intial rate of progress was not sustained, mainly due to the inherent lack of scalability of the architecture. In order to increase the number of qubits in the system new suitable molecules must be found. Even if this is possible, it becomes increasingly difficult to implement controlled operations, as the number of state dependent energy splittings that must be targeted grows exponentially with the number of spins in the system.
 
 Some issues were also raised about the validity of the calculations that were performed. In order to get a sufficient NMR signal the computation must be carried out on an ensemble containing on the order of 1012 − 1018 molecules, each acting as an individual quantum computer. Perfect initialisation of such an ensemble is impossible at finite temperature and, as a result, the states always have a large component of the fully mixed state included, and as such form pseudo-pure states. Theoretical work \cite{nmr_pseudo_pure} showed that at the operational temperatures the states involved were actually separable and therefore had no true entanglement, making it unlikely that a true quantum computation had been performed. In spite of these diffi- culties, there have been recent successes in using NMR techniques and quantum information processing ideas applied to sensing beyond the standard quantum limit \cite{nmr_sensing_09} and performing adiabatic algorithms \cite{nmr_143_factorization}.
@@ -119,23 +113,12 @@ Despite these successes the architecture has some weaknesses when it comes to sc
 
 \subsection{Quantum dots}
 
-Solid state quantum dots are semiconductor structures formed by encasing a nanodot of a low band gap material in higher band gap surroundings. The resulting three dimensional spacial confinement potential traps charge carriers within a region smaller than their de Broglie wavelength, λ = h , leading to a series of discrete energy level The system can, to a good approximation, be viewed as an artificial atom with improved handling and stability properties and the potential for easy embed- ding within a conventional electronic circuit. Using similar techniques as have been developed for atoms, Rabi oscillations [Stievater:2001p4750] and photon antibunching [Michler:2000p4758] have been observed in quantum dot systems.
+Quantum dots are semiconductor structures consisting of a nanoscale region of a low band gap material embedded in higher band gap surroundings. The resulting three dimensional spacial confinement potential traps charge carriers within a region smaller than their de Broglie wavelength, leading to a series of discrete energy level - which can, to a good approximation, be viewed as an artificial atom.
 
-There are a few possibilities for defining a qubit in a quantum dot system. We will briefly look at two: spin qubits and exitonic qubits. Spin qubits, un- surprisingly, use the spin of the electronic ground state to define the qubit. Coherence times are good, having been observed to be on the order of millisec- onds [Kroutvar:2004p4951, Greilich:2006p5031]. However, the same weak envi- ronmental coupling that allows this causes gating times to be relatively slow, on the nanosecond scale [Burkard:1999p5057]. On the other hand, excitonic qubits, using the absense or presence of an electron-hole pair, have very fast (ps) gating times [Li:2003p5178] but suffer from rapid decoherence (ns) due to strong environmental interactions. Some of the more promising recent proposals seek to combine the disireable features from both these schemes, for example by spin selective creation of an exciton to allow fast manipulation of the spin qubit [Calarco:2003p5363, Chen:2000p5290, Yokoi:2005p5390]. Quantum gates have been proposed based on these schemes [Feng:2004p5422, Nazir:2004p5542] but it is unclear whether their fidelity can be improved sufficiently due to the conflicting parameter regimes required to minimise both the radiative decay and dephasing process, which recent work suggests is primarily phonon-driven
-. There has been some hope that the gating fidelity could be raised to the required level by using adiabatic gating schemes, whereby the excitonic state is expoited whilst never being significantly populated, suppressing both decoherence processes [Gauger:2007p5447, Gauger:2008p5485].
+There are two main approaches to defining qubits in quantum dot systems. Spin qubits use the spin of the electronic ground state and have good coherence properties (\~ms) \cite{Kroutvar:2004p4951, Greilich:2006p5031} but relatively slow (ns) gating times \cite{Burkard:1999p5057}. Exitonic qubits use the existance of an electron-hole pair, or \textit{exiton}, to define the qubit and have very fast (ps) gating times \cite{Li:2003p5178} but suffer from rapid (ns) decoherence due to strong environmental interactions. Some of the more promising proposals seek to combine the disireable features from both these schemes, for example by spin selective creation of an exciton to allow fast manipulation of the spin qubit [Calarco:2003p5363, Chen:2000p5290, Yokoi:2005p5390]. There have been several successful demonstrations of initialisation \cite{atature_quantum_dot_06, gerardot_dot_08}, control \cite{quantum_dot_control_08}} and measurement \cite{quantum_dot_measurement_06} of quantum dot qubits.
 
+Self assembled quatum dots hindered by their random nature as optical characteristics vary wildly between dots. Some recent approaches have aimed to overcome this shortcoming by moving towards surface quantum dots allowing more precise engineering \cite{quantum_dot_nanowires_example}.
 
-Exist in semi conductor structures - no need to trap and hold
-spin to charge conversion
-\cite{quantum_dot_review_07}
-self assembled quantum dots hindered by random nature, optical characteristic vary, they can be controlled quickly though
-\cite{atature_quantum_dot_06} spin state preparation
-\cite{gerardot_dot_08} initialisation of hole and spin
-\cite{quantum_dot_control_08}
-\cite{quantum_dot_measurement_06}
-
-properties can vary wildely
-surface quantum dots
 
 \subsection{Photonic systems}
 
@@ -147,22 +130,21 @@ Dealing with photon loss is still a key challenge to the scheme but advances in 
 
 \subsection{NV Centres}
 
-NV centers 
-Another solid state system currently under consideration is that of NV centres in diamond. The defect occurs when a nitrogen atom is replaces a carbon atom in the diamond lattice, on a site adjacent to a missing carbon atom - an energetically favourable arrangement. The spin projections of the electron ground state have good properties for a qubit candidate \cite{nv_review, nv_oscillation_04}. The decoherence times are especially promising even at room temperatures, which is unusual in solid state systems.
+NV centers are defects in diamond cosisting of a nitrogen and a neightbouring vacancy in the place of two carbon atoms. The system is optically active and the spin projections of the electron ground state have promising properties for use as a qubit, including good decoherence times at room temperature \cite{nv_review, nv_oscillation_04}. 
 
+In 2012 Grover's algorithm was implemented using the degrees of freedom in a single NV center to define two qubits \cite{two_qubit_nv}, with gate fidelities of over 90\%. There has been much recent progress in generating entanglement between different centers. In 2013 Hanson demonstrated the non-deterministic entanglement of an NV center and a C-13 atom \cite{nv_entanglement_hanson}, and Wachtrup demonstrated determinishtic entanglement between two neighbouring NVs \cite{nv_entanglement_wachtrup}. It has also been shown possible to entangle two NV centers on different pieces of diamond \cite{remote_nv_entanglement_hanson} - a promising step towards a distributed quantum computing architecture.  
 
-http://www.nature.com/nphys/journal/v9/n3/full/nphys2563.html#ref2
-protected from magnetic noise, active colour centers
-\cite{two_qubit_nv}
-\cite{nv_entanglement_hanson} entanglement of NV with C13 - non-deterministic
-\cite{nv_entanglement_wachtrup} deterministic entanglement between neighbouring pairs of NVs
-\cite{remote_nv_entanglement_hanson} non-deterministic entanglement between NVs on different pieces of diamond
+\subsection{Superconducting devices}
 
-\textit{Superconducting qubits}
-\cite{two_qubit_chip_yale} 2 qubits, Deutsch-Josza, Grover, 2009
-\cite{dwave_annealing} quantum annealing - finding ground state of a system, 2011
+Superconducting devices represent one of the most attractive systems for quantum computing  \cite{superconducting_review_11}. The qubit state is encoded in the direction of a current flowing in a superconducting coil with  non-linear Josephson Junction \cite{josephson_junction} effects harnessed for two-qubit gates.
 
-\textit{Silicon based systems}
+Much progress since first qubit in 1999 \cite{superconducting_first_qubit}. An increase in coherence times \cite{superconducting_better_coherence_03} has allowed the demontration of two and three qubits control and entanglement \cite{ superconduction_bell_violation_09, superconducting_measurement_10}. There has also been successful imlpementations of quantum computing algorithms, such as a two-qubit implementations of the Deutsch-Josza alogrithm and Grover algorithm in 2009 \cite{two_qubit_chip_yale}
+It is thought that superconducting qubits can now be made with coherence times approaching those needed for fault tolerant quantum computing \cite{superconducting_long_coherence_11}
 
-There has been renewed interest in silicon based systems in recent years after the original proposal by Kane back in 1998. Qubits can be realised using the electronic and nuclear spin degrees of freedom in a system of an electron bound to a phosphorous donor. Measurements of the spin can be performed in a single-shot manner via spin to charge conversion. Experiments in 2012 have shown spin coherence times in excess of $200\mus$ \cite{silicon_qubits, silicon_seconds} at room temperature, with recent (unpublished) results apparently pushing hours.
+Superconducting devices are also system of choice of DWave Systems - the only commercial company claiming to offer quantum computing technology. In 2011 DWave published an article in Nature demonstrating the use of their superconducting computing device to find the ground state of an artificial Ising system using a quantum annealing technique \cite{dwave_annealing}.
+
+\subsection{Silicon based systems}
+
+There has been renewed interest in silicon based systems in recent years after the original proposal by Kane back in 1998. Qubits can be realised using the electronic and nuclear spin degrees of freedom in a system of an electron bound to a phosphorous donor. Measurements of the spin can be performed in a single-shot manner via spin to charge conversion. Experiments in 2012 have shown spin coherence times in excess of $200\mu s$ \cite{silicon_qubits, silicon_seconds} at room temperature, with recent (unpublished) results apparently pushing hours.
+
 
