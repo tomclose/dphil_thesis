@@ -2,7 +2,7 @@
 \label{ch:SpinAmplification}
 
 
-The standard approach to implementing a quantum technology is to identify a physical system that can represent a qubit: it must exhibit two (or more) stable states, it should be manipulable through external fields and possess a long decoherence time. Provided that the system can controllably interact with other such systems, then it may be a strong candidate. Electron and nuclear spins, within suitable molecules or solid state structures, can meet these requirements. However the drawback with spin qubits is that they have not been directly measured through a detection of the magnetic field they produce. The magnetic moment of a single electron spin is orders of magnitude too weak to be detected by standard ESR techniques and even the most sensitive magnetometers still fall short of single spin measurement~\cite{cleuziou06} - meanwhile the situation with nuclear spins is worse still. In a few special systems it is possible to convert the spin information into another degree of freedom. For example, a spin-dependent optical transition allow spin to photon conversion in some crystal defects~\cite{jelezko04, neumann10, Morello:2010p6617}, self-assembled semiconductor quantum dots~\cite{vamivakas10, Berezovsky:2008p6616}, and trapped atoms held in a vacuum~\cite{leibfried03}. Alternatively, spin to charge conversion is an established technology in lithographic quantum dots~\cite{hanson07}. However, the majority of otherwise promising spin systems do not have such a convenient property~\cite{morton10} and therefore cannot be measured directly.
+The standard approach to implementing a quantum technology is to identify a physical system that can represent a qubit: it must exhibit two (or more) stable states, it should be manipulable through external fields and possess a long decoherence time. Provided that the system can controllably interact with other such systems, then it may be a strong candidate. Electron and nuclear spins, within suitable molecules or solid state structures, can meet these requirements. However the drawback with spin qubits is that they have not been directly measured through a detection of the magnetic field they produce. The magnetic moment of a single electron spin is orders of magnitude too weak to be detected by standard ESR techniques and even the most sensitive magnetometers still fall short of single spin measurement~\cite{cleuziou06} - meanwhile the situation with nuclear spins is worse still. In a few special systems it is possible to convert the spin information into another degree of freedom. For example, a spin-dependent optical transition allow spin to photon conversion in some crystal defects~\cite{nv_oscillation_04, neumann10, Morello:2010p6617}, self-assembled semiconductor quantum dots~\cite{vamivakas10, Berezovsky:2008p6616}, and trapped atoms held in a vacuum~\cite{leibfried03}. Alternatively, spin to charge conversion is an established technology in lithographic quantum dots~\cite{quantum_dot_review_07}. However, the majority of otherwise promising spin systems do not have such a convenient property~\cite{morton10} and therefore cannot be measured directly.
 
 One suggested solution is to `amplify' a single spin, by using a set of ancillary spins that are (ideally) initialised to $\ket{0}$. We would look for a transformation of the form
 \begin{equation}
@@ -64,7 +64,10 @@ The spin to be measured is the corner spin ($i=j=1$) and so would form part of a
 
   Our starting point is the state $\ket 1$, with just the corner spin `up'. From this position our rules allow two possibilities: either the spin to the right of the corner flips, or the spin below it flips (see Fig.~\ref{partition_states}). In each case the magnitude of the transition matrix element is $\Omega$. As we continue this procedure, we notice that the states that arise for each excitation number can be characterised by a non-increasing sequence of integers that represent the number of `up'-spins in each column of the lattice (see Fig.~\ref{partition_states}). Such sequences can also be used to define partitions of at integer: ways of splitting an integer up into a sum of other integers, e.g. $3=3=2+1=1+1+1$. In fact, the states that arise are in 1-to-1 correspondence with such partitions; we call these states `partition states' and denote them with standard partition notation (see Fig.~\ref{partition_states}).
   \begin{figure}
+  \begin{center}
+    
   \includegraphics[scale=0.6]{assets/youngs_lattice_with_spins}
+\end{center}
   \caption{Partition states arranged into a lattice. Edges represent a coupling
     through the Hamiltion of strength $\Omega$. Weights represent the
       number of different paths through the lattice to a given state.}
@@ -106,7 +109,9 @@ It has been shown (e.g. \cite{Fitzsimons:2005p6472}) that a quantum state releas
 We can establish the rate of propagation in the 2D case using the ansatz that the time taken to travel between two neighbouring nodes is inversely proportional to the strength of the coupling between them. The total time is then $t_{2D}\propto \sum_{i=1}^{n}\frac{1}{\sqrt{i}}\simeq n^{\frac{1}{2}}$. As in the one-dimensional case, the position along the chain corresponds to the the number of spins that have flipped, and so we would expect the total polarisation to be proportional to $t^2$. This prediction of a quadratic speed-up of signal going from 1D to 2D is the central result of our paper, and was confirmed by simple numerical simulations of Eq. (\ref{2d_ham}) (Fig. \ref{comparison}).
 
 \begin{figure}
+  \begin{center}
 \includegraphics[scale=0.5]{assets/comparison.pdf}
+\end{center}
 \caption{Expected total polarisation against time. Time in units of
   $\frac{1}{\Omega}$, dephasing rate $\Gamma = 1$. The gradient of the
     'one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
@@ -184,8 +189,161 @@ Finally we consider imperfect inital polarisation (i.e. finite temperature) - a 
             % \end{figure}
 
 %\begin{acknowledgements}
-%We thank Gerard Milburn and John Morton for useful discussion. This work was supported by the EPSRC, the National Research Foundation and Ministry of Education, Singapore, and the Royal Society.
+%we thank gerard milburn and john morton for useful discussion. this work was supported by the epsrc, the national research foundation and ministry of education, singapore, and the royal society.
 %\end{acknowledgements}
 
+\section{Calculating the two-dimensional lattice coupling strengths}
+
+ The result that the sum of the squares of the weights in Young's lattice is $n!$ can be taken straight from the representation theory of the symmetric group: it can be shown that the nodes and their weights represent the irreducible representations and their dimensions. Given that the dimension of each representation is its multiplicity in the regular representation (with dimension $|S_n| = n!$), by dimension counting the result follows. However, for our purposes it is more enlightening to focus on a differetial poset approach, which uses particular combinatorical features of the lattice to produce the result. Here we give a brief overview of the approach detailed by Sagan in \cite{Sagan:2001p6568}.
+
+Let $L$ be an operator that takes a partition state to a sum of its
+children, and $R$ take a state to the sum of its parents. For example\begin{eqnarray*}
+L\ket{\psi_{1}} & = & \ket{\psi_{1,1}}+\ket{\psi_{2}}\\
+R\ket{\psi_{2,1}} & = & \ket{\psi_{1,1}}+\ket{\psi_{2}}\end{eqnarray*}
+We add a state $\ket\emptyset$ such that $L\ket\emptyset=\ket{\psi_{1}}$
+and $R\ket\emptyset=0$. Then \[
+L^{n}\ket\emptyset=\sum_{i\in P(n)}c_{i}\ket{\psi_{i}}\]
+ and\[
+R^{n}L^{n}\ket\emptyset=\sum_{i\in P(n)}|c_{i}|^{2}\]
+We then need to use two facts about the structure of the lattice:
+that each element has one more child than it does parents, and each
+pair of elements either share both a single parent and a single child,
+or neither. The first of these properties is easy to see: each child
+corresponds to adding a square at a concave corner of the diagram,
+and each parent corresponds to removing a convex corner. These corners
+alternate along the boundary of the shape, starting and ending with
+concave ones, and so there is always one more child than parents.
+The second property requires more work, but is roughly because two
+elements share a parent if, when placed on top of one another they
+differ by precisely two squares. Taking the union of these shapes
+you can find the unique child that they also both share.
+
+These properties imply the commutation relation $RL-LR=I$, so\[
+R^{n}L^{n}\ket\emptyset=R^{n-1}L^{n}R\ket\emptyset+nR^{n-1}L^{n-1}\ket\emptyset=...=n!\ket\emptyset\]
+and so, $n!=\sum_{i\in P(n)}|c_{i}|^{2}$.
+
+\section{The asyptotic behaviour of the one-dimensional lattice with dephasing}
+
+Fig. 2 in the main paper shows the rates of increase for the various cases. We claim that the one-dimensional case with decoherence scales like $\sqrt{t}$, yet the figure shows something closer to a $t^\frac{2}{3}$ dependence. Here we plot the gradient of the 1D decoherence case log-log plot, to show that at as time increases the rate becomes $t^\frac{1}{2}$ (Fig. \ref{asymptotic_1d}).
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[scale=0.4]{assets/asymptotic_1d.pdf}
+\end{center}
+  \caption{ The gradient of the 'one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
+
+\label{asymptotic_1d}
+\end{figure}
+
+\section{Individual noise case}
+
+In the main paper we considered a collective noise scenario, using a single Lindblad operator, $
+L=\sum_{n}n\ket n\bra n$ . This is convenient to analyse for our system, as the
+system remains in the subspace covered by our basis of number
+states. However, a more realistic model involves treating the noise
+occurring at each site as independent. In this case we have Lindblad
+operators of the form
+\begin{equation}
+L_i = \sigma_z^i
+\end{equation}
+for lattice sites $i$. Following a similar procedure to before we find
+the equivalent classical chain to be
+\begin{equation}
+\dot{\rho}_{ii}=-\sum_{j\in
+  P(i)}\frac{2|g_{ij}|^{2}}{\Gamma}\left(\rho_{ii}-\rho_{jj}\right)
+\label{qmat}
+\end{equation}
+where, crucially, the index now runs over all the partition states,
+rather than our basis of accessible states. In fact, in the
+1D case these states are one and the same, and so the
+spin propagation goes as $\sqrt{t}$, as found in the collective noise
+case. In the 2D case, we are now performing a
+continuous-time classical random walk on Young's lattice. We are able
+to use the property that each node always has one more child than
+parents, to predict that the rate of spin propagation will be proportional to $t$ - the same as the collective noise case.
+Thus for both forms of decoherence we find that the amplification still functions; when the noise is severe then it will take longer to flip a given number of spins.
+
+\section{Imperfect initialisation threshold}
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[scale=0.6]{assets/impurity}
+\end{center}
+  \caption{Maximum extent of propagation of initialisation
+    imperfections in the lattice - due to propagation rules
+    imperfections are unable to grow beyond the dotted bounding boxes. }
+  \label{impurities}
+\end{figure}
+
+ In the main paper we note that our system seems highly robust against imperfect lattice initialisation. The propagation rules mean that it is difficult for imperfections in the centre of the lattice to spread (Fig. \ref{impurities}). To estimate an upper bound for our initialisation threshold we took a randomly initialised lattice, with given imperfection probability, and evolved it using purely deterministic rules, to see whether the imperfections grew to cover over half the lattice. We expect this to give a loose upper bound for the quantum case, as quantum imperfections will both grow and shrink, making it less likely that they will compound in the same manner as deterministic growth. Fig \ref{flipthreshold} shows the results of these simulations; below $4\%$ the probability of growing to cover the majority of the lattice is negligible.
+
+\begin{figure}[!h]
+  \begin{center}
+\includegraphics[scale=0.5]{assets/flipthreshold.pdf}
+\end{center}
+\caption{Probability that imperfections at given density will deterministically grow to cover over half the lattice.}
+\label{flipthreshold}
+\end{figure}
+
+\section{Numerical simulations}
+
+In order to produce the plots in Fig. 2 of the paper, we calculated
+the evolution of the system in the reduced basis, as described by our
+derived Hamiltonian (Eq. 9, main paper), or Q-matrix (e.g. Eq. \ref{qmat}) in the case of decoherence. In both
+cases this required restricting the system to a finite number of
+states and numerically calculating the appropriate exponential
+involving the (now finite) Hamiltonian/Q-matrix and time. This was
+done using the linalg.expm method of the SciPy Python module. We then
+applied this evolution operator to our initial state, and were able to
+produce plots of the required system characteristics. In each case we
+ensured to restrict the time sufficiently to keep a negligible
+population from reaching the end of our now finite chain.
+
+To produce the plots in Fig. \ref{densitypics} we used the previously
+described evolution results and mapped these to a 2-d density diagram
+using the tree of simple states. We created this tree using the stated
+rules, up to around the 40th level, at which point computer memory
+became limiting. This was sufficient to achieve convergence on the
+timescales shown. The code was written in Python, making use of the
+NumPy and SciPy modules.
+
+% \section{Extention to three dimensions}
+
+% Unfortunately the mapping from 2D to 1D is not readily extendible to 3D. However,
+%  our results so far could have been anticipated using simple dimensional arguments; if one postulates that the rate of spin propagation is
+%  proportional to the boundary of the region, one can predict the
+%  correct scaling behaviour. In 1D the boundary size is
+%  independent of the region size; no matter how many spins have flipped,
+%  it still has size one. The coupling strength between states $\ket{n}$
+%  is constant. In the 2D case, the boundary size scales
+%  with the square root of the area, and the coupling goes with
+%  $\sqrt{n}$. In 3D, the boundary scales like the cube root of the volume squared, and so we expect the coupling to scale
+%  as $n^{\frac{2}{3}}$. Following similar logic to that used in 2D
+%  case: $t_{3D}\propto \sum_{i=1}^{n}\frac{1}{i^\frac{2}{3}}\simeq
+%  n^{\frac{1}{3}}$, and so $n \sim t^3$.
+
+\section{Shape of domain boundary}
+
+Although we know how the expected number of flipped spins increases
+with time, we have so far said nothing about how these spins are
+distributed throughout our sample. To investigate this we have plotted
+the value of the expected flipped spin density over the course of the
+evolution.
+
+\begin{figure}[ht]
+  \begin{center}
+  \includegraphics[scale =0.8] {assets/density_fig_all.pdf}
+\end{center}
+
+
+\caption{Density of flipped spins with time}
+\label{densitypics}
+\end{figure}
+
+As you can see (Fig. \ref{densitypics} ), the area of high density is triangular in shape, of
+dimensions that scale linearly with the time elapsed. The boundary
+between areas of high and low density remains remarkably sharp,
+considering that the number state basis elements on which the motion
+is based have diffuse boundaries themselves.
 
 

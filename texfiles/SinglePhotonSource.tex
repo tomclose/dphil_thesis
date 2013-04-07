@@ -1,31 +1,6 @@
 \chapter{Single Photon Source} 
 \label{ch:SinglePhotonSource}
 
-%\documentclass[superscriptaddress, prl, twocolumn,pdftex]{revtex4}
-
-%\documentclass[prb,twocolumn,showpacs,preprintnumbers,superscriptaddress,
-%amsmath]{revtex4}
-%\documentclass[ amsmath]{revtex4}
-%\documentclass[12pt]{iopart}
-%\bibliographystyle{unsrt}
-%\usepackage{amsfonts}
-
-%\usepackage{color}
-%\usepackage{graphicx}% Include figure files
-%\usepackage{bm}% bold math
-
-%\newcommand{\id}{\mathbb{I}}
-
-%\include{assets/braket}
-\newcommand{\tom}[1]{{\color{blue} #1}}
-
-\newcommand{\inmain}{}
-\newcommand{\threevec}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
-
-\newcommand{\eqntext}[1]{\textrm{#1}}
-%\newcommand{\eqref}[1]{Equation (\ref{#1})}
-
-
 \section{Introduction}
 % [ Use of single photon sources ]
 
@@ -353,8 +328,4 @@ The population in the $1$ subspace at time $t$ will give us the probability a ph
 \end{figure}
 
 If we only cared about this distribution, we could reduce the size of the system by replacing the states $\ket{g1}$ and $\ket{e1}$ with a single state $\ket{1}$ to keep track of the cumulative jump probability over time. We would need to remove the last two terms from the Hamiltonian as well as $J_2$, and set $J_1 =  \ketbra{1}{e0}$. Figure~\ref{sqme_mc_comp} shows the cumulative jump probability for this system, showing agreement between the SQME results and Monte Carlo simulations with increasing numbers of runs.
-\\
-
-
-\bibliography{photon_source}
 
