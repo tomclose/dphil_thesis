@@ -143,124 +143,9 @@ The effect on the system $S= S_1 \otimes S_2$ of a detection in the plus or minu
   C_\pm &= \ketbra{g_1}{g_a}\otimes\id \pm \id\otimes\ketbra{g_1}{g_a}.
 \end{eqnarray}
 
-We could now simulate many trajectories of this system and build up an estimate of $v_{\rm HOM}$ by averaging these~\cite{carmichael:92}. Instead we use a semi-quantum master equation technique described in more detail in~\ref{appA}. This allows us to find $v_{\rm HOM}$ in a single run of a master equation acting on a slightly larger Hilbert space.
+We could now simulate many trajectories of this system and build up an estimate of $v_{\rm HOM}$ by averaging these~\cite{carmichael:92}. Instead we introduce a technique that we call the \textit{semi-quantum master equation} method, which will allow us to find $v_{\rm HOM}$ in a single run of a master equation acting on a slightly larger Hilbert space.
 
-\begin{figure}[htb]
-  \begin{center}
-  \includegraphics[width=8cm]{assets/subspace_partition.pdf}
-\end{center}
-  \caption{The system jump-space: On the first jump the system moves to $P_+ / P_-$ depending on the arm in which the photon is detected. After the second jump the system moves to state $P_S / P_D$ depending on whether the second photon was detected in the same or different arm to the first. At any point the system can undesirably spontaneously emit into the environment, moving to the junk state $P_E$.}
-  \label{subspace_partition}
-\end{figure}
-
-When calculating $v_{\rm HOM}$ we must consider events in which photons trigger either detector, and events in which photons are spontaneously emitted into the environment. We introduce a set of process-states to record and labels these event classes (Fig.~\ref{subspace_partition}):
-\begin{eqnarray}
-  S_P = \left\{ P_0, P_+, P_-, P_S, P_D, P_E \right\}.
-\end{eqnarray}
-The process-state starts as $P_0$ and remains there until an event of interest occurs. $P_{+/-}$ represents the process-state after a single photon has been detected in the $D_{+/-}$ detectors respectively. After a second photon has been detected the process-state becomes $P_{S/D}$ depending on whether the second photon was detected in the same or different detector as the first. If at any point a photon is emitted into the environment the process moves to state $P_E$. When calculating the indistinguishability we can then ignore any population in state $P_E$, but we must include it when considering the overall efficiency of the process.
-
-We must also identify the operators that cause the movement between the process-states. Before doing this we extend the state-space $S$ of the system to include the process-states:
-\begin{eqnarray}
-  S   &= S_1 \otimes S_2 \otimes S_P.
-\end{eqnarray}
-The detection operators are then given by
-%\begin{widetext}
-\begin{eqnarray}
-  C_{+}^{(0)}  & = C_{+} \otimes \ketbra{P_+}{P_0}\\
-  C_{+}^{(+)} & = C_{+} \otimes \ketbra{P_S}{P_+}\\
-  C_{+}^{(-)} & = C_{+} \otimes \ketbra{P_D}{P_-}\\
-  C_{-}^{(0)}  & = C_{-} \otimes \ketbra{P_-}{P_0}\\
-  C_{-}^{(-)} & = C_{-} \otimes \ketbra{P_S}{P_-}\\
-  C_{-}^{(+)} & = C_{-} \otimes \ketbra{P_D}{P_+}
-\end{eqnarray}
-where for example $C_{+}^{(-)}$ is the jump operator representing a second detection in the $D_+$ detector, when the first detection was in $D_-$. The spontaneous emission operators are given similarly:
-\begin{eqnarray}
-  E_1^{(0)} &= \ketbra{g_1}{e} \otimes \id_S   \otimes \ketbra{P_E}{P_0}\\
-  E_2^{(0)} &=  \id_S  \otimes \ketbra{g_1}{e} \otimes \ketbra{P_E}{P_0}\\
-  E_1^{(+)} &= \ketbra{g_1}{e} \otimes \id_S   \otimes \ketbra{P_E}{P_+}\\
-  E_2^{(+)} &=  \id_S  \otimes \ketbra{g_1}{e} \otimes \ketbra{P_E}{P_+}\\
-  E_1^{(-)} &= \ketbra{g_1}{e} \otimes \id_S   \otimes \ketbra{P_E}{P_-}\\
-  E_2^{(-)} &=  \id_S  \otimes \ketbra{g_1}{e} \otimes \ketbra{P_E}{P_-}
-\end{eqnarray}
-where here $E_1^{(+)}$ represents a emission from $S_1$ acting after the first photon was detected in the $D_+$ detector.
-
-Finally we must modify our phonon decoherence operators. The subspaces corresponding to different process-states, are classically separated by observable events. These classically separated branches cannot exhibit interference, and we can therefore take the decoherence processes to occur independently on each branch:
-\begin{eqnarray}
-  U_{+,1}^{(0)} &= \sqrt{J(N+1)}\ketbra{\psi_-}{\psi_+} \otimes \id_S \otimes \ketbra{P_0}{P_0}\\
-  U_{-,1}^{(0)} &= \sqrt{JN}\ketbra{\psi_+}{\psi_-} \otimes \id_S \otimes \ketbra{P_0}{P_0}\\
-  U_{+,1}^{(+)} &= \sqrt{J(N+1)}\ketbra{\psi_-}{\psi_+} \otimes \id_S \otimes \ketbra{P_+}{P_+}\\
-  U_{-,1}^{(+)} &= \sqrt{JN}\ketbra{\psi_+}{\psi_-} \otimes \id_S \otimes \ketbra{P_+}{P_+}\\
-  U_{+,1}^{(-)} &= \sqrt{J(N+1)}\ketbra{\psi_-}{\psi_+} \otimes \id_S \otimes \ketbra{P_-}{P_-}\\
-  U_{-,1}^{(-)} &= \sqrt{JN}\ketbra{\psi_+}{\psi_-} \otimes \id_S \otimes \ketbra{P_-}{P_-}
-\end{eqnarray}  
-%\end{widetext}
-with similar operators acting on the second system. We do not need decoherence operators acting on the $P_S$, $P_D$ or $P_E$, since we are only concerned with populations in, and not coherences between, these states. Moreover, we only really need to keep track of the total population in each of these subspace, and not the populations of each state that make up each subspace - a fact that we exploit to reduce the dimension of our problem for the numerical simulations.
-
-We form a Lindblad master equation using these $24$ Lindblad operators:
-\begin{eqnarray}
-  \dot{\rho} &= i\left[ \rho, H \right] + \sum_i \gamma_i \left( L_i\rho L_i^\dagger - 1/2(L_i^\dagger L_i\rho + \rho L_i^\dagger L_i) \right).
-\end{eqnarray}
-The $\gamma_i$ are the rates for each process. As noted earlier for the $U_{\pm, i}^{(j)}$ this rate is $1$, as the rates have been incorporated into the Lindblad operators. For the $C_\pm^{(i)}$ we need $\gamma = \kappa$, the cavity leakage rate, which we take to be $3h$, a choice that allows for a reasonable enhancement of photon emission from the emitter system into the desired mode outside of the cavity, whilst preventing cavity photons being reabsorbed by the emitter system. For the $E_i^{(j)}$ we take $\gamma = 0.005ps^{-1}$, assuming a radiative livetime of $200$~ps. Our model allows only for spontaneous emission directly from the excited state $\ket{e}$; we assume that there is no loss from the cavity to modes other than the target waveguide mode, and that all photons that are emitted into the target mode are detected. For similar cavities we expect these effects to impact the two approaches to equal extent. 
-
-The dimension of this extended space $S$ is $4 \times 4 \times 6 = 96$. In fact we can reduce this by eliminating some unneccessary states from the subspaces. By carefully considering the basis states accessible in each the subspace corresponding to each process, we can reduce the number of system states to $9 + 6 + 6 + 1 + 1 + 1 = 24$. For our simulation we will need to calculate the density matrix for this system. As noted in~\ref{appA}, no coherences can exist between the different process-state subspaces. This reduces the number of density matrix elements we need to track to $9^2 + 6^2 + 6^2 + 1 + 1 + 1 = 116$.
-
-\section{Results}
-
-\begin{figure}[htb]
-  \begin{center}
-  \includegraphics[width=8cm]{assets/2LS_plot.pdf}
-  \end{center}
-  \caption{Pulse-relax technique: calculations are performed as a function of the cavity coupling strength. Upper panel: at realistic coupling strengths ($h<1$) increased HOM indistinguishability necessarily entails a decrease in efficiency (success probability), with the product of the two (blue curve) approaching zero. Here the spontaneous emission rate is $\Gamma = 0.005~\mathrm{ps}^{-1}$. For overcoming phonon-induced decoherence and achieving a  high success probability, we must move into a region of unrealistically high $h$, represented by the increasing level of shading of this plot.
- The lower panel shows the phonon spectral density, Eq.~\ref{eq:specdens}, evaluated at the cavity coupling strength $h$, giving a rate that is directly proportional to phonon-induced dephasing during the pulse-relax process.
- }
-  \label{2LS_plot}
-\end{figure}
-
-Fig.~\ref{2LS_plot} shows the HOM visibility obtained from, and spectral density used in, simulations of the pulse-relax technique. At low coupling strengths the phonon spectral density is small, and so phonon decoherence is largely avoided giving high indistinguishability. As described earlier, we have fixed $\kappa$, the cavity leakage rate, to be $3 h$ so the effective coupling to the the target mode is proportional to the Purcell factor $h^2/\kappa \sim h$. This means that, for small $h$, the rate of photon emission into the cavity mode is slow and thus spontaneous emission into environmental optical modes is a problem. To take account of this effect, we define the `combined HOM visibility', which is the product of success probability and bare HOM visibility, which approaches zero as $h \to 0$. Taking large coupling strengths allows one to access the region to the higher frequency side of the hump in the phonon spectral density and so could avoid this problem, but is unrealistic given the cavity parameters currently obtainable experimentally. In the experimentally feasible region ($h<1$)~\cite{vuckovic:12} we must therefore trade indistinguishability for efficiency.
-
-\begin{figure}[htb]
-  \begin{center}
-  \includegraphics[width=8cm]{assets/raman_plot.pdf}
-  \end{center}
-  \caption{Raman technique, $h = 0.5$: by choosing a detuning to move beyond the region of high phonon spectral density we can achieve near-perfect indistinguishability. The efficiency in this region is high enough for a feasible photon source.}
-  \label{raman_plot}
-\end{figure}
-
-In contrast, the Raman procedure (Fig.~\ref{raman_plot}) avoids this trade-off. For small detuning the visibility is low, but this is because we do not get a proper Raman ground state transition unless $\nu \gg h$. If this condition is not met, the system simply undergoes a non-optimal detuned pulse-relax transition. Once we reach a detuning of around $\nu = 12h (= 6~\mathrm{ps}^{-1})$ the indistinguishability and efficiency both  increase. Our choice of detuning size is limited in that it must be small in comparison with the original energy gap between the ground and excited states, and that it avoids any nearby excited states. This leaves us some freedom to use large detunings to push to frequencies above the region of high phonon spectral density. As the detuning is increased the efficiency saturates below unity. In this region both the time taken for the Raman process and the average excited state lifetime scale with the detuning squared, the two effects cancelling one another.
-
-
-\begin{figure}[htb]
-  \begin{center}
-  \includegraphics[width=8cm]{assets/no_spont_prod_rate.pdf}
-  \includegraphics[width=8cm]{assets/rate_of_production_plot.pdf}
-  \end{center}
-  \caption{Rate of photon pair production: with no spontaneous emission (upper), and spontaneous emission with an excited-state lifetime of $200$~ps (lower)}
-  \label{rate_of_production_plot}
-\end{figure}
-
-In many applications where photons are used, the product of efficiency and indistinguishability may not be the most useful metric for characterising the performance of the source; often photon escape errors can be accounted for, and the indistinguishability of photons that are detected is the important figure of merit. We therefore also calculate the rate of production of pairs of photons of a given indistinguishability using each approach (Fig.~\ref{rate_of_production_plot}). For our production rate we take
-\begin{eqnarray}
-  r_f = \frac{e_f}{t_f}
-\end{eqnarray}
-where $e_f$ is the efficiency and $t_f$ is the time taken for $99\%$ of the runs to have completed (possibly unsuccessfully), for parameters ($h$ in the pulse-relax scheme, and $\nu$ in the Raman scheme) chosen to obtain a given indistinguishability, $f$. This figure is somewhat approximate as it takes no account of how successful runs (where two photons are emitted into the correct modes) and unsuccessful runs are distributed within the process run time, and no allowance is made for time taken to reset the system in the event of a failure. The effect of the former is minor since in our model spontaneous emission can occur uniformly at any point of the process. We will revisit the effect of the latter shortly.
-
-Even in the absence of spontaneous emission (Fig.~\ref{rate_of_production_plot}, upper panel), the Raman procedure is quicker than the pulse-relax process at generating photons of a sufficiently high level of indistinguishability. With the dephasing parameters chosen in our model this occurs for indistinguishability of greater than $99.9\%$. In our model, spontaneous emission is the only process degrading the efficiency -- without it we have perfect efficiency and so neither of the potential shortcomings discussed in the previous paragraph apply.
-
-When spontaneous emission is added, we see a similar pattern but the indistinguishability threshold is very slightly lower. This is an upper bound, as here the reset time becomes important. The efficiency of the Raman procedure remains fixed at about $80\%$, requiring on average $1.25$ runs per pair. In contrast, the efficiency of the pulse-relax procedure heads towards zero, meaning that many attempts will be needed to produce a pair. If the time taken to reset the system (to the excited state $\ket{e}$ in which we have assumed the pulse-relax system starts) is large, the Raman procedure will become advantageous at a far lower threshold.
-
-\section{Conclusion}
-
-To conclude, we have developed a realistic and microscopically justified model of the impact of phonons on solid state single photon sources. We used a modified, `semi-quantum', master equation method for the efficient calculation of coincidence rates, without having to resort to a quantum Monte-Carlo simulation approach.
-
-Our physical results are best summarised by considering the following scenario: suppose you are working with a system where phonon dephasing and spontaneous emission are the dominant loss channels, where you have some control over the cavity parameters ($h$ and $\kappa$), and that you are tasked with building a high indistinguisability, efficient, on-demand photon source. In this scenario, we find that a Raman technique is preferable to the pulse-relax approach. In particular, in addition to producing superior production rates at a given indistiguishability, the Raman approach we have taken only requires varying of the detuning - by tuning the cavity mode, and driving field - whilst leaving the other cavity properties fixed. This is in contrast in to the pulse-relax approach that we used for comparison where we allowed the cavity coupling strength itself to be varied within a realistic range of values. 
-
-
-
-\section{Acknowledgements} We thank Ahsan Nazir, Simon Benjamin, Pieter Kok, Alexia Auff\`eves, and Sean Barrett for useful discussions. This work was supported by the Engineering \& Physical Sciences Research Council (UK) and the National Research Foundation and Ministry of Education, Singapore. B. W. L. thanks the Royal Society for a University Research Fellowship. 
-
-\appendix
-\section{Semi-quantum Master Equations}
-\label{appA}
+\section{Introducing the Semi-Quantum Master Equation Method}
 
 We are often interested in `observable events' in quantum systems, such as the emission of a photon. When an event is observed the system undergoes a transition due to wave function collapse. During a period when no event is observed the system evolves according to a conditional master equation, reflecting the fact if events could be observed but are not, then this also informs our knowledge of the state. In order to answer questions about the probabilities and time distributions of events or chains of events, one approach is to use a quantum jump master equation to generate individual trajectories of the system. In each timestep we decide probabilistically whether an event should occur. If it does occur then the system collapses according to a quantum jump; if it does not occur then the system evolves conditioned on no jump occurring. Statistics about the quantities of interest are built up as many trajectories are created.
 
@@ -312,10 +197,10 @@ Suppose that it is also possible for the system to spontaneously emit from state
 
 We are interested in knowing about the time distribution of the first time a photon is emitted. We add the two process-states $0$ and $1$, indicating whether the event has occurred or not. Our new system is described by:
 \begin{eqnarray}
-  S =& \left\{ \ket{g0}, \ket{e0}, \ket{g1}, \ket{e1} \right\} \label{sys-start} \\
-  H =& \Omega \left( \ketbra{g0}{e0} + \ketbra{e0}{g0} + \ketbra{g1}{e1} + \ketbra{e1}{g1}  \right) \\
-  J_1 =&  \ketbra{g1}{e0} \\
-  J_2 =& \ketbra{g1}{e1}. \label{sys-end}
+  S &=& \left\{ \ket{g0}, \ket{e0}, \ket{g1}, \ket{e1} \right\} \label{sys-start} \\
+  H &=& \Omega \left( \ketbra{g0}{e0} + \ketbra{e0}{g0} + \ketbra{g1}{e1} + \ketbra{e1}{g1}  \right) \\
+  J_1 &=&  \ketbra{g1}{e0} \\
+  J_2 &=& \ketbra{g1}{e1}. \label{sys-end}
 \end{eqnarray}
 The population in the $1$ subspace at time $t$ will give us the probability a photon has been emitted by this time.
 
@@ -328,4 +213,120 @@ The population in the $1$ subspace at time $t$ will give us the probability a ph
 \end{figure}
 
 If we only cared about this distribution, we could reduce the size of the system by replacing the states $\ket{g1}$ and $\ket{e1}$ with a single state $\ket{1}$ to keep track of the cumulative jump probability over time. We would need to remove the last two terms from the Hamiltonian as well as $J_2$, and set $J_1 =  \ketbra{1}{e0}$. Figure~\ref{sqme_mc_comp} shows the cumulative jump probability for this system, showing agreement between the SQME results and Monte Carlo simulations with increasing numbers of runs.
+
+
+\section{Applying the Semi-Quantum Master Equation Method}
+
+\begin{figure}[htb]
+  \begin{center}
+  \includegraphics[width=8cm]{assets/subspace_partition.pdf}
+\end{center}
+  \caption{The system jump-space: On the first jump the system moves to $P_+ / P_-$ depending on the arm in which the photon is detected. After the second jump the system moves to state $P_S / P_D$ depending on whether the second photon was detected in the same or different arm to the first. At any point the system can undesirably spontaneously emit into the environment, moving to the junk state $P_E$.}
+  \label{subspace_partition}
+\end{figure}
+
+When calculating $v_{\rm HOM}$ we must consider events in which photons trigger either detector, and events in which photons are spontaneously emitted into the environment. We introduce a set of process-states to record and labels these event classes (Fig.~\ref{subspace_partition}):
+\begin{eqnarray}
+  S_P = \left\{ P_0, P_+, P_-, P_S, P_D, P_E \right\}.
+\end{eqnarray}
+The process-state starts as $P_0$ and remains there until an event of interest occurs. $P_{+/-}$ represents the process-state after a single photon has been detected in the $D_{+/-}$ detectors respectively. After a second photon has been detected the process-state becomes $P_{S/D}$ depending on whether the second photon was detected in the same or different detector as the first. If at any point a photon is emitted into the environment the process moves to state $P_E$. When calculating the indistinguishability we can then ignore any population in state $P_E$, but we must include it when considering the overall efficiency of the process.
+
+We must also identify the operators that cause the movement between the process-states. Before doing this we extend the state-space $S$ of the system to include the process-states:
+\begin{eqnarray}
+  S   &= S_1 \otimes S_2 \otimes S_P.
+\end{eqnarray}
+The detection operators are then given by
+%\begin{widetext}
+\begin{eqnarray}
+  C_{+}^{(0)}  & =& C_{+} \otimes \ketbra{P_+}{P_0}\\
+  C_{+}^{(+)} & =& C_{+} \otimes \ketbra{P_S}{P_+}\\
+  C_{+}^{(-)} & =& C_{+} \otimes \ketbra{P_D}{P_-}\\
+  C_{-}^{(0)}  & =& C_{-} \otimes \ketbra{P_-}{P_0}\\
+  C_{-}^{(-)} & =& C_{-} \otimes \ketbra{P_S}{P_-}\\
+  C_{-}^{(+)} & =& C_{-} \otimes \ketbra{P_D}{P_+}
+\end{eqnarray}
+where for example $C_{+}^{(-)}$ is the jump operator representing a second detection in the $D_+$ detector, when the first detection was in $D_-$. The spontaneous emission operators are given similarly:
+\begin{eqnarray}
+  E_1^{(0)} &=& \ketbra{g_1}{e} \otimes \id_S   \otimes \ketbra{P_E}{P_0}\\
+  E_2^{(0)} &=&  \id_S  \otimes \ketbra{g_1}{e} \otimes \ketbra{P_E}{P_0}\\
+  E_1^{(+)} &=& \ketbra{g_1}{e} \otimes \id_S   \otimes \ketbra{P_E}{P_+}\\
+  E_2^{(+)} &=&  \id_S  \otimes \ketbra{g_1}{e} \otimes \ketbra{P_E}{P_+}\\
+  E_1^{(-)} &=& \ketbra{g_1}{e} \otimes \id_S   \otimes \ketbra{P_E}{P_-}\\
+  E_2^{(-)} &=&  \id_S  \otimes \ketbra{g_1}{e} \otimes \ketbra{P_E}{P_-}
+\end{eqnarray}
+where here $E_1^{(+)}$ represents a emission from $S_1$ acting after the first photon was detected in the $D_+$ detector.
+
+Finally we must modify our phonon decoherence operators. The subspaces corresponding to different process-states, are classically separated by observable events. These classically separated branches cannot exhibit interference, and we can therefore take the decoherence processes to occur independently on each branch:
+\begin{eqnarray}
+  U_{+,1}^{(0)} &=& \sqrt{J(N+1)}\ketbra{\psi_-}{\psi_+} \otimes \id_S \otimes \ketbra{P_0}{P_0}\\
+  U_{-,1}^{(0)} &=& \sqrt{JN}\ketbra{\psi_+}{\psi_-} \otimes \id_S \otimes \ketbra{P_0}{P_0}\\
+  U_{+,1}^{(+)} &=& \sqrt{J(N+1)}\ketbra{\psi_-}{\psi_+} \otimes \id_S \otimes \ketbra{P_+}{P_+}\\
+  U_{-,1}^{(+)} &=& \sqrt{JN}\ketbra{\psi_+}{\psi_-} \otimes \id_S \otimes \ketbra{P_+}{P_+}\\
+  U_{+,1}^{(-)} &=& \sqrt{J(N+1)}\ketbra{\psi_-}{\psi_+} \otimes \id_S \otimes \ketbra{P_-}{P_-}\\
+  U_{-,1}^{(-)} &=& \sqrt{JN}\ketbra{\psi_+}{\psi_-} \otimes \id_S \otimes \ketbra{P_-}{P_-}
+\end{eqnarray}  
+%\end{widetext}
+with similar operators acting on the second system. We do not need decoherence operators acting on the $P_S$, $P_D$ or $P_E$, since we are only concerned with populations in, and not coherences between, these states. Moreover, we only really need to keep track of the total population in each of these subspace, and not the populations of each state that make up each subspace - a fact that we exploit to reduce the dimension of our problem for the numerical simulations.
+
+We form a Lindblad master equation using these $24$ Lindblad operators:
+\begin{eqnarray}
+  \dot{\rho} &= i\left[ \rho, H \right] + \sum_i \gamma_i \left( L_i\rho L_i^\dagger - 1/2(L_i^\dagger L_i\rho + \rho L_i^\dagger L_i) \right).
+\end{eqnarray}
+The $\gamma_i$ are the rates for each process. As noted earlier for the $U_{\pm, i}^{(j)}$ this rate is $1$, as the rates have been incorporated into the Lindblad operators. For the $C_\pm^{(i)}$ we need $\gamma = \kappa$, the cavity leakage rate, which we take to be $3h$, a choice that allows for a reasonable enhancement of photon emission from the emitter system into the desired mode outside of the cavity, whilst preventing cavity photons being reabsorbed by the emitter system. For the $E_i^{(j)}$ we take $\gamma = 0.005ps^{-1}$, assuming a radiative livetime of $200$~ps. Our model allows only for spontaneous emission directly from the excited state $\ket{e}$; we assume that there is no loss from the cavity to modes other than the target waveguide mode, and that all photons that are emitted into the target mode are detected. For similar cavities we expect these effects to impact the two approaches to equal extent. 
+
+The dimension of this extended space $S$ is $4 \times 4 \times 6 = 96$. In fact we can reduce this by eliminating some unneccessary states from the subspaces. By carefully considering the basis states accessible in each the subspace corresponding to each process, we can reduce the number of system states to $9 + 6 + 6 + 1 + 1 + 1 = 24$. For our simulation we will need to calculate the density matrix for this system. As noted in~\ref{appA}, no coherences can exist between the different process-state subspaces. This reduces the number of density matrix elements we need to track to $9^2 + 6^2 + 6^2 + 1 + 1 + 1 = 116$.
+
+\section{Results}
+
+\begin{figure}[htb]
+  \begin{center}
+  \includegraphics[width=8cm]{assets/2LS_plot.pdf}
+  \end{center}
+  \caption{Pulse-relax technique: calculations are performed as a function of the cavity coupling strength. Upper panel: at realistic coupling strengths ($h<1$) increased HOM indistinguishability necessarily entails a decrease in efficiency (success probability), with the product of the two (blue curve) approaching zero. Here the spontaneous emission rate is $\Gamma = 0.005~\mathrm{ps}^{-1}$. For overcoming phonon-induced decoherence and achieving a  high success probability, we must move into a region of unrealistically high $h$, represented by the increasing level of shading of this plot.
+ The lower panel shows the phonon spectral density, Eq.~\ref{eq:specdens}, evaluated at the cavity coupling strength $h$, giving a rate that is directly proportional to phonon-induced dephasing during the pulse-relax process.
+ }
+  \label{2LS_plot}
+\end{figure}
+
+Fig.~\ref{2LS_plot} shows the HOM visibility obtained from, and spectral density used in, simulations of the pulse-relax technique. At low coupling strengths the phonon spectral density is small, and so phonon decoherence is largely avoided giving high indistinguishability. As described earlier, we have fixed $\kappa$, the cavity leakage rate, to be $3 h$ so the effective coupling to the the target mode is proportional to the Purcell factor $h^2/\kappa \sim h$. This means that, for small $h$, the rate of photon emission into the cavity mode is slow and thus spontaneous emission into environmental optical modes is a problem. To take account of this effect, we define the `combined HOM visibility', which is the product of success probability and bare HOM visibility, which approaches zero as $h \to 0$. Taking large coupling strengths allows one to access the region to the higher frequency side of the hump in the phonon spectral density and so could avoid this problem, but is unrealistic given the cavity parameters currently obtainable experimentally. In the experimentally feasible region ($h<1$)~\cite{vuckovic:12} we must therefore trade indistinguishability for efficiency.
+
+\begin{figure}[htb]
+  \begin{center}
+  \includegraphics[width=8cm]{assets/raman_plot.pdf}
+  \end{center}
+  \caption{Raman technique, $h = 0.5$: by choosing a detuning to move beyond the region of high phonon spectral density we can achieve near-perfect indistinguishability. The efficiency in this region is high enough for a feasible photon source.}
+  \label{raman_plot}
+\end{figure}
+
+In contrast, the Raman procedure (Fig.~\ref{raman_plot}) avoids this trade-off. For small detuning the visibility is low, but this is because we do not get a proper Raman ground state transition unless $\nu \gg h$. If this condition is not met, the system simply undergoes a non-optimal detuned pulse-relax transition. Once we reach a detuning of around $\nu = 12h (= 6~\mathrm{ps}^{-1})$ the indistinguishability and efficiency both  increase. Our choice of detuning size is limited in that it must be small in comparison with the original energy gap between the ground and excited states, and that it avoids any nearby excited states. This leaves us some freedom to use large detunings to push to frequencies above the region of high phonon spectral density. As the detuning is increased the efficiency saturates below unity. In this region both the time taken for the Raman process and the average excited state lifetime scale with the detuning squared, the two effects cancelling one another.
+
+\begin{figure}[htb]
+  \begin{center}
+  \includegraphics[width=8cm]{assets/no_spont_prod_rate.pdf}
+  \includegraphics[width=8cm]{assets/rate_of_production_plot.pdf}
+  \end{center}
+  \caption{Rate of photon pair production: with no spontaneous emission (upper), and spontaneous emission with an excited-state lifetime of $200$~ps (lower)}
+  \label{rate_of_production_plot}
+\end{figure}
+
+In many applications where photons are used, the product of efficiency and indistinguishability may not be the most useful metric for characterising the performance of the source; often photon escape errors can be accounted for, and the indistinguishability of photons that are detected is the important figure of merit. We therefore also calculate the rate of production of pairs of photons of a given indistinguishability using each approach (Fig.~\ref{rate_of_production_plot}). For our production rate we take
+\begin{eqnarray}
+  r_f = \frac{e_f}{t_f}
+\end{eqnarray}
+where $e_f$ is the efficiency and $t_f$ is the time taken for $99\%$ of the runs to have completed (possibly unsuccessfully), for parameters ($h$ in the pulse-relax scheme, and $\nu$ in the Raman scheme) chosen to obtain a given indistinguishability, $f$. This figure is somewhat approximate as it takes no account of how successful runs (where two photons are emitted into the correct modes) and unsuccessful runs are distributed within the process run time, and no allowance is made for time taken to reset the system in the event of a failure. The effect of the former is minor since in our model spontaneous emission can occur uniformly at any point of the process. We will revisit the effect of the latter shortly.
+
+Even in the absence of spontaneous emission (Fig.~\ref{rate_of_production_plot}, upper panel), the Raman procedure is quicker than the pulse-relax process at generating photons of a sufficiently high level of indistinguishability. With the dephasing parameters chosen in our model this occurs for indistinguishability of greater than $99.9\%$. In our model, spontaneous emission is the only process degrading the efficiency -- without it we have perfect efficiency and so neither of the potential shortcomings discussed in the previous paragraph apply.
+
+When spontaneous emission is added, we see a similar pattern but the indistinguishability threshold is very slightly lower. This is an upper bound, as here the reset time becomes important. The efficiency of the Raman procedure remains fixed at about $80\%$, requiring on average $1.25$ runs per pair. In contrast, the efficiency of the pulse-relax procedure heads towards zero, meaning that many attempts will be needed to produce a pair. If the time taken to reset the system (to the excited state $\ket{e}$ in which we have assumed the pulse-relax system starts) is large, the Raman procedure will become advantageous at a far lower threshold.
+
+\section{Conclusion}
+
+To conclude, we have developed a realistic and microscopically justified model of the impact of phonons on solid state single photon sources. We used a modified, `semi-quantum', master equation method for the efficient calculation of coincidence rates, without having to resort to a quantum Monte-Carlo simulation approach.
+
+Our physical results are best summarised by considering the following scenario: suppose you are working with a system where phonon dephasing and spontaneous emission are the dominant loss channels, where you have some control over the cavity parameters ($h$ and $\kappa$), and that you are tasked with building a high indistinguisability, efficient, on-demand photon source. In this scenario, we find that a Raman technique is preferable to the pulse-relax approach. In particular, in addition to producing superior production rates at a given indistiguishability, the Raman approach we have taken only requires varying of the detuning - by tuning the cavity mode, and driving field - whilst leaving the other cavity properties fixed. This is in contrast in to the pulse-relax approach that we used for comparison where we allowed the cavity coupling strength itself to be varied within a realistic range of values. 
+
+
+
+\section{Acknowledgements} We thank Ahsan Nazir, Simon Benjamin, Pieter Kok, Alexia Auff\`eves, and Sean Barrett for useful discussions. This work was supported by the Engineering \& Physical Sciences Research Council (UK) and the National Research Foundation and Ministry of Education, Singapore. B. W. L. thanks the Royal Society for a University Research Fellowship. 
+
 
