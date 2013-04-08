@@ -1,4 +1,4 @@
-\chapter{Light} 
+\chapter{Light as a Quantum Field} 
 \label{ch:Light}
 
 \section{Quantum Treatment of Light}
@@ -27,7 +27,7 @@ We begin by taking a one dimensional cavity occupying the interval $[0, L]$ on t
   E_x &= \sum_j \sqrt{\frac{2\omega_j^2}{\epsilon_0 L}} q_j(t) \sin(k_j z) \\
   B_y &= \sum_j \frac{1}{k_j \mu_0} \sqrt{\frac{2\omega_j^2}{\epsilon_0 L}} q_j(t) \cos(k_j z),
 \end{align}
-where $\omega_j = ck_j = \pi j/L$ for $j \in \{1, 2, \dots\}$ and $\epsilon_0$ and $\mu_0$ are constants that satisfy $\epsilon_0 \mu_0 = 1/c^2$. We know from the wave equation that
+where $\omega_j = ck_j = \pi j/L$ for $j \in \{1, 2, \dots\}$ and $\epsilon_0$ and $\mu_0$ are constants that satisfy $\epsilon_0 \mu_0 = 1/c^2$. The discrete set of values $\omega_j$ arise from applying the boundary conditions at either end of the cavity. We know from the wave equation that
 \begin{align}
   \ddot{q}_j = -\omega_j^2 q_j
 \end{align}
@@ -42,7 +42,7 @@ We now write the standard electromagentic field Hamiltonian in terms of $q$:
   H = \frac{\epsilon_0}{2} \int_0^L \vert \vec{E}\vert^2 + c^2\vert\vec{B}\vert^2 dz 
   = \frac{1}{2} \sum_j \left(\omega_j q_j^2 + p_j^2\right),
 \end{align}
-where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. The Hamiltonian now takes the same form as the Hamiltonian for the simple harmonic osciallator. We proceed with quantization by analogy with the harmonic oscillator by promoting $p$ and $q$ to operators satisfying the communtation relations
+where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. The Hamiltonian now takes the same form as the Hamiltonian for the simple harmonic osciallator. We proceed with quantisation by analogy with the harmonic oscillator by promoting $p$ and $q$ to operators satisfying the communtation relations
 \begin{align}
   [\hat{q}_i, \hat{p}_j] &= i\delta_{ij} \\
   [\hat{q}_i, \hat{q}_j] &= [\hat{p}_i, \hat{p}_j] = 0.
@@ -50,7 +50,7 @@ where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. The Hamiltonian now t
 As $\hat{p}$ and $\hat{q}$ satisfy the Heisenberg commutation relations, so will $\hat{E}_x$ and $\hat{B}_y$. As a consequence $\hat{E}_x$ and $\hat{B}_y$ will satisfy the Heisenberg uncertainty prinicple, so it is not possible to simultaneously have a well defined electric field and magnetic field. It is convenient to introduce operators $\an{a}$ and $\cre{a}$ so that
 \begin{align}
   \hat{q}_i &= \sqrt{\frac{\hbar}{2\omega_i}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right)\label{quantum_q} \\
-  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right)\\
+  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}e^{-i\omega_i t} - \cre{a}e^{i\omega_i t}\right)\\
   \hat{H} &= \sum_k \hbar \left( \omega_k \cre{a}_k\an{a}_k +\frac{1}{2} \right).
 \end{align}
 The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following commutation relations:
@@ -98,7 +98,7 @@ for complex number $\alpha = p + iq$, we find that
 \end{align}
 The states $\ket{\alpha}$ are known as \textit{coherent states} and are the closest quantum analogue to the classical states of radiation.
 
-\subsection{Field in free space}
+\subsection{Field in Free Space}
 
 We now present the corresponding results for the full electromagnetic field in free space. It will be useful to give the results for both the classic and quantum states, as we will use both at later points in this thesis.  Classically the state of the electromagnetic field can be decomposed into plane waves 
 \begin{align}
@@ -173,7 +173,7 @@ Showing good Hong-Ou-Mandel interference is not the only important measure of a 
 
 \subsection{Atom in a Cavity - Semiclassical Approach}
 
-We begin our section on light-matter interactions by looking at an atom interacting with electromagnetic modes in a cavity. We treat the cavity as an idealised system where only certain modes can exist, which allows us to ignore many of the complexities due to coupling to the full electromagnetic spectrum. Cavities are also incredibly important in quantum technologies due to their ability to filter and enhance emission into a given mode.
+We begin our section on light-matter interactions by looking at the semiclassical theory an atom interacting with electromagnetic modes in a cavity. The semiclassical approach treats the light field classically and the atom quantum mechanically, and is appropriate for coherent states of light with high photon number. We treat the cavity as an idealised system where only certain modes can exist, which allows us to ignore many of the complexities due to coupling to the full electromagnetic spectrum. Cavities are also incredibly important in quantum technologies due to their ability to filter and enhance emission into a given mode.
 
 An atom will couple to an electromagnetic field due to its charge configuration. It is convenient to use the dipole approximation to the coupling, taking the interaction Hamiltonian $H_d = -\vec{d}\cdot\vec{E}(t)$ where $\vec{d} = -e \vec{r}$ for the charge $e$ and the position operator $\vec{r}$ from the atom's center of mass, which we assume to be at the origin. The dipole approximation can be obtained by keeping the first order terms of an expansion of $\vec{E}$ about the origin and is a good approximation when the wavelength of the radiation is bigger the spacial extent of the atom. In quantum optics we do not usually use frequencies about the UV spectrum, $\lambda > 100\text{nm}$, which when compared with typical atomic radii of the order of $0.1\text{nm}$ makes the approximation valid. We also assume that, although we treat the atom quantum mechanically, we can treat its center of mass classically, so that the operator $\vec{r}$ really does correspond to a vector operator from the origin. 
 
@@ -209,9 +209,9 @@ To remove some of the time dependency we make a unitary transformation into a ba
     0 & e^{-i\omega t/2}
   \end{bmatrix},
 \end{align}
-to give
+The Hamiltonian transforms as $\hat{H} = UHU^{-1} + i U'U^{-1}$, to give
 \begin{align}
-  H =
+  \hat{H} =
   \begin{bmatrix}
     -(\omega_0-\omega)/2 & eE_0\vec{r}_{eg}^*\cdot(\vec{\epsilon}^* + \vec{\epsilon}\exp(2i\omega t)) \\
     eE_0\vec{r}_{eg}\cdot(\vec{\epsilon} + \vec{\epsilon}^*\exp(-2i\omega t)) & +(\omega_0-\omega)/2
@@ -220,7 +220,7 @@ to give
 
 We now make the rotating wave approximation, neglecting the fast rotating terms $e^{2i\omega t}$ and $e^{-2i\omega t}$ on the basis that they will be far off-resonance and their contribution will average to zero over time. This leaves us with 
 \begin{align}
-  H =
+  \hat{H} =
   \begin{bmatrix}
     -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot\vec{\epsilon}^* \\
     eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +\omega_0/2
@@ -230,7 +230,7 @@ which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). The syste
 
 \subsection{Atom in a Cavity: Quantum case}
 
-In many cases the semiclassical is sufficient, however if we want to look at the emission and absorbtion of single photons we must instead use the fully quantized field. We can either rederive the dipole approximation from the quantized Hamiltonian, in terms of the vector potential $A$, or appeal to the correspondence principle. 
+In many cases the semiclassical approach is sufficient, however if we want to look at the emission and absorption of single photons we must instead use the fully quantised field. We can either rederive the dipole approximation from the quantised Hamiltonian, in terms of the vector potential $A$ \cite{kok+lovett}, or appeal to the correspondence principle. 
 
 Quantum mechanically an electric field operator for a field with a single mode and definite polarisation is given
 \begin{align}
@@ -238,7 +238,7 @@ Quantum mechanically an electric field operator for a field with a single mode a
 \end{align}
 with $\vec{r}_{eg}$ defined as before we write the dipole interaction term in the system basis:
 \begin{align}
-  H_d = E_0 e \vec{r}_{eg}\cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a})\sp + E_0 e \vec{r}_{eg}^* \cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a}\sm),
+  H_d = E_0 e \vec{r}_{eg}\cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a})\sp + E_0 e \vec{r}_{eg}^* \cdot(\vec{\epsilon}\an{a} + \vec{\epsilon}^*\cre{a})\sm,
 \end{align}
 where we have used spin language to describe atomic transitions, $\ket{e}\bra{g} \equiv \sp$ and $\ket{g}\bra{e} \equiv \sm$. We use this to rewrite the total Hamiltonian (ignoring the vacuum energy contribution)
 \begin{align}
@@ -337,7 +337,7 @@ Following a similar pattern to the quantisation of the electromagnetic field, we
 \begin{align}
   H_E = \sum_\alpha \omega_\alpha \cre{b}_\alpha \an{b}_\alpha,
 \end{align}
-where $\cre{b}$ and $\an{b}$ are creation and annihilation operators, satisfying the familiar commutation relations: like photons, phonons are bosonic in nature. In a finite crystal there exist a discrete set of vibrational modes, but in practice in bodies of large extent the spectrum becomes approximately continuous. In any case, we choose to write the set of modes as a sum over descrete modes, mostly out of convenience. We usually assume that the phonon bath exists in a thermal state
+where $\cre{b}$ and $\an{b}$ are creation and annihilation operators, satisfying the familiar commutation relations: like photons, phonons are bosonic in nature. In a finite crystal there exist a discrete set of vibrational modes, but in practice in bodies of large extent the spectrum becomes approximately continuous. In any case, we choose to write the set of modes as a sum over discrete modes, mostly out of convenience. We usually assume that the phonon bath exists in a thermal state
 \begin{align}
   \rho_E = \frac{1}{Z_\beta} e^{-\beta H_E}
 \end{align}
@@ -356,17 +356,17 @@ We have also used that in quatum dot systems the deformation potential dominates
 
 Following the technique given in chapter \ref{ch:QuantumDynamics} we move to the interaction picture and decompose the system part of the interaction Hamiltonian, $\ket{e}\bra{e}$ into eigenoperators of the system Hamiltonian:
 \begin{align}
-  \tilde{H} = \left(P_0 + P_\Lambda e^{-i\Delta t}e^{\Lambda t} + P^\dagger_\Lambda e^{-i\Delta t} e^{i\Lambda t}\right)\sum_\vec{q}g_\vec{q}\left(\an{a}_\vec{q}e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t} \right)
+  \tilde{H} = \left(P_0 + P_\Lambda e^{-i(2\Delta + \Lambda) t} + P^\dagger_\Lambda e^{-i(2\Delta - \Lambda) t}\right)\sum_\vec{q}g_\vec{q}\left(\an{a}_\vec{q}e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t} \right)
 \end{align}
 where $P_0$ and $P_\Lambda$ are given in terms of the eigenvectors from the previous section
 \begin{align}
   P_0 &= \cos^2\phi \ket{+}\bra{+} + \sin^2\phi \ket{-}\bra{-} \\
-  p_\Lambda &= -\sin\phi \cos\phi \ket{-}\bra{+}.
+  P_\Lambda &= -\sin\phi \cos\phi \ket{-}\bra{+}.
 \end{align}
-By comparing with eq. (\ref{xxx}) we identify
+and $\Lambda = \lambda_{+} - \lambda{-}$. By comparing with eq. (\ref{xxx}) we identify
 \begin{align}
-  B_0(t) &= \sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right)
-  B_\Lambda(t) &= e^{-i\Delta t}\sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right).
+  B_0(t) &= \sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right) \\
+  B_\Lambda(t) &= e^{-i2\Delta t}\sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right).
 \end{align}
 
 \begin{align}
@@ -384,7 +384,7 @@ where
 \begin{align}
   N(\omega) = \frac{1}{e^{\beta \omega} - 1}
 \end{align}
-is the occupation of state $i$. This allows us to 
+is the occupation of state $i$. This allows us to define the Lindblad coefficients
 \begin{align}
   \gamma_\alpha(\omega) = \left\{
     \begin{array}{l l}
@@ -402,4 +402,4 @@ We end up with the phonon dissipator term
 \begin{align}
   D_\text{ph}(\rho) = J(\Lambda)\left[\left(N(\Lambda) + 1)D[P_\Lambda]\rho\right) + N(\Lambda)D[P^\dagger_\Lambda]\rho \right],
 \end{align}
-where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$. The dissipator terms correspond to a jump $\ket{+}$ to $\ket{-}$ with emission of energy into the phonon bath, and a jump from $\ket{-}$ to $\ket{+}$ with the corresponding absorption of energy from the the phonon bath. The transition rate is proportional to the spectral density, which encapsulates all the system-specific information we need to supply. What is more, we only sample the spectral density at the given frequency $\Lambda$, which can be adjusted using other system paramaters allowing us to minimise the phonon decoherence effects.
+where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$. The dissipator terms correspond to a jump from $\ket{+}$ to $\ket{-}$ with emission of energy into the phonon bath, and a jump from $\ket{-}$ to $\ket{+}$ with the corresponding absorption of energy from the the phonon bath. The transition rate is proportional to the spectral density, which encapsulates all the system-specific information we need to supply. What is more, we only sample the spectral density at the given frequency $\Lambda$, which can be adjusted using other system paramaters allowing us to minimise the phonon decoherence effects.
