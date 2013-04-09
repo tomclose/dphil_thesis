@@ -3,7 +3,7 @@
 
 \section{Quantum Treatment of Light}
 
-The quest to define the nature of light occupies an important place in the history of physics. Much of the debate has focussed on whether light should be modelled as a particle or as a wave. Newton favoured the particular description, which formed the basis for his many fundamental contributions to optics, while his contemporary Huuygens believed in a wave description. Young's famous split experiment demonstrated that light exhibited interference effects and when Maxwell introduced his unifying equations for the electic field, the problem was thought to be settled: in a vacuum Maxwell's equations for the electric field, $\vec{E}$, and magnetic field, $\vec{B}$, reduce to:
+The quest to define the nature of light occupies an important place in the history of physics. Much of the debate has focussed on whether light should be modelled as a particle or as a wave. Newton favoured the particular description, which formed the basis for his many fundamental contributions to optics, while his contemporary Huygens believed in a wave description. Young's famous split experiment demonstrated that light exhibited interference effects and when Maxwell introduced his unifying equations for the electic field, the problem was thought to be settled: in a vacuum Maxwell's equations for the electric field, $\vec{E}$, and magnetic field, $\vec{B}$, reduce to:
 \begin{align}
   \nabla \times \vec{B} &= \frac{1}{c^2} \frac{\partial \vec{E}}{\partial t} \label{maxwell_be} \\
   \nabla \times \vec{E} &= - \frac{\partial \vec{B}}{\partial t}\\
@@ -16,9 +16,9 @@ which lead to the wave equation for $\vec{E}(\vec{r}, t)$:
 \end{align}
 where $c$ is the speed of light.
 
-At the beginning of the 20th century physicists were forced to return to the question in order to explain the photoelectric effect and `ultraviolet catastrophy' of black body radiation. These problems were overcome, by Einstein \cite{eistein_photoelectric} and Planck \cite{planck_constant} respectively, by assuming that light could only be absorbed and emitted in discrete units of energy. The results were fundamental in the early development of the field of quantum mechanics. The modern description of light, capable of producing both wave and particle phenomena, is largely based on proposals from Dirac in the late 1920s \cite{dirac_1927}.
+At the beginning of the 20th century physicists were forced to return to the question in order to explain the photoelectric effect and `ultraviolet catastrophy' of black body radiation. These problems were overcome, by Einstein \cite{einstein_photoelectric} and Planck \cite{planck_constant} respectively, by assuming that light could only be absorbed and emitted in discrete units of energy. The results were fundamental in the early development of the field of quantum mechanics. The modern description of light, capable of producing both wave and particle phenomena, is largely based on proposals from Dirac in the late 1920s \cite{dirac_1927}.
 
-\subsection{Quantizing Light: A toy model}
+\subsection{Quantising Light: A toy model}
 
 The modern approach to quantising the electromagnetic field involves working with the electromagnetic vector potential and is fairly technical due to the relativistic nature of light and continuous spectrum of modes. We aim to avoid these technical complexities while still providing an overview of the key stages by looking at a toy model of light: an electromagnetic field in a one dimensional cavity. We later state the results for the quantisation of the full field.
 
@@ -42,18 +42,18 @@ We now write the standard electromagentic field Hamiltonian in terms of $q$:
   H = \frac{\epsilon_0}{2} \int_0^L \vert \vec{E}\vert^2 + c^2\vert\vec{B}\vert^2 dz 
   = \frac{1}{2} \sum_j \left(\omega_j q_j^2 + p_j^2\right),
 \end{align}
-where $p_i = \dot{q_i}$ is the conjugate momentum for $q$. The Hamiltonian now takes the same form as the Hamiltonian for the simple harmonic osciallator. We proceed with quantisation by analogy with the harmonic oscillator by promoting $p$ and $q$ to operators satisfying the communtation relations
+where $p_i = \dot{q_i}$, the conjugate momentum for $q$. The Hamiltonian now takes the same form as the Hamiltonian for the simple harmonic osciallator. We proceed with quantisation by analogy with the harmonic oscillator by promoting $p$ and $q$ to operators satisfying the communtation relations
 \begin{align}
   [\hat{q}_i, \hat{p}_j] &= i\delta_{ij} \\
   [\hat{q}_i, \hat{q}_j] &= [\hat{p}_i, \hat{p}_j] = 0.
 \end{align}
-As $\hat{p}$ and $\hat{q}$ satisfy the Heisenberg commutation relations, so will $\hat{E}_x$ and $\hat{B}_y$. As a consequence $\hat{E}_x$ and $\hat{B}_y$ will satisfy the Heisenberg uncertainty prinicple, so it is not possible to simultaneously have a well defined electric field and magnetic field. It is convenient to introduce operators $\an{a}$ and $\cre{a}$ so that
+Since $\hat{p}$ and $\hat{q}$ satisfy the Heisenberg commutation relations, so will $\hat{E}_x$ and $\hat{B}_y$. As a consequence $\hat{E}_x$ and $\hat{B}_y$ will obey the Heisenberg uncertainty prinicple, so it is not possible to simultaneously have a well defined electric field and magnetic field. It is convenient to introduce operators $\an{a}$ and $\cre{a}$ so that
 \begin{align}
-  \hat{q}_i &= \sqrt{\frac{\hbar}{2\omega_i}}\left( \an{a}e^{-i\omega_i t} + \cre{a}e^{i\omega_i t}\right)\label{quantum_q} \\
-  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}e^{-i\omega_i t} - \cre{a}e^{i\omega_i t}\right)\\
+  \hat{q}_i &= \sqrt{\frac{\hbar}{2\omega_i}}\left( \an{a}_ie^{-i\omega_i t} + \cre{a}_ie^{i\omega_i t}\right)\label{quantum_q} \\
+  \hat{p}_i &= -i \sqrt{\frac{\hbar\omega_i}{2}}\left( \an{a}_ie^{-i\omega_i t} - \cre{a}_ie^{i\omega_i t}\right)\\
   \hat{H} &= \sum_k \hbar \left( \omega_k \cre{a}_k\an{a}_k +\frac{1}{2} \right).
 \end{align}
-The commutation relations for $\hat{x}$ and $\hat{p}$ imply the following commutation relations:
+The commutation relations for $\hat{q}_i$ and $\hat{p}_i$ imply the following commutation relations:
 \begin{align}
   [\cre{a}_i, \an{a}_j] &= \delta_{ij} \\
   [\cre{a}_i, \cre{a}_j] &= [\an{a}_i, \an{a}_j] = 0 \\
@@ -166,7 +166,7 @@ If $f_1 = f_2$ then $C=0$: perfectly identical photon wavepackets demonstrate pe
 
 The Hong-Ou-Mandel effect can be used as a diagnostic tool for single photon sources. We can compare the photon output from two different sources, or from the same source at different times by using a delay circuit. The coincidence rate, $C$ - the probability of detecting the photons on different arms, will be ideally be zero. This will be the case if the two photons are indistinguishable and both emitted in a pure state. In order for the photon wavepacket to be in a pure state it is necessary that the photon have no correlations with the source - there should be no information left in the source that could add to our description of the photon. Having indistinguishable photons in a pure state is important for a lot of quantum computing uses, including remote entanglement generation and linear optical quantum computing. 
 
-Showing good Hong-Ou-Mandel interference is not the only important measure of a good photon source. In some applications, notably in quantum communication devices, it is vital that exactly one photon, and not more, is emitted. It is possible to test for this using the Hanbury-Brown-Twiss experiment. Another important measure of the source is the efficiency - what proportion of the time a photon is emitted when requested - which can be measured by gathering statistics.
+Showing good Hong-Ou-Mandel interference is not the only important measure of a good photon source. In some applications, notably in quantum communication devices, it is vital that exactly one photon, and not more, is emitted. It is possible to test for this using the Hanbury-Brown-Twiss experiment (e.g.\ \cite{garrison+chiao}). Another important measure of the source is the efficiency - what proportion of the time a photon is emitted when requested - which can be measured by gathering statistics.
 
 
 \section{Light-Matter interactions}
@@ -185,7 +185,7 @@ In doing this we assume there is some specific transition we wish to target and 
 
 In order to calculate the dipole interaction term $H_d$ we need to know about the electric field, $\vec{E}$, and the position operator, $\vec{r}$. Classically the electric field is given by
 \begin{align}
-  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{n}r]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{n}r]),
+  \vec{E} = E_0 (\vec{\epsilon}\exp(i[\omega t - \vec{k}\cdot\vec{r}]) + \vec{\epsilon}^*\exp(-i[\omega t - \vec{k}\cdot\vec{r}]),
 \end{align}
 where $\vec{k}$ is the wavevector, $\omega$ is the frequency, $\vec{\epsilon}$ is the polarisation and $E_0$ is a constant of correct dimension.  We now need to write the position operator, $\vec{r}$, in terms of our system basis $\{\ket{g}, \ket{e}\}$. As $\vec{r}$ has odd parity the diagonal elements $\bra{g}H_d\ket{g}$ and $\bra{e}H_d\ket{e}$ must both vanish. As the Hamiltonian is Hermitian there is only one element left to specify:
 \begin{align}
@@ -230,7 +230,7 @@ which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). The syste
 
 \subsection{Atom in a Cavity: Quantum case}
 
-In many cases the semiclassical approach is sufficient, however if we want to look at the emission and absorption of single photons we must instead use the fully quantised field. We can either rederive the dipole approximation from the quantised Hamiltonian, in terms of the vector potential $A$ \cite{kok+lovett}, or appeal to the correspondence principle. 
+In many cases the semiclassical approach is sufficient, however if we want to look at the emission and absorption of single photons we must instead use the fully quantised field. We can either rederive the dipole approximation from the quantised Hamiltonian, in terms of the vector potential $A$ (e.g.\ \cite{kok+lovett}), or appeal to the correspondence principle. 
 
 Quantum mechanically an electric field operator for a field with a single mode and definite polarisation is given
 \begin{align}
@@ -244,11 +244,11 @@ where we have used spin language to describe atomic transitions, $\ket{e}\bra{g}
 \begin{align}
   H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm + \gamma\an{a} \sm + \gamma^{*}\cre{a} \sp, 
 \end{align}
-where $g = E_0 e \vec{r}_{eg}\cdot\vec{\epsilon}$ and $\gamma = E_0 e \vec{r}_{eg}^*\cdot\vec{\epsilon}$. The first two of the four terms on the right hand side correspond to exchanging excitations between the system and electromagnetic field. If the field mode is on resonance with the atomic transition these processes will be energy conserving. The last two terms involve adding or removing excitations from both atom and field at the same time.  If we have that $\omega \approx \omega_0$ these terms will be highly off-resonant; ignoring them is equivalent to making the RWA and gives
+where $g = E_0 e \vec{r}_{eg}\cdot\vec{\epsilon}$ and $\gamma = E_0 e \vec{r}_{eg}^*\cdot\vec{\epsilon}$. The middle two terms on the RHS correspond to exchanging excitations between the system and electromagnetic field. If the field mode is on resonance with the atomic transition these processes will be energy conserving. The last two terms involve adding or removing excitations from both atom and field at the same time.  If we have that $\omega \approx \omega_0$ these terms will be highly off-resonant; ignoring them is equivalent to making the RWA and gives
 \begin{align}
   H = \frac{\hbar \omega_0}{2} \sz + \hbar \omega \cre{a}\an{a} + g\an{a} \sp + g^{*}\cre{a} \sm.
 \end{align}
-This is the well known \textit{Jaynes-Cummings Hamiltonian}. If we consider a basis of \textit{dressed states}, where we let $\ket{g, n} = \ket{g}\otimes\ket{n}$ and similarly for $\ket{e, n}$, we find that the Jaynes-Cummings Hamiltonian looks like the Rabi Hamiltonian on closed subspaces $\{\ket{g, n}, \ket{e, n-1}\}$ - the joint system oscillates between a state where it is relaxed and a state where it is excited but the mode contains one fewer excitation.
+This is the well known \textit{Jaynes-Cummings Hamiltonian} (e.g.\ \cite{kok+lovett}). If we consider a basis of \textit{dressed states}, where we let $\ket{g, n} = \ket{g}\otimes\ket{n}$ and similarly for $\ket{e, n}$, we find that the Jaynes-Cummings Hamiltonian looks like the Rabi Hamiltonian on closed subspaces $\{\ket{g, n}, \ket{e, n-1}\}$ - the joint system oscillates between a state where it is relaxed and a state where it is excited but the mode contains one fewer excitation.
 
 \subsection{Raman procedure}
 
@@ -315,7 +315,7 @@ in terms of the parameters
   \theta &= \arctan\left(\frac{\Omega_1}{\Omega_2}\right)\\
   \phi &= \arctan\left(\frac{\Omega_1^2 + \Omega_2^2}{\lambda_{+}}\right).
 \end{align}
-The state $\ket{d}$ lies in the subspace spanned by $\{\ket{0}, \ket{1}\}$ and so is not optically active. For this reason it is often referred to as a \textit{dark state}.
+The state $\ket{d}$ lies in the subspace spanned by $\{\ket{0}, \ket{1}\}$ and is not optically active. For this reason it is often referred to as a \textit{dark state}.
 
 In the limit where $\Delta \gg \{\Omega_1, \Omega_2\}$ we get $\ket{+} \approx \ket{e}$ and $\ket{-} \approx \sin\theta\ket{0} + \cos\theta\ket{1}$, so if the system starts in the space spanned by $\{\ket{0}, \ket{1}\}$ it will stay there. In terms of this reduced basis the Hamiltonian becomes
 \begin{align}
@@ -352,7 +352,7 @@ As a concrete example we look at the Raman process from the previous section. We
 \begin{align}
   H = \ket{e}\bra{e}\sum_\vec{q} g_\vec{q}\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}}\right).
 \end{align}
-We have also used that in quatum dot systems the deformation potential dominates \cite{ep76, ep138}.
+We have also used that in quatum dot systems the deformation potential dominates \cite{gardiner+zoller, pazy}.
 
 Following the technique given in chapter \ref{ch:QuantumDynamics} we move to the interaction picture and decompose the system part of the interaction Hamiltonian, $\ket{e}\bra{e}$ into eigenoperators of the system Hamiltonian:
 \begin{align}
@@ -363,7 +363,7 @@ where $P_0$ and $P_\Lambda$ are given in terms of the eigenvectors from the prev
   P_0 &= \cos^2\phi \ket{+}\bra{+} + \sin^2\phi \ket{-}\bra{-} \\
   P_\Lambda &= -\sin\phi \cos\phi \ket{-}\bra{+}.
 \end{align}
-and $\Lambda = \lambda_{+} - \lambda{-}$. By comparing with eq. (\ref{xxx}) we identify
+and $\Lambda = \lambda_{+} - \lambda{-}$. By comparing with eq. (\ref{AB_decomp}) we identify
 \begin{align}
   B_0(t) &= \sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right) \\
   B_\Lambda(t) &= e^{-i2\Delta t}\sum_\vec{q} g_\vec{q} \left(\an{a}_\vec{q} e^{-i\omega_\vec{q} t} + \cre{a}_\vec{q} e^{i\omega_\vec{q} t}\right).
@@ -402,4 +402,4 @@ We end up with the phonon dissipator term
 \begin{align}
   D_\text{ph}(\rho) = J(\Lambda)\left[\left(N(\Lambda) + 1)D[P_\Lambda]\rho\right) + N(\Lambda)D[P^\dagger_\Lambda]\rho \right],
 \end{align}
-where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$. The dissipator terms correspond to a jump from $\ket{+}$ to $\ket{-}$ with emission of energy into the phonon bath, and a jump from $\ket{-}$ to $\ket{+}$ with the corresponding absorption of energy from the the phonon bath. The transition rate is proportional to the spectral density, which encapsulates all the system-specific information we need to supply. What is more, we only sample the spectral density at the given frequency $\Lambda$, which can be adjusted using other system paramaters allowing us to minimise the phonon decoherence effects.
+where $D[L]\rho = L\rho L^\dagger -1/2(L^\dagger L\rho + \rho L^\dagger L)$. The dissipator terms correspond to a jump from $\ket{+}$ to $\ket{-}$ with emission of energy into the phonon bath, and a jump from $\ket{-}$ to $\ket{+}$ with the corresponding absorption of energy from the the phonon bath. The transition rate is proportional to the spectral density, which encapsulates all the information about the physical system that we need to supply. What is more, we only sample the spectral density at the given frequency $\Lambda$, which can be adjusted using other system paramaters allowing us to minimise the phonon decoherence effects.
