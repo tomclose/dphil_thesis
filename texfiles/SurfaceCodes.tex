@@ -1,34 +1,30 @@
-\chapter{On the Power of Small Toric Codes} 
+\chapter{The Power of Small Toric Codes} 
 \label{ch:SurfaceCodes}
 
 \section{Introduction to the Toric Code}
 
+The ability to correct and recover from errors is important for any quantum computing scheme. The discovery of the first error correcting quantum codes by Shor and Steane was vital in demonstrating that quantum computing was theoretically viable. The toric code is an error correcting code proposed by Kitaev \cite{kitaev_1, kitaev_2}, arising from work using quantum mechanics to provide simple models of topological order. It is the simplest and most elegant in a class of such codes, collectively known as surface codes \cite{kitaev_bravyi, planar_codes_freedman_meyer}.
 
-Toric code simple
-Excellent local 
-
-Other operations
-
-Other codes
+One of the key advantages of surface codes is their local nature - the codes can be implemented on a two-dimensional lattice using only nearest neighbour interactions. In this realistic experimental scenario, surface codes can tolerate per-operation error rates of up to 1\% \cite{fowler_11, fowler_classical_processing}, compared with rates in of the order of $10^{-4}$ for the early error correcting codes \cite{steane_code_shit}.
 
 In this chapter we look towards an experimental realisation of the toric code and study the code for small values of $n$. We pre-compute a decoding library, an approach that quickly becomes intractible for values of $n$ above those considered here, but has the advantage that we obtain a provably optimum decoding success rate. We use our pre-computed decoder to assess the \textit{encoding power} of the code: we say the code has positive encoding power if the encoded qubits exhibit a lower error rate than the same number of unencoded qubits subjected to the same noise.
 
 \subsection{Revisiting Shor's code}
 
-First consider a simple code. The first stage of Shor's code.
-
+Before moving on to the toric code, we will first look at a simple example of an error correcting code in order to introduce some of the notation and concepts that we will use later. For this purpose we pick the first stage of Shor's code \cite{shor_codes_95}. The full code uses nine qubits to protect against general errors; the code we analyse here uses only three qubits and protects only against a single error channel. We describe the code by specifying how to encode a general qubit:
 \begin{align}\label{shor_state}
-  \alpha\ket{0} + \beta\ket{1} \rightarrow \alpha\ket{000} + \beta\ket{111}
+  \alpha\ket{0} + \beta\ket{1} \rightarrow \alpha\ket{000} + \beta\ket{111}.
 \end{align}
+The idea here is very simple: each logical qubit is encoded into three physical qubits. Shor constructed a circuit such that if there was a bit-flip error on any one of the three qubits, the state would automatically be corrected. The system basically implements a `majority vote' error correction scheme.
 
-Introduce the qubit operators as in the quantum literature
+We will now analyse this system in a different way, which will directly translate to our treatment of the toric code later in the chapter. In order to do this we first introduce the standard qubit operators:
 \begin{align}
   Z &= \ket{0}\bra{0} - \ket{1}\bra{1} \\
   X &= \ket{0}\bra{1} + \ket{1}\bra{0} \\
-  Y &= \ket{0}\bra{1} - \ket{1}\bra{0} = ZX
+  Y &= \ket{0}\bra{1} - \ket{1}\bra{0} = ZX.
 \end{align}
+In what follows we will need to apply these operators to states of multiple qubits. To do this we will introduce subscripts to the operators, so that $Z_1$ is the $Z$ operator acting on the first qubit, for example. Operators acting on different qubits can be seen to commute with one another.
 
-Notice that the operators $Z_1 Z_2$, $Z_2 Z_3$ and $Z_1 Z_3$ all leave $\ket{\psi}$ unchanged. As these operators commute we can find states which are simultaneous eigenstates of all three. 
 \begin{figure}\label{ops_states}
   \begin{center}
     \begin{tabular}{c c c c c}
@@ -47,48 +43,53 @@ Notice that the operators $Z_1 Z_2$, $Z_2 Z_3$ and $Z_1 Z_3$ all leave $\ket{\ps
   \caption{The eigenvalues of the operators on their simultaneous eigenstates}
 \end{figure}
 
+We will start by considering a state of three qubits and the set of operators $S = \{Z_1Z_2, Z_2Z_3, Z_1Z_3\}$. As these operators commute with one another it is possible to find states that are simultaneous eigenstates of all three. For the set $S$ that we have chosen we can take these to be the standard basis elements as shown in Fig. \ref{ops_states}. You might have noticed that the operators we have chosen are not actually independent as
 \begin{align}
-  (Z_1Z_2)(Z_2Z_3) = Z_1Z_3
+  (Z_1Z_2)(Z_2Z_3) = Z_1Z_3.
 \end{align}
-The operators are not independent. The eigenvalue of the third can be inferred from the other two.
+The eigenvalue of the third operator can be inferred from the other two. To break the degeneracy in the eigenstates we introduce a fourth operator $Z_1$ that commutes with the elements of $S$.
 
-The set $\{Z_1Z_2, Z_2Z_3, Z_1\}$ is independent. The eigenvalues of these operators uniquely define the basis states. Call these stabilisers of the state $\ket{000}$. Similarly $\{Z_1Z_2, -Z_2Z_3, Z_1\}$ would stabilise $\ket{001}$.
+We say that the set $T = \{Z_1Z_2, Z_2Z_3, Z_1\}$ is an \textit{independent} set of commuting operators. The eigenvalues of these operators uniquely define the basis states. We say that the set $T$ \textit{stabilises} the state $\ket{000}$, as $t\ket{000} = \ket{000}$ for all $t\in T$. Similarly $\{Z_1Z_2, -Z_2Z_3, Z_1\}$ stabilises $\ket{001}$. We call $T$ the \textit{stabiliser representation} of the state $\ket{000}$; by specifying three independent, binary-outcome operators in a Hilbert space of dimension $2^3$ we have uniquely defined the state.
 
-Taking $\{Z_1Z_2, Z_2Z_3\}$ uniquely defines a subspace spanned by $\{\ket{000}, \ket{111}\}$ - precisely the codespace defined in Eqn. (\ref{shor_state}). Repeated measurement would give the same result.
+We can also use the stabiliser representation to define a subspace of the Hilbert space. The set $\{Z_1Z_2, Z_2Z_3\}$ uniquely defines a subspace spanned by the states $\{\ket{000}, \ket{111}\}$, which is precisely the codespace defined in Eqn. (\ref{shor_state}). If we were to perform measurements corresponding to the operators $Z_1Z_2$ and $Z_2Z_3$ on our encoded state we would expect the outcome $+1$ in both cases, no matter how many times the measurement was repeated. We can consider the a measurement of the operator $Z_1$ as a measurement of the encoded logical qubit.
 
-
-The operator on the logical qubit can be taken to be $Z_1$. 
-
-Errors can be taken to be the $X$ and $Z$ acting on each qubit. To take a concrete example consider $X_1$ acting on the state.
+Following Shor's approach, we model the introduction of errors as the $X$ and $Z$ operations acting on one or more of the qubits. To take a concrete example consider the error represented by the $X_1$ acting on the state:
 \begin{align}
-  X_1 (\alpha\ket{000} + \beta\ket{111}) = \alpha\ket{100} + \beta\ket{011}
+  X_1 (\alpha\ket{000} + \beta\ket{111}) = \alpha\ket{100} + \beta\ket{011}.
 \end{align}
-If we evaluate the stabilisers now we find $Z_1Z_2 \rightarrow -1$ and $Z_2 Z_3 \rightarrow +1$. We know that an error has occurred. Can predict these outcomes by noticing that $(Z_1Z_2)X_1 = -X_1(Z_1Z_2)$. The outcome of our stabiliser has now changed. We can tell an error has taken place. We do not know if it was $X_1$ or $X_2X_3$. In Shor's scheme we correct the most likely. A different way of looking at this is that we can return to the codespace by applying $X_1$: if the error was actually $X_1$ the logical qubit will be intact, but if the error was $X_2X_3$ the overall operation will be $X_1X_2X_3$ and there will be an error on the logical qubit.
+If we evaluate the stabilisers now we find $Z_1Z_2 \rightarrow -1$ and $Z_2 Z_3 \rightarrow +1$. We can see from the stabiliser outcomes that we are no longer in the codespace and that an error has occurred. You will notice that the error was visible only in the outcome of the stabiliser that anticommuted with the error operator: $(Z_1Z_2)X_1 = -X_1(Z_1Z_2)$.
 
-If we instead have a phase flip $Z_1$ we will not be able to detect this as it commutes with the stabilisers and will go unseen. In Shor's original paper he fixes this by expanding the codespace.
+Although we can tell that an error occurred, we do not know if it was $X_1$ or $X_2X_3$. In Shor's scheme we correct the most likely. A different way of looking at this is that we can return to the codespace by applying $X_1$: if the error was actually $X_1$ the logical qubit will be intact, but if the error was $X_2X_3$ the overall operation will be $X_1X_2X_3$ and there will be an error on the logical qubit.
 
-We have introduced the stabiliser notation to describe a familiar code. We have seen how by measuring stabiliser operators we can detect certain errors. We have an operator that completes the commuting set that defines an operation on the logical qubit. We will now use this language to introduce the toric code.
+If we instead have a phase flip $Z_1$ we will not be able to detect the error, as $Z_1$ commutes with all the stabilisers and will go unseen. In Shor's original paper he fixes this by expanding the codespace.
+
+We have introduced the stabiliser notation to describe a familiar code and have seen how by measuring stabiliser operators we can detect certain errors. We have an operator that completes the commuting set that defines an operation on the logical qubit and that we can detect errors provided they do not commute with all of the stabilisers. We will now use this language to introduce the toric code.
 
 \subsection{Definition of Toric Codespace}
 
-The toric $2n$-code (Fig. \ref{4-code}) uses $2n^2$ physical qubits to encode $2$ logical qubits. The \textit{codespace}, the subspace  that the code states inhabit, is most elegantly described using the \textit{stabiliser formalism} - by specifying a set of commuting operators with respect to which the state is invariant. In particular, in a $2^n$ dimensional Hilbert space by specifiying a set of $n$, independent, commuting, binary-outcome operators we uniquely determine the state. 
+The toric $2n$-code (Fig. \ref{4-code}) uses $2n^2$ physical qubits to encode two logical qubits. The codespace is most elegantly described using the stabiliser formalism. In particular we shall specify a set of $2n - 2$ independent stabilisers to give a codespace of dimension four.
 
-To describe the code, it is useful to picture the $2n^2$ physical qubits positioned on the odd diagonals of a $2n \times 2n$ lattice (i.e. in the positions with coordinates $(i,j)$, where $i+j$ is odd). The remaining positions will represent the stabilisers used to define the code. The stabilisers fall into two distinct families: the $X$-stabilisers, pictured on the even rows (those sites with coordinates $(i,j)$ where $i$ and $j$ are both even); and the $Z$-stabilisers, pictured on the odd rows. The $X/Z$-stabiliser at a given site represents the product of the four $X/Z$ operations on the neighbouring physical qubits (see Fig. \ref{4-code}). The `toric' nature of the code comes from identifying opposite edges of the lattices in what we consider to be neighbouring physical qubits. 
+To describe the code, it is useful to picture the $2n^2$ physical qubits positioned on the odd diagonals of a $2n \times 2n$ lattice (i.e. in the positions with coordinates $(i,j)$, where $i+j$ is odd). On the sites $(i, j)$ where $i$ and $j$ are both even we construct an \textit{X-stabiliser}, $s^X_{ij}$, by taking the product of $X$ operators of qubits on the neighbouring squares. When considering what we mean by `neighbouring' we identify opposite edges of the lattice, hence the `toric' nature of the code. On the sites $(i,j)$ where $i$ and $j$ are both odd, we define the \textit{Z-stabilisers}, $s^Z_{ij}$, in a similar manner.
 \begin{figure}[htb]
   \begin{center}
     \includegraphics[width=5cm]{assets/4-code.pdf}
   \end{center}
-  \caption{Qubit lattice for the $4$-code. $s_i^X$ and $s_i^Z$ are $X$- and $Z$-stabilisers represented by the sites respectively. $q_i$ are qubits. By way of example, $s_0^X = X_0 X_2 X_1 X_6$ and $s_0^Z = Z_3 Z_4 Z_2 Z_0$.}
+  \caption{Qubit lattice for the $4$-code. $s_{ij}^X$ and $s_{ij}^Z$ are $X$- and $Z$-stabilisers represented by the sites respectively. $q_i$ are qubits. By way of example, $s_{00}^X = X_0 X_2 X_1 X_6$ and $s_{00}^Z = Z_3 Z_4 Z_2 Z_0$.}
   \label{4-code}
 \end{figure}
 
-As all the stabilisers commute with one another, a given set of stabiliser measurement outcomes, or {\it syndrome}, can be used to define the codespace. If the outcome of the measurement is a $-1$ we say that the stabiliser has fired. Only $n^2-1$ of the $X$-stabilisers and $n^2-1$ of the $Z$-stabilisers are actually independent: the final stabiliser is the product of the others, so the outcome of the final stabiliser measurement is determined by the previous outcomes. This places the restriction on the set of possible syndromes, $A$, that the total number of firing stabiliser sites must be even and means that the codespace is the size of two qubits.
+We let $S_X = \{s^X_{ij}\}$ and let $\bar{S}_X$ be the set generated by $S_X$ - the set of all unique products of elements of $S_X$. 
+Say which ones are indepedent. Talk about measuring to stabilise. Maybe introduce syndrome.
+
+[As all the stabilisers commute with one another, a given set of stabiliser measurement outcomes, or {\it syndrome}, can be used to define the codespace. If the outcome of the measurement is a $-1$ we say that the stabiliser has fired. Only $n^2-1$ of the $X$-stabilisers and $n^2-1$ of the $Z$-stabilisers are actually independent: the final stabiliser is the product of the others, so the outcome of the final stabiliser measurement is determined by the previous outcomes. This places the restriction on the set of possible syndromes, $A$, that the total number of firing stabiliser sites must be even and means that the codespace is the size of two qubits.]
 
 To fully define the state we must add another two independent, commuting operators to the set. We define $X_h$ (horizontal X) to be the product of $X_i$s acting on qubits in an even row, $X_v$ (vertical X) the product of $X_i$s acting on qubits in an even column, and similarly, $Z_h$ to be $Z_i$s on an odd row, and $Z_v$ to be $Z_i$s on an odd column. Any of the pairs $\{X_v, X_h\}$, $\{X_v, Z_v\}$, $\{Z_v, Z_h\}$, and $\{Z_h, X_h\}$ will suffice to fully define the state. The remaining pairs, $\{X_v, Z_h\}$ and $\{X_h, Z_v\}$, satisfy the standard qubit commutation relation, $[X, Z] = 2iY$, and so we can use this set of \textit{logical operators}, $L = \{X_v, X_h, Z_v , Z_h\}$, to define a pair of independent \textit{logical qubits}. 
 
 \subsection{Detecting Errors}
 
-Now that we have defined the codespace and given a basis for our logical qubits, we move on to looking at error correction. For the rest of the chapter we work in the codespace given by the \textit{zero-syndrome}, where each stabiliser outcome is $+1$ (where no stabiliser sites fire). The first stage of the error correction step is to measure all the stabilisers. If any of the stabiliser sites fire, we know that we are no-longer in the codespace and an error must have occurred.
+Now that we have defined the codespace and given a basis for our logical qubits, we move on to looking at error correction.
+
+For the rest of the chapter we work in the codespace given by the \textit{zero-syndrome}, where each stabiliser outcome is $+1$ (where no stabiliser sites fire). The first stage of the error correction step is to measure all the stabilisers. If any of the stabiliser sites fire, we know that we are no-longer in the codespace and an error must have occurred.
 
 \begin{figure}[htb]
   \begin{center}
@@ -100,6 +101,9 @@ Now that we have defined the codespace and given a basis for our logical qubits,
 
 Any error on a single physical qubit can be considered a mixture of $X$, $Z$ and $Y = XZ$ errors, up to global phase. It therefore suffices to be able to correct these types of errors. An $X$ error on a single qubit will cause both neighbouring $Z$-stabiliser sites to fire, but will be undetected by the $X$-stabilisers. Similarly, $Z$ errors will be detected by the $X$-stabiliser measurements and $Y$ errors by both sets of stabiliser measurements. If qubit errors do not occur in isolation, stabiliser sites fire at either end of the string of errors. 
 
+Introduce the set of all errors. Introduce the set of all syndromes.
+
+Introduce the three different cases we look at. 
 
 From a given syndrome we can deduce a set of operations that will bring us back to the codespace, but do not know whether this will introduce a logical error. We call such an operator a matching. We now look at the set of all matching for a given syndrome.
 
@@ -125,38 +129,6 @@ To see an example, take the full case. $|E| = 4^{(2n)^2}$, $|A| = 2^{(2n)^2-2}$,
 Still have to answer the question of which matching to pick. In the Shor code case we picked the matching to minimise the probability of introducing a logical error. Ideally that is what we would do here too. This of course depends on the error model, which we have not discussed yet. It is also not straightforward to do. The number of matchings in each class grows exponentially with the size of the grid. No efficient way of calculating the probabilities is know, even for the simplest error model.
 
 The job of picking a matching given a syndrome falls to a decoder. These are often heuristic procedures, designed to balance calculation time with identifying the most likely class as often as possible. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-To move back into the codespace we must apply operations to the physical qubits to prevent these stabilisers from firing: we must apply strings of operations each of whose ends connect two firing stabiliser sites. We call such a set of operations a \textit{matching} for the syndrome.
-
-One simple matching strategy is to connect each firing stabiliser to a given qubit site on the lattice. Pick the qubit site $(0,1)$ and call this the \textit{default matching}.
-
-While such a matching is guaranteed to return us to the codespace, it is possible that it will also alter the state of the logical qubits. It is useful to consider the error introduction, $e$, and error correction, $m$, as jointly perfoming an operation $r=em$. As $r$ maps the codespace to itself, it can be written as a product of stabilisers and logical qubit operators. If $r$ is a product of stabilisers only then the logical qubit state remains unaltered. Geometrically this corresponds to $r$ being represented as product of operators forming trivial loops or loops that wrap the torus an even number of times in each direction. 
-
-A \textit{decoder} takes a given sydrome, $a$, and returns a matching $m$. The aim of the decoding step is to return to the codespace without altering the logical qubit state. Unfortunately, given a syndrome, $a$, it is impossible to determine the underlying errors that occurred, only that they must belong to a set $E_a$ of errors consistent with the syndrome. Moreover the logical error introduced by the operation $r = em$ is not the same for all $e \in E_a$ regardless of the choice of $m$. It is thus impossible to have a perfect decoder, and we must be content with a decoder offering a reasonable success probability in a reasonable amount of time.
-
 
 \subsection{Existing Decoding Strategies}
 
