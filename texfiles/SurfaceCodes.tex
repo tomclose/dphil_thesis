@@ -3,27 +3,27 @@
 
 \section{Introduction to the Toric Code}
 
-The ability to correct and recover from errors is important for any quantum computing scheme. The discovery of the first error correcting quantum codes by Shor and Steane was vital in demonstrating that quantum computing was theoretically viable. The toric code is an error correcting code proposed by Kitaev \cite{kitaev_1, kitaev_2}, arising from work using quantum mechanics to provide simple models of topological order. It is the simplest and most elegant in a class of such codes, collectively known as surface codes \cite{kitaev_bravyi, planar_codes_freedman_meyer}.
+The ability to correct and recover from errors is important for any quantum computing scheme. The discovery of the first error correcting quantum codes by Shor in 1995 was vital for demonstrating that quantum computing was theoretically viable. The toric code is an error correcting code proposed by Kitaev \cite{kitaev_1, kitaev_2}, arising from work using quantum mechanics to provide simple models of topological order. It is the simplest and most elegant in the class of such codes, collectively known as surface codes \cite{kitaev_bravyi, planar_codes_freedman_meyer}.
 
-One of the key advantages of surface codes is their local nature - the codes can be implemented on a two-dimensional lattice using only nearest neighbour interactions. In this realistic experimental scenario, surface codes can tolerate per-operation error rates of up to 1\% \cite{fowler_11, fowler_classical_processing}, compared with rates in of the order of $10^{-4}$ for the early error correcting codes \cite{steane_code_shit}.
+One of the key advantages of surface codes is their local nature - the codes can be implemented on a two-dimensional lattice using only nearest neighbour interactions. In this realistic experimental scenario, surface codes can tolerate per-operation error rates of up to 1\% \cite{fowler11, fowler_classical_processing}, compared with rates in of the order of $10^{-4}$ for the early error correcting codes \cite{steane_code_shit}.
 
 In this chapter we look towards an experimental realisation of the toric code and study the code for small values of $n$. We pre-compute a decoding library, an approach that quickly becomes intractible for values of $n$ above those considered here, but has the advantage that we obtain a provably optimum decoding success rate. We use our pre-computed decoder to assess the \textit{encoding power} of the code: we say the code has positive encoding power if the encoded qubits exhibit a lower error rate than the same number of unencoded qubits subjected to the same noise.
 
 \section{Shor's Code Revisited}
 
-Before moving on to the toric code, we will first look at a simple example of an error correcting code in order to introduce some of the notation and concepts that we will use later. For this purpose we pick the first stage of Shor's code \cite{shor_codes_95}. The full code uses nine qubits to protect against general errors; the code we analyse here uses only three qubits and protects only against a single error channel. We describe the code by specifying how to encode a general qubit:
+Before moving on to the toric code, we first look at a simple example of an error correcting code in order to introduce some of the notation and concepts that we use later. For this purpose we pick the first stage of Shor's code \cite{shor_codes_95}. The full code uses nine qubits to protect against general errors; the code we analyse here uses only three qubits and protects only against a single error channel. We describe the code by specifying how to encode a general qubit:
 \begin{align}\label{shor_state}
   \alpha\ket{0} + \beta\ket{1} \rightarrow \alpha\ket{000} + \beta\ket{111}.
 \end{align}
 The idea here is very simple: each logical qubit is encoded into three physical qubits. Shor constructed a circuit such that if there was a bit-flip error on any one of the three qubits, the state would automatically be corrected. The system basically implements a `majority vote' error correction scheme.
 
-We will now analyse this system in a different way, which will directly translate to our treatment of the toric code later in the chapter. In order to do this we first introduce the standard qubit operators:
+We now analyse this system in a different way, which will directly translate to our treatment of the toric code later in the chapter. In order to do this we first introduce the standard qubit operators:
 \begin{align}
   Z &= \ket{0}\bra{0} - \ket{1}\bra{1} \\
   X &= \ket{0}\bra{1} + \ket{1}\bra{0} \\
   Y &= \ket{0}\bra{1} - \ket{1}\bra{0} = ZX.
 \end{align}
-In what follows we will need to apply these operators to states of multiple qubits. To do this we will introduce subscripts to the operators, so that $Z_1$ is the $Z$ operator acting on the first qubit, for example. Operators acting on different qubits can be seen to commute with one another.
+In what follows we will need to apply these operators to states of multiple qubits. To do this we will introduce subscripts to the operators, so that, for example, $Z_1$ is the $Z$ operator acting on the first qubit. Operators acting on different qubits can be seen to commute with one another.
 
 \begin{figure}\label{ops_states}
   \begin{center}
@@ -43,7 +43,7 @@ In what follows we will need to apply these operators to states of multiple qubi
   \caption{The eigenvalues of the operators on their simultaneous eigenstates}
 \end{figure}
 
-We will start by considering a state of three qubits and the set of operators $S = \{Z_1Z_2, Z_2Z_3, Z_1Z_3\}$. As these operators commute with one another it is possible to find states that are simultaneous eigenstates of all three. For the set $S$ that we have chosen we can take these to be the standard basis elements as shown in Fig. \ref{ops_states}. You might have noticed that the operators we have chosen are not actually independent as
+We will start by considering a state of three qubits and the set of operators $S = \{Z_1Z_2, Z_2Z_3, Z_1Z_3\}$. As these operators commute with one another it is possible to find states that are simultaneous eigenstates of all three. For the set $S$ that we have chosen we can take these to be the standard basis elements as shown in Fig. \ref{ops_states}. The operators we have chosen are not actually independent as
 \begin{align}
   (Z_1Z_2)(Z_2Z_3) = Z_1Z_3.
 \end{align}
@@ -51,15 +51,15 @@ The eigenvalue of the third operator can be inferred from the other two. To brea
 
 We say that the set $T = \{Z_1Z_2, Z_2Z_3, Z_1\}$ is an \textit{independent} set of commuting operators. The eigenvalues of these operators uniquely define the basis states. We say that the set $T$ \textit{stabilises} the state $\ket{000}$, as $t\ket{000} = \ket{000}$ for all $t\in T$. Similarly $\{Z_1Z_2, -Z_2Z_3, Z_1\}$ stabilises $\ket{001}$. We call $T$ the \textit{stabiliser representation} of the state $\ket{000}$; by specifying three independent, binary-outcome operators in a Hilbert space of dimension $2^3$ we have uniquely defined the state.
 
-We can also use the stabiliser representation to define a subspace of the Hilbert space. The set $\{Z_1Z_2, Z_2Z_3\}$ uniquely defines a subspace spanned by the states $\{\ket{000}, \ket{111}\}$, which is precisely the codespace defined in Eqn. (\ref{shor_state}). If we were to perform measurements corresponding to the operators $Z_1Z_2$ and $Z_2Z_3$ on our encoded state we would expect the outcome $+1$ in both cases, no matter how many times the measurement was repeated. We can consider the a measurement of the operator $Z_1$ as a measurement of the encoded logical qubit.
+We can also use the stabiliser representation to define a subspace of the Hilbert space. The set $\{Z_1Z_2, Z_2Z_3\}$ uniquely defines a subspace spanned by the states $\{\ket{000}, \ket{111}\}$, which is precisely the codespace defined in Eqn. (\ref{shor_state}). If we were to perform measurements corresponding to the operators $Z_1Z_2$ and $Z_2Z_3$ on our encoded state we would expect the outcome $+1$ in both cases, no matter how many times the measurement was repeated. We can consider a measurement of the operator $Z_1$ as a measurement of the encoded logical qubit.
 
-Following Shor's approach, we model the introduction of errors as the $X$ and $Z$ operations acting on one or more of the qubits. To take a concrete example consider the error represented by the $X_1$ acting on the state:
+Following Shor's approach, we model the introduction of errors as the $X$ and $Z$ operations acting on one or more of the qubits. To take a concrete example consider the error represented by $X_1$ acting on the state:
 \begin{align}
   X_1 (\alpha\ket{000} + \beta\ket{111}) = \alpha\ket{100} + \beta\ket{011}.
 \end{align}
-If we evaluate the stabilisers now we find $Z_1Z_2 \rightarrow -1$ and $Z_2 Z_3 \rightarrow +1$. We can see from the stabiliser outcomes that we are no longer in the codespace and that an error has occurred. You will notice that the error was visible only in the outcome of the stabiliser that anticommuted with the error operator: $(Z_1Z_2)X_1 = -X_1(Z_1Z_2)$.
+If we evaluate the stabilisers now we find $Z_1Z_2 \rightarrow -1$ and $Z_2 Z_3 \rightarrow +1$. We can see from the stabiliser outcomes that we are no longer in the codespace and that an error has occurred. You will notice that the error was visible only in the outcome of the stabiliser that anti-commuted with the error operator: $(Z_1Z_2)X_1 = -X_1(Z_1Z_2)$.
 
-Although we can tell that an error occurred, we do not know if it was $X_1$ or $X_2X_3$. In Shor's scheme we correct the most likely. A different way of looking at this is that we can return to the codespace by applying $X_1$: if the error was actually $X_1$ the logical qubit will be intact, but if the error was $X_2X_3$ the overall operation will be $X_1X_2X_3$ and there will be an error on the logical qubit.
+Although we can tell that an error occurred, we do not know if it was $X_1$ or $X_2X_3$. In Shor's scheme we correct the most likely. A different way of looking at this is that we can return to the codespace by applying $X_1$: if the error was actually $X_1$, the logical qubit will be intact, but if the error was $X_2X_3$ the overall operation will be $X_1X_2X_3$ and there will be an error on the logical qubit.
 
 If we instead have a phase flip $Z_1$ we will not be able to detect the error, as $Z_1$ commutes with all the stabilisers and will go unseen. In Shor's original paper he fixes this by expanding the codespace.
 
@@ -80,11 +80,11 @@ To describe the code, it is useful to picture the $2n^2$ physical qubits positio
 
 We let $S_X = \{s^X_{ij}\}$. There are $n^2$ elements in $S_X$, but only $n^2-1$ independent elements, as the final element is the product of all the others. We similarly define $S_Z = \{s^Z_{ij}\}$. We will later use the sets $S_X$ and $S_Z$ to define the stabilisers of the codespace. Practically we will make measurements of these operators to check whether our state is still in the codespace. 
 
-Just as in the Shor code, to fully define a state we will need to add additional commuting operators to our set of stabilisers. We now construct a set of operators that will be used for this purpose. We define $X_h$ (horizontal X) to be the product of $X_i$s acting on qubits in an even row, $X_v$ (vertical X) the product of $X_i$s acting on qubits in an even column, and similarly, $Z_h$ to be $Z_i$s on an odd row, and $Z_v$ to be $Z_i$s on an odd column. Any of the pairs $\{X_v, X_h\}$, $\{X_v, Z_v\}$, $\{Z_v, Z_h\}$, and $\{Z_h, X_h\}$ will suffice to fully define the state. The remaining pairs, $\{X_v, Z_h\}$ and $\{X_h, Z_v\}$, satisfy the standard qubit commutation relation, $[X, Z] = 2iY$, and so we can use this set of \textit{logical operators}, $L = \{X_v, X_h, Z_v , Z_h\}$, to define a pair of independent \textit{logical qubits}. 
+Just as in Shor's code, to fully define a state we will need to add additional commuting operators to our set of stabilisers. We now construct a set of operators that will be used for this purpose. We define $X_h$ (horizontal X) to be the product of $X_i$s acting on qubits in an even row, $X_v$ (vertical X) the product of $X_i$s acting on qubits in an even column, and similarly, $Z_h$ to be $Z_i$s on an odd row, and $Z_v$ to be $Z_i$s on an odd column. Any of the pairs $\{X_v, X_h\}$, $\{X_v, Z_v\}$, $\{Z_v, Z_h\}$, and $\{Z_h, X_h\}$ will suffice to fully define the state. The remaining pairs, $\{X_v, Z_h\}$ and $\{X_h, Z_v\}$, satisfy the standard qubit commutation relation, $[X, Z] = 2iY$, and so we can use this set of \textit{logical operators}, $L = \{X_v, X_h, Z_v , Z_h\}$, to define a pair of independent \textit{logical qubits}. 
 
 \section{Detecting Errors}
 
-We will now turn to how errors are detected in the toric code. As with the treatment of the Shor code we will consider an error to be a set of individual $X$ and $Z$ errors applied to a subset of the physical qubits. An $X$ error on a single qubit will flip the eigenvalue of the neighbouring $Z$-stabilisers, but commutes with the $X$-stabilisers and will not be detected by them. Similarly, a $Z$ error will be detected by the $X$-stabilisers and not the $Z$-stabilisers, and a $Y$ will be detected by both sets. Additional errors will cause the stabiliser eigenvales to toggle. If errors occur sequentially they will be detected by the stabilisers at either end of the chain.
+We will now turn to how errors are detected in the toric code. As with the treatment of the Shor code we will consider an error to be a set of individual $X$ and $Z$ errors applied to a subset of the physical qubits. An $X$-error on a single qubit will flip the eigenvalue of the neighbouring $Z$-stabilisers, but commutes with the $X$-stabilisers and will not be detected by them. Similarly, a $Z$ error will be detected by the $X$-stabilisers and not the $Z$-stabilisers, and a $Y$ will be detected by both sets. Additional errors will cause the stabiliser eigenvalues to toggle. If errors occur sequentially they will be detected by the stabilisers at either end of the chain.
 
 
 \begin{figure}[htb]
@@ -115,7 +115,7 @@ Following similar reasoning to the classical toric code we can deduce the size o
 
 \subsection{Reduced Quantum Toric Code}
 
-The reduced quantum toric code is slightly more subtle that the previous two cases. We take the full set of stabilisers $S = S_X \cup S_Z$ and logical operators $L = \{Z_h, Z_v, X_h, X_v\}$, but aim only to protect against individual qubit $Y_i$ errors. As previously, it is straightforward to show that $|E| = 2^{2n^2}$. However it is not possible to say anything about the size of $A$ immediately; given the reduced set of errors we consider, not all syndromes are possible. We will revisit this later, after investigating some general features of the variations that we have defined.
+The reduced quantum toric code is slightly more subtle that the previous two cases. We take the full set of stabilisers $S = S_X \cup S_Z$ and logical operators $L = \{Z_h, Z_v, X_h, X_v\}$, but aim only to protect against individual qubit $Y_i$ errors. As previously, it is straightforward to show that $|E| = 2^{2n^2}$. However it is not possible to say anything about the size of $A$ immediately; given the reduced set of errors we consider, not all syndromes are possible. We will revisit this later, after investigating some general features of these variations.
 
 \section{Toric Code Features}
 
@@ -123,11 +123,11 @@ We begin by defining the function
 \begin{align}
   \text{synd}: E \rightarrow A
 \end{align}
-that maps an error onto its assosciated syndrome. We are then able to define the sets
+that maps an error onto its associated syndrome. We are then able to define
 \begin{align}
   E_a = \{ e\in E : \text{synd}(e) = a \},
 \end{align}
-the set of possible errors corresponding to a syndrome $a$. For convenience we define $E_0 = E_{a_0}$ to be the set of errors corresponding to the zero-syndrome, $a_0$. If an error in $E_0$ occurs it will go undetected by the code. We define a function to act on the set $E_0$,
+the set of all possible errors corresponding to a syndrome $a$. For convenience we define $E_0 = E_{a_0}$ to be the set of errors corresponding to the zero-syndrome, $a_0$. If an error in $E_0$ occurs it will go undetected by the code. We define a function to act on the set $E_0$,
 \begin{align}
   \text{lerr}: E_0 \rightarrow L,
 \end{align}
@@ -135,9 +135,21 @@ taking an error to the corresponding logical error on the encoded qubits. Finall
 \begin{align}
   E_{0, l} = \{ e\in E_0: \text{lerr}(e) = l \}.
 \end{align}
-It is easy to see that each of the $E_{0, l}$ contains at least one element, as $l \in E_{0, l}$ itself: by applying a set of errors corresponding to a logical operator, we apply this operator to the encoded qubits, inducing a logical error.  We will now show that the sets $E_{0,l}$ have exactly the same number of elements - our first important result about the structure of our toric codes.
+It is easy to see that each $E_{0, l}$ contains at least one element, as $l$ itself is a member: by applying a set of errors corresponding to a logical operator, we apply this operator to the encoded qubits, inducing a logical error.  We will now show that the sets $E_{0,l}$ have exactly the same number of elements - our first important result about the structure of our toric codes.
 
-To show that the $E_{0, l}$ are all the same size, we will show that they all have the same number of elements as $E_{0,0}$ - the set of elements of $E_0$ that introduce no logical error. To see this take element $e_1 \in E_{0, l}$ and $e_2 \in E_0$. We claim that
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{figures/4_array.pdf}
+  \end{center}
+  \caption{Full set of errors, $E$, for the classical $4$-code.}
+  \label{4_array}
+\end{figure}
+
+
+
+
+To show that the $E_{0, l}$ are all the same size, we will show that they all have the same number of elements as $E_{0,0}$ - the set of elements of $E_0$ that introduce no logical error. To see this, take element $e_1 \in E_{0, l}$ and $e_2 \in E_0$. We claim that
 \begin{align}
   e_2 \in E_{0, l} \Leftrightarrow e_1 e_2 \in E_{0,0}.
 \end{align}
@@ -145,11 +157,11 @@ The proof of the claim follows from the fact that all logical operators $l\in L$
 \begin{align}
   e_1 E_{0,0} = \{e_1 e : e \in E_{0,0}\}
 \end{align}
-and claim that, given $e_1 \in E_{0,l}$, we must have $E_{0, l} = e_1 E_{0,0}$. This follows as, because $e_1^2 = \id$,
+and claim that, given $e_1 \in E_{0,l}$, we must have $E_{0, l} = e_1 E_{0,0}$. This follows as, 
 \begin{align}
-  e_2 =  e_1 e \Leftrightarrow e_1 e_2 = e.
+  e_2 =  e_1 e \Leftrightarrow e_1 e_2 = e,
 \end{align}
-Therefore we can use $e_1$ to establish a bijection between $E_{0,l}$ and $E_{0,0}$ and the sets must have the same number of elements.
+where we have used that $e_1^2 = \id$. Therefore we can use $e_1$ to establish a bijection between $E_{0,l}$ and $E_{0,0}$ and so the sets must have the same number of elements.
 
 We now move on to the sets of errors, $E_a$, corresponding to a general syndrome, $a \in A$. As we have taken $A$ to be the set of obtainable sydromes, it follows that there must be at least one element in each set $E_a$. It is useful to assume that we have chosen an arbitrary member from $E_a$. We call this a \textit{matching} for the syndrome, and denote our specific choice of matching $m^*(a)$. In practice there are many ways to construct a specific matching for each syndrome $a$, for example see Fig. ?. If we observe the syndrome $a$ and apply the matching $m^*(a)$ we are guaranteed to be back in the codespace.
 
@@ -178,7 +190,7 @@ You can see that this relationship holds for our three code variations in Fig.~\
   \caption{Sizes of the sets involved with our three toric code variants.}
 \end{figure}
 
-We have shown that given a syndrome always corresponds to multiple logical error classes, of which we can correct only one.  e still have to answer the question of which one to correct. In the Shor code case we picked the matching to minimise the probability of introducing a logical error. Ideally that is what we would do here too. This of course depends on the error model, which we have not discussed yet. It is also not straightforward to do. The number of matchings in each class grows exponentially with the size of the grid. No efficient way of calculating the probabilities is know, even for the simplest error model.
+We have shown that given a syndrome always corresponds to multiple logical error classes, of which we can correct only one. We still have to answer the question of which one to correct. In the Shor code case we picked the matching to minimise the probability of introducing a logical error. Ideally that is what we would do here too. This of course depends on the error model, which we have not discussed yet. It is also not straightforward to do. The number of matchings in each class grows exponentially with the size of the grid. No efficient way of calculating the probabilities is know, even for the simplest error model.
 
 The job of picking a matching given a syndrome falls to a decoder. These are often heuristic procedures, designed to balance calculation time with identifying the most likely class as often as possible. 
 
@@ -186,13 +198,13 @@ The job of picking a matching given a syndrome falls to a decoder. These are oft
 
 Determining a good decoding strategy is currently a very active area of research. It is not only important that a decoder maximises the probability of returning to the codespace without inducing an error on the logical qubits, but also that the decoder can run in a reasonable amount of time. Here we look at three leading decoding strategies: minimum weight path matching, renormalisation, and Markov chain Monte Carlo.
 
-Minimum weight path matching (MWPM) aims to minimise a cost associated with the matching. The first stage of the algorithm is take the firing stabiliser sites and place them on the nodes of a graph. An edge is then constructed between each pair of nodes, with weight representing the cost of connecting the sites on the lattice. A common choice is to take the Manhatten distance between the nodes, but it is possible to construct different weights to take addition information into account such as inhomogeneous error rates. Edmond's minimum weight path matching algorithm is then run on the graph, to pair up all the nodes whilst minimising the total weight of the edges chosen. This procedure is run separately on the $X$- and $Z$-syndromes, but it is possible to modify the procedure to take into account correlations between the syndromes caused by $Y$ errors.
+Minimum weight path matching (MWPM) aims to minimise a cost associated with the matching. The first stage of the algorithm is to take the firing stabiliser sites and place them on the nodes of a graph. An edge is then constructed between each pair of nodes with a weight representing the cost of connecting the sites on the lattice. A common choice is to take the Manhatten distance between the nodes, but it is possible to construct different weights to take addition information into account such as inhomogeneous error rates. Edmond's minimum weight path matching algorithm is then run on the graph, to pair up all the nodes whilst minimising the total weight of the edges chosen. This procedure is run separately on the $X$- and $Z$-syndromes, but it is possible to modify the procedure to take into account correlations between the syndromes caused by $Y$ errors.
 
-MWPM is quick as Edmond's algorithm is \ldots in the number of nodes. It provides good results especially in the low error case, when the minimum weight matching has a high probability of belonging to the most likely error class. Conceptually it is a little unsatisfactory that the algorithm is not truly aiming to find the most likely error class. The other two strategies have been shown to outperform MWPM in the case of high error rates, but this point is somewhat moot as it is unlikely that a quantum computer would function in this regime. A more troubling feature is that there is no natural way to incorporate additional classical information that may be available from the experimental procedure beyond altering the edge weights in an ad.\ hoc.\ fasion.
+MWPM is quick as Edmond's algorithm is \ldots in the number of nodes. It provides good results especially in the low error case, when the minimum weight matching has a high probability of belonging to the most likely error class. Conceptually it is a little unsatisfactory that the algorithm is not truly aiming to find the most likely error class. The other two strategies have been shown to outperform MWPM in the case of high error rates, but this point is somewhat moot as it is unlikely that a quantum computer would function in this regime. A more troubling feature is that there is no natural way to incorporate additional classical information that may be available from the experimental procedure beyond altering the edge weights in an ad.\ hoc.\ fashion.
 
 The renormalisation approach involves splitting the lattice into sublattices, producing a matching on the sublattices and then combining the results to produce a matching for the complete lattice. The approach is recursive, in that the same procedure is applied to each sublattice. 
 
-The Markov chain Monte Carlo method aims to estimate the probabilities of each of the error classes consistent with the observed syndromes, by randomly sampling the from each class using the Manhatten algorithm. 
+The Markov chain Monte Carlo method aims to estimate the probabilities of each of the error classes consistent with the observed syndromes, by randomly sampling from each class using the Manhatten algorithm. 
 
 
 \section{Analysis of Small Toric Codes}
@@ -200,26 +212,26 @@ The Markov chain Monte Carlo method aims to estimate the probabilities of each o
 
 \subsection{Error Model}
 
-We consider deploarising noise distributed uniformly over the lattice with a given, constant probability:
+We consider depolarising noise distributed uniformly over the lattice with a given, constant probability:
 \begin{equation} \label{noise_eq}
   D(\rho) = p_x X\rho X +  p_z Z\rho Z + p_y Y\rho Y  + (1- p_x - p_y - p_z)\rho.
 \end{equation}
 The values of $p_x$, $p_y$ and $p_z$ vary over our different code variants accordingly
 \begin{enumerate}
-  \item Classical case: $p_y = p$, $p_x = p_z = 0$
-  \item Reduced quantum case:
+  \item Classical case: $p_x = p$, $p_y = p_z = 0$
+  \item Reduced quantum case: $p_y = p$, $p_x = p_z = 0$
   \item Full quantum case: $p_x = p_y = p_z = p/3$.
 \end{enumerate}
 
 We also consider the effect of stabiliser sites mis-reporting the stabiliser measurement outcomes: that with some probability, $q$, the stabiliser reports that it fired (/did not fire) when it did not (/did). The normal approach here is to consider multiple faulty stabiliser evaluations as extending the code into a third dimension. By observing the stabiliser outcomes over multiple rounds it is possible to increase the chance of correctly identifying any mis-reported outcomes.
 
-We just consider a single round of stabiliser evaluation, and so this extra information is not available to us. Instead we try to identify and correct the right syndrome based on the sydrome we see. Even in multi-round systems the final step will look like this and so our results are an upper bound on the possible decoding probabilities for small systems.
+We just consider a single round of stabiliser evaluation, and so this extra information is not available to us. Instead we try to identify and correct the right syndrome based on the syndrome we see. Even in multi-round systems the final step will look like this and so our results are an upper bound on the possible decoding probabilities for small systems.
 
 \subsection{A Precomputed Decoder}
 
-When discussing decoders it is useful to start with an arbitrary matching, $m^*(a)$, for the given syndrome $a$. This matching allows us to split the possible physical qubit error configurations $e \in E_a$ into subsets $E_{a,l}$ based on the corresponding logical operation, $l\in L$, that is performed by the overall operation $r = em^*$.
+When discussing decoders it is useful to start with an arbitrary matching, $m^*(a)$, for the given syndrome $a$. This matching allows us to split the possible physical qubit error configurations, $e \in E_a$, into subsets $E_{a,l}$ based on the corresponding logical operation, $l\in L$, that is performed by the overall operation $r = em^*$.
 
-We first consider the probability that we see sydrome $a$ and decode it with $m^*(a)$ we introduce the logical operation $l$ on the encoded qubits,
+We first consider the probability that we see syndrome $a$ and decode it with $m^*(a)$ we introduce the logical operation $l$ on the encoded qubits,
 \begin{align}
   p(l \vert a) = \sum_{e \in E_{a,l}} \frac{p(e)}{p(a)}. 
 \end{align}
@@ -227,19 +239,19 @@ For each stabiliser outcome $a$ we identify the most likely logical error $l_a$,
 \begin{align}
   P_d &= \sum_{a \in A} p(l_a \vert a)p(a) \\
   &= \sum_{a \in A} \max_{l\in L} \left\{ \sum_{e \in E_a} \frac{p(e)}{p(a)} \right\} p(a) \\
-  &= \sum_{a \in A} \max_{l\in L} \left\{ \sum_{e \in E_a} p(e) \right\} \label{truthful_prob}
+  &= \sum_{a \in A} \max_{l\in L} \left\{ \sum_{e \in E_a} p(e) \right\}. \label{truthful_prob}
 \end{align}
 
-When considering mis-reported stabiliser outcomes we must relax the restriction that there will be an even number of firing stabiliser sites. We let $A'$ be the set of all possible stabiliser outcomes $A' = \{0, 1\}^{\otimes n^2}$. If we are to successfully decode a syndrome $a'$, we must first identify the correct sydrome $a$, on which to perform the arbitrary matching, and then identify the most likely logical error $l_a$ to correct. If we identify the wrong $a$ the final state will not even be in the code space. Given $a'$ we must pick $a$ and $l$ to provide the maximum probability of a successful decoding in the case of mis-reporting stabiliser outcomes:
+When considering mis-reported stabiliser outcomes we must relax the restriction that there will be an even number of firing stabiliser sites. We let $A'$ be the set of all possible stabiliser outcomes $A' = \{0, 1\}^{\otimes n^2}$. If we are to successfully decode a syndrome $a'$, we must first identify the correct syndrome $a$, on which to perform the arbitrary matching, and then identify the most likely logical error $l_a$ to correct. If we identify the wrong $a$, the final state will not even be in the code space. Given $a'$ we must pick $a$ and $l$ to provide the maximum probability of a successful decoding in the case of mis-reporting stabiliser outcomes:
 \begin{align}
   P'_d &= \sum_{a' \in A'} p(\text{success} \vert a') p(a') \\
   &= \sum_{a'\in A'} \max_{a \in A} \left\{ p(l_a \vert a) p(a \vert a') \right\} p(a')\\
   &= \sum_{a'\in A'} \max_{a \in A} \left\{ \max_{l \in L} \left\{\sum_{e \in E_a} \frac{p(e)}{p(a)} \right\} p(a \cap a') \right\}\\
-  &= \sum_{a'\in A'} \max_{a \in A} \left\{ \max_{l \in L} \left\{\sum_{e \in E_a} p(e) \right\} p(a' \vert a) \right\} \label{lying_prob}
+  &= \sum_{a'\in A'} \max_{a \in A} \left\{ \max_{l \in L} \left\{\sum_{e \in E_a} p(e) \right\} p(a' \vert a) \right\}. \label{lying_prob}
 \end{align}
 While equations (\ref{truthful_prob}) and (\ref{lying_prob}) are conceptually simple, calculations are beset by difficulties due to the rapid growth in the size of the sets $E_{a,l}$, $A$, and $A'$: in the single noise channel case for the $2n$-code $|E_{a,l}| = |A| = 2^{n^2-1}$; for the full noise channel $2n$-code $|E_{a,l}| = |A| = 2^{2n^2 - 2}$. For example, the total number of error configurations, $|E|$, for the $6$-code is $2^{36}$, which would require $\sim200$GB of storage space.
 
-Thankfully, it we do not need the complete set of error configurations to compute the value of $p_\text{success}$ in eq (\ref{truthful_prob}). For each configuration $e\in E$ the probability is
+Thankfully, we do not need the complete set of error configurations to compute the value of $p_\text{success}$ in Eq.~(\ref{truthful_prob}). For each configuration $e\in E$ the probability is
 \begin{align}
   p(e) = (1-p)^{2n^2 - n(e)} p^{n(e)}
 \end{align}
@@ -253,25 +265,13 @@ where $d_{a,l}^{(i)} = \vert \left\{e \in E_{a,l} : n(e)=i \right\} \vert$ and w
 
 The full source code used for our calculations, along with the computed tables of characteristic function coeffients, is available online \cite{?}.
 
-\subsection{Classical Case}
+\section{Simulation Results}
 
-We first look at a `classical' version of the toric code, where care only about the information stored in the $X$ component of each qubit. We take consider pure X noise: eq. \ref{noise_eq} with $p_x = p$ and $p_y = p_z = 0$. At each round we will measure only the $X$-stabilisers.
+\subsection{Classical Toric Code}
+
+We first look at a `classical' version of the toric code, where we care only about the information stored in the $X$ component of each qubit. We consider pure X noise: Eq. \ref{noise_eq} with $p_x = p$ and $p_y = p_z = 0$. At each round we will measure only the $X$-stabilisers.
 
 It is worth noting that this setup leaves us with a lot of freedom in our code state. The Hilbert space of the $2n^2$ code qubits has dimension $2^{2n^2}$ and the $n^2-1$ independent $X$-stabilisers only reduce this by a factor of $2^{n^2-1}$, with only two of the remaining degrees of freedom being used to store the qubit information. Experimentally we can use this freedom in the choice of initial state - we can choose to prepare any eigenstate of the $X$-stabilisers and logical $X$ operators, for example $\vert + \rangle^{\otimes n}$.
-
-In order to calculate
-\begin{align}
-  p(e) = (1-p)^{2n^2 - n(e)} p^{n(e)}
-\end{align}
-where $n(e)$ counts the number of errors in error configuration $e \in E$. We can write
-\begin{align}
-  \sum_{e \in E_{a,l}} p(e) &= \sum_{e \in E_{a,l}} (1-p)^{2n^2 - n(e)} p^{n(e)} \\
-  &= (1-p)^{n^2} \sum_{i = 0}^{2n^2} d_{a,l}^{(i)} \left(\frac{p}{1-p}\right)^i \\
-  &=: (1-p)^{n^2} \chi_{a,l}\left(\frac{p}{1-p}\right)
-\end{align}
-where $d_{a,l}^{(i)} = \vert \left\{e \in E_{a,l} : n(e)=i \right\} \vert$ and we have used the final line to define the characteristic function $\chi_{a,l}$ of the class $E_{a,l}$.
-
-In order to generate the sets $E_{a,l}$ there are two strategies: the first is to generate all members of $E$ and split them into the $E_{a,l}$ by calculating the syndrome $a$ and logical error $l$ for each one. The second is to generate each set by finding a representative $e_{a}$ by following the matching procedure and then acting on it with $E_{0, l}$\ldots 
 
 We calculated the success probabilities $p_{\text{success}}(n, p)$, and compared them with $p_{\text{bare}} = (1-p)^2$, the probability that two non-encoded qubits would remain error-free (Fig. \ref{x_truthful}).
 
@@ -322,7 +322,7 @@ We find that the $4$-code is the first code to offer encoding power in this scen
   \label{y_lying}
 \end{figure}
 
-\subsection{Full Quantum Case}
+\subsection{Full Quantum Code}
 
 Finally we look at the full code, protecting against full depolarizing noise, taking $p_x = p_y = p_z$ in equation (\ref{noise_eq}). 
 
