@@ -5,14 +5,14 @@
 % [ Use of single photon sources ]
 
 Single photon sources are an essential component of many quantum information processing (QIP) protocols, from quantum key distribution (QKD) protocols \cite{bennett_brassard_84, ekert_91} to linear optical quantum computing (LOQC) schemes \cite{knill:2001, kok07, kok10}.
-Optical schemes using path erasure, a two-photon interference effect, can be used to generate long-range entanglement between physically separated systems  \cite{barrett+kok, bose99, simon:03, lim05}. Such procedures can be repeated on many different pairs of systems and so create a distributed cluster state~\cite{raussendorf01,kok10}, which is the key resource required for implementation of measurement based quantum computing.
+As described in Section \ref{remote_entanglement_generation}, optical schemes using path erasure  can be used to generate long-range entanglement between physically separated systems  \cite{barrett+kok, bose99, simon:03, lim05}. Such procedures can be repeated on many different pairs of systems and so create a distributed cluster state~\cite{raussendorf01,kok10}, which is the key resource required for implementation of measurement based quantum computing (Section \ref{MBQC}).
 
 In order to be useful in these applications, a photon source must be of a high quality in two respects: it must reliably produce a single photon on demand, and the photons produced must be indistinguishable from one another. 
 
 To be perfectly indistinguishable, photons must have the same pulse width, band width, polarization, arrival time at the detector, and carrier frequency. Indistinguishability is vital if photons are to exhibit high quality quantum interference, and its consideration is therefore critical when designing photon sources for LOQC and path erasure entanglement generation.
 If photons can be distinguished even in principle, this can lead directly to imperfect LOQC gates, or to a lessening of the degree of entanglement generated in distributed cluster states. In QKD, indistinguishability is less important as interference effects are not required, but it is of paramount importance that no more than one photon is emitted on demand; multiple photon emission leads to security loopholes~\cite{kok10}.
 
-As a measure of indistinguishability we exploit the Hong-Ou-Mandel (HOM) effect \cite{HOM}, which relies on the bunching behaviour of identical photons when they are incident on a beam splitter with the same temporal profile. If the photons are indistinguishable, they will always emerge in and be detected in the same output arm (Fig.~\ref{HOM_expt}). The number of same-arm detection events are usually plotted as a function of arrival time of the two photons - and hence a `dip' at a time difference of zero is an indicator of indistinguishability.
+As a measure of indistinguishability we exploit the Hong-Ou-Mandel (HOM) effect \cite{HOM}, which relies on the bunching behaviour of identical photons when they are incident on a beam splitter with the same temporal profile. As explained in Section \ref{HOM_section}, if the photons are indistinguishable, they will always emerge in and be detected in the same output arm (Fig.~\ref{HOM_expt}). The number of same-arm detection events are usually plotted as a function of arrival time of the two photons - and hence a `dip' at a time difference of zero is an indicator of indistinguishability.
 \begin{figure}[htb]
   \begin{center}
   \includegraphics[width=8cm]{assets/HOM_expt.pdf}
@@ -44,7 +44,7 @@ A fundamentally different approach is to use more elaborate QED schemes to relea
 Each arm is coupled to either a classical or a quantum light field; in Fig~\ref{lambda_system} we show the situation when one arm is driven classically, with a coupling $\Omega$, and the other arm is coupled to a cavity mode with strength $h$. By detuning both arms of the $\Lambda$-system by the same amount $\nu$, population is transferred from one arm to the other, whilst suppressing population in the top state. Provided that the coupling strengths are small in comparison to the detuning, $\Omega \ll \nu$ and $h\ll\nu$, we induce an effective coupling between the two low-lying states, which causes oscillations with Rabi frequency ${h\Omega}/{4 \nu}$. The population in the excited state remains small at all times, and so any decoherence that arises due to environmental coupling to this excited state may be reduced using this strategy. In particular, a common realisation of a single photon source is a quantum dot, in which the excited state typically has a different charge configuration to the ground state. This causes local lattice distortions, which in turn locally alter the electronic bandgap, thus inducing a coupling to acoustic phonons~\cite{ramsay:2010, mahan00} that can act as a noise source. 
 % [ Overview of what we will do ]
 
-In this paper we provide a detailed and realistic analysis of the effects of the lattice vibrations for single photon emitters based on (self-assembled) semiconductor quantum dots. By comparing a standard pulse-relax approach with the aforementioned Raman technique, we find that the latter can can offer considerable improvements in terms of both photon indistinguishability and source efficiency. Our results extend and complement a previous study \cite{santori:2009} which considered generic pure dephasing noise. However, here we also show that the precise choice of control parameters is important if phonon-induced decoherence is to be successfully suppressed.
+In this chapter we provide a detailed and realistic analysis of the effects of the lattice vibrations for single photon emitters based on (self-assembled) semiconductor quantum dots. By comparing a standard pulse-relax approach with the aforementioned Raman technique, we find that the latter can can offer considerable improvements in terms of both photon indistinguishability and source efficiency. Our results extend and complement a previous study \cite{santori:2009} which considered generic pure dephasing noise. However, here we also show that the precise choice of control parameters is important if phonon-induced decoherence is to be successfully suppressed.
 
 \section{Our model}
 
@@ -53,15 +53,15 @@ In this paper we provide a detailed and realistic analysis of the effects of the
 For convenience of notation we consider the $\Lambda$-system detailed in Fig.~\ref{lambda_system} for both the pulse-relax and the Raman approach. 
 %In the former case we are only interested in the transition from one of ground states to the common excited state. 
 In both cases one arm of the system is coupled to the cavity with detuning $\nu$. % where we denote the frequency mismatch between cavity and $\Lambda$-system transition by $\nu$. 
-In the Raman scheme, the other arm is driven with strength $\Omega$ by a laser with a matching detuning $\nu$, and the system starts in state $\ket{g_0}$. By contrast, we model the pulse-relax approach by setting $\Omega = \nu = 0$ and starting in state $\ket{e}$, ignoring the details of the excitation process. The fact that we are neglecting the excitation step in this simplified picture will slightly favour the pulse-relax approach, but is largely justified on the assumption that the initial excitation process takes place quickly compared with other system dynamics. Our framework thus allows us to consider the pulse-relax approach as a special case of the master equation we will now derive for the Raman approach.
+In the Raman scheme, the other arm is driven with strength $\Omega$ by a laser with a matching detuning $\nu$, and the system starts in state $\ket{g_0}$. By contrast, we model the pulse-relax approach by setting $\Omega = \nu = 0$ and starting in state $\ket{e}$, ignoring the details of the excitation process. The fact that we are neglecting the excitation step in this simplified picture will slightly favour the pulse-relax approach in terms of production rate, but is largely justified on the assumption that the initial excitation process takes place quickly compared with other system dynamics. Our framework thus allows us to consider the pulse-relax approach as a special case of the master equation we will now derive for the Raman approach.
 
-We split the Hamiltonian into contributions from the emitter system and cavity ($sys$), the driving laser ($dr$), the unperturbed phonon bath ($ph$) and interaction terms between the system and phonon bath ($sys-ph$), system and target external mode ($sys-mod$), and system and other exernal modes ($sys-ext$):
+We split the Hamiltonian into contributions from the emitter system and cavity ($sys$), the driving laser ($dr$), the unperturbed phonon bath ($ph$) and interaction terms between the system and phonon bath ($sys-ph$), system and target external mode ($sys-mod$), and system and other external modes ($sys-ext$):
 \begin{eqnarray}
   H = H_{sys} + H_{dr} + H_{ph} + H_{sys-ph} + H_{sys-mod} + H_{sys-ext}~.
 \end{eqnarray}
 The $H_{sys-mod}$ and $H_{sys-ext}$ terms are well understood, and we will treat these by adding in the appropriate Lindblad terms to our final master equation. In the following, we shall describe the rest of these terms separately. 
 
-Using the standard Jaynes-Cummings Hamiltonian, the $\Lambda$-system coupled to a cavity mode with strength $h$ and detuning $\nu$ from resonance  can be described by the following Hamiltonian:
+Using the standard Jaynes-Cummings Hamiltonian (Section \ref{JC_Ham}), the $\Lambda$-system coupled to a cavity mode with strength $h$ and detuning $\nu$ from resonance  can be described by the following Hamiltonian:
 \begin{eqnarray}
   H_{sys} = \left(\omega + \nu\right)\ketbra{e}{e} + \omega a^\dagger a + \frac{h}{2}\left(\ketbra{g_1}{e}a^\dagger + \eqntext{h.c.} \right)~,
 \end{eqnarray}
@@ -79,7 +79,7 @@ After performing the rotating wave approximation, assuming that $\omega \gg \nu,
 \end{eqnarray}
 for the total system Hamiltonian.
 
-We model the phonons as a bath of harmonic oscillators
+We model the phonons as a bath of harmonic oscillators with creation and annihilation operators, $b_q^\dagger$ and $b_q$, as in Section \ref{phonon_me}:
 \begin{eqnarray}
   H_{ph} &= \sum_q \omega_q b_q^\dagger b_q,
 \end{eqnarray}
@@ -88,7 +88,7 @@ which couple to the exciton state $\ket{e}$ through the deformation coupling wit
   H_{sys-ph} = \ketbra{e}{e}\sum_q f_q \left(b_q^\dagger + b_q\right).
 \end{eqnarray}
 
-The effect of the phonon bath on a driven quantum dot can be described using a Lindblad master equation \cite{gauger:2008}, where the Lindblad operators  induce phonon-assisted transitions between the dressed system eigenstates \cite{gauger:2010}. Being analogous to Refs \cite{gauger:2008, gauger:2010}, it suffices to outline the derivation of the  phonon master equation only briefly in the following. To derive the master equation we must first diagonalise the system Hamiltonian, $H_{sys} + H_{dr}$. We find that the eigenvalues are
+The effect of the phonon bath on a driven quantum dot can be described using a Lindblad master equation \cite{gauger:2008}, where the Lindblad operators  induce phonon-assisted transitions between the dressed system eigenstates \cite{gauger:2010}. We follow the derivation from Section \ref{phonon_me}. To derive the master equation we must first diagonalise the system Hamiltonian, $H_{sys} + H_{dr}$. We find that the eigenvalues are
 \begin{eqnarray}
  \lambda_0 &=& 0 \nonumber, \\
  \lambda_\pm &=& \frac{\nu \pm \sqrt{\nu^2 + \Omega^2 + h^2}}{2},
@@ -111,7 +111,7 @@ where $D[L]\rho = L\rho L^\dagger - 1/2(L^\dagger L\rho + \rho L^\dagger L)$, $\
 \begin{eqnarray}
   N(\omega) &= \frac{1}{e^{\beta \omega}-1}
 \end{eqnarray}
-$\beta = (k_BT)^{-1}$ and we shall be henceforth consider all systems at room temperature, $T = 298$~K. The spectral density function $J(\omega)$ represents the electron-phonon coupling weighted by the density of phonon modes~\cite{breuer02}. We expect this to be dominated by deformation potential coupling, and in this case we obtain~\cite{gauger:2008}:
+$\beta = (k_BT)^{-1}$ and we shall be henceforth consider all systems at room temperature, $T = 298$~K. The spectral density function $J(\omega)$ represents the electron-phonon coupling weighted by the density of phonon modes~\cite{breuer02}. The quantum dot system we consider is well described by taking~\cite{gauger:2008}
 \begin{eqnarray}
   J(\omega) &= \alpha \omega^3 e^{-\left(\frac{\omega}{\omega_c}\right)^2}~.
   \label{eq:specdens}
@@ -132,7 +132,7 @@ v_{\rm HOM} = \frac{p_{\rm same} - p_{\rm diff}}{p_{\rm same} + p_{\rm diff}},
 where $p_{\rm same}  = p(D_+ \cap D_+) + p({D_- \cap D_-})$ and $p_{\rm diff}  = p(D_+ \cap D_-) + p({D_- \cap D_+})$ with $p(D_x \cap D_y)$ being the probability of obtaining a click in detector $D_y$ followed by a click in detector $D_x$.
 
 In order to calculate $v_{\rm HOM}$ we thus need to consider photons emitted from two copies of the system $S_1$ and $S_2$, one for each input arm of the beam splitter interferometer. The joint state of the system then inhabits the space $S= S_1 \otimes S_2$ (Fig.~\ref{HOM_expt}).
-We label the two cavity modes using annihilation operators $a_1$ and $a_2$. Using the input-output formalism (e.g~\cite{walls+milburn}) and neglecting incoming light, we can describe the modes outside the cavities as $a_{i, out} = \sqrt{\kappa}$, where $\kappa$ is the cavity leakage rate. The modes corresponding to detection in $D_\pm$ are labelled $c_\pm$ respectively. Due to the transformation performed by the beam splitter, $c_\pm$ can be written in terms of $a_1$ and $a_2$ as follows:
+We label the two cavity modes using annihilation operators $a_1$ and $a_2$. Using the input-output formalism (e.g~\cite{walls+milburn}) and neglecting incoming light, we can describe the modes outside the cavities as $a_{i, \text{out}} = \sqrt{\kappa}a_{i, \text{in}}$, where $\kappa$ is the cavity leakage rate. The modes corresponding to detection in $D_\pm$ are labelled $c_\pm$ respectively. Due to the transformation performed by the beam splitter, $c_\pm$ can be written in terms of $a_1$ and $a_2$ as follows:
 \begin{eqnarray}
   c_+ &= \sqrt{\kappa} \frac{1}{\sqrt{2}}\left( a_1 + a_2 \right), \\
   c_- &= \sqrt{\kappa} \frac{1}{\sqrt{2}}\left( a_1 - a_2 \right).
@@ -145,9 +145,9 @@ The effect on the system $S= S_1 \otimes S_2$ of a detection in the plus or minu
 
 We could now simulate many trajectories of this system and build up an estimate of $v_{\rm HOM}$ by averaging these~\cite{carmichael:92}. Instead we introduce a technique that we call the \textit{semi-quantum master equation} method, which will allow us to find $v_{\rm HOM}$ in a single run of a master equation acting on a slightly larger Hilbert space.
 
-\section{Introducing the Semi-Quantum Master Equation Method}
+\section{Introducing the Semi-Quantum Master Equation Method}\label{semi_quant_me_section}
 
-We are often interested in `observable events' in quantum systems, such as the emission of a photon. When an event is observed the system undergoes a transition due to wave function collapse. During a period when no event is observed the system evolves according to a conditional master equation, reflecting the fact if events could be observed but are not, then this also informs our knowledge of the state. In order to answer questions about the probabilities and time distributions of events or chains of events, one approach is to use a quantum jump master equation to generate individual trajectories of the system. In each timestep we decide probabilistically whether an event should occur. If it does occur then the system collapses according to a quantum jump; if it does not occur then the system evolves conditioned on no jump occurring. Statistics about the quantities of interest are built up as many trajectories are created.
+We are often interested in `observable events' in quantum systems, such as the emission of a photon. When an event is observed the system undergoes a transition due to wave function collapse. During a period when no event is observed the system evolves according to a conditional master equation, reflecting the fact if events could be observed but are not, then this also informs our knowledge of the state. In order to answer questions about the probabilities and time distributions of events or chains of events, one approach is to use a quantum jump master equation to generate individual trajectories of the system. In each time step we decide probabilistically whether an event should occur. If it does occur then the system collapses according to a quantum jump; if it does not occur then the system evolves conditioned on no jump occurring. Statistics about the quantities of interest are built up as many trajectories are created.
 
 Here we look at a different approach to calculating the quantities relating to events that occur in such systems. Instead of simulating multiple trajectories of the system, we efficiently increase the size of the statespace to record the information of interest. This allows us to calculate the desired system properties, and their time evolution, by solving a single master equation. 
 
@@ -208,7 +208,7 @@ The population in the $1$ subspace at time $t$ will give us the probability a ph
   \begin{center}
   \includegraphics[width=8cm]{assets/sqme_mc_comp.pdf}
   \end{center}
-  \caption{Comparison of semi-quantum master equation approach with Monte Carlo simulations of n=20, 100, 1000, and 10000 runs, for the system described by~\ref{sys-start}-~\ref{sys-end}. For the cumulative histogram plots we used horizontal binning with 40 bins, which explains why the horizontal resolation does not improve further for the larger values of n.}
+  \caption{Comparison of semi-quantum master equation approach with Monte Carlo simulations of $n$=20, 100, 1000, and 10000 runs, for the system described by~\ref{sys-start}-~\ref{sys-end}. For the cumulative histogram plots we used horizontal binning with 40 bins, which explains why the horizontal resolation does not improve further for the larger values of $n$.}
   \label{sqme_mc_comp}
 \end{figure}
 
@@ -272,9 +272,9 @@ We form a Lindblad master equation using these $24$ Lindblad operators:
 \begin{eqnarray}
   \dot{\rho} &= i\left[ \rho, H \right] + \sum_i \gamma_i \left( L_i\rho L_i^\dagger - 1/2(L_i^\dagger L_i\rho + \rho L_i^\dagger L_i) \right).
 \end{eqnarray}
-The $\gamma_i$ are the rates for each process. As noted earlier for the $U_{\pm, i}^{(j)}$ this rate is $1$, as the rates have been incorporated into the Lindblad operators. For the $C_\pm^{(i)}$ we need $\gamma = \kappa$, the cavity leakage rate, which we take to be $3h$, a choice that allows for a reasonable enhancement of photon emission from the emitter system into the desired mode outside of the cavity, whilst preventing cavity photons being reabsorbed by the emitter system. For the $E_i^{(j)}$ we take $\gamma = 0.005ps^{-1}$, assuming a radiative livetime of $200$~ps. Our model allows only for spontaneous emission directly from the excited state $\ket{e}$; we assume that there is no loss from the cavity to modes other than the target waveguide mode, and that all photons that are emitted into the target mode are detected. For similar cavities we expect these effects to impact the two approaches to equal extent. 
+The $\gamma_i$ are the rates for each process. As noted earlier for the $U_{\pm, i}^{(j)}$ this rate is $1$, as the rates have been incorporated into the Lindblad operators. For the $C_\pm^{(i)}$ we need $\gamma = \kappa$, the cavity leakage rate, which we take to be $3h$, a choice that allows for a reasonable enhancement of photon emission from the emitter system into the desired mode outside of the cavity, whilst preventing cavity photons being reabsorbed by the emitter system. For the $E_i^{(j)}$ we take $\gamma = 0.005ps^{-1}$, assuming a radiative lifetime of $200$~ps. Our model allows only for spontaneous emission directly from the excited state $\ket{e}$; we assume that there is no loss from the cavity to modes other than the target waveguide mode, and that all photons that are emitted into the target mode are detected. For similar cavities we expect these effects to impact the two approaches to equal extent. 
 
-The dimension of this extended space $S$ is $4 \times 4 \times 6 = 96$. In fact we can reduce this by eliminating some unneccessary states from the subspaces. By carefully considering the basis states accessible in each the subspace corresponding to each process, we can reduce the number of system states to $9 + 6 + 6 + 1 + 1 + 1 = 24$. For our simulation we will need to calculate the density matrix for this system. As noted in the previous section, no coherences can exist between the different process-state subspaces. This reduces the number of density matrix elements we need to track to $9^2 + 6^2 + 6^2 + 1 + 1 + 1 = 116$.
+The dimension of this extended space $S$ is $4 \times 4 \times 6 = 96$. In fact we can reduce this by eliminating some unnecessary states from the subspaces. By carefully considering the basis states accessible in each the subspace corresponding to each process, we can reduce the number of system states to $9 + 6 + 6 + 1 + 1 + 1 = 24$. For our simulation we will need to calculate the density matrix for this system. As noted in the previous section, no coherences can exist between the different process-state subspaces. This reduces the number of density matrix elements we need to track to $9^2 + 6^2 + 6^2 + 1 + 1 + 1 = 116$.
 
 \section{Results}
 

@@ -13,16 +13,16 @@ the idea being that the $n$ ancillary spins constitute a large enough set that s
 
 This is a rather broadly defined transformation and there are a number of ways that one might perform it. Clearly one would like to find the method that is the least demanding experimentally. Previous authors have proposed schemes using a strictly one-dimensional (1D) homogeneous lattice with continuous global driving \cite{Lee:2005p6468}, and an inhomogeneous three-dimensional (3D) lattice with alternating timed EM pulses \cite{PerezDelgado:2006p6542}. The former result has the advantage of simplicity but the rate at which amplification occurs will inevitably be limited by the single dimension of the array; moreover such a system must be highly vulnerable to imperfect initialisation (i.e. finite temperature).
 
-In this chapter we generalise to a homogeneous two-dimensional (2D) square lattice, showing that a continuous global EM field can drive an amplification process that succeeds at finite temperatures (imperfect initialisation of the ancilla spins) and in the presence of decoherence. By bringing the global EM field onto resonance with certain transitions, we are able to create a set of rules that govern locally how spins propagate over the lattice. We then look at the rate of increase in the total number of flipped spins as a measure of quality of the scheme. While our focus is on the 2D case, we are also able to predict the performance of the amplification protocol for a homogeneous 3D lattice with continuous driving.
+In this chapter we present an amplification procedure using a homogeneous two-dimensional (2D) square lattice. We show that a continuous global EM field can drive an amplification process that succeeds at finite temperatures (imperfect initialisation of the ancilla spins) and in the presence of decoherence. By bringing the global EM field onto resonance with certain transitions, we are able to create a set of rules that govern locally how spins propagate over the lattice. We then look at the rate of increase in the total number of flipped spins as a measure of quality of the scheme. While our focus is on the 2D case, we are also able to predict the performance of the amplification protocol for a homogeneous 3D lattice with continuous driving.
 
-\section{Reviewing of 1D Model}
+\section{Review of 1D Model}
 
 The case of a 1D lattice has been studied in detail by Lee and Khitrin \cite{Lee:2005p6468}. Before moving to the 2D spin lattice that will form the core of the chapter, we first recall how to simplify the description of this (semi-infinite) 1D spin chain, with nearest neighbour Ising (ZZ) interactions. Under a microwave driving field of frequency $\omega$, the Hamiltonian is given by
 \begin{equation} {\cal H} = \sum_{i=1}^{\infty} \epsilon_i \sigma^i_z
   + J_i \sigma_z^i\sigma_z^{i+1} + 2 \Omega_i \sigma_x^i \cos(\omega
   t)
 \end{equation}
-$\epsilon_i$ is the on-site Zeeman energy of spin $i$, and $J_i$ is the magnitude of the coupling between spins $i$ and $i+1$. $\Omega$ describes the coupling of spin $i$ and the microwave field. In this case, spin $i=1$ is the one whose state is supposed to be amplified. If we assume that the chain is uniform, such that $\Omega_i = \Omega$, $\epsilon_i = \epsilon$ and $J_i = J$, then moving into a frame rotating at frequency $\omega$, making a rotating wave approximation and setting $\omega = \epsilon$ leads to
+$\epsilon_i$ is the on-site Zeeman energy of spin $i$, and $J_i$ is the magnitude of the coupling between spins $i$ and $i+1$. $\Omega$ describes the coupling of spin $i$ and the microwave field. In this case, spin $i=1$ is the one whose state is supposed to be amplified. We assume that the chain is uniform, such that $\Omega_i = \Omega$, $\epsilon_i = \epsilon$ and $J_i = J$, and that $\Omega$ is weak. Following the same procedure as in Section~\ref{semiclassical_atom_cavity}, we move into a frame rotating at frequency $\omega$ and make a rotating wave approximation, setting $\omega = \epsilon$:
 \begin{equation} {\cal H} = \sum_{i=1}^{\infty} J
   \sigma_z^i\sigma_z^{i+1} + \Omega \sigma_x^i .
 \end{equation}
@@ -35,11 +35,12 @@ In order to understand the dynamics of the system, is it instructive to explicit
 \end{equation}
 Choosing a driving field such that $\Omega\ll J$ means that spin $k$ will only undergo resonant oscillations when the first term in Eq.~\ref{hamk} goes to zero - i.e. when the two spins neighbouring spin $k$ are oriented in opposite directions. In any other configuration the Ising coupling takes the spin $k$ off resonance with the microwave and no appreciable dynamics are expected.
 
-Let us now define a subset of states $S$ that exist in the spin chain Hilbert space, $\ket{n}$, which have the first $n$ spins of the chain in state $\ket{\uparrow}$ with the rest $\ket{\downarrow}$. If the rule we just derived holds exactly these states define a closed subspace. We may then write a very simple isolated Hamiltonian for this subspace:
+Let us now define a subset of states $S$ that exist in the spin chain Hilbert space, $\ket{n}$, which have the first $n$ spins of the chain in state $\ket{\uparrow}$ with the rest $\ket{\downarrow}$. If the rule we just derived holds exactly, these states define a closed subspace. We may then write a very simple isolated Hamiltonian for this subspace:
 \begin{equation}
   {\cal H}_S = \Omega \sum_{n=1}^\infty \ket{n}\bra{ n+1}+\ket{n+1}\bra{ n}.
   \label{1d_ham}
 \end{equation}
+The Hamiltonian couples states with $n$ up-spins to those with $n-1$ and $n+1$, with coupling strength $\Omega$. 
 
 \section{Extension to 2D Model}
 
@@ -79,7 +80,7 @@ Our starting point is the state $\ket 1$, with just the corner spin `up'. From t
   number of different paths through the lattice to a given state.}
   \label{partition_states}
 \end{figure}
-The graph we have just described is depicted in Fig.~\ref{partition_states}  is known as `Young's lattice' and arises in areas of pure mathematics, such as the representation theory of the symmetric group, and the theory of differential posets. We have drawn weights beneath each state, recording the number of ways the state can be constructed. We will now further reduce the dimension of this basis
+The graph we have just described is depicted in Fig.~\ref{partition_states}  is known as `Young's lattice' and arises in areas of pure mathematics, such as the representation theory of the symmetric group, and the theory of differential posets \cite{Sagan:2001p6568}. We have drawn weights beneath each state, recording the number of ways the state can be constructed. We will now further reduce the dimension of this basis
 by eliminating combinations of states which are inaccessible.
 
 Starting with $\ket 1$ we see that $\bra 1H\left(\alpha_{1,1}\ket{\psi_{1,1}}+ \alpha_{2}\ket{\psi_{2}}\right) =\Omega\left(\alpha_{1,1}+ \alpha_{2}\right)$ so $\ket 1$ does not couple to the two-excitation state $\ket{\psi_{1,1}}-\ket{\psi_{2}}$. We can eliminate this, leaving a single orthogonal, coupled state with two excitations: $\ket 2 := \frac{1}{\sqrt{2}}\left( \ket{\psi_{1,1}}+\ket{\psi_2} \right)$.
@@ -99,7 +100,7 @@ Unfortunately there is no easy way to write down the partition states and weight
   \Omega\frac{ N_n}{N_{n-1}}\label{coupling_as_sum_c2}\end{align}
 To find the $N_n$ we need the sum of the squares of the weights of partitions in a given row. A standard result about Young's lattice immediately gives us this sum: $n!$ \cite{STANLEY:1975p6605}.
 
-This result can be taken straight from the representation theory of the symmetric group: it can be shown that the nodes and their weights represent the irreducible representations and their dimensions. Given that the dimension of each representation is its multiplicity in the regular representation (with dimension $|S_n| = n!$), by dimension counting the result follows. However, for our purposes it is more enlightening to focus on a differetial poset approach, which uses particular combinatorical features of the lattice to produce the result. Here we give a brief overview of the approach detailed by Sagan in \cite{Sagan:2001p6568}.
+This result can be taken straight from the representation theory of the symmetric group: it can be shown that the nodes and their weights represent the irreducible representations and their dimensions. Given that the dimension of each representation is its multiplicity in the regular representation (with dimension $|S_n| = n!$), by dimension counting the result follows. However, for our purposes it is more enlightening to focus on a differetial poset approach, which uses particular combinatorial features of the lattice to produce the result. Here we give a brief overview of the approach detailed by Sagan in \cite{Sagan:2001p6568}.
 
 Let $L$ be an operator that takes a partition state to a sum of its
 children, and $R$ take a state to the sum of its parents. For example\begin{eqnarray*}
@@ -128,19 +129,19 @@ Referring back to Eq. (\ref{coupling_as_sum_c2}), and using $N_i=\sqrt{i!}$, we 
   \ket{n} \bra{n-1} \right) .
   \label{2d_ham}
 \end{equation}
-In essence we have established a linear sequence of states, each coupled to the the next analogously to the states on a 1D chain \ref{1d_ham}. However, each of our states is in fact a superposition of many configurations of the 2D array, and crucially the effective coupling from each state to the next increases along the sequence.
+In essence we have established a linear sequence of states, each coupled to the next analogously to the states on a 1D chain \ref{1d_ham}. However, each of our states is in fact a superposition of many configurations of the 2D array, and crucially the effective coupling from each state to the next increases along the sequence.
 
 \section{Rate of Spin Propagation}
 
-It has been shown (e.g. \cite{Fitzsimons:2005p6472}) that a quantum state released at the end of a semi-inifinite chain of states, with constant couplings, will travel ballistically: the average position of the state along the chain is proportional to the time passed, and inversely proportional to the coupling strength. Since, in the one-dimensional case, the position is proportional to the number of spins that have flipped, we have that the total polarisation will increase linearly with time.
+It has been shown (e.g. \cite{Fitzsimons:2005p6472}) that a quantum state released at the end of a semi-infinite chain of states, with constant couplings, will travel ballistically: the average position of the state along the chain is proportional to the time passed, and inversely proportional to the coupling strength. Since, in the one-dimensional case, the position is proportional to the number of spins that have flipped, we have that the total polarisation will increase linearly with time.
 
-We can establish the rate of propagation in the 2D case using the ansatz that the time taken to travel between two neighbouring nodes is inversely proportional to the strength of the coupling between them. The total time is then $t_{2D}\propto \sum_{i=1}^{n}\frac{1}{\sqrt{i}}\simeq n^{\frac{1}{2}}$. As in the one-dimensional case, the position along the chain corresponds to the the number of spins that have flipped, and so we would expect the total polarisation to be proportional to $t^2$. This prediction of a quadratic speed-up of signal going from 1D to 2D is the central result of the chapter, and was confirmed by simple numerical simulations of Eq. (\ref{2d_ham}) (Fig. \ref{comparison}).
+We can establish the rate of propagation in the 2D case using the ansatz that the time taken to travel between two neighbouring nodes is inversely proportional to the strength of the coupling between them. The total time is then $t_{2D}\propto \sum_{i=1}^{n}\frac{1}{\sqrt{i}}\simeq n^{\frac{1}{2}}$. As in the one-dimensional case, the position along the chain corresponds to the  number of spins that have flipped, and so we would expect the total polarisation to be proportional to $t^2$. This prediction of a quadratic speed-up of signal going from 1D to 2D is the central result of the chapter, and was confirmed by simple numerical simulations of Eq.~(\ref{2d_ham}) (Fig. \ref{comparison}).
 
 \begin{figure}
   \begin{center}
     \includegraphics[scale=0.7]{assets/comparison.pdf}
   \end{center}
-  \caption{Expected total polarisation against time. Time in units of $\frac{1}{\Omega}$, dephasing rate $\Gamma = 1$. The gradient of the 'one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
+  \caption{Expected total polarisation against time. Time in units of $\frac{1}{\Omega}$, dephasing rate $\Gamma = 1$. The gradient of the `one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
   \label{comparison}
 \end{figure}
 
@@ -166,7 +167,7 @@ We proceed by splitting up the equation into diagonal and off-diagonal terms
   \dot{\rho_{ij}} & = i\left(\sum_{k=\pm j}\rho_{ik}g_{kj}-\sum_{k=\pm i}\rho_{kj}g_{ik}\right)-\Gamma\rho_{ij}
 \end{align}
 where $g_{ij}$ is the coupling between states $i$ and $j$. In the limit of heavy dephasing ($\Gamma\gg g$), we have a process similar to adiabatic following, and we can make the approximation\[ \Gamma\rho_{ij}\approx i\left(\sum_{k=\pm j}\rho_{ik}g_{kj}-\sum_{k=\pm i}\rho_{kj}g_{ik}\right).\] We consider the $\rho_{ij}$ as a set of $\frac{n(n-1)}{2}$ variables and solve for them in terms of the $\rho_{ii}$. Neglecting terms that are second order in $\frac{g}{\Gamma}$, and substituting back into Eq. (\ref{rhoii}) gives \[ \dot{\rho}_{ii}=-\sum_{j=i\pm1}\frac{2|g_{ij}|^{2}}{\Gamma}\left(\rho_{ii}-\rho_{jj}\right).\]
-Our quantum chain formally reduces to a classical Markov chain on the same statespace, with transition rates proportional to the coupling squared.  Although states with more `up' spins decohere more quickly, the decoherence rate $\Gamma$ is not multiplied for higher states, as it is the \textit{relative} decoherence rate between neighbouring states, which is of importance.
+Our quantum chain formally reduces to a classical Markov chain on the same statespace, with transition rates proportional to the coupling squared. 
 
 In one-dimension $g_{ij} = 1$ and we are reduced to a simple random walk on a semi-infinite line. By analogy with simple diffusion we expect that the resulting distribution is roughly Gaussian, with the expected number of flipped spins going with $\sqrt{t}$: the rate of spin propagation drops from $t$ to $\sqrt{t}$. This result was confirmed numerically - although (Fig. \ref{comparison}) appears to show something closer to a $t^\frac{2}{3}$ dependence, (Fig.~\ref{asymptotic_1d}) shows that the $\sqrt{t}$ value is recovered as time increases.
 
@@ -174,7 +175,7 @@ In one-dimension $g_{ij} = 1$ and we are reduced to a simple random walk on a se
   \begin{center}
     \includegraphics[scale=0.6]{assets/asymptotic_1d.pdf}
   \end{center}
-  \caption{ The gradient of the 'one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
+  \caption{ The gradient of the `one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
   \label{asymptotic_1d}
 \end{figure}
 

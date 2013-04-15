@@ -201,7 +201,7 @@ To put all this on a rigorous footing we will describe our observation using a P
 \begin{align}
   \frac{A_1 \rho A_1^\dagger}{\tr\{A_1 \rho A_1^\dagger\}}
 \end{align}
-We assume the measurement is weak and that the probability of detecting an event is on the order of $\epsilon$, a `weakness parameter', which we can take to be small. We write $A_1 = \sqrt{\epsilon} L$, in doing so defining $L$. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that Eqn. (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
+We assume the measurement is weak and that the probability of detecting an event is on the order of $\epsilon$, a `weakness parameter', which we can take to be small. We write $A_1 = \sqrt{\epsilon} L$, in doing so defining $L$. Currently $A_1$ represents one outcome of a POVM. To complete our description we must complete the set of measurement outcome operators so that eq. (\ref{POVM_completeness_eq}) is satisfied. We do this by setting $A_0 = \id - \frac{\epsilon}{2} L^\dagger L$ so that
 \begin{align}
   A_0^\dagger A_0 + A_1^\dagger A_1 = \left( \id - \frac{\epsilon}{2} L^\dagger L\right)^\dagger \left( \id - \frac{\epsilon}{2} L^\dagger L\right) + \epsilon L^\dagger L = \id + O(\epsilon^2).
 \end{align}
@@ -258,11 +258,11 @@ Our best description of the state of the system $S$ is given by taking the parti
   \tilde{\rho}_S(t) = \tr_E\left\{\tilde{\rho}(t)\right\}.
 \end{align}
 
-We now look to find the master equation for the system, $S$, which will be an expression for the rate of change of $\tilde{\rho}_S$ in terms of $\tilde{\rho}_S$. To this end, we formally solve Eqn. (\ref{i_von_neumann_eq}) to find an equation for $\tilde{\rho}$ in integral form
+We now look to find the master equation for the system, $S$, which will be an expression for the rate of change of $\tilde{\rho}_S$ in terms of $\tilde{\rho}_S$. To this end, we formally solve eq. (\ref{i_von_neumann_eq}) to find an equation for $\tilde{\rho}$ in integral form
 \begin{align}
   \tilde{\rho}(t) = \tilde{\rho}(0) + -i\int_{0}^t \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] ds
 \end{align}
-and then substitute this back into Eqn. (\ref{i_von_neumann_eq}) and apply Eqn. (\ref{trace_eq}) to get
+and then substitute this back into eq. (\ref{i_von_neumann_eq}) and apply eq. (\ref{trace_eq}) to get
 \begin{align}
   \label{before_markov_approx}
   \ddt \tilde{\rho}_S(t) = -\int_{0}^t \tr_E\left\{ \left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}(s) \right] \right] \right\} ds
@@ -271,7 +271,7 @@ where we have assumed that $\tr_E [\tilde{H}_I(t), \tilde{\rho}(0)] = 0$.
 
 This isn't yet in a closed form as the RHS still contains $\tilde{\rho}(t)$, the density matrix of the whole system. To begin rectifying this we first make the Born approximation by letting $\tilde{\rho}(s) \approx \tilde{\rho}_S(s) \otimes \tilde{\rho}_E$. When doing this we envisage a system that is weakly coupled to a large environment. We expect the influence of the system on the environment to be small enough that the state remains approximately separable throughout. Excitations from the system are allowed to enter the environment, but we assume there is a sufficiently large continuum of frequencies that the excitations dissipate on a timescale that is small with respect to the timescale over which the system evolves. 
 
-After the Born approximation the RHS of Eqn. (\ref{before_markov_approx}) no longer depends on the history of the environment, but still depends on the system state at previous times. To remove this dependence we make the first part of the \textit{Markov approximation} by setting $\rho(s) = \rho(t)$
+After the Born approximation the RHS of eq. (\ref{before_markov_approx}) no longer depends on the history of the environment, but still depends on the system state at previous times. To remove this dependence we make the first part of the \textit{Markov approximation} by setting $\rho(s) = \rho(t)$
 \begin{align}
   \ddt \tilde{\rho}_S = -i \int_{s}^t \tr_E\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(s), \tilde{\rho}_S(t)\otimes\tilde{\rho}_E \right] \right]\right\} ds.
 \end{align}
@@ -280,7 +280,7 @@ This equation is known as the Redfield equation. We can justify the Markov appro
   \label{redfield_eq}
   \ddt \tilde{\rho}_S(t) = -i \int_{s}^\infty \tr_B\left\{\left[ \tilde{H}_I(t), \left[ \tilde{H}_I(t-s), \tilde{\rho}(t) \right] \right]\right\} ds.
 \end{align}
-It is important to reiterate that timescales are important here: the \textit{Born-Markov approximation} is suitable for modelling the system on a timescale larger than the typical environmental decay time. We make this notion more precise when we later write the equation in terms of the environmental correlation functions. It can be shown \cite{kok+lovett} that the Born-Markov approximation is equivalent to keeping second order commutator terms in a formal expansion of the solution to Eqn. (\ref{i_von_neumann_eq}).
+It is important to reiterate that timescales are important here: the \textit{Born-Markov approximation} is suitable for modelling the system on a timescale larger than the typical environmental decay time. We make this notion more precise when we later write the equation in terms of the environmental correlation functions. It can be shown \cite{kok+lovett} that the Born-Markov approximation is equivalent to keeping second order commutator terms in a formal expansion of the solution to eq.~(\ref{i_von_neumann_eq}).
 
 We now look to get the equation into a form where we can perform the integral by examining the form of the Hamiltonian. We begin by returning to the Schr\"odinger picture Hamiltonian and writing
 \begin{align}\label{AB_decomp}
@@ -308,7 +308,7 @@ so that
   \tilde{H}_I(t) = \sum_{\alpha, \omega} e^{-i \omega t} A_\alpha(\omega)\otimes \tilde{B}_\alpha(t) = \sum_{\alpha, \omega} e^{i \omega t} A^\dagger_\alpha(\omega)\otimes \tilde{B}^\dagger_\alpha(t).
 \end{align}
 
-If we substitute this back into the Redfield Eqn. (\ref{redfield_eq}) we are able to perform the integration
+If we substitute this back into the Redfield eq. (\ref{redfield_eq}) we are able to perform the integration
 \begin{align}
   \label{me_before_rwa}
   \ddt \tilde{\rho}_S(t) = \sum_{\omega, \omega'} \sum_{\alpha, \beta} e^{i(\omega'-\omega)t} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega') - A^\dagger_\alpha(\omega')A_\beta(\omega)\right) + \text{H.c},
@@ -319,7 +319,7 @@ where the reservoir correlations functions are defined by
 \end{align}
 We have assumed that $\rho_E$ is a stationary state of the environment, so that $\tr_E \{\tilde{B}_\alpha^\dagger(t) \tilde{B}_\beta(t-s) \rho_E \} = \tr_E \{\tilde{B}_\alpha^\dagger(s) \tilde{B}_\beta(0) \rho_E \}$ and thus $\Gamma_{\alpha\beta}(\omega)$ has no time dependence. We have also dropped any terms involving $AA$ and $A^\dagger A^\dagger$, as the associated correlation functions will be zero.
 
-We now make the \textit{secular approximation} or \textit{rotating wave approximation} (RWA): we eliminate any terms from Eqn.~(\ref{me_before_rwa}) where $\omega' \neq \omega$. We justify this by again thinking about the timescales involved: terms involving $e^{i(\omega' - \omega)t}$ will average to zero on a characteristic timescale of $1/(\omega' - \omega)$. If this is small compared to the timescale of system evolution we can perform the approximation to give
+We now make the \textit{secular approximation} or \textit{rotating wave approximation} (RWA): we eliminate any terms from eq.~(\ref{me_before_rwa}) where $\omega' \neq \omega$. We justify this by again thinking about the timescales involved: terms involving $e^{i(\omega' - \omega)t}$ will average to zero on a characteristic timescale of $1/(\omega' - \omega)$. If this is small compared to the timescale of system evolution we can perform the approximation to give
 \begin{align}
   \ddt \tilde{\rho}_S(t) = \sum_{\omega} \sum_{\alpha, \beta} \Gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\tilde{\rho}_S(t)A^\dagger_\alpha(\omega) - A^\dagger_\alpha(\omega)A_\beta(\omega)\right) + \text{H.c}.
 \end{align}
@@ -336,6 +336,6 @@ where
 \begin{align}
  D(\rho) = \sum_\omega \sum_{\alpha, \beta} \gamma_{\alpha\beta}(\omega)\left(A_\beta(\omega)\rho A_\alpha^\dagger(\omega) - \frac{1}{2}\{A^\dagger_\alpha(\omega)A_\beta(\omega), \rho\} \right).
 \end{align}
-Note that the system Hamiltonian has picked up the Lamb shift contribution $H_{LS}$, from the terms $S_{\alpha\beta}$. It can be shown \cite{b+p} that the matrix $\gamma_{\alpha\beta}$ is positive, so that we can diagonalise it to recover the Master Equation form in Eqn.~(\ref{master_eq}).
+Note that the system Hamiltonian has picked up the Lamb shift contribution $H_{LS}$, from the terms $S_{\alpha\beta}$. It can be shown \cite{b+p} that the matrix $\gamma_{\alpha\beta}$ is positive, so that we can diagonalise it to recover the Master Equation form in eq.~(\ref{master_eq}).
 
 
