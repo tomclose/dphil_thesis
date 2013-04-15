@@ -82,8 +82,6 @@ We let $S_X = \{s^X_{k}\}$. There are $n^2$ elements in $S_X$, but only $n^2-1$ 
 
 Just as in Shor's code, to fully define a state we will need to add additional commuting operators to our set of stabilisers. We now construct a set of operators that will be used for this purpose. We define $X_h$ (horizontal X) to be the product of $X_i$s acting on qubits in an even row, $X_v$ (vertical X) the product of $X_i$s acting on qubits in an even column, and similarly, $Z_h$ to be $Z_i$s on an odd row, and $Z_v$ to be $Z_i$s on an odd column. Any of the pairs $\{X_v, X_h\}$, $\{X_v, Z_v\}$, $\{Z_v, Z_h\}$, and $\{Z_h, X_h\}$ will suffice to fully define the state. The remaining pairs, $\{X_v, Z_h\}$ and $\{X_h, Z_v\}$, satisfy the standard qubit commutation relation, $[X, Z] = 2iY$, and so we can use this set of \textit{logical operators}, $L = \{X_v, X_h, Z_v , Z_h\}$, to define a pair of independent \textit{logical qubits}. 
 
-\section{Detecting Errors}
-
 We will now turn to how errors are detected in the toric code. As with the treatment of the Shor code we will consider an error to be a set of individual $X$ and $Z$ errors applied to a subset of the physical qubits. An $X$-error on a single qubit will flip the eigenvalue of the neighbouring $Z$-stabilisers, but commutes with the $X$-stabilisers and will not be detected by them. Similarly, a $Z$ error will be detected by the $X$-stabilisers and not the $Z$-stabilisers, and a $Y$ will be detected by both sets. Additional errors will cause the stabiliser eigenvalues to toggle. If errors occur sequentially they will be detected by the stabilisers at either end of the chain.
 
 
@@ -213,7 +211,7 @@ The job of picking a matching given a syndrome falls to a decoder. These are oft
 %The Markov chain Monte Carlo method aims to estimate the probabilities of each of the error classes consistent with the observed syndromes, by randomly sampling from each class using the Manhatten algorithm. 
 
 
-\subsection{Error Model}
+\section{Error Model}
 
 We consider depolarising noise distributed uniformly over the lattice with a given, constant probability:
 \begin{equation} \label{noise_eq}
@@ -230,7 +228,7 @@ We also consider the effect of stabiliser sites mis-reporting the stabiliser mea
 
 We just consider a single round of stabiliser evaluation, and so this extra information is not available to us. Instead we try to identify and correct the right syndrome based on the syndrome we see. Even in multi-round systems the final step will look like this and so our results are an upper bound on the possible decoding probabilities for small systems.
 
-\subsection{A Precomputed Decoder}
+\section{A Precomputed Decoder}
 
 We begin by looking at the probability of getting a particular logical error, $l$, given that syndrome, $a$, occurs and we attempt to correct it using our chosen matching method by applying $m^*(a)$:
 \begin{align}
