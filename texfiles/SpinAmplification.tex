@@ -35,6 +35,14 @@ In order to understand the dynamics of the system, is it instructive to explicit
 \end{equation}
 Choosing a driving field such that $\Omega\ll J$ means that spin $k$ will only undergo resonant oscillations when the first term in Eq.~\ref{hamk} goes to zero - i.e. when the two spins neighbouring spin $k$ are oriented in opposite directions. In any other configuration the Ising coupling takes the spin $k$ off resonance with the microwave and no appreciable dynamics are expected.
 
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{figures/1D_spin_lattice.pdf}
+  \end{center}
+  \caption{States of the 1D chain: only spins with one neighbour $\uparrow$ and the other neighbour $\downarrow$ are on resonance.}
+  \label{1D_spin_lattice}
+\end{figure}
+
 Let us now define a subset of states $S$ that exist in the spin chain Hilbert space, $\ket{n}$, which have the first $n$ spins of the chain in state $\ket{\uparrow}$ with the rest $\ket{\downarrow}$. If the rule we just derived holds exactly, these states define a closed subspace. We may then write a very simple isolated Hamiltonian for this subspace:
 \begin{equation}
   {\cal H}_S = \Omega \sum_{n=1}^\infty \ket{n}\bra{ n+1}+\ket{n+1}\bra{ n}.
@@ -173,7 +181,7 @@ In one-dimension $g_{ij} = 1$ and we are reduced to a simple random walk on a se
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.6]{assets/asymptotic_1d.pdf}
+    \includegraphics{assets/asymptotic_1d.pdf}
   \end{center}
   \caption{ The gradient of the `one dimension with decoherence' line tends to $\frac{1}{2}$ asymptotically.}
   \label{asymptotic_1d}
@@ -214,7 +222,7 @@ A fortuitous consequence of the propagation rules is that our system is particul
 To estimate an upper bound for our initialisation threshold we took a randomly initialised lattice, with given imperfection probability, and evolved it using purely deterministic rules, to see whether the imperfections grew to cover over half the lattice. We expect this to give a loose upper bound for the quantum case, as quantum imperfections will both grow and shrink, making it less likely that they will compound in the same manner as deterministic growth. Fig \ref{flipthreshold} shows the results of these simulations; below $4\%$ the probability of growing to cover the majority of the lattice is negligible.
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[scale=0.5]{assets/flipthreshold.pdf}
+    \includegraphics{assets/flipthreshold.pdf}
   \end{center}
   \caption{Probability that imperfections at given density will deterministically grow to cover over half the lattice.}
   \label{flipthreshold}

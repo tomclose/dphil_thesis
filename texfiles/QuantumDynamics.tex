@@ -1,7 +1,7 @@
 \chapter{Quantum Dynamics} 
 \label{ch:QuantumDynamics}
 
-\section{Closed quantum systems}
+\section{Closed Quantum Systems}
 
 We begin by quickly summarising the laws of quantum mechanics as applied to a \textit{closed system}; that is, a system which does not interact in any way with other systems. In practice, it is rare that any given system can truly be considered to be closed, yet the dynamics of closed systems are fundamental to the quantum mechanical description of nature: at the highest level, we can view the universe itself an closed quantum system which contains all others.
 
@@ -25,7 +25,15 @@ where the normalisation condition is imposed by requiring that $|\alpha|^2 + |\b
 \begin{align}
   \ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi}\sin\frac{\theta}{2}\ket{1}
 \end{align}
-where we have used the fact that two states are physically equivalent if they differ by a global phase, $\ket{a} = e^{ik}\ket{b}$, which will become apparent when we look at the measurement postulate. We can use this representation to visualise a qubit as a point on the surface of a unit sphere, known as the \textit{Bloch sphere}, described by the real $3$-vector $(\cos\phi\sin\theta, \sin\phi\sin\theta, \cos\theta)$.
+where we have used the fact that two states are physically equivalent if they differ by a global phase, $\ket{a} = e^{ik}\ket{b}$, which will become apparent when we look at the measurement postulate. We can use this representation to visualise a qubit as a point on the surface of a unit sphere, known as the \textit{Bloch sphere}, described by the real $3$-vector $(\cos\phi\sin\theta, \sin\phi\sin\theta, \cos\theta)$ (Fig.~\ref{bloch_sphere}).
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{figures/bloch_sphere.pdf}
+  \end{center}
+  \caption{The Bloch Sphere: the state $\ket{\psi} =  \cos\frac{\theta}{2}\ket{0} + e^{i\phi}\sin\frac{\theta}{2}\ket{1}$ is represented as a vector pointing to a point on a unit sphere, with spherical polar coordinates $(\theta, \phi)$. }
+  \label{bloch_sphere}
+\end{figure}
 
 \subsection{Dynamics}
 
