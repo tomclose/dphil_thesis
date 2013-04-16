@@ -346,8 +346,12 @@ Our experimental proposal is as follows:
 The procedure is then repeated for initial measurements of $X_vZ_v$, $X_hZ_h$ and $Z_hZ_v$. We then repeat this procedure for the $2$-code and compare the results: if the larger system outperforms the $2$-code protection is provided. 
 
 
-\section{Conclusion}
+\section{Conclusion and Further Work}
 
 We have provided a protocol and pre-computed decoder for demonstrating toric encoding size at minimal scale. The fewest qubits with which one could implement the $2n$-code is $2n^2+1$, and in that case the `extra' qubit must be capable of performing gate operations with all others. For the $4$-code this is a requirement of $9$ qubits and for the $6$-code the requirement is $19$ qubits. The error rates provided are not unrealistic for current experimental systems. 
+
+As further work, a natural extension would be to apply the procedure described here to other surface codes. The smallest planar code can be constructed with fewer qubits than the smallest toric code, so could provide an easy experimental realisation of the class of surface codes. It is unclear whether the lower degree of symmetry in planar codes would improve the successful decoding probabilities that we calculate or not. 
+
+We also believe that the reduced quantum case is particularly interesting and merits further investigation. The figures given in Table~\ref{code_sizes} show an imbalance between the sizes of $A$ and $E_{0,0}$ not present in the other codes, which seem to be the source of the codes high tolerance both to physical qubit errors and to mis-reported stabiliser outcomes. The structure of the code is also highly specialised, to an extent that it may be possible to calculate the characteristic functions for the classes $E_{a,l}$ without resorting to a full space search. This would allow far larger sizes of code to be investigated. The reduced quantum code model could also be experimentally appropriate for systems where one error channel is heavily dominant.
 
 

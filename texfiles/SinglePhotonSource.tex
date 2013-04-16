@@ -319,11 +319,12 @@ Even in the absence of spontaneous emission (Fig.~\ref{rate_of_production_plot},
 
 When spontaneous emission is added, we see a similar pattern but the indistinguishability threshold is very slightly lower. This is an upper bound, as here the reset time becomes important. The efficiency of the Raman procedure remains fixed at about $80\%$, requiring on average $1.25$ runs per pair. In contrast, the efficiency of the pulse-relax procedure heads towards zero, meaning that many attempts will be needed to produce a pair. If the time taken to reset the system (to the excited state $\ket{e}$ in which we have assumed the pulse-relax system starts) is large, the Raman procedure will become advantageous at a far lower threshold.
 
-\section{Conclusion}
+\section{Conclusion and Further Work}
 
 To conclude, we have developed a realistic and microscopically justified model of the impact of phonons on solid state single photon sources. We used a modified, `semi-quantum', master equation method for the efficient calculation of coincidence rates, without having to resort to a quantum Monte-Carlo simulation approach.
 
 Our physical results are best summarised by considering the following scenario: suppose you are working with a system where phonon dephasing and spontaneous emission are the dominant loss channels, where you have some control over the cavity parameters ($h$ and $\kappa$), and that you are tasked with building a high indistinguisability, efficient, on-demand photon source. In this scenario, we find that a Raman technique is preferable to the pulse-relax approach. In particular, in addition to producing superior production rates at a given indistiguishability, the Raman approach we have taken only requires varying of the detuning - by tuning the cavity mode, and driving field - whilst leaving the other cavity properties fixed. This is in contrast in to the pulse-relax approach that we used for comparison where we allowed the cavity coupling strength itself to be varied within a realistic range of values. 
 
+An interesting extension of this work would be to apply the methods developed here to other solid state systems by modifying our phonon interaction model. The basic idea of tuning the procedure to avoid harmful dephasing effects should be applicable in a wide range of systems.
 
-
+The master equation techniques presented allow for modest yet important reductions in the system size required in a number of quantum jump processes. It would be useful to extract the core code implementing the technique from the specific system code, in order to create a package that could be used by the community at large. 
