@@ -222,8 +222,8 @@ We now make the rotating wave approximation, neglecting the fast rotating terms 
 \begin{align}
   \hat{H} =
   \begin{bmatrix}
-    -\omega_0/2 & eE_0\vec{r}_{eg}^*\cdot\vec{\epsilon}^* \\
-    eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +\omega_0/2
+    -(\omega_0-\omega)/2 & eE_0\vec{r}_{eg}^*\cdot\vec{\epsilon}^* \\
+    eE_0\vec{r}_{eg}\cdot\vec{\epsilon} & +(\omega_0-\omega)/2
   \end{bmatrix}
 \end{align}
 which is of the form of the Rabi Hamiltonian (\ref{rabi_hamiltonian}). The system will undergo oscillations between the ground state, $\ket{g}$, and excited state, $\ket{e}$, driven by the electromagnetic field.
@@ -352,7 +352,7 @@ As a concrete example we look at the Raman process from the previous section. We
 \begin{align}
   H = \ket{e}\bra{e}\sum_\vec{q} g_\vec{q}\left(\an{a}_\vec{q} + \cre{a}_{-\vec{q}}\right).
 \end{align}
-We have also used that in quatum dot systems the deformation potential dominates \cite{gardiner+zoller, pazy}.
+We have also used that in quatum dot systems the deformation potential dominates \cite{gardiner+zoller, pazy, PhysRevB.65.195313, PhysRevB.66.165312}.
 
 Following the technique given in chapter \ref{ch:QuantumDynamics} we move to the interaction picture and decompose the system part of the interaction Hamiltonian, $\ket{e}\bra{e}$ into eigenoperators of the system Hamiltonian:
 \begin{align}

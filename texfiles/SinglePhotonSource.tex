@@ -88,7 +88,7 @@ which couple to the exciton state $\ket{e}$ through the deformation coupling wit
   H_{sys-ph} = \ketbra{e}{e}\sum_q f_q \left(b_q^\dagger + b_q\right).
 \end{eqnarray}
 
-The effect of the phonon bath on a driven quantum dot can be described using a Lindblad master equation \cite{gauger:2008}, where the Lindblad operators  induce phonon-assisted transitions between the dressed system eigenstates \cite{gauger:2010}. We follow the derivation from Section \ref{phonon_me}. To derive the master equation we must first diagonalise the system Hamiltonian, $H_{sys} + H_{dr}$. We find that the eigenvalues are
+The effect of the phonon bath on a driven quantum dot can be described using a Lindblad master equation \cite{gauger:2008, PhysRevB.78.165311}, where the Lindblad operators  induce phonon-assisted transitions between the dressed system eigenstates \cite{gauger:2010}. We follow the derivation from Section \ref{phonon_me}. To derive the master equation we must first diagonalise the system Hamiltonian, $H_{sys} + H_{dr}$. We find that the eigenvalues are
 \begin{eqnarray}
  \lambda_0 &=& 0 \nonumber, \\
  \lambda_\pm &=& \frac{\nu \pm \sqrt{\nu^2 + \Omega^2 + h^2}}{2},
@@ -129,7 +129,7 @@ As a measure of the degree of indistinguishability of the photons produced in th
 \begin{eqnarray}
 v_{\rm HOM} = \frac{p_{\rm same} - p_{\rm diff}}{p_{\rm same} + p_{\rm diff}},
 \end{eqnarray}
-where $p_{\rm same}  = p(D_+ \cap D_+) + p({D_- \cap D_-})$ and $p_{\rm diff}  = p(D_+ \cap D_-) + p({D_- \cap D_+})$ with $p(D_x \cap D_y)$ being the probability of obtaining a click in detector $D_y$ followed by a click in detector $D_x$.
+where $p_{\rm same}  = p(D_+ \cap D_+) + p({D_- \cap D_-})$ and $p_{\rm diff}  = p(D_+ \cap D_-) + p({D_- \cap D_+})$ with $p(D_x \cap D_y)$ being the probability of obtaining a click in detector $D_y$ followed by a click in detector $D_x$. Note that HOM visibility, $v_{\rm HOM}$, as described here is not the standard HOM dip figure from the literature: the HOM visibility measures the similarity of two single-photon wave packets, not two incoherently pumped sources. We assume that both systems start their evolution at the same time, so that the wavepackets coincide on the beam splitter. 
 
 In order to calculate $v_{\rm HOM}$ we thus need to consider photons emitted from two copies of the system $S_1$ and $S_2$, one for each input arm of the beam splitter interferometer. The joint state of the system then inhabits the space $S= S_1 \otimes S_2$ (Fig.~\ref{HOM_expt}).
 We label the two cavity modes using annihilation operators $a_1$ and $a_2$. Using the input-output formalism (e.g~\cite{walls+milburn}) and neglecting incoming light, we can describe the modes outside the cavities as $a_{i, \text{out}} = \sqrt{\kappa}a_{i, \text{in}}$, where $\kappa$ is the cavity leakage rate. The modes corresponding to detection in $D_\pm$ are labelled $c_\pm$ respectively. Due to the transformation performed by the beam splitter, $c_\pm$ can be written in terms of $a_1$ and $a_2$ as follows:
